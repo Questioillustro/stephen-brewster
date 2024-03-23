@@ -12,7 +12,7 @@ pool:
 steps:
 - task: AzureStaticWebApp@0
   inputs:
-    app_location: 'build'
-    output_location: ''
+    app_location: '/'
+    output_location: '/build'
   env:
     azure_static_web_apps_api_token: $(token)
