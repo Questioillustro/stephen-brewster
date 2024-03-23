@@ -12,8 +12,7 @@ pool:
 steps:
 - task: AzureStaticWebApp@0
   inputs:
-    app_location: '/'
-    api_location: 'api'
+    app_location: '/src'
     output_location: 'public'
   env:
     azure_static_web_apps_api_token: $(token)
