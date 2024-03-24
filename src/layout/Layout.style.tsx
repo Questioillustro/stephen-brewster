@@ -15,8 +15,15 @@ export const LayoutStyle = {
     fontSize: 'calc(10px + 2vmin)',
     color: 'white',
   }),
+  navButtons: css({
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+  }),
   content: css({
-    maxWidth: '40vw',
+    maxWidth: '100%',
+    display: 'flex',
+    justifyContent: 'center',
     margin: '1vh',
     minHeight: '80vh',
   }),

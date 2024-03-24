@@ -2,10 +2,10 @@
 import Header from './header/Header';
 import Footer from './footer/Footer';
 import { Paper } from '@mui/material';
-import Navbar from './navbar/Navbar';
 import { LayoutStyle } from './Layout.style';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import NavbarButtonGroup from './navbar/horizontal/NavbarButtonGroup';
 
 function Layout() {
   return (
@@ -14,9 +14,11 @@ function Layout() {
         <Header />
       </Paper>
 
-      <Paper elevation={5} css={LayoutStyle.content}>
-        <Navbar />
+      <Paper css={LayoutStyle.navButtons}>
+        <NavbarButtonGroup />
       </Paper>
+
+      <Paper elevation={5} css={LayoutStyle.content}></Paper>
 
       <Paper elevation={5} css={LayoutStyle.footer}>
         <Footer />

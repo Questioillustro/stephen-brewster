@@ -1,5 +1,5 @@
 ﻿function Footer() {
-  return <div className={"footer"}>Steve's Feet</div>;
+  return <div className={'footer'}></div>;
 }
 
 export default Footer;
