@@ -1,19 +1,13 @@
-import React from "react";
-import "./App.css";
-import Layout from "./layout/Layout";
-import { createTheme, ThemeProvider } from "@mui/material";
+import React from 'react';
+import Layout from './layout/Layout';
+import { AppStyle } from './App.style';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
 function App() {
   return (
-    <div className="app">
-      <ThemeProvider theme={darkTheme}>
-        <Layout />
-      </ThemeProvider>
+    <div css={AppStyle.root}>
+      <Layout />
     </div>
   );
 }

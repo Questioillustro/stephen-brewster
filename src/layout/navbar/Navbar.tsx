@@ -1,43 +1,44 @@
-﻿import {
-  Divider,
-  ListItemIcon,
-  ListItemText,
-  MenuItem,
-  MenuList,
-} from "@mui/material";
-import {
-  DocumentScanner,
-  SportsMartialArts,
-  Widgets,
-} from "@mui/icons-material";
-import React from "react";
+﻿import { Divider, ListItemIcon, ListItemText, MenuItem, MenuList } from '@mui/material';
+import { DocumentScanner, SportsMartialArts, Widgets } from '@mui/icons-material';
+import React from 'react';
+import { navBarStyle } from './Navbar.style';
+import MenuListText from './MenuListText';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 
 function Navbar() {
   return (
-    <MenuList className={"nav-list"}>
+    <MenuList css={navBarStyle.navMenuList}>
       <MenuItem>
         <ListItemIcon>
-          <DocumentScanner fontSize="large" />
+          <DocumentScanner fontSize='large' />
         </ListItemIcon>
-        <ListItemText>Resume</ListItemText>
+
+        <ListItemText>
+          <MenuListText text={'Resume'} />
+        </ListItemText>
       </MenuItem>
 
       <Divider />
 
       <MenuItem>
         <ListItemIcon>
-          <Widgets fontSize="large" />
+          <Widgets fontSize='large' />
         </ListItemIcon>
-        <ListItemText>Widgets</ListItemText>
+        <ListItemText>
+          <MenuListText text={'Widgets'} />
+        </ListItemText>
       </MenuItem>
 
       <Divider />
 
       <MenuItem>
         <ListItemIcon>
-          <SportsMartialArts fontSize="large" />
+          <SportsMartialArts fontSize='large' />
         </ListItemIcon>
-        <ListItemText>Katas</ListItemText>
+        <ListItemText>
+          <MenuListText text={'Katas'} />
+        </ListItemText>
       </MenuItem>
     </MenuList>
   );

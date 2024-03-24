@@ -1,25 +1,24 @@
-﻿import React from "react";
-import Header from "./header/Header";
-import Footer from "./footer/Footer";
-import { Paper } from "@mui/material";
-import Navbar from "./navbar/Navbar";
+﻿import React from 'react';
+import Header from './header/Header';
+import Footer from './footer/Footer';
+import { Paper } from '@mui/material';
+import Navbar from './navbar/Navbar';
+import { LayoutStyle } from './Layout.style';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 
 function Layout() {
   return (
-    <div className={"layout"}>
-      <Paper elevation={5} className={"app-header"}>
+    <div css={LayoutStyle.root}>
+      <Paper elevation={5} css={LayoutStyle.header}>
         <Header />
       </Paper>
 
-      <Paper
-        sx={{ width: 320, maxWidth: "100%" }}
-        className={"app-content"}
-        elevation={5}
-      >
+      <Paper elevation={5} css={LayoutStyle.content}>
         <Navbar />
       </Paper>
 
-      <Paper elevation={5} className={"app-footer"}>
+      <Paper elevation={5} css={LayoutStyle.footer}>
         <Footer />
       </Paper>
     </div>
