@@ -2,7 +2,7 @@
 
 export const NavbarButtonGroupStyle = {
   root: css({
-    width: '50%',
+    width: '100%',
     display: 'flex',
     justifyContent: 'center',
   }),

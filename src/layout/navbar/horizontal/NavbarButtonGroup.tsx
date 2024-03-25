@@ -1,17 +1,17 @@
-﻿import Button from '@mui/material/Button';
+﻿/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+
+import Button from '@mui/material/Button';
 import { ButtonGroup } from '@mui/material';
 import { DocumentScanner, SportsMartialArts, Widgets } from '@mui/icons-material';
-import React from 'react';
 import { NavbarButtonGroupStyle } from './NavbarButtonGroup.style';
-
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 
 function NavbarButtonGroup() {
   const buttons = [
     <Button
       startIcon={<DocumentScanner fontSize='large' />}
       key='resume'
+      href={'/resume'}
       css={NavbarButtonGroupStyle.button}
     >
       Resume
@@ -19,6 +19,7 @@ function NavbarButtonGroup() {
     <Button
       startIcon={<Widgets fontSize='large' />}
       key='widgets'
+      href={'/widgets'}
       css={NavbarButtonGroupStyle.button}
     >
       Widgets
@@ -26,6 +27,7 @@ function NavbarButtonGroup() {
     <Button
       startIcon={<SportsMartialArts fontSize='large' />}
       key='katas'
+      href={'/katas'}
       css={NavbarButtonGroupStyle.button}
     >
       Katas

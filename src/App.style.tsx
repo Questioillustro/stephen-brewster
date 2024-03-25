@@ -6,6 +6,5 @@ export const AppStyle = {
     height: '100vh',
     display: 'flex',
     flexDirection: 'column',
-    background: 'darkseagreen',
   }),
 };

@@ -21,10 +21,10 @@ export const LayoutStyle = {
     justifyContent: 'center',
   }),
   content: css({
-    maxWidth: '100%',
+    width: '100%',
     display: 'flex',
     justifyContent: 'center',
-    margin: '1vh',
+    margin: '0',
     minHeight: '80vh',
   }),
   footer: css({
