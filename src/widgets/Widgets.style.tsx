@@ -1,5 +1,5 @@
 ﻿import { css } from '@emotion/react';
 
-export const ResumeSectionStyle = {
+export const WidgetsStyle = {
   root: css({}),
 };

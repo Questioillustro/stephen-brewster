@@ -1,15 +1,15 @@
 ﻿/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 
-import { ResumeStyle } from './Resume.style';
-import ResumeSection from './section/ResumeSection';
+import SBAccordion from '../components/accordion/SBAccordion';
+import Masonry from '@mui/lab/Masonry';
 
 function Resume() {
   return (
-    <div css={ResumeStyle.root}>
-      <ResumeSection title={'Contact'} subtitle={''} content={'sbrewster4669@gmail.com'} />
+    <Masonry columns={1} spacing={2}>
+      <SBAccordion title={'Contact'} subtitle={''} content={'sbrewster4669@gmail.com'} />
 
-      <ResumeSection
+      <SBAccordion
         title={'Skills'}
         subtitle={''}
         content={
@@ -17,18 +17,18 @@ function Resume() {
         }
       />
 
-      <ResumeSection
+      <SBAccordion
         title={'Experience'}
         subtitle={''}
         content={'Solu Technology Partners, REDCOM.'}
       />
 
-      <ResumeSection
+      <SBAccordion
         title={'Education'}
         subtitle={''}
         content={'RIT class of 2015, Magna Cum Laude.'}
       />
-    </div>
+    </Masonry>
   );
 }
 

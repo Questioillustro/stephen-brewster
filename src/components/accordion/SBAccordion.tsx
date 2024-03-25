@@ -1,9 +1,13 @@
-﻿import Accordion from '@mui/material/Accordion';
+﻿/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+
+import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import { AccordionDetails, Paper } from '@mui/material';
 import ArrowDropUpOutlinedIcon from '@mui/icons-material/ArrowDropUpOutlined';
 import { useState } from 'react';
+import { SBAccordionStyle } from './SBAccordion.style';
 
 export interface IResumeSectionProps {
   title: string;
@@ -11,7 +15,7 @@ export interface IResumeSectionProps {
   content: string;
 }
 
-function ResumeSection(props: IResumeSectionProps) {
+function SBAccordion(props: IResumeSectionProps) {
   const [expanded, setExpanded] = useState(false);
   const handleChange = () => () => {
     setExpanded(!expanded);
@@ -19,15 +23,18 @@ function ResumeSection(props: IResumeSectionProps) {
 
   return (
     <Accordion expanded={expanded} onChange={handleChange()}>
-      <AccordionSummary
-        expandIcon={<ArrowDropUpOutlinedIcon />}
-        aria-controls='panel1bh-content'
-        id='panel1bh-header'
-      >
-        <Typography variant={'h5'} color={'primary'}>
-          {props.title}
-        </Typography>
-        <Typography variant={'body1'}>{props.subtitle}</Typography>
+      <AccordionSummary expandIcon={<ArrowDropUpOutlinedIcon />}>
+        <div css={SBAccordionStyle.summary}>
+          <div css={SBAccordionStyle.title}>
+            <Typography variant={'h5'} color={'primary'}>
+              {props.title}
+            </Typography>
+          </div>
+
+          <div css={SBAccordionStyle.subtitle}>
+            <Typography variant={'body2'}>{props.subtitle}</Typography>
+          </div>
+        </div>
       </AccordionSummary>
 
       <AccordionDetails>
@@ -37,4 +44,4 @@ function ResumeSection(props: IResumeSectionProps) {
   );
 }
 
-export default ResumeSection;
+export default SBAccordion;
