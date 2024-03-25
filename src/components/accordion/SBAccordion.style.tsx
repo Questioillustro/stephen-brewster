@@ -16,10 +16,7 @@ export const SBAccordionStyle = {
     display: 'flex',
     width: '100%',
   }),
-  subtitle: css({
-    display: 'flex',
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
+  details: css({
+    padding: '10px',
   }),
 };

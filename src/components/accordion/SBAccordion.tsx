@@ -6,13 +6,12 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import { AccordionDetails, Paper } from '@mui/material';
 import ArrowDropUpOutlinedIcon from '@mui/icons-material/ArrowDropUpOutlined';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { SBAccordionStyle } from './SBAccordion.style';
 
 export interface IResumeSectionProps {
   title: string;
-  subtitle: string;
-  content: string;
+  content: ReactNode;
 }
 
 function SBAccordion(props: IResumeSectionProps) {
@@ -22,7 +21,7 @@ function SBAccordion(props: IResumeSectionProps) {
   };
 
   return (
-    <Accordion expanded={expanded} onChange={handleChange()}>
+    <Accordion expanded={expanded} onChange={handleChange()} square>
       <AccordionSummary expandIcon={<ArrowDropUpOutlinedIcon />}>
         <div css={SBAccordionStyle.summary}>
           <div css={SBAccordionStyle.title}>
@@ -30,15 +29,13 @@ function SBAccordion(props: IResumeSectionProps) {
               {props.title}
             </Typography>
           </div>
-
-          <div css={SBAccordionStyle.subtitle}>
-            <Typography variant={'body2'}>{props.subtitle}</Typography>
-          </div>
         </div>
       </AccordionSummary>
 
       <AccordionDetails>
-        <Typography>{props.content}</Typography>
+        <Paper elevation={100} css={SBAccordionStyle.details} square>
+          {props.content}
+        </Paper>
       </AccordionDetails>
     </Accordion>
   );

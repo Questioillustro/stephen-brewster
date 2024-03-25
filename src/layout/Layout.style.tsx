@@ -12,8 +12,6 @@ export const LayoutStyle = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    fontSize: 'calc(10px + 2vmin)',
-    color: 'white',
   }),
   navButtons: css({
     width: '100%',
@@ -25,14 +23,6 @@ export const LayoutStyle = {
     display: 'flex',
     justifyContent: 'center',
     margin: '0',
-    minHeight: '80vh',
-  }),
-  footer: css({
-    height: '10vh',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    fontSize: 'calc(10px + 2vmin)',
-    color: 'white',
+    minHeight: '90vh',
   }),
 };
