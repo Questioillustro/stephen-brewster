@@ -18,11 +18,17 @@ export const LayoutStyle = {
     display: 'flex',
     justifyContent: 'center',
   }),
+  contentWrapper: css({
+    width: '100%',
+    display: 'flex',
+    padding: '0px',
+    justifyContent: 'center',
+    minHeight: '90vh',
+  }),
   content: css({
     width: '100%',
     display: 'flex',
+    padding: '20px',
     justifyContent: 'center',
-    margin: '0',
-    minHeight: '90vh',
   }),
 };

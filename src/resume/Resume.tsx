@@ -1,20 +1,21 @@
 ﻿/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 
-import SBAccordion from '../components/accordion/SBAccordion';
 import Masonry from '@mui/lab/Masonry';
 import Skills from './skills/Skills';
+import SBCard from '../components/card/SBCard';
+import Experience from './experience/Experience';
 
 function Resume() {
   return (
     <Masonry columns={1} spacing={2}>
-      <SBAccordion title={'Contact'} content={'sbrewster4669@gmail.com'} />
+      <SBCard title={'Skills'} content={<Skills />} />
 
-      <SBAccordion title={'Skills'} content={<Skills />} />
+      <SBCard title={'Experience'} content={<Experience />} />
 
-      <SBAccordion title={'Experience'} content={'Solu Technology Partners, REDCOM.'} />
+      <SBCard title={'Education'} content={'RIT class of 2015, Magna Cum Laude.'} />
 
-      <SBAccordion title={'Education'} content={'RIT class of 2015, Magna Cum Laude.'} />
+      <SBCard title={'Interests'} content={'I have interests in things'} />
     </Masonry>
   );
 }
