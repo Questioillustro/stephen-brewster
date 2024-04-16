@@ -26,7 +26,7 @@ export const LayoutStyle = {
   }),
   content: css({
     minHeight: '90vh',
-    width: '100%',
+    width: '80%',
     display: 'flex',
     padding: '20px',
     justifyContent: 'center',

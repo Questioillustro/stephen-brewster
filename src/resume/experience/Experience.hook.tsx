@@ -2,6 +2,7 @@
   company: string;
   address: string;
   phone: string;
+  website: string;
   dateRange: string;
   years: number;
   descriptions: string[];
@@ -13,6 +14,7 @@ export const useExperienceHook = (): IExperienceItem[] => {
       company: 'Solu Technology Partners',
       address: '7647 Main Street Fishers, Victor NY',
       phone: '(585) 625-2600',
+      website: 'https://www.solutechnology.com/',
       dateRange: 'July 2015 - April 2024',
       years: 8,
       descriptions: [
@@ -25,6 +27,7 @@ export const useExperienceHook = (): IExperienceItem[] => {
       company: 'REDCOM Laboratories Inc',
       address: '1 Redcom Ctr, Victor NY',
       phone: '(585) 924-7550',
+      website: 'https://www.redcom.com/',
       dateRange: 'November 2012 - September 2013',
       years: 1.5,
       descriptions: [

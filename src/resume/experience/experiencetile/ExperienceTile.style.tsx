@@ -9,8 +9,6 @@ export const ExperienceTileStyle = {
   descriptions: css({
     display: 'flex',
     width: '100%',
-    justifyContent: 'center',
-    alignItems: 'start',
     flexDirection: 'column',
   }),
 };

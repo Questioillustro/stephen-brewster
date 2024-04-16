@@ -20,10 +20,13 @@ export const useInterestsHook = (): IInterestItem[] => {
       name: 'Rucking',
     },
     {
-      name: 'Poi',
+      name: 'Fire Poi',
     },
     {
-      name: 'Reading',
+      name: 'Book Worm',
+    },
+    {
+      name: 'Self-Improvement',
     },
   ];
 };

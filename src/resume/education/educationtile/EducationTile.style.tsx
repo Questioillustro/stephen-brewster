@@ -6,7 +6,7 @@ export const EducationTileStyle = {
     display: 'flex',
     flexDirection: 'column',
     minHeight: '120px',
-    minWidth: '200px',
+    minWidth: '380px',
     padding: '10px 30px',
   }),
 };

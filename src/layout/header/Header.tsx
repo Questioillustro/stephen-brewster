@@ -11,8 +11,11 @@ function Header() {
 
   return (
     <div css={HeaderStyle.root}>
-      <Typography variant={'h4'} color={'tertiary'}>
-        <div onClick={() => navigate('/')}>Stephen Brewster</div>
+      <Typography variant={'h4'} color={'primary'}>
+        Stephen Brewster
+      </Typography>
+      <Typography variant={'subtitle1'} color={'tertiary'}>
+        Software Engineer
       </Typography>
     </div>
   );

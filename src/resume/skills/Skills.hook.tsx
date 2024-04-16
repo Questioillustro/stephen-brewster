@@ -97,8 +97,12 @@ export function useLanguagesHook(): ISkillItem[] {
       years: 1,
     },
     {
-      name: 'RESTful API ',
+      name: 'RESTful API',
       years: 1,
+    },
+    {
+      name: 'Responsive Design',
+      years: 5,
     },
   ];
 }

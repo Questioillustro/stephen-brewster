@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 
 import { EducationTileStyle } from './EducationTile.style';
-import { Box, Card } from '@mui/material';
+import { Box, Card, Link } from '@mui/material';
 import { IEducationItem } from '../Education.hook';
 import Typography from '@mui/material/Typography';
 
@@ -16,7 +16,9 @@ function EducationTile(props: IEducationTileProps) {
   return (
     <Box css={EducationTileStyle.root}>
       <Card variant={'outlined'} css={EducationTileStyle.card}>
-        <Typography variant={'h5'}>{education.school}</Typography>
+        <Link href={education.website} underline={'none'}>
+          <Typography variant={'h5'}>{education.school}</Typography>
+        </Link>
 
         {education.honor && <Typography variant={'h6'}>{education.honor}</Typography>}
 

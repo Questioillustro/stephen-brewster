@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 
 import { IExperienceItem } from '../Experience.hook';
-import { Box, Card } from '@mui/material';
+import { Box, Card, Link, List, ListItem, Paper } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { ExperienceTileStyle } from './ExperienceTile.style';
 
@@ -16,19 +16,26 @@ function ExperienceTile(props: IExperienceTileProps) {
   return (
     <Card variant={'outlined'} css={ExperienceTileStyle.root}>
       <Card variant={'outlined'} css={ExperienceTileStyle.companyInfo}>
-        <Typography variant={'h5'}>{experience.company}</Typography>
+        <Link href={experience.website} underline={'none'}>
+          <Typography variant={'h5'}>{experience.company}</Typography>
+        </Link>
+
         <Typography variant={'body1'}>{experience.address}</Typography>
+
         <Typography variant={'body1'}>{experience.phone}</Typography>
+
         <Typography variant={'body1'}>{experience.dateRange}</Typography>
       </Card>
 
-      <div>
-        <Box sx={{ p: 2 }} css={ExperienceTileStyle.descriptions}>
+      <Paper css={ExperienceTileStyle.descriptions}>
+        <List>
           {experience.descriptions.map((d) => (
-            <Typography variant={'body1'}>{d}</Typography>
+            <ListItem>
+              <Typography variant={'body1'}>{d}</Typography>
+            </ListItem>
           ))}
-        </Box>
-      </div>
+        </List>
+      </Paper>
     </Card>
   );
 }
