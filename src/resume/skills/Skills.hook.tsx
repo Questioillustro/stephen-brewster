@@ -104,5 +104,9 @@ export function useLanguagesHook(): ISkillItem[] {
       name: 'Responsive Design',
       years: 5,
     },
+    {
+      name: 'Turbo Basic',
+      years: 2,
+    },
   ];
 }

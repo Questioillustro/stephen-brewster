@@ -1,5 +1,5 @@
 ﻿import { css } from '@emotion/react';
 
 export const HeaderStyle = {
-  root: css({}),
+  root: css({ textAlign: 'center' }),
 };
