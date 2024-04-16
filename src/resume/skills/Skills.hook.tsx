@@ -6,11 +6,11 @@ export function useLanguagesHook(): ISkillItem[] {
   return [
     {
       name: 'Javascript',
-      years: 8,
+      years: 10,
     },
     {
       name: 'Java',
-      years: 5,
+      years: 4,
     },
     {
       name: 'Python',
@@ -41,7 +41,7 @@ export function useLanguagesHook(): ISkillItem[] {
       years: 0.25,
     },
     {
-      name: 'GIT',
+      name: 'Git',
       years: 10,
     },
     {
@@ -50,7 +50,55 @@ export function useLanguagesHook(): ISkillItem[] {
     },
     {
       name: 'Agile Development',
-      years: 8,
+      years: 10,
+    },
+    {
+      name: 'Splunk',
+      years: 1,
+    },
+    {
+      name: 'Java Spring',
+      years: 2,
+    },
+    {
+      name: 'Angular',
+      years: 3,
+    },
+    {
+      name: 'React',
+      years: 1,
+    },
+    {
+      name: 'SQL',
+      years: 4,
+    },
+    {
+      name: 'MongoDB',
+      years: 1,
+    },
+    {
+      name: 'Node.js',
+      years: 0.5,
+    },
+    {
+      name: 'Express.js',
+      years: 0.5,
+    },
+    {
+      name: 'ASP.NET Razor',
+      years: 0.5,
+    },
+    {
+      name: 'Microservices Architecture',
+      years: 1,
+    },
+    {
+      name: 'Embedded C',
+      years: 1,
+    },
+    {
+      name: 'RESTful API ',
+      years: 1,
     },
   ];
 }

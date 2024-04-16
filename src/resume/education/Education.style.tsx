@@ -1,10 +1,10 @@
 ﻿import { css } from '@emotion/react';
 
-export const ExperienceStyle = {
+export const EducationStyle = {
   root: css({
     display: 'flex',
+    flexDirection: 'row',
     width: '100%',
-    flexDirection: 'column',
-    gap: '20px',
+    justifyContent: 'space-evenly',
   }),
 };

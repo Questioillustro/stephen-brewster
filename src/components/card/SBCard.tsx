@@ -16,7 +16,7 @@ function SBCard(props: ISBCardProps) {
 
       <Divider />
 
-      {props.content}
+      <Box sx={{ p: 2 }}>{props.content}</Box>
     </Card>
   );
 }

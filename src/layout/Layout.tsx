@@ -9,11 +9,11 @@ import Resume from '../resume/Resume';
 function Layout() {
   return (
     <div css={LayoutStyle.root}>
-      <Paper elevation={10} css={LayoutStyle.header} square>
+      <Paper elevation={0} css={LayoutStyle.header} square>
         <Header />
       </Paper>
 
-      <Paper elevation={1} css={LayoutStyle.contentWrapper} square>
+      <Paper elevation={10} css={LayoutStyle.contentWrapper} square>
         <div css={LayoutStyle.content}>
           <Resume />
         </div>

@@ -8,7 +8,7 @@ export const LayoutStyle = {
     justifyContent: 'space-between',
   }),
   header: css({
-    height: '10vh',
+    minHeight: '10vh',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -23,9 +23,9 @@ export const LayoutStyle = {
     display: 'flex',
     padding: '0px',
     justifyContent: 'center',
-    minHeight: '90vh',
   }),
   content: css({
+    minHeight: '90vh',
     width: '100%',
     display: 'flex',
     padding: '20px',
