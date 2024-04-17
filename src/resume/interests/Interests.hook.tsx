@@ -14,6 +14,15 @@ export const useInterestsHook = (): IInterestItem[] => {
       name: 'Bouldering',
     },
     {
+      name: 'Reading',
+      links: [
+        {
+          displayText: 'GoodReads',
+          url: 'https://www.goodreads.com/user/show/23215826-stephen-brewster',
+        },
+      ],
+    },
+    {
       name: 'Travel',
     },
     {
@@ -26,16 +35,7 @@ export const useInterestsHook = (): IInterestItem[] => {
       name: 'Rucking / Hiking',
     },
     {
-      name: 'Fire Poi',
-    },
-    {
-      name: 'Book Worm',
-      links: [
-        {
-          displayText: 'GoodReads',
-          url: 'https://www.goodreads.com/user/show/23215826-stephen-brewster',
-        },
-      ],
+      name: 'Poi',
     },
     {
       name: 'Magic: The Gathering',

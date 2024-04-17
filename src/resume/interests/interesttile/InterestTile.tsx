@@ -16,12 +16,12 @@ function InterestTile(props: IInterestTileProps) {
   return (
     <Card variant={'outlined'} css={InterestTileStyle.root}>
       <Typography variant={'h5'}>{interest.name}</Typography>
-      {interest.links &&
-        interest.links.map((l) => (
-          <Link underline={'none'} href={l.url} target={'_blank'}>
-            {l.displayText}
-          </Link>
-        ))}
+      {/*{interest.links &&*/}
+      {/*  interest.links.map((l) => (*/}
+      {/*    <Link underline={'none'} href={l.url} target={'_blank'}>*/}
+      {/*      {l.displayText}*/}
+      {/*    </Link>*/}
+      {/*  ))}*/}
     </Card>
   );
 }

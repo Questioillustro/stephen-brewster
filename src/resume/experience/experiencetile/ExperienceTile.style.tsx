@@ -11,7 +11,10 @@ export const ExperienceTileStyle = {
   }),
   companyInfo: css({
     padding: '10px',
-    minWidth: '350px',
+    minWidth: '320px',
+  }),
+  roleInfo: css({
+    marginTop: '10px',
   }),
   descriptions: css({
     display: 'flex',
