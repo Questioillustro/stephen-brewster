@@ -9,7 +9,7 @@ function Code() {
     <div css={CodeStyle.root}>
       <div>
         <Link
-          href={'https://github.com/Questioillustro'}
+          href={'https://github.com/Questioillustro/stephen-brewster'}
           target={'_blank'}
           underline={'none'}
           css={CodeStyle.codeLink}

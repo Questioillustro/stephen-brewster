@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 document.body.style.margin = '0';
+document.title = 'StephenBrewster';
 
 root.render(
   <BrowserRouter>
