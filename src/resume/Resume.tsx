@@ -8,6 +8,7 @@ import Experience from './experience/Experience';
 import Education from './education/Education';
 import Interests from './interests/Interests';
 import Summary from './summary/Summary';
+import Code from './code/Code';
 
 function Resume() {
   return (
@@ -19,6 +20,8 @@ function Resume() {
       <SBCard title={'Skills'} content={<Skills />} />
 
       <SBCard title={'Education'} content={<Education />} />
+
+      <SBCard title={'Code'} content={<Code />} />
 
       <SBCard title={'Interests'} content={<Interests />} />
     </Masonry>
