@@ -16,7 +16,7 @@ function ExperienceTile(props: IExperienceTileProps) {
   return (
     <Card variant={'outlined'} css={ExperienceTileStyle.root}>
       <Card variant={'outlined'} css={ExperienceTileStyle.companyInfo}>
-        <Link href={experience.website} underline={'none'}>
+        <Link href={experience.website} target={'_blank'} underline={'none'}>
           <Typography variant={'h5'}>{experience.company}</Typography>
         </Link>
 

@@ -16,11 +16,11 @@ function EducationTile(props: IEducationTileProps) {
   return (
     <Box css={EducationTileStyle.root}>
       <Card variant={'outlined'} css={EducationTileStyle.card}>
-        <Link href={education.website} underline={'none'}>
-          <Typography variant={'h5'}>{education.school}</Typography>
+        <Link href={education.website} target={'_blank'} underline={'none'}>
+          <Typography variant={'h6'}>{education.school}</Typography>
         </Link>
 
-        {education.honor && <Typography variant={'h6'}>{education.honor}</Typography>}
+        {education.honor && <Typography variant={'body1'}>{education.honor}</Typography>}
 
         <Typography variant={'body1'}>
           GPA: {education.gpa} / {education.gpaMax}

@@ -1,4 +1,5 @@
 ﻿import { css } from '@mui/material';
+import { Constants } from './Layout.constants';
 
 export const LayoutStyle = {
   root: css({
@@ -27,6 +28,10 @@ export const LayoutStyle = {
   content: css({
     minHeight: '90vh',
     width: '80%',
+    [Constants.MID_MEDIA_QUERY]: {
+      width: '100%',
+      padding: '20px 0px',
+    },
     display: 'flex',
     padding: '20px',
     justifyContent: 'center',

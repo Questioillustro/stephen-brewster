@@ -10,11 +10,11 @@ function Interests() {
   const interests = useInterestsHook();
 
   return (
-    <Masonry columns={2} spacing={2} css={InterestsStyle.root}>
+    <div css={InterestsStyle.root}>
       {interests.map((i) => (
         <InterestTile interest={i} />
       ))}
-    </Masonry>
+    </div>
   );
 }
 

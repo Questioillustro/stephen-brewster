@@ -1,4 +1,5 @@
 ﻿import { css } from '@emotion/react';
+import { Constants } from '../../../layout/Layout.constants';
 
 export const EducationTileStyle = {
   root: css({}),
@@ -6,7 +7,10 @@ export const EducationTileStyle = {
     display: 'flex',
     flexDirection: 'column',
     minHeight: '120px',
-    minWidth: '380px',
+    minWidth: '300px',
     padding: '10px 30px',
+    [Constants.MOBILE_MEDIA_QUERY]: {
+      padding: '5px 10px',
+    },
   }),
 };

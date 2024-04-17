@@ -12,7 +12,7 @@ import Summary from './summary/Summary';
 function Resume() {
   return (
     <Masonry columns={1} spacing={2}>
-      <SBCard title={'About Me'} content={<Summary />} />
+      {/*<SBCard title={'About Me'} content={<Summary />} />*/}
 
       <SBCard title={'Experience'} content={<Experience />} />
 
