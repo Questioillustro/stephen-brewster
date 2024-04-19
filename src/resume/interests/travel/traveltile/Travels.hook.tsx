@@ -24,7 +24,14 @@ export const useTravelsHook = (): ITravelItem[] => {
       name: 'Peru',
       displayImage: '/peru/peru-ruins_window.jpg',
       year: 2018,
-      images: ['/peru/peru-ruins_window.jpg'],
+      images: [
+        '/peru/peru-ruins_window.jpg',
+        '/peru/peru-winaywayna_1.jpg',
+        '/peru/peru-winaywayna_2.jpg',
+        '/peru/peru-machu_picchu_1.jpg',
+        '/peru/peru-cusco.jpg',
+        '/peru/peru-intipata.jpg',
+      ],
     },
     {
       name: 'Africa',
