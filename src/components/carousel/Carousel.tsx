@@ -38,7 +38,7 @@ function Carousel(props: ICarouselProps) {
       <div css={CarouselStyle.content}>{items.map((i, idx) => (indexInRange(idx) ? i : ''))}</div>
 
       {showButtons && (
-        <IconButton size={'large'} disabled={(page + 1) * pageSize > items.length}>
+        <IconButton size={'large'} disabled={(page + 1) * pageSize >= items.length}>
           <ChevronRight fontSize={'large'} onClick={() => setPage(page + 1)} />
         </IconButton>
       )}

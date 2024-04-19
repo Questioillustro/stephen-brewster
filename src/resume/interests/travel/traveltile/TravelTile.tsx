@@ -29,8 +29,8 @@ function TravelTile(props: ITravelTileProps) {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
+        aria-labelledby={item.name}
+        aria-describedby={item.name}
       >
         <Paper elevation={0} css={TravelTileStyle.modalContent}>
           <Typography color={'primary'} variant='h6' component='h2'>

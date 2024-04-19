@@ -8,8 +8,10 @@ export const TravelTileStyle = {
     cursor: 'pointer',
   }),
   modalContent: css({
+    overflowY: 'auto',
     textAlign: 'center',
     position: 'absolute',
+    maxHeight: '75%',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
