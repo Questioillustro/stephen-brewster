@@ -13,7 +13,6 @@ function Bouldering() {
       <Typography variant={'body2'}>First Session: 7/10/2023</Typography>
 
       <div css={BoulderingStyle.myGyms}>
-        <Typography variant={'body1'}>My Gyms: </Typography>
         <Link href={'https://centralrockgym.com/rochester/'} underline={'none'} target={'_blank'}>
           Central Rock Gym
         </Link>

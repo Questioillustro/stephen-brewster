@@ -41,5 +41,9 @@ export const useBooksHook = (): IBookItem[] => {
       name: "Hitchhiker's Guide to the Galaxy",
       image: '/books/hitchhikers.jpeg',
     },
+    {
+      name: "Can't Hurt Me",
+      image: '/books/goggins.jpeg',
+    },
   ];
 };
