@@ -35,9 +35,16 @@ export const useTravelsHook = (): ITravelItem[] => {
     },
     {
       name: 'Africa',
-      displayImage: '/africa/africa-giraffe_sunset.jpg',
+      displayImage: '/africa/africa-safari_giraffe.jpg',
       year: 2022,
-      images: ['/africa/africa-giraffe_sunset.jpg'],
+      images: [
+        '/africa/africa-safari_giraffe.jpg',
+        '/africa/africa-safari_elephants.jpg',
+        '/africa/africa-safari_lioness.jpg',
+        '/africa/africa-killi_sunset.jpg',
+        '/africa/africa-killi_checkpoint.jpg',
+        '/africa/africa-killi_summit.jpg',
+      ],
     },
   ];
 };
