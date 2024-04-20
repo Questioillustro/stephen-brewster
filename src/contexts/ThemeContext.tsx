@@ -1,4 +1,3 @@
-﻿import { createContext, ReactNode } from 'react';
-import { DarkTheme } from '../theme/Theme';
+﻿import { createContext } from 'react';
 
 export const ThemeContext = createContext<any>(null);

@@ -9,7 +9,7 @@ export interface ISkillTileProps {
 }
 
 function SkillTile(props: ISkillTileProps) {
-  return <Chip label={props.name} variant={'outlined'} css={SkillTileStyle.root} />;
+  return <Chip color={'info'} label={props.name} variant={'outlined'} css={SkillTileStyle.root} />;
 }
 
 export default SkillTile;

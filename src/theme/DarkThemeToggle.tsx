@@ -1,7 +1,10 @@
-﻿import { FormControlLabel, FormGroup, Switch } from '@mui/material';
+﻿/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+
+import { FormControlLabel, FormGroup, Switch } from '@mui/material';
 import { useContext, useState } from 'react';
-import { DarkTheme, LightTheme } from './Theme';
 import { ThemeContext } from '../contexts/ThemeContext';
+import { ThemeBook } from './Theme';
 
 function DarkThemeToggle() {
   const { setTheme } = useContext(ThemeContext);
@@ -10,9 +13,9 @@ function DarkThemeToggle() {
 
   const handleChange = () => {
     if (isDarkTheme) {
-      setTheme(LightTheme);
+      setTheme(ThemeBook.LightMode);
     } else {
-      setTheme(DarkTheme);
+      setTheme(ThemeBook.DarkMode);
     }
 
     setIsDarkTheme(!isDarkTheme);
