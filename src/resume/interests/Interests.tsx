@@ -12,7 +12,7 @@ function Interests() {
   return (
     <div css={InterestsStyle.root}>
       {interests.map((i) => (
-        <InterestTile interest={i} />
+        <InterestTile interest={i} key={i.name} />
       ))}
     </div>
   );

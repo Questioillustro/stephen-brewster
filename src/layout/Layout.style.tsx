@@ -36,4 +36,8 @@ export const LayoutStyle = {
     padding: '20px',
     justifyContent: 'center',
   }),
+  controlPanel: css({
+    display: 'flex',
+    justifyContent: 'space-evenly',
+  }),
 };

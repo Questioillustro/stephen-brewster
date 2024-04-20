@@ -15,7 +15,9 @@ function InterestTile(props: IInterestTileProps) {
 
   return (
     <Card variant={'outlined'} css={InterestTileStyle.root}>
-      <Typography variant={'h5'}>{interest.name}</Typography>
+      <Typography color={'secondary'} variant={'h5'}>
+        {interest.name}
+      </Typography>
       {interest.component && interest.component}
     </Card>
   );

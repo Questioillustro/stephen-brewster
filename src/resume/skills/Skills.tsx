@@ -12,7 +12,7 @@ function Skills() {
     <div css={SkillsStyle.root}>
       <div css={SkillsStyle.skillGrid}>
         {skills.map((s) => (
-          <SkillTile name={s.name} />
+          <SkillTile name={s.name} key={s.name} />
         ))}
       </div>
     </div>

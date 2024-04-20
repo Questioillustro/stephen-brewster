@@ -11,7 +11,9 @@ function SBCard(props: ISBCardProps) {
   return (
     <Card variant={'outlined'}>
       <Box sx={{ p: 2 }}>
-        <Typography variant={'h4'}>{props.title}</Typography>
+        <Typography color={'primary'} variant={'h4'}>
+          {props.title}
+        </Typography>
       </Box>
 
       <Divider />

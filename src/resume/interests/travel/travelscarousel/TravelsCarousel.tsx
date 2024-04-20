@@ -9,7 +9,7 @@ import { useTravelsHook } from '../traveltile/Travels.hook';
 function TravelsCarousel() {
   const travels = useTravelsHook();
 
-  const travelTiles = travels.map((t) => <TravelTile item={t} />);
+  const travelTiles = travels.map((t) => <TravelTile item={t} key={t.name} />);
 
   return (
     <div css={TravelsCarouselStyle.root}>

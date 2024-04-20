@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 
 import Typography from '@mui/material/Typography';
 import { BoulderingStyle } from './Bouldering.style';
-import { Link } from '@mui/material';
+import SBLink from '../../../components/link/SBLink';
 
 function Bouldering() {
   return (
@@ -13,17 +13,17 @@ function Bouldering() {
       <Typography variant={'body2'}>First Session: 7/10/2023</Typography>
 
       <div css={BoulderingStyle.myGyms}>
-        <Link href={'https://centralrockgym.com/rochester/'} underline={'none'} target={'_blank'}>
-          Central Rock Gym
-        </Link>
+        <SBLink
+          href={'https://centralrockgym.com/rochester/'}
+          text={'Central Rock Gym'}
+          variant={'body2'}
+        />
         |
-        <Link
+        <SBLink
           href={'https://www.rit.edu/fitnessrecreation/red-barn-climbing'}
-          underline={'none'}
-          target={'_blank'}
-        >
-          Red Barn
-        </Link>
+          text={'Red Barn'}
+          variant={'body2'}
+        />
       </div>
     </div>
   );

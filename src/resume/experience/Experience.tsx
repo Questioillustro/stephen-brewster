@@ -11,7 +11,7 @@ function Experience() {
   return (
     <div css={ExperienceStyle.root}>
       {experiences.map((e) => (
-        <ExperienceTile experience={e} />
+        <ExperienceTile experience={e} key={e.company} />
       ))}
     </div>
   );
