@@ -1,4 +1,4 @@
-﻿import { Box, Card, Divider } from '@mui/material';
+﻿import { Box, Card, Divider, Paper } from '@mui/material';
 import { ReactNode } from 'react';
 import Typography from '@mui/material/Typography';
 
@@ -9,17 +9,17 @@ export interface ISBCardProps {
 
 function SBCard(props: ISBCardProps) {
   return (
-    <Card variant={'outlined'}>
-      <Box sx={{ p: 2 }}>
+    <Paper elevation={2} variant={'outlined'}>
+      <Paper elevation={5} sx={{ p: 2 }} square>
         <Typography color={'primary'} variant={'h4'}>
           {props.title}
         </Typography>
-      </Box>
+      </Paper>
 
-      <Divider />
-
-      <Box sx={{ p: 2 }}>{props.content}</Box>
-    </Card>
+      <Paper elevation={0} sx={{ p: 2 }} square>
+        {props.content}
+      </Paper>
+    </Paper>
   );
 }
 

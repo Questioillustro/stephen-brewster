@@ -16,7 +16,7 @@ function ExperienceTile(props: IExperienceTileProps) {
 
   return (
     <Card variant={'outlined'} css={ExperienceTileStyle.root}>
-      <Card variant={'outlined'} css={ExperienceTileStyle.companyInfo}>
+      <Paper elevation={2} css={ExperienceTileStyle.companyInfo}>
         <SBLink href={experience.website} text={experience.company} variant={'h6'} />
 
         <Typography variant={'body2'}>{experience.address}</Typography>
@@ -28,9 +28,9 @@ function ExperienceTile(props: IExperienceTileProps) {
 
           <Typography variant={'body2'}>{experience.dateRange}</Typography>
         </div>
-      </Card>
+      </Paper>
 
-      <Paper css={ExperienceTileStyle.descriptions}>
+      <Paper elevation={0} css={ExperienceTileStyle.descriptions}>
         <List>
           {experience.descriptions.map((d) => (
             <ListItem key={d}>
