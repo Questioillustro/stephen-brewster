@@ -26,6 +26,7 @@ function DarkThemeToggle() {
       <FormControlLabel
         control={<Switch defaultChecked onChange={handleChange} />}
         label={isDarkTheme ? 'Dark Mode' : 'Light Mode'}
+        color={'secondary'}
       />
     </FormGroup>
   );

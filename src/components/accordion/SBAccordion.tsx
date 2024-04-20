@@ -22,7 +22,7 @@ function SBAccordion(props: IResumeSectionProps) {
 
   return (
     <Accordion expanded={expanded} onChange={handleChange()} square css={SBAccordionStyle.root}>
-      <AccordionSummary expandIcon={<ArrowDropUpOutlinedIcon />}>
+      <AccordionSummary expandIcon={<ArrowDropUpOutlinedIcon color={'primary'} />}>
         <div css={SBAccordionStyle.title}>
           <Typography variant={'h5'} color={'primary'}>
             {props.title}
