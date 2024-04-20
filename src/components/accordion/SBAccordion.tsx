@@ -30,11 +30,7 @@ function SBAccordion(props: IResumeSectionProps) {
         </div>
       </AccordionSummary>
 
-      <AccordionDetails css={SBAccordionStyle.details}>
-        <Paper elevation={1} square>
-          {props.content}
-        </Paper>
-      </AccordionDetails>
+      <AccordionDetails css={SBAccordionStyle.details}>{props.content}</AccordionDetails>
     </Accordion>
   );
 }

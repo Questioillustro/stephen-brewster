@@ -13,13 +13,15 @@ function Books() {
 
   return (
     <div css={BooksStyle.root}>
-      <SBLink
-        href={'https://www.goodreads.com/user/show/23215826-stephen-brewster'}
-        variant={'body1'}
-        text={'GoodReads.com Profile'}
-      />
+      <div css={BooksStyle.goodReadsLink}>
+        <SBLink
+          href={'https://www.goodreads.com/user/show/23215826-stephen-brewster'}
+          variant={'body1'}
+          text={'GoodReads.com Profile'}
+        />
+      </div>
 
-      <Carousel title={''} items={bookItems} itemWidth={150} />
+      <Carousel title={''} items={bookItems} itemWidth={170} />
     </div>
   );
 }

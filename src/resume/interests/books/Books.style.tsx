@@ -2,9 +2,9 @@
 
 export const BooksStyle = {
   root: css({
-    display: 'flex',
-    flexDirection: 'column',
     textAlign: 'center',
-    gap: '10px',
+  }),
+  goodReadsLink: css({
+    marginBottom: '10px',
   }),
 };

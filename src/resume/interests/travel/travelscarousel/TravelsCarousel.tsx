@@ -13,7 +13,7 @@ function TravelsCarousel() {
 
   return (
     <div css={TravelsCarouselStyle.root}>
-      <Carousel title={''} items={travelTiles} />
+      <Carousel title={''} items={travelTiles} itemWidth={400} />
     </div>
   );
 }
