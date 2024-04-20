@@ -2,9 +2,10 @@
 import { css } from '@emotion/react';
 
 import { EducationTileStyle } from './EducationTile.style';
-import { Box, Card, Link } from '@mui/material';
+import { Box, Card, Link, Paper } from '@mui/material';
 import { IEducationItem } from '../Education.hook';
 import Typography from '@mui/material/Typography';
+import SBLink from '../../../components/link/SBLink';
 
 export interface IEducationTileProps {
   education: IEducationItem;
@@ -14,11 +15,9 @@ function EducationTile(props: IEducationTileProps) {
   const { education } = props;
 
   return (
-    <Box css={EducationTileStyle.root}>
-      <Card variant={'outlined'} css={EducationTileStyle.card}>
-        <Link href={education.website} target={'_blank'} underline={'none'}>
-          <Typography variant={'h6'}>{education.school}</Typography>
-        </Link>
+    <Card variant={'outlined'} css={EducationTileStyle.root}>
+      <Paper elevation={2} css={EducationTileStyle.card}>
+        <SBLink href={education.website} variant={'h6'} text={education.school} />
 
         {education.honor && <Typography variant={'body1'}>{education.honor}</Typography>}
 
@@ -27,8 +26,8 @@ function EducationTile(props: IEducationTileProps) {
         </Typography>
 
         <Typography variant={'body1'}>{education.graduationDate}</Typography>
-      </Card>
-    </Box>
+      </Paper>
+    </Card>
   );
 }
 

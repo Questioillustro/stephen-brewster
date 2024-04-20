@@ -11,7 +11,7 @@ function Education() {
   return (
     <div css={EducationStyle.root}>
       {educations.map((e) => (
-        <EducationTile education={e} />
+        <EducationTile education={e} key={e.school} />
       ))}
     </div>
   );

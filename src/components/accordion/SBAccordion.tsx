@@ -21,22 +21,16 @@ function SBAccordion(props: IResumeSectionProps) {
   };
 
   return (
-    <Accordion expanded={expanded} onChange={handleChange()} square>
+    <Accordion expanded={expanded} onChange={handleChange()} square css={SBAccordionStyle.root}>
       <AccordionSummary expandIcon={<ArrowDropUpOutlinedIcon />}>
-        <div css={SBAccordionStyle.summary}>
-          <div css={SBAccordionStyle.title}>
-            <Typography variant={'h5'} color={'primary'}>
-              {props.title}
-            </Typography>
-          </div>
+        <div css={SBAccordionStyle.title}>
+          <Typography variant={'h5'} color={'primary'}>
+            {props.title}
+          </Typography>
         </div>
       </AccordionSummary>
 
-      <AccordionDetails>
-        <Paper elevation={100} css={SBAccordionStyle.details} square>
-          {props.content}
-        </Paper>
-      </AccordionDetails>
+      <AccordionDetails css={SBAccordionStyle.details}>{props.content}</AccordionDetails>
     </Accordion>
   );
 }

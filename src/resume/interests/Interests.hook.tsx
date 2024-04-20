@@ -1,6 +1,12 @@
-﻿export interface IInterestItem {
+﻿import { ReactNode } from 'react';
+import TravelsCarousel from './travel/travelscarousel/TravelsCarousel';
+import Bouldering from './bouldering/Bouldering';
+import Books from './books/Books';
+
+export interface IInterestItem {
   name: string;
   links?: ILinkItem[];
+  component?: ReactNode;
 }
 
 export interface ILinkItem {
@@ -11,19 +17,16 @@ export interface ILinkItem {
 export const useInterestsHook = (): IInterestItem[] => {
   return [
     {
-      name: 'Bouldering',
+      name: 'Travel',
+      component: <TravelsCarousel />,
     },
     {
       name: 'Reading',
-      links: [
-        {
-          displayText: 'GoodReads',
-          url: 'https://www.goodreads.com/user/show/23215826-stephen-brewster',
-        },
-      ],
+      component: <Books />,
     },
     {
-      name: 'Travel',
+      name: 'Bouldering',
+      component: <Bouldering />,
     },
     {
       name: 'Philosophy',
