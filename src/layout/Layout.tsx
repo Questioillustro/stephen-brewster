@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 
 import Header from './header/Header';
-import { Paper } from '@mui/material';
+import { Fade, Paper } from '@mui/material';
 import { LayoutStyle } from './Layout.style';
 import Resume from '../resume/Resume';
 import ControlPanel from './controlpanel/ControlPanel';

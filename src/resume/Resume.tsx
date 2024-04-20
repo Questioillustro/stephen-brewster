@@ -7,7 +7,6 @@ import SBCard from '../components/card/SBCard';
 import Experience from './experience/Experience';
 import Education from './education/Education';
 import Interests from './interests/Interests';
-import Summary from './summary/Summary';
 import Code from './code/Code';
 
 function Resume() {

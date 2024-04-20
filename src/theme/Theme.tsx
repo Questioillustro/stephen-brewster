@@ -1,5 +1,5 @@
-﻿import { createTheme, Theme } from '@mui/material';
-import { blue, red } from '@mui/material/colors';
+﻿import { createTheme } from '@mui/material';
+import { blue } from '@mui/material/colors';
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -52,51 +52,11 @@ const LightTheme = createTheme({
   },
 });
 
-const GetRandomTheme = (): Theme => {
-  return createTheme({
-    palette: GetRandomPalette(),
-    typography: GetRandomTypography(),
-  });
-};
-
-const GetRandomPalette = () => {
-  return {
-    mode: GetRandomMode(),
-    primary: {
-      main: GetRandomColor(),
-    },
-    secondary: {
-      main: GetRandomColor(),
-    },
-    info: {
-      main: GetRandomColor(),
-    },
-    link: GetRandomColor(),
-  };
-};
-
-const GetRandomTypography = () => {
-  return {
-    allVariants: {
-      color: GetRandomColor(),
-    },
-  };
-};
-
-const GetRandomColor = (): string => {
-  return `#${GetRandomHexValue()}${GetRandomHexValue()}${GetRandomHexValue()}`;
-};
-
-const GetRandomHexValue = (): string => {
-  return `${Math.floor(Math.random() * 256).toString(16)}`;
-};
-
-const GetRandomMode = (): 'dark' | 'light' => {
-  return Math.floor(Math.random() * 2) === 0 ? 'dark' : 'light';
-};
-
 export const ThemeBook = {
   DarkMode: DarkTheme,
   LightMode: LightTheme,
-  GetRandom: GetRandomTheme,
+};
+
+export const ThemeConstants = {
+  FadeTransitionDuration: 300,
 };
