@@ -3,20 +3,18 @@
 export const SBAccordionStyle = {
   root: css({
     display: 'flex',
-    flexDirection: 'row',
     width: '100%',
-  }),
-  summary: css({
-    display: 'flex',
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'center',
+    flexDirection: 'column',
   }),
   title: css({
+    justifyContent: 'center',
     display: 'flex',
     width: '100%',
+    marginLeft: '23px',
   }),
   details: css({
-    padding: '10px',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
   }),
 };
