@@ -16,7 +16,7 @@ function SBCard(props: ISBCardProps) {
         </Typography>
       </Paper>
 
-      <Paper elevation={0} sx={{ p: 2 }} square>
+      <Paper elevation={0} square>
         {props.content}
       </Paper>
     </Paper>

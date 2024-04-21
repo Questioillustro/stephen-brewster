@@ -10,7 +10,7 @@ export type SkillType =
   | 'Database'
   | 'Cloud'
   | 'Process'
-  | 'Architecture & Patterns'
+  | 'Architecture'
   | 'Tools';
 
 export const SkillTypeArray = [
@@ -19,7 +19,7 @@ export const SkillTypeArray = [
   'Database',
   'Cloud',
   'Process',
-  'Architecture & Patterns',
+  'Architecture',
   'Tools',
 ];
 
@@ -73,12 +73,12 @@ export function useSkillsHook(): ISkillItem[] {
     {
       name: 'Git',
       years: 10,
-      skillType: 'Process',
+      skillType: 'Tools',
     },
     {
       name: 'Jira',
       years: 8,
-      skillType: 'Process',
+      skillType: 'Tools',
     },
     {
       name: 'Agile Development',
@@ -133,7 +133,7 @@ export function useSkillsHook(): ISkillItem[] {
     {
       name: 'Microservices Architecture',
       years: 1,
-      skillType: 'Architecture & Patterns',
+      skillType: 'Architecture',
     },
     {
       name: 'Embedded C',
@@ -143,17 +143,32 @@ export function useSkillsHook(): ISkillItem[] {
     {
       name: 'RESTful API',
       years: 3,
-      skillType: 'Back End',
+      skillType: 'Architecture',
     },
     {
       name: 'Responsive Design',
       years: 5,
-      skillType: 'Front End',
+      skillType: 'Architecture',
     },
     {
       name: 'Turbo Basic',
       years: 2,
       skillType: 'Back End',
+    },
+    {
+      name: 'IntelliJ / Rider',
+      years: 8,
+      skillType: 'Tools',
+    },
+    {
+      name: 'Visual Studio',
+      years: 0.5,
+      skillType: 'Tools',
+    },
+    {
+      name: 'Docker',
+      years: 2,
+      skillType: 'Tools',
     },
   ];
 }
