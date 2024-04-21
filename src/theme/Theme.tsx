@@ -59,4 +59,5 @@ export const ThemeBook = {
 
 export const ThemeConstants = {
   FadeTransitionDuration: 300,
+  SlideTransitionDuration: 600,
 };

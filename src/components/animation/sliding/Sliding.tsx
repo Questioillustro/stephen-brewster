@@ -5,13 +5,18 @@ import { Slide } from '@mui/material';
 
 export interface ISlidingProps {
   child: ReactNode;
+  direction: 'left' | 'right' | 'up' | 'down';
 }
 
 function Sliding(props: ISlidingProps) {
-  const { fadeIn } = useContext(ThemeContext);
+  const { slideIn } = useContext(ThemeContext);
 
   return (
-    <Slide direction={'left'} in={fadeIn} timeout={ThemeConstants.FadeTransitionDuration}>
+    <Slide
+      direction={props.direction}
+      in={slideIn}
+      timeout={ThemeConstants.SlideTransitionDuration}
+    >
       <div>{props.child}</div>
     </Slide>
   );

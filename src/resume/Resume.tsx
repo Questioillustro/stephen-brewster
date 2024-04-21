@@ -8,21 +8,25 @@ import Experience from './experience/Experience';
 import Education from './education/Education';
 import Interests from './interests/Interests';
 import Code from './code/Code';
+import Sliding from '../components/animation/sliding/Sliding';
 
 function Resume() {
   return (
     <Masonry columns={1} spacing={2}>
       {/*<SBCard title={'About Me'} content={<Summary />} />*/}
 
-      <SBCard title={'Experience'} content={<Experience />} />
+      <Sliding
+        direction={'left'}
+        child={<SBCard title={'Experience'} content={<Experience />} />}
+      />
 
-      <SBCard title={'Skills'} content={<Skills />} />
+      <Sliding direction={'right'} child={<SBCard title={'Skills'} content={<Skills />} />} />
 
-      <SBCard title={'Education'} content={<Education />} />
+      <Sliding direction={'left'} child={<SBCard title={'Education'} content={<Education />} />} />
 
-      <SBCard title={'Code'} content={<Code />} />
+      <Sliding direction={'right'} child={<SBCard title={'Code'} content={<Code />} />} />
 
-      <SBCard title={'Interests'} content={<Interests />} />
+      <Sliding direction={'left'} child={<SBCard title={'Interests'} content={<Interests />} />} />
     </Masonry>
   );
 }

@@ -10,10 +10,11 @@ import { GetRandomTheme } from '../util/RandomGenerator.util';
 import { ThemeConstants } from './Theme';
 
 function RandomTheme() {
-  const { theme, setTheme, fadeIn, setFadeIn } = useContext(ThemeContext);
+  const { theme, setTheme, fadeIn, setFadeIn, slideIn, setSlideIn } = useContext(ThemeContext);
 
   const handleGenerate = () => {
     setFadeIn(false);
+    setSlideIn(false);
 
     setTimeout(() => {
       const rando = GetRandomTheme();
@@ -23,6 +24,7 @@ function RandomTheme() {
 
   useEffect(() => {
     if (!fadeIn) setFadeIn(true);
+    if (!slideIn) setSlideIn(true);
   }, [theme]);
 
   return (
