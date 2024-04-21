@@ -2,11 +2,12 @@
 import { css } from '@emotion/react';
 
 import { SkillsStyle } from './Skills.style';
-import { useLanguagesHook } from './Skills.hook';
+import { useSkillsHook } from './Skills.hook';
 import SkillTile from './skilltile/SkillTile';
+import SkillTypeChart from './charts/SkillTypeChart';
 
 function Skills() {
-  const skills = useLanguagesHook();
+  const skills = useSkillsHook();
 
   return (
     <div css={SkillsStyle.root}>
@@ -14,6 +15,10 @@ function Skills() {
         {skills.map((s) => (
           <SkillTile name={s.name} key={s.name} />
         ))}
+      </div>
+
+      <div css={SkillsStyle.pieChart}>
+        <SkillTypeChart />
       </div>
     </div>
   );
