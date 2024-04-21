@@ -1,4 +1,4 @@
-﻿import { SetStateAction, useState } from 'react';
+﻿import { useState } from 'react';
 import { Theme } from '@mui/material';
 import { ThemeBook } from '../theme/Theme';
 
@@ -9,5 +9,7 @@ export default function useTheme() {
 
   const [slideIn, setSlideIn] = useState<boolean>(true);
 
-  return { theme, setTheme, fadeIn, setFadeIn, slideIn, setSlideIn };
+  const [growIn, setGrowIn] = useState<boolean>(true);
+
+  return { theme, setTheme, fadeIn, setFadeIn, slideIn, setSlideIn, growIn, setGrowIn };
 }

@@ -4,32 +4,16 @@ import { css } from '@emotion/react';
 import { FormControlLabel, FormGroup, Switch } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
-import { ThemeBook, ThemeConstants } from './Theme';
+import { useAnimationConductor } from '../hooks/AnimationConductor.hook';
 
 function DarkThemeToggle() {
-  const { theme, setTheme, fadeIn, setFadeIn, slideIn, setSlideIn } = useContext(ThemeContext);
+  const themeContext = useContext(ThemeContext);
 
-  const [isDarkTheme, setIsDarkTheme] = useState(true);
+  const { isDarkTheme, AnimatedToggleDarkTheme } = useAnimationConductor();
 
   const handleChange = () => {
-    setFadeIn(false);
-    setSlideIn(false);
-
-    setTimeout(() => {
-      if (isDarkTheme) {
-        setTheme(ThemeBook.LightMode);
-      } else {
-        setTheme(ThemeBook.DarkMode);
-      }
-
-      setIsDarkTheme(!isDarkTheme);
-    }, ThemeConstants.FadeTransitionDuration + 100);
+    AnimatedToggleDarkTheme(themeContext);
   };
-
-  useEffect(() => {
-    if (!fadeIn) setFadeIn(true);
-    if (!slideIn) setSlideIn(true);
-  }, [theme]);
 
   return (
     <FormGroup>

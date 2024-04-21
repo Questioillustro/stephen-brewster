@@ -56,8 +56,3 @@ export const ThemeBook = {
   DarkMode: DarkTheme,
   LightMode: LightTheme,
 };
-
-export const ThemeConstants = {
-  FadeTransitionDuration: 300,
-  SlideTransitionDuration: 600,
-};

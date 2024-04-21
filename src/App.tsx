@@ -10,12 +10,12 @@ import { ThemeContext } from './contexts/ThemeContext';
 import Fading from './components/animation/fading/Fading';
 
 function App() {
-  const { theme, setTheme, fadeIn, setFadeIn, slideIn, setSlideIn } = useTheme();
+  const theme = useTheme();
 
   return (
     <React.StrictMode>
-      <ThemeContext.Provider value={{ theme, setTheme, fadeIn, setFadeIn, slideIn, setSlideIn }}>
-        <ThemeProvider theme={theme}>
+      <ThemeContext.Provider value={theme}>
+        <ThemeProvider theme={theme.theme}>
           <div css={AppStyle.root}>
             <Fading child={<Layout />} />
           </div>

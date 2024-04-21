@@ -1,31 +1,21 @@
 ﻿/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { Casino } from '@mui/icons-material';
 import { RandomThemeStyle } from './RandomTheme.style';
 import Typography from '@mui/material/Typography';
-import { GetRandomTheme } from '../util/RandomGenerator.util';
-import { ThemeConstants } from './Theme';
+import { useAnimationConductor } from '../hooks/AnimationConductor.hook';
 
 function RandomTheme() {
-  const { theme, setTheme, fadeIn, setFadeIn, slideIn, setSlideIn } = useContext(ThemeContext);
+  const themeContext = useContext(ThemeContext);
+
+  const { AnimatedRandomTheme } = useAnimationConductor();
 
   const handleGenerate = () => {
-    setFadeIn(false);
-    setSlideIn(false);
-
-    setTimeout(() => {
-      const rando = GetRandomTheme();
-      setTheme(rando);
-    }, ThemeConstants.FadeTransitionDuration + 100);
+    AnimatedRandomTheme(themeContext);
   };
-
-  useEffect(() => {
-    if (!fadeIn) setFadeIn(true);
-    if (!slideIn) setSlideIn(true);
-  }, [theme]);
 
   return (
     <div onClick={handleGenerate} css={RandomThemeStyle.root}>
