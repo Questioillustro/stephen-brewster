@@ -1,15 +1,15 @@
-﻿import { createTheme, Theme } from '@mui/material';
+﻿import { createTheme, PaletteOptions, Theme } from '@mui/material';
 
-export const GetRandomTheme = (): Theme => {
+export const GetRandomTheme = (isDarkMode: boolean): Theme => {
   return createTheme({
-    palette: GetRandomPalette(),
+    palette: GetRandomPalette(isDarkMode),
     typography: GetRandomTypography(),
   });
 };
 
-const GetRandomPalette = () => {
+const GetRandomPalette = (isDarkMode: boolean): PaletteOptions => {
   return {
-    mode: GetRandomMode(),
+    mode: isDarkMode ? 'dark' : 'light',
     primary: {
       main: GetRandomColor(),
     },

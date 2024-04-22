@@ -63,7 +63,7 @@ export const useThemeConductor = () => {
     fadeOutAll();
 
     setTimeout(() => {
-      setTheme(GetRandomTheme());
+      setTheme(GetRandomTheme(isDarkTheme));
 
       setFadeIn(true);
       setSlideIn(true);
