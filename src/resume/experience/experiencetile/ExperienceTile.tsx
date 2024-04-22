@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 
 import { IExperienceItem } from '../Experience.hook';
-import { Card, Link, List, ListItem, Paper } from '@mui/material';
+import { Card, List, ListItem, Paper } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { ExperienceTileStyle } from './ExperienceTile.style';
 import SBLink from '../../../components/link/SBLink';

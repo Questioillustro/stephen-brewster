@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 import { HeaderStyle } from './Header.style';
+import Growing from '../../components/animation/growing/Growing';
 
 function Header() {
   return (

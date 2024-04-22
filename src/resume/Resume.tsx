@@ -3,27 +3,49 @@ import { css } from '@emotion/react';
 
 import Masonry from '@mui/lab/Masonry';
 import Skills from './skills/Skills';
-import SBCard from '../components/card/SBCard';
 import Experience from './experience/Experience';
 import Education from './education/Education';
 import Interests from './interests/Interests';
-import Summary from './summary/Summary';
 import Code from './code/Code';
+import Sliding from '../components/animation/sliding/Sliding';
+import { SkillsProvider } from './skills/context/SkillsContext';
+import ResumeCard from '../components/card/resumecard/ResumeCard';
+import SkillControlPanel from './skills/controlpanel/SkillControlPanel';
 
 function Resume() {
   return (
     <Masonry columns={1} spacing={2}>
       {/*<SBCard title={'About Me'} content={<Summary />} />*/}
 
-      <SBCard title={'Experience'} content={<Experience />} />
+      <Sliding
+        direction={'left'}
+        child={<ResumeCard title={'Experience'} content={<Experience />} />}
+      />
 
-      <SBCard title={'Skills'} content={<Skills />} />
+      <SkillsProvider>
+        <Sliding
+          direction={'right'}
+          child={
+            <ResumeCard
+              title={'Skills'}
+              content={<Skills />}
+              controlPanel={<SkillControlPanel />}
+            />
+          }
+        />
+      </SkillsProvider>
 
-      <SBCard title={'Education'} content={<Education />} />
+      <Sliding
+        direction={'left'}
+        child={<ResumeCard title={'Education'} content={<Education />} />}
+      />
 
-      <SBCard title={'Code'} content={<Code />} />
+      <Sliding direction={'right'} child={<ResumeCard title={'Code'} content={<Code />} />} />
 
-      <SBCard title={'Interests'} content={<Interests />} />
+      <Sliding
+        direction={'left'}
+        child={<ResumeCard title={'Interests'} content={<Interests />} />}
+      />
     </Masonry>
   );
 }

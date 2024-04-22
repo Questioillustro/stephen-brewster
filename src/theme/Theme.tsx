@@ -9,11 +9,11 @@ declare module '@mui/material/styles' {
   }
 
   interface PaletteOptions {
-    link: string;
+    link?: string;
   }
 }
 
-export const DarkTheme = createTheme({
+const DarkTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
@@ -31,13 +31,16 @@ export const DarkTheme = createTheme({
   },
 });
 
-export const LightTheme = createTheme({
+const LightTheme = createTheme({
   palette: {
     mode: 'light',
     background: {
       paper: '#FDFEFF',
     },
     secondary: {
+      main: '#000000',
+    },
+    info: {
       main: '#000000',
     },
     link: blue[900],
@@ -48,3 +51,8 @@ export const LightTheme = createTheme({
     },
   },
 });
+
+export const ThemeBook = {
+  DarkMode: DarkTheme,
+  LightMode: LightTheme,
+};

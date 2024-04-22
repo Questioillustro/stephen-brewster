@@ -2,18 +2,24 @@
 import { css } from '@emotion/react';
 
 import { SkillsStyle } from './Skills.style';
-import { useLanguagesHook } from './Skills.hook';
 import SkillTile from './skilltile/SkillTile';
+import SkillTypeChart from './charts/SkillTypeChart';
+import { useContext } from 'react';
+import { SkillsContext } from './context/SkillsContext';
 
 function Skills() {
-  const skills = useLanguagesHook();
+  const { getActiveSkills } = useContext(SkillsContext);
 
   return (
     <div css={SkillsStyle.root}>
       <div css={SkillsStyle.skillGrid}>
-        {skills.map((s) => (
+        {getActiveSkills().map((s) => (
           <SkillTile name={s.name} key={s.name} />
         ))}
+      </div>
+
+      <div css={SkillsStyle.pieChart}>
+        <SkillTypeChart />
       </div>
     </div>
   );
