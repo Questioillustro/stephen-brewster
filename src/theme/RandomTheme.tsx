@@ -6,15 +6,12 @@ import { ThemeContext } from '../contexts/ThemeContext';
 import { Casino } from '@mui/icons-material';
 import { RandomThemeStyle } from './RandomTheme.style';
 import Typography from '@mui/material/Typography';
-import { useAnimationConductor } from '../hooks/AnimationConductor.hook';
 
 function RandomTheme() {
   const themeContext = useContext(ThemeContext);
 
-  const { AnimatedRandomTheme } = useAnimationConductor();
-
   const handleGenerate = () => {
-    AnimatedRandomTheme(themeContext);
+    themeContext.AnimatedRandomTheme();
   };
 
   return (

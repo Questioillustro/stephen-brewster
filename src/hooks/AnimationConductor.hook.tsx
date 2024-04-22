@@ -1,61 +1,96 @@
 ﻿import { ThemeBook } from '../theme/Theme';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { GetRandomTheme } from '../util/RandomGenerator.util';
+import { Theme } from '@mui/material';
 
-export const ThemeConstants = {
-  FadeTransitionDuration: 300,
-  SlideTransitionDuration: 600,
-  GrowTransitionDuration: 800,
-};
+export interface IThemeConductor {
+  theme: Theme;
+  setTheme: (them: Theme) => void;
+  isDarkTheme: boolean;
+  AnimatedToggleDarkTheme: () => void;
+  AnimatedRandomTheme: () => void;
+  fadeIn: boolean;
+  setFadeIn: (fadeIn: boolean) => void;
+  slideIn: boolean;
+  setSlideIn: (slideIn: boolean) => void;
+  growIn: boolean;
+  setGrowIn: (growIn: boolean) => void;
+}
 
-export const useAnimationConductor = () => {
+export const useThemeConductor = () => {
+  const [theme, setTheme] = useState<Theme>(ThemeBook.DarkMode);
+
   const [isDarkTheme, setIsDarkTheme] = useState(true);
 
-  const fadeOutAll = (themeContext: any) => {
-    themeContext.setFadeIn(false);
-    themeContext.setSlideIn(false);
-    themeContext.setGrowIn(false);
+  const [fadeIn, setFadeIn] = useState<boolean>(true);
+
+  const [slideIn, setSlideIn] = useState<boolean>(true);
+
+  const [growIn, setGrowIn] = useState<boolean>(true);
+
+  const fadeOutAll = () => {
+    setFadeIn(false);
+    setSlideIn(false);
+    setGrowIn(false);
   };
 
-  const AnimatedToggleDarkTheme = (themeContext: any) => {
-    fadeOutAll(themeContext);
+  const AnimatedToggleDarkTheme = () => {
+    fadeOutAll();
 
     setTimeout(() => {
-      toggleDarkTheme(themeContext);
+      toggleDarkTheme();
 
-      themeContext.setFadeIn(true);
-      themeContext.setSlideIn(true);
+      setFadeIn(true);
+      setSlideIn(true);
 
       setTimeout(() => {
-        themeContext.setGrowIn(true);
-      }, ThemeConstants.FadeTransitionDuration);
+        setGrowIn(true);
+      }, AnimationConstants.FadeTransitionDuration);
     }, 500);
   };
 
-  const toggleDarkTheme = (themeContext: any) => {
+  const toggleDarkTheme = () => {
     if (isDarkTheme) {
-      themeContext.setTheme(ThemeBook.LightMode);
+      setTheme(ThemeBook.LightMode);
     } else {
-      themeContext.setTheme(ThemeBook.DarkMode);
+      setTheme(ThemeBook.DarkMode);
     }
 
     setIsDarkTheme(!isDarkTheme);
   };
 
-  const AnimatedRandomTheme = (themeContext: any) => {
-    fadeOutAll(themeContext);
+  const AnimatedRandomTheme = () => {
+    fadeOutAll();
 
     setTimeout(() => {
-      themeContext.setTheme(GetRandomTheme());
+      setTheme(GetRandomTheme());
 
-      themeContext.setFadeIn(true);
-      themeContext.setSlideIn(true);
+      setFadeIn(true);
+      setSlideIn(true);
 
       setTimeout(() => {
-        themeContext.setGrowIn(true);
-      }, ThemeConstants.FadeTransitionDuration);
+        setGrowIn(true);
+      }, AnimationConstants.FadeTransitionDuration);
     }, 500);
   };
 
-  return { isDarkTheme, AnimatedToggleDarkTheme, AnimatedRandomTheme };
+  return {
+    theme,
+    setTheme,
+    isDarkTheme,
+    AnimatedToggleDarkTheme,
+    AnimatedRandomTheme,
+    fadeIn,
+    setFadeIn,
+    slideIn,
+    setSlideIn,
+    growIn,
+    setGrowIn,
+  };
+};
+
+export const AnimationConstants = {
+  FadeTransitionDuration: 300,
+  SlideTransitionDuration: 600,
+  GrowTransitionDuration: 800,
 };

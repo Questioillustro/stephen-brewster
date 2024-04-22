@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import { ReactNode, useContext } from 'react';
 import { ThemeContext } from '../../../contexts/ThemeContext';
 import { Grow } from '@mui/material';
-import { ThemeConstants } from '../../../hooks/AnimationConductor.hook';
+import { AnimationConstants } from '../../../hooks/AnimationConductor.hook';
 
 export interface IGrowingProps {
   child: ReactNode;
@@ -17,7 +17,7 @@ function Growing(props: IGrowingProps) {
   return (
     <Grow
       in={growIn}
-      timeout={ThemeConstants.GrowTransitionDuration}
+      timeout={AnimationConstants.GrowTransitionDuration}
       addEndListener={props.callback}
     >
       <div>{props.child}</div>

@@ -1,7 +1,7 @@
 ﻿import { ReactNode, useContext } from 'react';
-import { ThemeContext } from '../../../contexts/ThemeContext';
 import { Fade } from '@mui/material';
-import { ThemeConstants } from '../../../hooks/AnimationConductor.hook';
+import { AnimationConstants } from '../../../hooks/AnimationConductor.hook';
+import { ThemeContext } from '../../../contexts/ThemeContext';
 
 export interface IFadingProps {
   child: ReactNode;
@@ -14,7 +14,7 @@ function Fading(props: IFadingProps) {
   return (
     <Fade
       in={fadeIn}
-      timeout={ThemeConstants.FadeTransitionDuration}
+      timeout={AnimationConstants.FadeTransitionDuration}
       addEndListener={props.callback}
     >
       <div>{props.child}</div>

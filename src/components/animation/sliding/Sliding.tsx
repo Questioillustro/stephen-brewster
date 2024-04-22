@@ -1,7 +1,7 @@
 ﻿import { ReactNode, useContext } from 'react';
 import { ThemeContext } from '../../../contexts/ThemeContext';
 import { Slide } from '@mui/material';
-import { ThemeConstants } from '../../../hooks/AnimationConductor.hook';
+import { AnimationConstants } from '../../../hooks/AnimationConductor.hook';
 
 export interface ISlidingProps {
   child: ReactNode;
@@ -16,7 +16,7 @@ function Sliding(props: ISlidingProps) {
     <Slide
       direction={props.direction}
       in={slideIn}
-      timeout={ThemeConstants.SlideTransitionDuration}
+      timeout={AnimationConstants.SlideTransitionDuration}
       addEndListener={props.callback}
     >
       <div>{props.child}</div>

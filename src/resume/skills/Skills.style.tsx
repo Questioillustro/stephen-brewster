@@ -1,6 +1,4 @@
 ﻿import { css } from '@emotion/react';
-import { ThemeConstants } from '../../hooks/AnimationConductor.hook';
-import { Constants } from '../../layout/Layout.constants';
 
 export const SkillsStyle = {
   root: css({
@@ -19,15 +17,5 @@ export const SkillsStyle = {
     width: '100%',
     justifyContent: 'center',
     minHeight: '350px',
-    [Constants.MID_MEDIA_QUERY]: {
-      minHeight: '300px',
-    },
-  }),
-  controlPanel: css({
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    width: '100%',
-    height: '100%',
   }),
 };

@@ -2,7 +2,6 @@
 import { useContext, useMemo } from 'react';
 import { SkillsContext } from '../context/SkillsContext';
 import useWindowDimensions from '../../../hooks/WindowDimensions.hook';
-import { ChartsLegendProps } from '@mui/x-charts/ChartsLegend/ChartsLegend';
 import { LegendRendererProps } from '@mui/x-charts/ChartsLegend/DefaultChartsLegend';
 import { CardinalDirections } from '@mui/x-charts/models/layout';
 

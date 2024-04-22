@@ -14,11 +14,6 @@ export const LayoutStyle = {
     flexDirection: 'column',
     justifyContent: 'center',
   }),
-  navButtons: css({
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-  }),
   contentWrapper: css({
     width: '100%',
     display: 'flex',
