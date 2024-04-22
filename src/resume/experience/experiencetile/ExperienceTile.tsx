@@ -15,7 +15,7 @@ function ExperienceTile(props: IExperienceTileProps) {
   const { experience } = props;
 
   return (
-    <Card variant={'outlined'} css={ExperienceTileStyle.root}>
+    <Card variant={'outlined'} css={ExperienceTileStyle.root} square>
       <Paper elevation={2} css={ExperienceTileStyle.companyInfo}>
         <SBLink href={experience.website} text={experience.company} variant={'h6'} />
 

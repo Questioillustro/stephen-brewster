@@ -14,7 +14,7 @@ export interface IResumeCardProps {
 
 function ResumeCard(props: IResumeCardProps) {
   return (
-    <Paper elevation={2} square>
+    <Paper elevation={2} variant={'outlined'} square>
       <Paper elevation={5} sx={{ p: 2 }} square>
         <Typography color={'primary'} variant={'h4'}>
           {props.title}
