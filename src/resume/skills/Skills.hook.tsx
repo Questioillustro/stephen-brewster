@@ -171,5 +171,10 @@ export function useSkillsHook(): ISkillItem[] {
       years: 2,
       skillType: 'Tools',
     },
+    {
+      name: 'CI / CD',
+      years: 9,
+      skillType: 'Process',
+    },
   ];
 }

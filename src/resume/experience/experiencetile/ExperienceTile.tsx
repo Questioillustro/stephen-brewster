@@ -6,6 +6,7 @@ import { Card, List, ListItem, Paper } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { ExperienceTileStyle } from './ExperienceTile.style';
 import SBLink from '../../../components/link/SBLink';
+import { useMemo } from 'react';
 
 export interface IExperienceTileProps {
   experience: IExperienceItem;
@@ -17,14 +18,22 @@ function ExperienceTile(props: IExperienceTileProps) {
   return (
     <Card variant={'outlined'} css={ExperienceTileStyle.root} square>
       <Paper elevation={2} css={ExperienceTileStyle.companyInfo}>
-        <SBLink href={experience.website} linkContent={experience.company} variant={'h6'} />
+        <div css={ExperienceTileStyle.titleWrapper}>
+          <SBLink variant={'h6'} href={experience.website} linkContent={experience.company} />
+
+          <Typography variant={'body2'} color={'secondary'}>
+            ~{experience.years} {experience.years === 1 ? 'Year' : 'Years'}
+          </Typography>
+        </div>
 
         <Typography variant={'body2'}>{experience.address}</Typography>
 
         <Typography variant={'body2'}>{experience.phone}</Typography>
 
         <div css={ExperienceTileStyle.roleInfo}>
-          <Typography variant={'body2'}>{experience.roles.join(' | ')}</Typography>
+          <Typography variant={'body2'} color={'primary'}>
+            {experience.roles.join(' | ')}
+          </Typography>
 
           <Typography variant={'body2'}>{experience.dateRange}</Typography>
         </div>

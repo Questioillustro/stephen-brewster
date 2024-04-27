@@ -10,7 +10,7 @@ export const EducationStyle = {
     gap: '16px',
     [Constants.TABLET_MEDIA_QUERY]: {
       flexDirection: 'column',
-      gap: '10px',
+      gap: '16px',
     },
   }),
 };

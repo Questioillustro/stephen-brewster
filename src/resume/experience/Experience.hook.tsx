@@ -17,8 +17,8 @@ export const useExperienceHook = (): IExperienceItem[] => {
       phone: '(585) 625-2600',
       website: 'https://www.solutechnology.com/',
       dateRange: 'July 2015 - April 2024',
-      roles: ['Solution Lead', 'Software Engineer'],
-      years: 8,
+      roles: ['Solution Lead', 'Senior Software Engineer'],
+      years: 9,
       descriptions: [
         'Promoted to solution lead within two years of college graduation',
         'Worked with approximately ten different interdisciplinary teams and four clients using agile methodologies',
@@ -35,7 +35,7 @@ export const useExperienceHook = (): IExperienceItem[] => {
       website: 'https://www.redcom.com/',
       dateRange: 'November 2012 - September 2013',
       roles: ['Software Developer', 'Cooperative Education'],
-      years: 1.5,
+      years: 1,
       descriptions: [
         'Assisted with the development of an administrative web application for telecommunication switches',
         'Converted over 80 JSP form pages to Javascript in less than one month using a custom wrapper for the datatables.net library',

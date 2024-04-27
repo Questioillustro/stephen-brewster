@@ -21,7 +21,7 @@ export const useCodeHooks = (): ICodeItem[] => {
     {
       href: 'https://www.codewars.com/users/Questioillustro/stats',
       linkText: 'Code Wars Profile',
-      description: 'I enjoy practicing my skills with the occasional Kata on Code Wars',
+      description: 'I enjoy sharpening my skills with the occasional Kata on Code Wars',
     },
   ];
 };
