@@ -14,8 +14,8 @@ function CodeTile(props: ICodeTileProps) {
   const { item } = props;
 
   return (
-    <Paper elevation={1} css={CodeTileStyle.root} sx={{ p: 2 }}>
-      <SBLink variant={'h6'} href={item.href} text={item.linkText} />
+    <Paper elevation={1} css={CodeTileStyle.root} sx={{ p: 2 }} square>
+      <SBLink variant={'h6'} href={item.href} linkContent={item.linkText} />
       <Typography variant={'body1'}>{item.description}</Typography>
     </Paper>
   );

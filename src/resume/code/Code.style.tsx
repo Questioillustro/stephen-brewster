@@ -6,7 +6,7 @@ export const CodeStyle = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    gap: '10px',
+    gap: '16px',
     [Constants.MID_MEDIA_QUERY]: {
       flexDirection: 'column',
     },

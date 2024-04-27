@@ -17,7 +17,7 @@ function Books() {
         <SBLink
           href={'https://www.goodreads.com/user/show/23215826-stephen-brewster'}
           variant={'body1'}
-          text={'GoodReads.com Profile'}
+          linkContent={'GoodReads.com Profile'}
         />
       </div>
 

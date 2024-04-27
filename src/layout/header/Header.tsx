@@ -4,8 +4,9 @@ import { css } from '@emotion/react';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 import { HeaderStyle } from './Header.style';
-import { Link } from '@mui/material';
-import { LinkedIn } from '@mui/icons-material';
+import { Download, LinkedIn } from '@mui/icons-material';
+import SBLink from '../../components/link/SBLink';
+import SBPopoverTextField from '../../components/popover/textfield/SBPopoverTextField';
 
 function Header() {
   return (
@@ -13,13 +14,26 @@ function Header() {
       <Typography variant={'h4'} color={'primary'}>
         Stephen Brewster
       </Typography>
+
       <Typography variant={'subtitle1'} color={'tertiary'}>
         Software Engineer
       </Typography>
 
-      <Link href={'https://www.linkedin.com/in/stephen-brewster-5b3180166/'} target={'_blank'}>
-        <LinkedIn />
-      </Link>
+      <div css={HeaderStyle.links}>
+        <SBLink
+          ariaLabel={'LinkedIn profile'}
+          href={'https://www.linkedin.com/in/stephen-brewster-5b3180166/'}
+          linkContent={<LinkedIn />}
+          popoverContent={<SBPopoverTextField text={'View my LinkedIn profile'} />}
+        />
+
+        <SBLink
+          ariaLabel={'Download resume'}
+          href={'/StephenBrewster_Resume.pdf'}
+          linkContent={<Download />}
+          popoverContent={<SBPopoverTextField text={'Download Resume (pdf)'} />}
+        />
+      </div>
     </div>
   );
 }

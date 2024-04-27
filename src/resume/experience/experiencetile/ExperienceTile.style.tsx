@@ -11,7 +11,13 @@ export const ExperienceTileStyle = {
   }),
   companyInfo: css({
     padding: '10px',
-    minWidth: '320px',
+    minWidth: '350px',
+  }),
+  titleWrapper: css({
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: '10px',
   }),
   roleInfo: css({
     marginTop: '10px',

@@ -15,7 +15,7 @@ function InterestTile(props: IInterestTileProps) {
   const { interest } = props;
 
   return (
-    <Paper elevation={3} css={InterestTileStyle.root}>
+    <Paper elevation={3} css={InterestTileStyle.root} square>
       {interest.component && <SBAccordion title={interest.name} content={interest.component} />}
 
       {!interest.component && (

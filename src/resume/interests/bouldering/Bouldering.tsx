@@ -15,13 +15,13 @@ function Bouldering() {
       <div css={BoulderingStyle.myGyms}>
         <SBLink
           href={'https://centralrockgym.com/rochester/'}
-          text={'Central Rock Gym'}
+          linkContent={'Central Rock Gym'}
           variant={'body2'}
         />
         |
         <SBLink
           href={'https://www.rit.edu/fitnessrecreation/red-barn-climbing'}
-          text={'Red Barn'}
+          linkContent={'Red Barn'}
           variant={'body2'}
         />
       </div>
