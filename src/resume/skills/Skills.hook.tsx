@@ -2,6 +2,7 @@
   name: string;
   years: number;
   skillType: SkillType;
+  practicedAt?: string[];
 }
 
 export type SkillType =
@@ -27,32 +28,32 @@ export function useSkillsHook(): ISkillItem[] {
   return [
     {
       name: 'Javascript',
-      years: 10,
+      years: 11,
       skillType: 'Front End',
     },
     {
       name: 'Java',
-      years: 5,
+      years: 15,
       skillType: 'Back End',
     },
     {
       name: 'Python',
-      years: 1,
+      years: 2,
       skillType: 'Back End',
     },
     {
       name: 'CSS',
-      years: 10,
+      years: 15,
       skillType: 'Front End',
     },
     {
       name: 'Typescript',
-      years: 3,
+      years: 4,
       skillType: 'Front End',
     },
     {
       name: 'HTML',
-      years: 10,
+      years: 15,
       skillType: 'Front End',
     },
     {
@@ -82,12 +83,12 @@ export function useSkillsHook(): ISkillItem[] {
     },
     {
       name: 'Agile',
-      years: 10,
+      years: 9,
       skillType: 'Process',
     },
     {
       name: 'Splunk',
-      years: 1,
+      years: 2,
       skillType: 'Tools',
     },
     {
@@ -97,7 +98,7 @@ export function useSkillsHook(): ISkillItem[] {
     },
     {
       name: 'Angular',
-      years: 3,
+      years: 4,
       skillType: 'Front End',
     },
     {
@@ -107,12 +108,12 @@ export function useSkillsHook(): ISkillItem[] {
     },
     {
       name: 'SQL',
-      years: 4,
+      years: 9,
       skillType: 'Database',
     },
     {
       name: 'MongoDB',
-      years: 1,
+      years: 2,
       skillType: 'Database',
     },
     {
@@ -142,7 +143,7 @@ export function useSkillsHook(): ISkillItem[] {
     },
     {
       name: 'RESTful API',
-      years: 3,
+      years: 5,
       skillType: 'Architecture',
     },
     {

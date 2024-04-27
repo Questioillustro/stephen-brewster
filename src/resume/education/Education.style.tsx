@@ -6,7 +6,8 @@ export const EducationStyle = {
     display: 'flex',
     flexDirection: 'row',
     width: '100%',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
+    gap: '16px',
     [Constants.TABLET_MEDIA_QUERY]: {
       flexDirection: 'column',
       gap: '10px',

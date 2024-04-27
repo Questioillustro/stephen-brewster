@@ -2,7 +2,9 @@
 import { Constants } from '../../../layout/Layout.constants';
 
 export const EducationTileStyle = {
-  root: css({}),
+  root: css({
+    width: '100%',
+  }),
   card: css({
     display: 'flex',
     flexDirection: 'column',
