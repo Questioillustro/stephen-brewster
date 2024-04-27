@@ -1,4 +1,4 @@
-﻿import { ThemeBook } from '../theme/Theme';
+﻿import { ThemeBook } from '../theme/ThemeBook';
 import { useState } from 'react';
 import { GetRandomTheme } from '../util/RandomGenerator.util';
 import { Theme } from '@mui/material';

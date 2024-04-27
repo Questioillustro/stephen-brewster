@@ -1,6 +1,6 @@
 ﻿import { ReactNode, useContext } from 'react';
 import { Fade } from '@mui/material';
-import { AnimationConstants } from '../../../hooks/AnimationConductor.hook';
+import { AnimationConstants } from '../../../hooks/ThemeConductor.hook';
 import { ThemeContext } from '../../../contexts/ThemeContext';
 
 export interface IFadingProps {

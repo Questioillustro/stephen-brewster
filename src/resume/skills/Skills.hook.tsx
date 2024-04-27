@@ -81,7 +81,7 @@ export function useSkillsHook(): ISkillItem[] {
       skillType: 'Tools',
     },
     {
-      name: 'Agile Development',
+      name: 'Agile',
       years: 10,
       skillType: 'Process',
     },

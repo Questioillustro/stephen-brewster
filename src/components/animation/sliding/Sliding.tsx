@@ -1,7 +1,7 @@
 ﻿import { ReactNode, useContext } from 'react';
 import { ThemeContext } from '../../../contexts/ThemeContext';
 import { Slide } from '@mui/material';
-import { AnimationConstants } from '../../../hooks/AnimationConductor.hook';
+import { AnimationConstants } from '../../../hooks/ThemeConductor.hook';
 
 export interface ISlidingProps {
   child: ReactNode;

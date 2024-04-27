@@ -1,5 +1,5 @@
 ﻿import { createContext, ReactNode } from 'react';
-import { IThemeConductor, useThemeConductor } from '../hooks/AnimationConductor.hook';
+import { IThemeConductor, useThemeConductor } from '../hooks/ThemeConductor.hook';
 
 export const ThemeContext = createContext<IThemeConductor>({} as IThemeConductor);
 
