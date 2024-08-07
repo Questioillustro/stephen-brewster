@@ -16,13 +16,7 @@ function InterestTile(props: IInterestTileProps) {
 
   return (
     <Paper elevation={3} css={InterestTileStyle.root} square>
-      {interest.component && <SBAccordion title={interest.name} content={interest.component} />}
-
-      {!interest.component && (
-        <Typography color={'primary'} variant={'h5'}>
-          {interest.name}
-        </Typography>
-      )}
+      <SBAccordion title={interest.name} content={interest.component} />
     </Paper>
   );
 }

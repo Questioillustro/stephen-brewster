@@ -21,27 +21,27 @@ export const useInterestsHook = (): IInterestItem[] => {
       component: <TravelsCarousel />,
     },
     {
-      name: 'Reading',
+      name: 'Reading / Writing',
       component: <Books />,
     },
     {
       name: 'Bouldering',
       component: <Bouldering />,
     },
-    {
-      name: 'Philosophy',
-    },
-    {
-      name: 'Futurism',
-    },
-    {
-      name: 'Rucking / Hiking',
-    },
-    {
-      name: 'Poi',
-    },
-    {
-      name: 'Magic: The Gathering',
-    },
+    // {
+    //   name: 'Philosophy',
+    // },
+    // {
+    //   name: 'Futurism',
+    // },
+    // {
+    //   name: 'Rucking / Hiking',
+    // },
+    // {
+    //   name: 'Poi',
+    // },
+    // {
+    //   name: 'Magic: The Gathering',
+    // },
   ];
 };

@@ -8,9 +8,12 @@ import SBLink from '../../../components/link/SBLink';
 function Bouldering() {
   return (
     <div css={BoulderingStyle.root}>
-      <Typography variant={'body2'}>Currently Projecting: V5</Typography>
-
-      <Typography variant={'body2'}>First Session: 7/10/2023</Typography>
+      <Typography variant={'body2'}>
+          I immediately fell in love with the sport of bouldering after my first session in July of 2023 and try to get
+          out at least two or three times per week. It is a sport that works the mind and body like nothing else I have 
+          attempted before. The feeling of looking at a route, attempting it, finding it 'impossible', and then ultimately
+          sending it is one of the most rewarding experiences I have found in athletics.
+      </Typography>
 
       <div css={BoulderingStyle.myGyms}>
         <SBLink

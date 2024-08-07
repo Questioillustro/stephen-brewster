@@ -7,7 +7,7 @@
 export const useCodeHooks = (): ICodeItem[] => {
   return [
     {
-      href: 'https://github.com/Questioillustro/stephen-brewster',
+      href: 'https://dev.azure.com/questioillustro/_git/StephenBrewster',
       linkText: 'This Site',
       description:
         'This site is written in React with Typescript and deployed through an Azure pipeline',

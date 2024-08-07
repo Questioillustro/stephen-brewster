@@ -1,15 +1,17 @@
 ﻿import { createTheme } from '@mui/material';
-import { blue } from '@mui/material/colors';
+import { blue, blueGrey } from '@mui/material/colors';
 
 declare module '@mui/material/styles' {
   interface Theme {
     palette: {
       link: string;
+      cardContrastBg: string;
     };
   }
 
   interface PaletteOptions {
     link?: string;
+    cardContrastBg?: string;
   }
 }
 
@@ -43,6 +45,7 @@ const LightTheme = createTheme({
     info: {
       main: '#000000',
     },
+    cardContrastBg: blueGrey[50],
     link: blue[900],
   },
   typography: {

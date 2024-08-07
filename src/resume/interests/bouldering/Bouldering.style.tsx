@@ -2,7 +2,7 @@
 
 export const BoulderingStyle = {
   root: css({
-    textAlign: 'center',
+    textAlign: 'left',
   }),
   myGyms: css({
     alignItems: 'center',

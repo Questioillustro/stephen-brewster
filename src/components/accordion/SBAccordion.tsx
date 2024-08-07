@@ -22,12 +22,12 @@ function SBAccordion(props: IResumeSectionProps) {
 
   return (
     <Accordion expanded={expanded} onChange={handleChange()} square css={SBAccordionStyle.root}>
-      <AccordionSummary expandIcon={<ArrowDropUpOutlinedIcon color={'primary'} />}>
-        <div css={SBAccordionStyle.title}>
+      <AccordionSummary sx={{backgroundColor: 'cardContrastBg'}} expandIcon={<ArrowDropUpOutlinedIcon color={'primary'} />}>
+        <Paper variant={'outlined'} css={SBAccordionStyle.title} sx={{backgroundColor: 'cardContrastBg', border: '0'}}>
           <Typography variant={'h5'} color={'primary'}>
             {props.title}
           </Typography>
-        </div>
+        </Paper>
       </AccordionSummary>
 
       <AccordionDetails css={SBAccordionStyle.details}>{props.content}</AccordionDetails>
