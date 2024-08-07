@@ -1,5 +1,6 @@
 ﻿export interface IEducationItem {
   school: string;
+  degree: string;
   website: string;
   honor?: string;
   gpa: number;
@@ -10,6 +11,7 @@ export const useEducationHook = (): IEducationItem[] => {
   return [
     {
       school: 'Rochester Institute of Technology',
+      degree: 'Bachelor in Science, Software Engineering',
       website: 'https://www.rit.edu/',
       honor: 'Magna Cum Laude',
       gpa: 3.72,
@@ -18,6 +20,7 @@ export const useEducationHook = (): IEducationItem[] => {
     },
     {
       school: 'Monroe Community College',
+      degree: 'Associate in Science, Computer Science',
       website: 'https://www.monroecc.edu/',
       gpa: 3.71,
       gpaMax: 4,
