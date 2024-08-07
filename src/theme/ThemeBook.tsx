@@ -24,6 +24,7 @@ const DarkTheme = createTheme({
     secondary: {
       main: '#FFFFFF',
     },
+    cardContrastBg: '#000000',
     link: blue[400],
   },
   typography: {
