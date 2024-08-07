@@ -17,7 +17,7 @@ function Layout() {
   return (
     <ThemeProvider theme={theme}>
       <div css={LayoutStyle.root}>
-        <Paper elevation={0} css={LayoutStyle.header} square>
+        <Paper elevation={0} css={LayoutStyle.header} sx={{ backgroundColor: 'cardContrastBg'}} square>
           <Growing child={<Header />} />
         </Paper>
 

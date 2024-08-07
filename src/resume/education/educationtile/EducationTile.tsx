@@ -16,7 +16,7 @@ function EducationTile(props: IEducationTileProps) {
 
   return (
     <Paper elevation={0} css={EducationTileStyle.root} square>
-      <Paper elevation={2} css={EducationTileStyle.card} sx={{ backgroundColor: 'cardContrastBg' }} square>
+      <Paper elevation={0} css={EducationTileStyle.card} sx={{ backgroundColor: 'cardContrastBg' }} square>
         <SBLink href={education.website} variant={'h6'} linkContent={education.school} />
         
         <Typography variant={'body1'}>
