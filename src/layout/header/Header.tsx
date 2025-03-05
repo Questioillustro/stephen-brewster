@@ -21,13 +21,6 @@ function Header() {
 
       <div css={HeaderStyle.links}>
         <SBLink
-          ariaLabel={'LinkedIn profile'}
-          href={'https://www.linkedin.com/in/stephen-brewster-5b3180166/'}
-          linkContent={<LinkedIn />}
-          popoverContent={<SBPopoverTextField text={'View my LinkedIn profile'} />}
-        />
-
-        <SBLink
           ariaLabel={'Download resume'}
           href={'/StephenBrewster_Resume.pdf'}
           linkContent={<Download />}
