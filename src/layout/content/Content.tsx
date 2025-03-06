@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 
 import { Route, Routes } from 'react-router-dom';
 import Landing from '../../landing/Landing';
-import Resume from '../../resume/Resume';
+import Resume from '@/apps/resume/Resume';
 import Widgets from '../../widgets/Widgets';
 
 function Content() {

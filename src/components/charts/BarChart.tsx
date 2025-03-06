@@ -1,5 +1,5 @@
 ﻿import { BarChart } from '@mui/x-charts';
-import { useSkillsHook } from '../../resume/skills/Skills.hook';
+import { useSkillsHook } from '@/apps/resume/skills/Skills.hook';
 
 function SBBarChart() {
   const skills = useSkillsHook();
