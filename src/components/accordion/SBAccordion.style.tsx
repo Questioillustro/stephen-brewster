@@ -10,7 +10,7 @@ export const SBAccordionStyle = {
     justifyContent: 'center',
     display: 'flex',
     width: '100%',
-    marginLeft: '23px',
+    marginLeft: '1.4375rem',
   }),
   details: css({
     display: 'flex',

@@ -5,6 +5,6 @@ export const BooksStyle = {
     textAlign: 'center',
   }),
   goodReadsLink: css({
-    marginBottom: '10px',
+    marginBottom: '.625rem',
   }),
 };

@@ -11,15 +11,26 @@ import Sliding from '../components/animation/sliding/Sliding';
 import { SkillsProvider } from './skills/context/SkillsContext';
 import ResumeCard from '../components/card/resumecard/ResumeCard';
 import SkillControlPanel from './skills/controlpanel/SkillControlPanel';
+import SBLink from "../components/link/SBLink";
+import SBPopoverTextField from "../components/popover/textfield/SBPopoverTextField";
+import React from "react";
+import ResumeLink from "./resumelink/ResumeLink";
 
 function Resume() {
   return (
     <Masonry columns={1} spacing={2}>
-      {/*<SBCard title={'About Me'} content={<Summary />} />*/}
+      <div>
+        <SBLink
+          ariaLabel={'Download resume'}
+          href={'/StephenBrewster_Resume.pdf'}
+          linkContent={<ResumeLink />}
+          popoverContent={<SBPopoverTextField text={'Download Resume (pdf)'}/>}
+        />
+      </div>
 
       <Sliding
         direction={'left'}
-        child={<ResumeCard title={'Experience'} content={<Experience />} />}
+        child={<ResumeCard title={'Experience'} content={<Experience/>}/>}
       />
 
       <SkillsProvider>
@@ -28,8 +39,8 @@ function Resume() {
           child={
             <ResumeCard
               title={'Skills'}
-              content={<Skills />}
-              controlPanel={<SkillControlPanel />}
+              content={<Skills/>}
+              controlPanel={<SkillControlPanel/>}
             />
           }
         />
@@ -37,17 +48,21 @@ function Resume() {
 
       <Sliding
         direction={'left'}
-        child={<ResumeCard title={'Education'} content={<Education />} />}
+        child={<ResumeCard title={'Education'} content={<Education/>}/>}
       />
 
-      <Sliding direction={'right'} child={<ResumeCard title={'Code'} content={<Code />} />} />
+      <Sliding direction={'right'} child={<ResumeCard title={'Code'} content={<Code/>}/>}/>
 
       <Sliding
         direction={'left'}
-        child={<ResumeCard title={'Interests'} content={<Interests />} />}
+        child={<ResumeCard title={'Interests'} content={<Interests/>}/>}
       />
     </Masonry>
   );
 }
+
+const ResumeStyle = {
+  root: css({}),
+};
 
 export default Resume;

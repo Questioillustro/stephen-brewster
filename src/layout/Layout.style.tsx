@@ -17,7 +17,7 @@ export const LayoutStyle = {
   contentWrapper: css({
     width: '100%',
     display: 'flex',
-    padding: '0px',
+    padding: '0',
     justifyContent: 'center',
   }),
   content: css({
@@ -25,10 +25,10 @@ export const LayoutStyle = {
     width: '80%',
     [Constants.MID_MEDIA_QUERY]: {
       width: '100%',
-      padding: '20px 0px',
+      padding: '1.25rem 0',
     },
     display: 'flex',
-    padding: '20px',
+    padding: '1.25rem',
     justifyContent: 'center',
   }),
   controlPanel: css({

@@ -5,6 +5,6 @@ export const ExperienceStyle = {
     display: 'flex',
     width: '100%',
     flexDirection: 'column',
-    gap: '20px',
+    gap: '1.25rem',
   }),
 };

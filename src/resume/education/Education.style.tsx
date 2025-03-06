@@ -7,10 +7,10 @@ export const EducationStyle = {
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'center',
-    gap: '16px',
+    gap: '1rem',
     [Constants.TABLET_MEDIA_QUERY]: {
       flexDirection: 'column',
-      gap: '16px',
+      gap: '1rem',
     },
   }),
 };

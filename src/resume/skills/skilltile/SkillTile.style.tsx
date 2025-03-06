@@ -2,6 +2,6 @@
 
 export const SkillTileStyle = {
   root: css({
-    padding: '10px',
+    padding: '.625rem',
   }),
 };

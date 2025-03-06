@@ -16,7 +16,7 @@ export const TravelTileStyle = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '90%',
-    border: '2px solid #000',
-    padding: '10px',
+    border: '.125rem solid #000',
+    padding: '.625rem',
   }),
 };

@@ -7,10 +7,10 @@ export const SummaryStyle = {
   }),
   textHidden: css({
     display: 'flex',
-    maxHeight: '13px',
+    maxHeight: '.8125rem',
   }),
   textShown: css({}),
   continueButton: css({
-    minWidth: '150px',
+    minWidth: '9.375rem',
   }),
 };

@@ -8,7 +8,7 @@ export const CarouselStyle = {
   content: css({
     display: 'flex',
     flexDirection: 'row',
-    padding: '0px',
-    gap: '20px',
+    padding: '0',
+    gap: '1.25rem',
   }),
 };

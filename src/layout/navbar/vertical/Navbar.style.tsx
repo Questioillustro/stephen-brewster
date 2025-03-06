@@ -2,6 +2,6 @@
 
 export const navBarStyle = {
   navMenuList: css({
-    padding: '20px',
+    padding: '1.25rem',
   }),
 };

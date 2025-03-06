@@ -8,10 +8,10 @@ export const EducationTileStyle = {
   card: css({
     display: 'flex',
     flexDirection: 'column',
-    minHeight: '120px',
-    padding: '10px 30px',
+    minHeight: '7.5rem',
+    padding: '.625rem 1.875rem',
     [Constants.MOBILE_MEDIA_QUERY]: {
-      padding: '5px 10px',
+      padding: '.3125rem .625rem',
     },
   }),
 };

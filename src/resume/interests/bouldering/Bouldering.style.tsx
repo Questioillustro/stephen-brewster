@@ -8,7 +8,7 @@ export const BoulderingStyle = {
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'row',
-    marginTop: '10px',
-    gap: '10px',
+    marginTop: '.625rem',
+    gap: '.625rem',
   }),
 };

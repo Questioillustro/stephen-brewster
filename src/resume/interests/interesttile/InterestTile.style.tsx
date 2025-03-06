@@ -3,7 +3,7 @@
 export const InterestTileStyle = {
   root: css({
     alignItems: 'center',
-    padding: '20px',
+    padding: '1.25rem',
     display: 'flex',
     flexDirection: 'column',
   }),

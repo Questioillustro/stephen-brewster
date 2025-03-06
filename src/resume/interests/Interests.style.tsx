@@ -5,7 +5,7 @@ export const InterestsStyle = {
   root: css({
     display: 'flex',
     flexDirection: 'column',
-    gap: '16px',
+    gap: '1rem',
     [Constants.MOBILE_MEDIA_QUERY]: {},
   }),
 };

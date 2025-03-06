@@ -9,13 +9,13 @@ export const SkillsStyle = {
   }),
   skillGrid: css({
     display: 'flex',
-    gap: '10px',
+    gap: '.625rem',
     flexWrap: 'wrap',
   }),
   pieChart: css({
     display: 'flex',
     width: '100%',
     justifyContent: 'center',
-    minHeight: '350px',
+    minHeight: '21.875rem',
   }),
 };

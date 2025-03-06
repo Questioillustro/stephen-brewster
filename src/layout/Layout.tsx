@@ -5,11 +5,10 @@ import Header from './header/Header';
 import { Paper, ThemeProvider } from '@mui/material';
 import { LayoutStyle } from './Layout.style';
 import Resume from '../resume/Resume';
-import ControlPanel from './controlpanel/ControlPanel';
 import Growing from '../components/animation/growing/Growing';
-import Sliding from '../components/animation/sliding/Sliding';
 import { ThemeContext } from '../contexts/ThemeContext';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
+import {Route, Routes} from "react-router-dom";
 
 function Layout() {
   const { theme } = useContext(ThemeContext);
@@ -21,13 +20,13 @@ function Layout() {
           <Growing child={<Header />} />
         </Paper>
 
-        <Paper elevation={5} css={LayoutStyle.controlPanel} square>
-          <Sliding direction={'right'} child={<ControlPanel />} />
-        </Paper>
-
         <Paper elevation={10} css={LayoutStyle.contentWrapper} square>
           <div css={LayoutStyle.content}>
-            <Resume />
+            <Routes>
+              <Route path="/" element={<div>Stephen Brewster home</div>} />
+              <Route path="/resume" element={<Resume />} />
+              <Route path="/apps" element={<div>Apps</div>} />
+            </Routes>
           </div>
         </Paper>
       </div>

@@ -2,7 +2,7 @@
 
 export const TravelsCarouselStyle = {
   root: css({
-    paddingTop: '20px',
+    paddingTop: '1.25rem',
     display: 'flex',
   }),
 };

@@ -5,7 +5,6 @@ import { Route, Routes } from 'react-router-dom';
 import Landing from '../../landing/Landing';
 import Resume from '../../resume/Resume';
 import Widgets from '../../widgets/Widgets';
-import { ContentStyle } from './Content.style';
 
 function Content() {
   return (
@@ -18,5 +17,13 @@ function Content() {
     </div>
   );
 }
+
+const ContentStyle = {
+  root: css({
+    padding: '1.25rem',
+    display: 'flex',
+    width: '90%',
+  }),
+};
 
 export default Content;

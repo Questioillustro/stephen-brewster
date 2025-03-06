@@ -7,6 +7,6 @@ export const RandomThemeStyle = {
     flexDirection: 'row',
     alignItems: 'center',
     cursor: 'pointer',
-    gap: '5px',
+    gap: '.3125rem',
   }),
 };
