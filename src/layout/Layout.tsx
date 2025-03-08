@@ -1,11 +1,9 @@
 ﻿/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 
-import Header from './header/Header';
 import { Paper, ThemeProvider } from '@mui/material';
 import { LayoutStyle } from './Layout.style';
 import Resume from '@/apps/resume/Resume';
-import Growing from '@/components/animation/growing/Growing';
 import { ThemeContext } from '@/contexts/ThemeContext';
 import React, { useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
@@ -18,15 +16,6 @@ function Layout() {
   return (
     <ThemeProvider theme={theme}>
       <div css={LayoutStyle.root}>
-        <Paper
-          elevation={0}
-          css={LayoutStyle.header}
-          sx={{ backgroundColor: 'cardContrastBg' }}
-          square
-        >
-          <Growing child={<Header />} />
-        </Paper>
-
         <Paper square>
           <NavigationGrid compact />
         </Paper>

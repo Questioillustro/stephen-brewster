@@ -8,12 +8,6 @@ export const LayoutStyle = {
     flexDirection: 'column',
     justifyContent: 'space-between',
   }),
-  header: css({
-    minHeight: '10vh',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-  }),
   contentWrapper: css({
     width: '100%',
     display: 'flex',
@@ -21,7 +15,7 @@ export const LayoutStyle = {
     justifyContent: 'center',
   }),
   content: css({
-    minHeight: '90vh',
+    minHeight: '100vh',
     width: '80%',
     [Constants.MID_MEDIA_QUERY]: {
       width: '95%',

@@ -32,12 +32,12 @@ function ResumeCard(props: IResumeCardProps) {
           {props.title}
         </Typography>
 
-        <SBLink
-          ariaLabel={'Download resume'}
-          href={'/StephenBrewster_Resume.pdf'}
-          linkContent={<ResumeLink />}
-          popoverContent={<SBPopoverTextField text={'Download Resume (pdf)'} />}
-        />
+        {/*<SBLink*/}
+        {/*  ariaLabel={'Download resume'}*/}
+        {/*  href={'/StephenBrewster_Resume.pdf'}*/}
+        {/*  linkContent={<ResumeLink />}*/}
+        {/*  popoverContent={<SBPopoverTextField text={'Download Resume (pdf)'} />}*/}
+        {/*/>*/}
       </Paper>
 
       <Paper elevation={1} square css={ResumeCardStyle.controlPanel}>

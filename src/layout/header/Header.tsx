@@ -1,7 +1,6 @@
 ﻿/** @jsxImportSource @emotion/react */
 import Typography from '@mui/material/Typography';
 import React from 'react';
-import QuoteCarousel from '@/apps/about/quotes/QuoteCarousel';
 import { Box } from '@mui/material';
 import { headerStyles } from './Header.styles';
 

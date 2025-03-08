@@ -5,24 +5,22 @@ export const headerStyles = {
   container: css`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
     width: 100%;
-    background-color: ${(theme) => theme.palette.background.paper};
 
     @media (max-width: 48rem) {
       flex-direction: column;
       padding: 1.25rem;
-      min-height: auto;
       width: 90%;
     }
   `,
 
   titleContainer: css`
-    width: 40%;
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
+    gap: 2.25rem;
     align-items: center;
     text-align: center;
 
