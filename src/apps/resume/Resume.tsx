@@ -2,7 +2,6 @@
 import Skills from './skills/Skills';
 import Experience from './experience/Experience';
 import Education from './education/Education';
-import Interests from './interests/Interests';
 import Code from './code/Code';
 import Sliding from '@/components/animation/sliding/Sliding';
 import { SkillsProvider } from './skills/context/SkillsContext';
@@ -49,11 +48,6 @@ function Resume() {
       />
 
       <Sliding direction={'right'} child={<ResumeCard title={'Code'} content={<Code />} />} />
-
-      <Sliding
-        direction={'left'}
-        child={<ResumeCard title={'Interests'} content={<Interests />} />}
-      />
     </Masonry>
   );
 }

@@ -24,7 +24,7 @@ export const LayoutStyle = {
     minHeight: '90vh',
     width: '80%',
     [Constants.MID_MEDIA_QUERY]: {
-      width: '100%',
+      width: '95%',
       padding: '1.25rem 0',
     },
     display: 'flex',
