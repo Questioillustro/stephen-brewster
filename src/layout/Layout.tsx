@@ -11,8 +11,6 @@ import React, { useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import About from '@/apps/about/About';
 import NavigationGrid from '@/components/navigation/NavigationGrid';
-import Button from '@mui/material/Button';
-import QuoteCarousel from '@/apps/about/quotes/QuoteCarousel';
 
 function Layout() {
   const { theme } = useContext(ThemeContext);
@@ -29,10 +27,14 @@ function Layout() {
           <Growing child={<Header />} />
         </Paper>
 
+        <Paper square>
+          <NavigationGrid compact />
+        </Paper>
+
         <Paper elevation={10} css={LayoutStyle.contentWrapper} square>
           <div css={LayoutStyle.content}>
             <Routes>
-              <Route path='/' element={<NavigationGrid />} />
+              <Route path='/' element={<div>Home</div>} />
               <Route path='/apps' element={<div>Apps</div>} />
               <Route path='/resume' element={<Resume />} />
               <Route path='/about' element={<About />} />

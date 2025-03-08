@@ -30,15 +30,4 @@ export const headerStyles = {
       width: 100%;
     }
   `,
-
-  quoteContainer: css`
-    width: 40%;
-    display: flex;
-    align-items: center;
-
-    @media (max-width: 48rem) {
-      width: 100%;
-      justify-content: center;
-    }
-  `,
 };

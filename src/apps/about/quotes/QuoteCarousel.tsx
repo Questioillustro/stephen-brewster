@@ -54,7 +54,6 @@ const QuoteCarousel: React.FC = () => {
                 elevation={3}
                 sx={{
                   minWidth: '18.75rem',
-                  maxWidth: '31.25rem',
                   padding: '1.25rem',
                   textAlign: 'center',
                   borderRadius: '10px',

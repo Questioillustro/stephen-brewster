@@ -17,10 +17,6 @@ function Header() {
           Human of Earth
         </Typography>
       </Box>
-
-      <Box css={headerStyles.quoteContainer}>
-        <QuoteCarousel />
-      </Box>
     </Box>
   );
 }
