@@ -54,6 +54,7 @@
     "@craco/craco": "^7.1.0",
     "@types/react-syntax-highlighter": "^15.5.13",
     "@types/uuid": "^9.0.8",
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "raw-loader": "^4.0.2"
   }
 }

@@ -29,7 +29,12 @@ const navItems: NavItem[] = [
     description: 'View my professional experience',
   },
   { title: 'About', path: '/about', icon: <PersonIcon />, description: 'Learn more about me' },
-  { title: 'Blog', path: '/blog', icon: <ArticleIcon />, description: 'Read my latest posts' },
+  {
+    title: 'Writing',
+    path: '/writing',
+    icon: <ArticleIcon />,
+    description: 'Read my latest posts',
+  },
   {
     title: 'Pictures',
     path: '/pictures',

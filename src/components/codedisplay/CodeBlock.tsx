@@ -28,6 +28,14 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   showLineNumbers = true,
   className,
 }) => {
+  // Normalize the code string:
+  // 1. Replace literal "\r\n" or "\n" with actual newlines
+  // 2. Handle cases where the string might have been escaped improperly
+  const normalizedCode = code
+    .replace(/\\r\\n/g, '\n') // Replace literal "\r\n" with actual newline
+    .replace(/\\n/g, '\n') // Replace literal "\n" with actual newline
+    .replace(/\\r/g, '\n'); // Replace literal "\r" with actual newline
+
   return (
     <CodeContainer className={className}>
       <Typography variant='caption' color='text.secondary' sx={{ display: 'block', mb: 1 }}>
@@ -49,7 +57,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
           },
         }}
       >
-        {code.trim()}
+        {normalizedCode}
       </SyntaxHighlighter>
     </CodeContainer>
   );

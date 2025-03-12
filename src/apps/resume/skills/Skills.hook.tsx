@@ -48,7 +48,7 @@ export function useSkillsHook(): ISkillItem[] {
     },
     {
       name: 'Typescript',
-      years: 4,
+      years: 5,
       skillType: 'Front End',
     },
     {
@@ -103,7 +103,7 @@ export function useSkillsHook(): ISkillItem[] {
     },
     {
       name: 'React',
-      years: 2,
+      years: 3,
       skillType: 'Front End',
     },
     {

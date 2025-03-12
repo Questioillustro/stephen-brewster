@@ -9,6 +9,7 @@ import React, { useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import About from '@/apps/about/About';
 import NavigationGrid from '@/components/navigation/NavigationGrid';
+import { PythonScripts } from '@/apps/pythonscripts/PythonScripts';
 
 function Layout() {
   const { theme } = useContext(ThemeContext);
@@ -24,10 +25,10 @@ function Layout() {
           <div css={LayoutStyle.content}>
             <Routes>
               <Route path='/' element={<div>Home</div>} />
-              <Route path='/apps' element={<div>Apps</div>} />
+              <Route path='/apps' element={<PythonScripts scripts={['calculator.py']} />} />
               <Route path='/resume' element={<Resume />} />
               <Route path='/about' element={<About />} />
-              <Route path='/blog' element={<div>blog</div>} />
+              <Route path='/writing' element={<div>writing</div>} />
               <Route path='/pictures' element={<div>pictures</div>} />
             </Routes>
           </div>
