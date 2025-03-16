@@ -172,6 +172,11 @@ export function useSkillsHook(): ISkillItem[] {
       skillType: 'Tools',
     },
     {
+      name: 'AI Prompt Engineering',
+      years: 1,
+      skillType: 'Tools',
+    },
+    {
       name: 'CI / CD',
       years: 9,
       skillType: 'Process',

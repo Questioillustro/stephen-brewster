@@ -10,6 +10,8 @@ import { Route, Routes } from 'react-router-dom';
 import About from '@/apps/about/About';
 import NavigationGrid from '@/components/navigation/NavigationGrid';
 import { PythonScripts } from '@/apps/pythonscripts/PythonScripts';
+import { AppsPage } from '@/apps/appspage/AppsPage';
+import { WritingPage } from '@/apps/writing/WritingPage';
 
 function Layout() {
   const { theme } = useContext(ThemeContext);
@@ -25,10 +27,10 @@ function Layout() {
           <div css={LayoutStyle.content}>
             <Routes>
               <Route path='/' element={<div>Home</div>} />
-              <Route path='/apps' element={<PythonScripts scripts={['calculator.py']} />} />
+              <Route path='/apps' element={<AppsPage />} />
               <Route path='/resume' element={<Resume />} />
               <Route path='/about' element={<About />} />
-              <Route path='/writing' element={<div>writing</div>} />
+              <Route path='/writing' element={<WritingPage />} />
               <Route path='/pictures' element={<div>pictures</div>} />
             </Routes>
           </div>

@@ -1,10 +1,9 @@
-﻿import React, { useState, useEffect } from 'react';
-import { Typography, Container } from '@mui/material';
+﻿// PythonScripts.tsx
+import React, { useState, useEffect } from 'react';
+import { Typography, Container, Paper } from '@mui/material';
 import CodeBlock from '@/components/codedisplay/CodeBlock';
-
-interface PythonScriptsProps {
-  scripts: string[];
-}
+import SBAccordion from '@/components/accordion/SBAccordion';
+import { scriptService } from '@/service/ScriptService';
 
 interface ScriptContent {
   name: string;
@@ -12,70 +11,51 @@ interface ScriptContent {
   error?: string;
 }
 
-export const PythonScripts: React.FC<PythonScriptsProps> = ({ scripts }) => {
+const scripts = ['calculator.py', 'quotes.py'];
+
+export const PythonScripts: React.FC = () => {
   const [scriptContents, setScriptContents] = useState<ScriptContent[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadScripts = async () => {
+    const fetchScripts = async () => {
       setLoading(true);
-      const contents: ScriptContent[] = await Promise.all(
-        scripts.map(async (scriptName) => {
-          try {
-            // Import the .py file to get its URL
-            const scriptModule = await import(`./scripts/${scriptName}`);
-            const scriptUrl = scriptModule.default; // This will be the URL (e.g., /static/media/...)
-            console.log(`Imported URL for ${scriptName}:`, scriptUrl);
-
-            // Fetch the raw content using the URL
-            const response = await fetch(scriptUrl);
-            if (!response.ok) {
-              throw new Error(`Failed to fetch ${scriptName}: ${response.statusText}`);
-            }
-            const scriptContent = await response.text();
-            return { name: scriptName, content: scriptContent };
-          } catch (error) {
-            console.error(`Error loading ${scriptName}:`, error);
-            return {
-              name: scriptName,
-              content: '',
-              error: `Error loading script: ${
-                error instanceof Error ? error.message : 'Unknown error'
-              }`,
-            };
-          }
-        }),
-      );
-      console.log('Loaded script contents:', contents);
-      setScriptContents(contents);
-      setLoading(false);
+      try {
+        const contents = await scriptService.loadScripts(scripts);
+        console.log('Loaded script contents:', contents);
+        setScriptContents(contents);
+      } catch (error) {
+        console.error('Error fetching scripts:', error);
+        setScriptContents([]);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    loadScripts();
-  }, [scripts]);
+    fetchScripts();
+  }, []); // Remove scripts from dependency array since we're not using it directly
 
   const scriptComponents = scriptContents.map((script, index) => (
     <div key={index}>
-      <Typography variant='h6' gutterBottom>
-        {script.name}
-      </Typography>
       {script.error ? (
         <Typography color='error'>{script.error}</Typography>
       ) : (
-        <CodeBlock code={script.content} language='python' showLineNumbers />
+        <SBAccordion
+          title={script.name}
+          content={<CodeBlock code={script.content} language='python' showLineNumbers />}
+        />
       )}
     </div>
   ));
 
   return (
     <Container maxWidth='lg' sx={{ py: 4 }}>
-      <Typography variant='h4' component='h1' gutterBottom>
-        Python Scripts
-      </Typography>
       {loading ? (
         <Typography>Loading scripts...</Typography>
       ) : scriptComponents.length > 0 ? (
-        <div>{scriptComponents}</div>
+        <Paper square sx={{ rowGap: '1.25rem', display: 'flex', flexDirection: 'column' }}>
+          {scriptComponents}
+        </Paper>
       ) : (
         <Typography>No scripts available</Typography>
       )}

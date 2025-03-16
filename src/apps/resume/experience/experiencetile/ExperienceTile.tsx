@@ -47,9 +47,7 @@ function ExperienceTile(props: IExperienceTileProps) {
         <List>
           {experience.descriptions.map((d) => (
             <ListItem key={d}>
-              <Typography variant={'body1'}>
-                <TypingText text={d} />
-              </Typography>
+              <Typography variant={'body1'}>{d}</Typography>
             </ListItem>
           ))}
         </List>
