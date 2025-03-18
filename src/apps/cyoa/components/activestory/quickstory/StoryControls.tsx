@@ -1,4 +1,4 @@
-﻿import { Button, Grid, Paper, Typography } from '@mui/material';
+﻿import { Box, Button, Grid, Paper, Typography } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import StoryTile from '../../storygrid/StoryTile';
 import React, { useState } from 'react';
@@ -8,6 +8,7 @@ import MainCharacterName from '../inputs/MainCharacterName';
 import ThemeSelect from '../inputs/ThemeSelect';
 import { IAdventure } from '../../../api/AdventureService';
 import { IStory } from '../../../api/StoryService';
+import AgeInput from '@/apps/cyoa/components/activestory/inputs/AgeInput';
 
 export interface QuickStoryControls {
   story: IStory;
@@ -35,6 +36,8 @@ const StoryControls = (props: QuickStoryControls) => {
   const [themes, setThemes] = useState<string[]>([]);
 
   const [quotes, setQuotes] = useState<string[]>([]);
+
+  const [age, setAge] = useState<number>(8);
 
   const [characterName, setCharacterName] = useState<string | null>(null);
 
@@ -95,51 +98,79 @@ const StoryControls = (props: QuickStoryControls) => {
         </Typography>
       </Button>
 
-      <StoryTile story={story} />
+      <Grid sx={{ display: 'flex', flexDirection: 'row' }}>
+        <StoryTile story={story} />
 
-      <Button
-        onClick={() => buildAdventure(story._id)}
-        variant={'contained'}
-        disabled={!showingText}
-      >
-        Get New Story
-      </Button>
+        <Paper
+          variant={'outlined'}
+          style={{
+            display: 'flex',
+            width: '100%',
+            flexDirection: 'column',
+            rowGap: '20px',
+          }}
+          sx={{ p: 2 }}
+        >
+          <Typography variant={'h6'} color={'primary'}>
+            New Story
+          </Typography>
 
-      <MainCharacterName setCharacterName={setCharacterName} />
+          <Grid sx={{ flexDirection: 'row' }}>
+            <MainCharacterName setCharacterName={setCharacterName} />
+            <AgeInput setAge={setAge} />
+          </Grid>
 
-      <ThemeSelect addTheme={addTheme} />
+          <ThemeSelect addTheme={addTheme} />
 
-      <QuoteSelect addQuote={addQuote} />
+          <QuoteSelect addQuote={addQuote} />
 
-      <Grid container spacing={2} sx={{ p: 2 }}>
-        <Grid item>
           <Button
-            startIcon={<ArrowBack />}
-            onClick={previousVersion}
-            disabled={currentVersionNumber === 0 || !showingText}
-            variant={'outlined'}
+            onClick={() => buildAdventure(story._id)}
+            variant={'contained'}
+            disabled={!showingText}
           >
-            Previous Version
+            Get New Story
           </Button>
-        </Grid>
 
-        <Grid item>
-          <Button
-            endIcon={<ArrowForward />}
-            onClick={nextVersion}
-            disabled={
-              currentVersionNumber + 1 === adventures.length || !showingText
-            }
-            variant={'outlined'}
-          >
-            Next Version
-          </Button>
-        </Grid>
+          <Paper square elevation={1} sx={{ p: 2 }}>
+            <Typography variant={'h6'} color={'primary'}>
+              Existing Stories
+            </Typography>
+
+            <Typography variant={'body1'} color={'secondary'}>
+              View previously generated stories
+            </Typography>
+
+            <Grid container spacing={2} sx={{ p: 2 }}>
+              <Grid item>
+                <Button
+                  startIcon={<ArrowBack />}
+                  onClick={previousVersion}
+                  disabled={currentVersionNumber === 0 || !showingText}
+                  variant={'outlined'}
+                >
+                  Previous Version
+                </Button>
+              </Grid>
+
+              <Grid item>
+                <Button
+                  endIcon={<ArrowForward />}
+                  onClick={nextVersion}
+                  disabled={currentVersionNumber + 1 === adventures.length || !showingText}
+                  variant={'outlined'}
+                >
+                  Next Version
+                </Button>
+              </Grid>
+            </Grid>
+
+            <Typography variant={'body2'} color={'secondary'}>
+              Currently displaying version: {currentVersionNumber + 1} / {adventures.length}
+            </Typography>
+          </Paper>
+        </Paper>
       </Grid>
-
-      <Typography variant={'body2'} color={'secondary'}>
-        Version: {currentVersionNumber + 1} / {adventures.length}
-      </Typography>
     </Paper>
   );
 };

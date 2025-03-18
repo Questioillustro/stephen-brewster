@@ -5,11 +5,7 @@ import StoryControls from './quickstory/StoryControls';
 import StoryPresenter from './storypresentation/StoryPresenter';
 import LoadingStory from './LoadingStory';
 import { AnimationConstants } from '../../constants/AnimationConstants';
-import {
-  IAdventure,
-  generateNewAdventure,
-  getQuickAdventures,
-} from '../../api/AdventureService';
+import { IAdventure, generateNewAdventure, getQuickAdventures } from '../../api/AdventureService';
 
 export interface ActiveStoryProps {
   story: IStory;
@@ -27,9 +23,7 @@ const ActiveStory = (props: ActiveStoryProps) => {
 
   const [adventures, setAdventures] = useState<IAdventure[]>([]);
 
-  const [currentAdventure, setCurrentAdventure] = useState<IAdventure | null>(
-    null,
-  );
+  const [currentAdventure, setCurrentAdventure] = useState<IAdventure | null>(null);
 
   useEffect(() => {
     loadAdventures();
@@ -90,7 +84,7 @@ const ActiveStory = (props: ActiveStoryProps) => {
   return (
     <Paper variant={'elevation'}>
       {story && (
-        <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
           <StoryControls
             story={story}
             adventures={adventures}
@@ -103,10 +97,7 @@ const ActiveStory = (props: ActiveStoryProps) => {
           />
 
           {!isLoading && currentAdventure && (
-            <StoryPresenter
-              adventure={currentAdventure}
-              showText={showStoryText}
-            />
+            <StoryPresenter adventure={currentAdventure} showText={showStoryText} />
           )}
 
           {isLoading && <LoadingStory />}

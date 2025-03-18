@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { Fade, Paper } from '@mui/material';
 import ActiveStory from './activestory/ActiveStory';
 import { AnimationConstants } from '../constants/AnimationConstants';
+import Typography from '@mui/material/Typography';
 
 const CyaMain = () => {
   const { data: stories, loading, error } = useFetch<IStory[]>(getStories);
@@ -22,7 +23,7 @@ const CyaMain = () => {
   };
 
   return (
-    <Paper variant={'outlined'}>
+    <Paper variant={'outlined'} sx={{ p: 2 }}>
       {!gridHidden && (
         <Fade
           in={selectedIndex === null}
@@ -30,21 +31,21 @@ const CyaMain = () => {
           timeout={AnimationConstants.MENU_TRANSITION_SPEED}
         >
           <div>
+            <Paper square sx={{ p: 1 }}>
+              <Typography variant={'h5'} sx={{ width: '100%', textAlign: 'center' }}>
+                Choose a story format, themes, character names, and let AI create a custom story
+                just for you!
+              </Typography>
+            </Paper>
+
             <StoryGrid stories={stories} setStoryIndex={setStory} />
           </div>
         </Fade>
       )}
-
       {selectedIndex !== null && (
-        <Fade
-          in={gridHidden}
-          timeout={AnimationConstants.MENU_TRANSITION_SPEED}
-        >
+        <Fade in={gridHidden} timeout={AnimationConstants.MENU_TRANSITION_SPEED}>
           <div>
-            <ActiveStory
-              story={stories![selectedIndex!]}
-              setStoryIndex={setStory}
-            />
+            <ActiveStory story={stories![selectedIndex!]} setStoryIndex={setStory} />
           </div>
         </Fade>
       )}

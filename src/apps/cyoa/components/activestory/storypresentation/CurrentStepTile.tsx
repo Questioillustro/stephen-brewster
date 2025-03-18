@@ -16,15 +16,8 @@ export interface CurrentStepTileProps {
 }
 
 const CurrentStepTile = (props: CurrentStepTileProps) => {
-  const {
-    step,
-    currentPage,
-    totalPages,
-    generateImage,
-    generatingImage,
-    previousPage,
-    nextPage,
-  } = props;
+  const { step, currentPage, totalPages, generateImage, generatingImage, previousPage, nextPage } =
+    props;
 
   const [showContent, setShowContent] = useState(true);
 
@@ -58,7 +51,7 @@ const CurrentStepTile = (props: CurrentStepTileProps) => {
           style={{ width: '100%', flexDirection: 'row', display: 'flex' }}
         >
           <Typography
-            variant={'h5'}
+            variant={'h6'}
             color={'secondary'}
             sx={{ p: 2 }}
             dangerouslySetInnerHTML={{
@@ -74,11 +67,7 @@ const CurrentStepTile = (props: CurrentStepTileProps) => {
         </Paper>
       </Fade>
 
-      <StoryPagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        paginate={paginate}
-      />
+      <StoryPagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />
     </Paper>
   );
 };

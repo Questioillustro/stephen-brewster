@@ -17,12 +17,7 @@ const StoryTile = (props: IStoryTileProps) => {
       sx={{ p: 2 }}
       style={{ maxWidth: '400px' }}
     >
-      <Paper
-        variant={'elevation'}
-        elevation={5}
-        color={'secondary'}
-        sx={{ p: 2, mb: 2 }}
-      >
+      <Paper variant={'elevation'} elevation={5} color={'secondary'} sx={{ p: 2, mb: 2 }}>
         <Typography variant={'h5'} color={'secondary'}>
           {story.name}
         </Typography>

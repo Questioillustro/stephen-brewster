@@ -32,7 +32,6 @@ function Layout() {
               <Route path='/resume' element={<Resume />} />
               <Route path='/about' element={<About />} />
               <Route path='/writing' element={<WritingPage />} />
-              <Route path='/cyoa' element={<CyaMain />} />
               <Route path='/pictures' element={<div>pictures</div>} />
             </Routes>
           </div>

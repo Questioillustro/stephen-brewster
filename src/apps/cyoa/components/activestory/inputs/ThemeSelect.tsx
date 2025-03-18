@@ -1,10 +1,4 @@
-﻿import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from '@mui/material';
+﻿import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
 export interface ThemeSelectProps {
@@ -34,12 +28,12 @@ const ThemeSelect = (props: ThemeSelectProps) => {
 
   return (
     <FormControl variant={'filled'} fullWidth>
-      <InputLabel id="theme-select-label">Include a Theme</InputLabel>
+      <InputLabel id='theme-select-label'>Include a Theme</InputLabel>
       <Select
-        labelId="theme-select-label"
-        id="theme-select"
+        labelId='theme-select-label'
+        id='theme-select'
         value={theme}
-        label="Theme"
+        label='Theme'
         defaultValue={'NONE'}
         onChange={handleChange}
       >
@@ -51,18 +45,11 @@ const ThemeSelect = (props: ThemeSelectProps) => {
         >
           Random
         </MenuItem>
-        <MenuItem value={'Include themes about overcoming the fear of dying'}>
-          Fear of Dying
-        </MenuItem>
-        <MenuItem value={'Include themes about growing older'}>
-          Growing Old
-        </MenuItem>
-        <MenuItem value={'Include themes about stoic philosophy'}>
-          Stoicism
-        </MenuItem>
-        <MenuItem value={'Include themes about Christianity'}>
-          Christianity
-        </MenuItem>
+        <MenuItem value={'Include themes about growing older'}>Growing Old</MenuItem>
+        <MenuItem value={'Include themes about respecting other people'}>Respect</MenuItem>
+        <MenuItem value={'Include themes about honesty'}>Honesty</MenuItem>
+        <MenuItem value={'Include themes about stoic philosophy'}>Stoicism</MenuItem>
+        <MenuItem value={'Include themes about Christianity'}>Christianity</MenuItem>
       </Select>
     </FormControl>
   );
