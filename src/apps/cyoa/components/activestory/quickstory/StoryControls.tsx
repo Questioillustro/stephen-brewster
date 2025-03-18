@@ -8,7 +8,6 @@ import MainCharacterName from '../inputs/MainCharacterName';
 import ThemeSelect from '../inputs/ThemeSelect';
 import { IAdventure } from '../../../api/AdventureService';
 import { IStory } from '../../../api/StoryService';
-import AgeInput from '@/apps/cyoa/components/activestory/inputs/AgeInput';
 
 export interface QuickStoryControls {
   story: IStory;
@@ -115,14 +114,15 @@ const StoryControls = (props: QuickStoryControls) => {
             New Story
           </Typography>
 
-          <Grid sx={{ flexDirection: 'row' }}>
+          <Grid sx={{ display: 'flex', rowGap: '1rem', flexDirection: 'column' }}>
             <MainCharacterName setCharacterName={setCharacterName} />
-            <AgeInput setAge={setAge} />
           </Grid>
 
-          <ThemeSelect addTheme={addTheme} />
+          <Grid sx={{ display: 'flex', columnGap: '1rem', flexDirection: 'row' }}>
+            <ThemeSelect addTheme={addTheme} />
 
-          <QuoteSelect addQuote={addQuote} />
+            <QuoteSelect addQuote={addQuote} />
+          </Grid>
 
           <Button
             onClick={() => buildAdventure(story._id)}
