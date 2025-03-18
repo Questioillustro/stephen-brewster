@@ -12,6 +12,7 @@ import NavigationGrid from '@/components/navigation/NavigationGrid';
 import { PythonScripts } from '@/apps/pythonscripts/PythonScripts';
 import { AppsPage } from '@/apps/appspage/AppsPage';
 import { WritingPage } from '@/apps/writing/WritingPage';
+import CyaMain from '@/apps/cyoa/components/CyaMain';
 
 function Layout() {
   const { theme } = useContext(ThemeContext);
@@ -31,6 +32,7 @@ function Layout() {
               <Route path='/resume' element={<Resume />} />
               <Route path='/about' element={<About />} />
               <Route path='/writing' element={<WritingPage />} />
+              <Route path='/cyoa' element={<CyaMain />} />
               <Route path='/pictures' element={<div>pictures</div>} />
             </Routes>
           </div>
