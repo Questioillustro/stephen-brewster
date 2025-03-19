@@ -111,7 +111,7 @@ const StoryControls = (props: QuickStoryControls) => {
           sx={{ p: 2 }}
         >
           <Typography variant={'h6'} color={'primary'}>
-            New Story
+            Build-A-Venture
           </Typography>
 
           <Grid sx={{ display: 'flex', rowGap: '1rem', flexDirection: 'column' }}>
@@ -129,16 +129,16 @@ const StoryControls = (props: QuickStoryControls) => {
             variant={'contained'}
             disabled={!showingText}
           >
-            Get New Story
+            Generate Story
           </Button>
 
           <Paper square elevation={1} sx={{ p: 2 }}>
             <Typography variant={'h6'} color={'primary'}>
-              Existing Stories
+              Revisit-A-Story
             </Typography>
 
             <Typography variant={'body1'} color={'secondary'}>
-              View previously generated stories
+              Revisit a previously generated story
             </Typography>
 
             <Grid container spacing={2} sx={{ p: 2 }}>

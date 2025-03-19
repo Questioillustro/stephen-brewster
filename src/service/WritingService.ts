@@ -1,26 +1,31 @@
-﻿const writingCache: Map<string, string> = new Map();
+﻿import { LibraryItem } from '@/apps/writing/library/library';
+
+const writingCache: Map<string, string> = new Map();
 
 export const writingService = {
-  async loadWriting(fileName: string): Promise<undefined | string> {
-    // Check if writing piece is already in cache
-    if (writingCache.has(fileName)) {
-      return writingCache.get(fileName)!;
+  async loadWritingItem(item: LibraryItem): Promise<LibraryItem> {
+    // Check if content is already in cache
+    if (writingCache.has(item.fileName)) {
+      return {
+        ...item,
+        content: writingCache.get(item.fileName)!,
+      };
     }
 
     try {
-      // Import the writing file (assuming .txt or .md files) to get its URL
-      const writingModule = await import(`@/apps/writing/myths/${fileName}`);
+      // Import the writing file to get its URL
+      const writingModule = await import(`@/apps/writing/library/${item.fileName}`);
       const writingUrl = writingModule.default;
 
-      // Fetch the raw content using the URL
+      // Fetch the raw content
       const response = await fetch(writingUrl);
       if (!response.ok) {
-        throw new Error(`Failed to fetch ${fileName}: ${response.statusText}`);
+        throw new Error(`Failed to fetch ${item.fileName}: ${response.statusText}`);
       }
       const writingContent = await response.text();
       let cleanContent: string = '';
 
-      // Try to parse metadata if it exists (assuming metadata might be in frontmatter or JSON format)
+      // Try to parse metadata if it exists
       let metadata: undefined | {} = undefined;
       try {
         const metadataMatch = writingContent.match(/^---\n([\s\S]*?)\n---\n/);
@@ -34,23 +39,30 @@ export const writingService = {
           metadata = metadataObj;
           // Remove metadata from content
           cleanContent = writingContent.replace(/^---\n[\s\S]*?\n---\n/, '');
+        } else {
+          cleanContent = writingContent;
         }
       } catch (metaError) {
-        console.warn(`No metadata found for ${fileName}`);
+        console.warn(`No metadata found for ${item.fileName}`);
+        cleanContent = writingContent;
       }
 
-      // Cache the result
-      writingCache.set(fileName, cleanContent);
-      console.log(cleanContent);
-      return cleanContent;
+      // Cache the content
+      writingCache.set(item.fileName, cleanContent);
+
+      return {
+        ...item,
+        content: cleanContent,
+      };
     } catch (error) {
-      console.error(`Error loading ${fileName}:`, error);
+      console.error(`Error loading ${item.fileName}:`, error);
+      return item; // Return original item without content in case of error
     }
   },
 
-  async loadWritings(fileNames: string[]): Promise<(string | undefined)[]> {
-    const results: (string | undefined)[] = await Promise.all(
-      fileNames.map((writingName) => this.loadWriting(writingName)),
+  async loadWritingItems(items: LibraryItem[]): Promise<LibraryItem[]> {
+    const results: LibraryItem[] = await Promise.all(
+      items.map((item) => this.loadWritingItem(item)),
     );
     return results;
   },

@@ -6,7 +6,6 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import rrulePlugin from '@fullcalendar/rrule';
 import { Input, Paper } from '@mui/material';
 import Button from '@mui/material/Button';
 import {
@@ -59,7 +58,7 @@ const Calendar: React.FC = () => {
 
       <Paper elevation={5} css={calendarWrapperStyles}>
         <FullCalendar
-          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, rrulePlugin]}
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView='dayGridMonth'
           events={events}
           eventClick={handleEventClick}
