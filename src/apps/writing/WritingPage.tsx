@@ -1,7 +1,16 @@
-﻿import StoryReader from '@/components/textdisplay/StoryReader';
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { LibraryItem, MyLibrary } from '@/apps/writing/library/library';
 import { writingService } from '@/service/WritingService';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
+import { TileGrid } from '@/apps/writing/TileGrid';
+
+const Message = styled.div`
+  ${({ theme }) => css`
+    color: #e0e0e0;
+    padding: 20px;
+  `}
+`;
 
 export const WritingPage: React.FC = () => {
   const [libraryItems, setLibraryItems] = useState<LibraryItem[]>([]);
@@ -23,30 +32,23 @@ export const WritingPage: React.FC = () => {
     };
 
     loadContent();
-  }, []); // Empty dependency array means this runs once on mount
+  }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Message>Loading...</Message>;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <Message>{error}</Message>;
   }
 
   if (libraryItems.length === 0) {
-    return <div>No content available</div>;
+    return <Message>No content available</Message>;
   }
 
   return (
     <div>
-      {libraryItems.map((item, index) => (
-        <StoryReader
-          key={index} // You might want to use a more unique key like item.id if available
-          author={item.author}
-          content={item.content || 'No content loaded'}
-          title={item.title}
-        />
-      ))}
+      <TileGrid items={libraryItems} />
     </div>
   );
 };
