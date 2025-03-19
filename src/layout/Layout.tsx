@@ -27,10 +27,9 @@ function Layout() {
         <Paper elevation={10} css={LayoutStyle.contentWrapper} square>
           <div css={LayoutStyle.content}>
             <Routes>
-              <Route path='/' element={<div>Home</div>} />
+              <Route path='/' element={<About />} />
               <Route path='/apps' element={<AppsPage />} />
               <Route path='/resume' element={<Resume />} />
-              <Route path='/about' element={<About />} />
               <Route path='/writing' element={<WritingPage />} />
               <Route path='/pictures' element={<div>pictures</div>} />
             </Routes>

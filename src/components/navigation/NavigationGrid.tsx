@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom'; // Add useLocation
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { Grid, Card, CardActionArea, CardContent, Typography, Box } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import AppsIcon from '@mui/icons-material/Apps';
@@ -28,7 +28,6 @@ const navItems: NavItem[] = [
     icon: <DescriptionIcon />,
     description: 'View my professional experience',
   },
-  { title: 'About', path: '/about', icon: <PersonIcon />, description: 'Learn more about me' },
   {
     title: 'Writing',
     path: '/writing',
@@ -44,7 +43,7 @@ const navItems: NavItem[] = [
 ];
 
 const NavigationGrid: React.FC<NavigationGridProps> = ({ compact = false }) => {
-  const location = useLocation(); // Get current route
+  const location = useLocation();
 
   return (
     <Box
@@ -64,7 +63,7 @@ const NavigationGrid: React.FC<NavigationGridProps> = ({ compact = false }) => {
         direction={compact ? 'row' : 'row'}
       >
         {navItems.map((item) => {
-          const isSelected = location.pathname === item.path; // Check if this is the current route
+          const isSelected = location.pathname === item.path;
           return (
             <Grid
               item
@@ -81,10 +80,10 @@ const NavigationGrid: React.FC<NavigationGridProps> = ({ compact = false }) => {
                   ...(compact && {
                     borderRadius: 2,
                     boxShadow: 'none',
-                    bgcolor: isSelected ? 'grey.700' : 'grey.900', // Highlight when selected
-                    color: isSelected ? 'white' : 'grey.200',
+                    bgcolor: isSelected ? 'lightblue' : 'grey.900',
+                    color: isSelected ? 'black' : 'grey.200',
                     '&:hover': {
-                      bgcolor: isSelected ? 'grey.600' : 'grey.800', // Adjust hover for selected state
+                      bgcolor: isSelected ? '#87ceeb' : 'grey.800',
                     },
                   }),
                   ...(!compact && {
@@ -116,7 +115,7 @@ const NavigationGrid: React.FC<NavigationGridProps> = ({ compact = false }) => {
                           display: 'flex',
                           alignItems: 'center',
                           mr: 1,
-                          color: isSelected ? 'white' : 'grey.400', // Highlight icon when selected
+                          color: isSelected ? 'black' : 'grey.400',
                         }),
                         ...(!compact && {
                           mb: 2,
