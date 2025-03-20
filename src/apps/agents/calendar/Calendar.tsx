@@ -15,10 +15,9 @@ import {
   inputStyles,
   calendarWrapperStyles,
 } from './Calendar.style';
-import { FullCalendarEvent, parseCommand } from '@/apps/agents/calendar/Compromise.commands';
 
 const Calendar: React.FC = () => {
-  const [events, setEvents] = useState<FullCalendarEvent[]>(() => {
+  const [events, setEvents] = useState<[]>(() => {
     const savedEvents = localStorage.getItem('calendarEvents');
     return savedEvents ? JSON.parse(savedEvents) : [];
   });
@@ -28,19 +27,7 @@ const Calendar: React.FC = () => {
     localStorage.setItem('calendarEvents', JSON.stringify(events));
   }, [events]);
 
-  const handleCommand = () => {
-    parseCommand(command, setEvents, events, setCommand);
-  };
-
-  const handleDeleteEvent = (eventId: string) => {
-    setEvents(events.filter((event) => event.id !== eventId));
-  };
-
-  const handleEventClick = (arg: { event: { id: string } }) => {
-    if (window.confirm('Delete this event?')) {
-      handleDeleteEvent(arg.event.id);
-    }
-  };
+  const handleCommand = () => {};
 
   return (
     <Paper css={calendarContainerStyles} square>
@@ -61,7 +48,6 @@ const Calendar: React.FC = () => {
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView='dayGridMonth'
           events={events}
-          eventClick={handleEventClick}
           editable={true}
           selectable={true}
           contentHeight='auto'
