@@ -8,7 +8,7 @@ import QuoteCarousel from '@/apps/about/quotes/QuoteCarousel';
 function About() {
   return (
     <div>
-      Hi, I'm Stephen Brewster's website. Take a look around.
+      Hi, I'm Stephen Brewster's website. Take a look around, or don't.
       <Box>
         <QuoteCarousel />
       </Box>
