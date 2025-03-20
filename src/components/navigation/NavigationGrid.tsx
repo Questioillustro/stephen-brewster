@@ -34,12 +34,12 @@ const navItems: NavItem[] = [
     icon: <ArticleIcon />,
     description: 'Read my latest posts',
   },
-  {
-    title: 'Pictures',
-    path: '/pictures',
-    icon: <PhotoIcon />,
-    description: 'View my photo gallery',
-  },
+  // {
+  //   title: 'Pictures',
+  //   path: '/pictures',
+  //   icon: <PhotoIcon />,
+  //   description: 'View my photo gallery',
+  // },
 ];
 
 const NavigationGrid: React.FC<NavigationGridProps> = ({ compact = false }) => {
