@@ -18,7 +18,7 @@ const StoryGrid = (props: StoryGridProps) => {
       style={{ width: '100%', justifyContent: 'space-evenly' }}
       sx={{ p: 2 }}
     >
-      {stories?.map((s, idx) => (
+      {(stories || []).map((s, idx) => (
         <Grid item key={s._id}>
           <div onClick={() => setStoryIndex(idx)} style={{ cursor: 'pointer' }}>
             <StoryTile key={s._id} story={s} />
