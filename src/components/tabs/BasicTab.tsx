@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import { Tabs, Tab, Box } from '@mui/material';
+import { Tabs, Tab, Box, Paper } from '@mui/material';
 
 export interface TabData {
   label: string;
@@ -38,7 +38,7 @@ const TabbedContent: React.FC<TabbedContentProps> = ({ tabs }) => {
   };
 
   return (
-    <Box>
+    <Paper sx={{ width: '100%' }}>
       <Tabs value={value} onChange={handleChange} aria-label='tabs'>
         {tabs.map((tab, index) => (
           <Tab
@@ -54,7 +54,7 @@ const TabbedContent: React.FC<TabbedContentProps> = ({ tabs }) => {
           {tab.content}
         </TabPanel>
       ))}
-    </Box>
+    </Paper>
   );
 };
 

@@ -5,7 +5,7 @@ import { Grid } from '@mui/material';
 
 export interface StoryGridProps {
   stories: IStory[] | null;
-  setStoryIndex: (idx: number | null) => void;
+  setStoryIndex: (idx: number) => void;
 }
 
 const StoryGrid = (props: StoryGridProps) => {

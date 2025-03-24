@@ -9,10 +9,8 @@ import React, { useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import About from '@/apps/about/About';
 import NavigationGrid from '@/components/navigation/NavigationGrid';
-import { PythonScripts } from '@/apps/pythonscripts/PythonScripts';
-import { AppsPage } from '@/apps/appspage/AppsPage';
+import { AppsPage } from '@/layout/appspage/AppsPage';
 import { WritingPage } from '@/apps/writing/WritingPage';
-import CyaMain from '@/apps/cyoa/components/CyaMain';
 
 function Layout() {
   const { theme } = useContext(ThemeContext);

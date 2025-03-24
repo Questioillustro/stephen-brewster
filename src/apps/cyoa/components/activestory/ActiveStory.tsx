@@ -1,110 +1,100 @@
 ﻿import { Paper } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { IStory } from '../../api/StoryService';
-import StoryControls from './quickstory/StoryControls';
-import StoryPresenter from './storypresentation/StoryPresenter';
-import LoadingStory from './LoadingStory';
-import { AnimationConstants } from '../../constants/AnimationConstants';
 import { IAdventure, generateNewAdventure, getQuickAdventures } from '../../api/AdventureService';
+import TypeSelection from '@/apps/cyoa/layout/TypeSelection';
+import { CyaViews } from '@/apps/cyoa/CyaMain';
+import BuildNew from '@/apps/cyoa/layout/BuildNew';
+import StoryPresenter from '@/apps/cyoa/components/activestory/storypresentation/StoryPresenter';
+import LoadingStory from '@/apps/cyoa/components/activestory/LoadingStory';
 
 export interface ActiveStoryProps {
   story: IStory;
-  setStoryIndex: (idx: number | null) => void;
+  setView: (view: CyaViews) => void;
 }
 
-const ActiveStory = (props: ActiveStoryProps) => {
-  const { story, setStoryIndex } = props;
+export type ActiveStoryViews = 'typeselect' | 'build' | 'revisit' | 'new';
 
-  const [versionIndex, setVersionIndex] = useState(0);
+const ActiveStory = (props: ActiveStoryProps) => {
+  const { story, setView } = props;
+
+  const [activeView, setActiveView] = useState<ActiveStoryViews>('typeselect');
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [showStoryText, setShowStoryText] = useState(false);
-
   const [adventures, setAdventures] = useState<IAdventure[]>([]);
 
-  const [currentAdventure, setCurrentAdventure] = useState<IAdventure | null>(null);
+  const [currentAdventure, setCurrentAdventure] = useState<IAdventure>();
 
   useEffect(() => {
     loadAdventures();
   }, [story]);
 
-  useEffect(() => {
-    setCurrentAdventure(adventures[versionIndex]);
-  }, [versionIndex]);
-
-  useEffect(() => {
-    setVersionIndex(adventures.length - 1);
-  }, [adventures]);
-
   const loadAdventures = () => {
     setIsLoading(true);
-    setShowStoryText(false);
 
     getQuickAdventures(story._id).then((adventures) => {
       setIsLoading(false);
-      setShowStoryText(true);
 
       if (adventures.length === 0) return;
 
       setAdventures(adventures);
-      setVersionIndex(adventures.length - 1);
     });
   };
 
-  const getQuickAdventure = async (id: string, prompts: string[]) => {
+  const getQuickAdventure = async (prompts: string[]) => {
     setIsLoading(true);
-    setShowStoryText(false);
 
-    generateNewAdventure(id, prompts).then((adventure: IAdventure) => {
-      loadAdventures();
+    generateNewAdventure(story._id, prompts).then((adventure: IAdventure) => {
+      setIsLoading(false);
+      setAdventures(adventures.concat(adventure));
+      setActiveView('new');
     });
   };
 
-  const navPreviousVersion = () => {
-    setShowStoryText(false);
-    setTimeout(decrementVersion, AnimationConstants.QUICK_STORY_NAV_SPEED);
+  const goBack = () => {
+    setView('maingrid');
   };
 
-  const decrementVersion = () => {
-    setVersionIndex((prev) => prev - 1);
-    setShowStoryText(true);
-  };
+  if (isLoading) {
+    return (
+      <Paper variant={'elevation'} sx={{ display: 'flex', width: '100%', height: '100vh' }}>
+        <LoadingStory />
+      </Paper>
+    );
+  } else {
+    return (
+      <Paper variant={'elevation'} sx={{ display: 'flex', width: '100%' }}>
+        {activeView === 'typeselect' && (
+          <TypeSelection story={story} goBack={goBack} setActiveView={setActiveView} />
+        )}
 
-  const navNextVersion = () => {
-    setShowStoryText(false);
-    setTimeout(incrementVersion, AnimationConstants.QUICK_STORY_NAV_SPEED);
-  };
+        {activeView === 'build' && (
+          <BuildNew story={story} setView={setActiveView} build={getQuickAdventure} />
+        )}
 
-  const incrementVersion = () => {
-    setVersionIndex((next) => next + 1);
-    setShowStoryText(true);
-  };
-
-  return (
-    <Paper variant={'elevation'}>
-      {story && (
-        <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-          <StoryControls
-            story={story}
+        {activeView === 'revisit' && (
+          <StoryPresenter
             adventures={adventures}
-            showingText={showStoryText}
-            setStoryIndex={setStoryIndex}
-            getQuickAdventure={getQuickAdventure}
-            currentVersionNumber={versionIndex}
-            previousVersion={navPreviousVersion}
-            nextVersion={navNextVersion}
+            showText={true}
+            setView={setActiveView}
+            view={'existing'}
+            displayedVersion={0}
           />
+        )}
 
-          {!isLoading && currentAdventure && (
-            <StoryPresenter adventure={currentAdventure} showText={showStoryText} />
-          )}
-
-          {isLoading && <LoadingStory />}
-        </div>
-      )}
-    </Paper>
-  );
+        {activeView === 'new' && (
+          <StoryPresenter
+            adventures={adventures}
+            showText={true}
+            setView={setActiveView}
+            view={'new'}
+            displayedVersion={adventures.length - 1}
+          />
+        )}
+      </Paper>
+    );
+  }
 };
 
 export default ActiveStory;
