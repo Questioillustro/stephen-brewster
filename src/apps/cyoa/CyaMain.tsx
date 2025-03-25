@@ -1,15 +1,9 @@
-﻿import StoryGrid from './components/storygrid/StoryGrid';
-import useFetch from './hooks/useFetch';
+﻿import useFetch from './hooks/useFetch';
 import { getStories, IStory } from './api/StoryService';
 import React, { useState } from 'react';
-import { Box, Fade, Paper } from '@mui/material';
+import { Paper } from '@mui/material';
 import ActiveStory from './components/activestory/ActiveStory';
-import { AnimationConstants } from './constants/AnimationConstants';
-import Typography from '@mui/material/Typography';
-import Header from '@/apps/cyoa/layout/Header';
-import TypeSelection from '@/apps/cyoa/layout/TypeSelection';
 import MainGrid from '@/apps/cyoa/layout/MainGrid';
-import BuildOptions from '@/apps/cyoa/components/activestory/inputs/BuildOptions';
 
 export type CyaViews = 'maingrid' | 'activestory';
 

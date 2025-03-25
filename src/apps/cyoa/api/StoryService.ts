@@ -1,4 +1,4 @@
-﻿import apiClient from './apiClient';
+﻿import apiClient from '@/api/ApiClient';
 
 export interface IStory {
   _id: string;

@@ -8,11 +8,9 @@ import Fading from './components/animation/fading/Fading';
 
 function App() {
   return (
-      <React.StrictMode>
-        <SBThemeProvider>
-          <Fading child={<Layout />} />          
-        </SBThemeProvider>
-      </React.StrictMode>
+    <SBThemeProvider>
+      <Fading child={<Layout />} />
+    </SBThemeProvider>
   );
 }
 

@@ -1,4 +1,4 @@
-﻿import apiClient from './apiClient';
+﻿import apiClient from '@/api/ApiClient';
 
 export interface IAdventure {
   _id: string;
@@ -15,19 +15,14 @@ export interface IAdventureStep {
   imageUrl: string;
 }
 
-export const generateNewAdventure = async (
-  id: string,
-  prompts: string[],
-): Promise<IAdventure> => {
+export const generateNewAdventure = async (id: string, prompts: string[]): Promise<IAdventure> => {
   const response = await apiClient.post<IAdventure>(`/quickadventure/${id}`, {
     prompts: prompts,
   });
   return response.data;
 };
 
-export const getQuickAdventures = async (
-  storyid: string,
-): Promise<IAdventure[]> => {
+export const getQuickAdventures = async (storyid: string): Promise<IAdventure[]> => {
   const response = await apiClient.get<IAdventure[]>(`/adventure/${storyid}`);
   return response.data;
 };

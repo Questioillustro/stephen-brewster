@@ -1,4 +1,4 @@
-﻿import apiClient from './apiClient';
+﻿import apiClient from '@/api/ApiClient';
 import { IAdventure } from './AdventureService';
 
 export interface IGenerateImageRequest {
@@ -14,11 +14,8 @@ export const getImagesForPrompt = async (
   id: string,
   index: number,
 ): Promise<IAdventure> => {
-  const response = await apiClient.post<IAdventure>(
-    `/generateimages/${id}/${index}`,
-    {
-      prompt: prompt,
-    },
-  );
+  const response = await apiClient.post<IAdventure>(`/generateimages/${id}/${index}`, {
+    prompt: prompt,
+  });
   return response.data;
 };
