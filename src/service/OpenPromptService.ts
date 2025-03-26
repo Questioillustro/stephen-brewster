@@ -1,6 +1,6 @@
 ﻿import axios, { AxiosResponse } from 'axios';
 import ApiClient from '@/api/ApiClient';
-import { ICalendarData } from '@/apps/finance/CalendarOfEvents';
+import { ICalendarData } from '@/apps/finance/FinanceDataGrid';
 
 interface OpenPromptRequest {
   prompts: string[];
@@ -8,7 +8,7 @@ interface OpenPromptRequest {
 
 type OpenPromptResponse = string;
 
-export const openPromptService = async (prompts: string[]): Promise<ICalendarData[]> => {
+export const openPromptService = async (prompts: string[]): Promise<string> => {
   try {
     const requestData: OpenPromptRequest = {
       prompts: prompts,
@@ -19,7 +19,7 @@ export const openPromptService = async (prompts: string[]): Promise<ICalendarDat
       requestData,
     );
 
-    return JSON.parse(response.data);
+    return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       throw new Error(

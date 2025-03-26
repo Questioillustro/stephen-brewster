@@ -1,12 +1,14 @@
 ﻿import { Paper } from '@mui/material';
-import CalendarOfEvents from '@/apps/finance/CalendarOfEvents';
+import FinanceDataGrid from '@/apps/finance/FinanceDataGrid';
+import MacroNews from '@/apps/finance/MacroNews';
 
 export interface IFinanceNewsPanelProps {}
 
 const FinanceNewsPanel: React.FC<IFinanceNewsPanelProps> = () => {
   return (
     <Paper square elevation={10}>
-      <CalendarOfEvents />
+      <MacroNews />
+      <FinanceDataGrid />
     </Paper>
   );
 };
