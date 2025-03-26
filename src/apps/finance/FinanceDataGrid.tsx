@@ -39,6 +39,7 @@ const FinanceDataGrid: React.FC = () => {
     'Include expected values where available.',
     'Estimate the impact that the data point will have on the stock market.',
     'Only respond with the data formatted as JSON',
+    'Sort by date ascending',
     'Do not include ```json wrapping.',
     `JSON structured should be [{ dataPoint, releaseDate, description, previousValue, expectedValue, actualValue, marketImpact }]`,
   ];
@@ -48,15 +49,13 @@ const FinanceDataGrid: React.FC = () => {
       try {
         const prompt = CALENDAR_PROMPTS.join('|');
         setIsLoading(true);
-        const prompts: string[] = [prompt];
 
-        openPromptService(prompts).then((data: string) => {
+        openPromptService(prompt).then((data: string) => {
           setCalendarData(JSON.parse(data));
+          setIsLoading(false);
         });
       } catch (err) {
         console.log(err);
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -71,7 +70,7 @@ const FinanceDataGrid: React.FC = () => {
 
       <Grid container spacing={1}>
         {isLoading && (
-          <Paper sx={{ display: 'flex', width: '100%', height: '100%' }}>
+          <Paper sx={{ display: 'flex', width: '100%', minHeight: '15rem' }}>
             <LoadingSkeleton />
           </Paper>
         )}

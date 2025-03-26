@@ -17,8 +17,11 @@ const MacroNews: React.FC = () => {
   const [macroNewsData, setMacroNewsData] = useState<IMacroNewsData[]>();
   const [isLoading, setIsLoading] = useState(false);
 
+  const today = new Date();
+  const dateString = `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`;
+
   const MACRO_NEWS_PROMPTS = [
-    `Provide a list of important macro finance related news for ${new Date()}, formatted as JSON.`,
+    `Provide a list of breaking news in macro finance for today ${dateString}, formatted as JSON.`,
     'Only include United States related news.',
     `Provide at least 5 items of note.`,
     'Include a title for the news item.',
@@ -36,15 +39,13 @@ const MacroNews: React.FC = () => {
       try {
         const prompt = MACRO_NEWS_PROMPTS.join('|');
         setIsLoading(true);
-        const prompts: string[] = [prompt];
 
-        openPromptService(prompts).then((data: string) => {
+        openPromptService(prompt).then((data: string) => {
           setMacroNewsData(JSON.parse(data));
+          setIsLoading(false);
         });
       } catch (err) {
         console.log(err);
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -59,7 +60,7 @@ const MacroNews: React.FC = () => {
 
       <Grid container spacing={1}>
         {isLoading && (
-          <Paper sx={{ display: 'flex', width: '100%', height: '100%' }}>
+          <Paper sx={{ display: 'flex', width: '100%', minHeight: '15rem' }}>
             <LoadingSkeleton />
           </Paper>
         )}

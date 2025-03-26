@@ -6,7 +6,11 @@ export interface IFinanceNewsPanelProps {}
 
 const FinanceNewsPanel: React.FC<IFinanceNewsPanelProps> = () => {
   return (
-    <Paper square elevation={10}>
+    <Paper
+      square
+      elevation={1}
+      sx={{ display: 'flex', rowGap: '2rem', minHeight: '100rem', flexDirection: 'column' }}
+    >
       <MacroNews />
       <FinanceDataGrid />
     </Paper>

@@ -1,17 +1,16 @@
 ﻿import axios, { AxiosResponse } from 'axios';
 import ApiClient from '@/api/ApiClient';
-import { ICalendarData } from '@/apps/finance/FinanceDataGrid';
 
 interface OpenPromptRequest {
-  prompts: string[];
+  prompt: string;
 }
 
 type OpenPromptResponse = string;
 
-export const openPromptService = async (prompts: string[]): Promise<string> => {
+export const openPromptService = async (prompt: string): Promise<string> => {
   try {
     const requestData: OpenPromptRequest = {
-      prompts: prompts,
+      prompt: prompt,
     };
 
     const response: AxiosResponse<OpenPromptResponse> = await ApiClient.post(
