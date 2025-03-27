@@ -44,6 +44,7 @@ const StoryPresenter = (props: StoryPresenterProps) => {
   const generateImage = async () => {
     setGeneratingImage(true);
     const step = presentedAdventure.steps[currentStepIndex];
+
     getImagesForPrompt(step.imagePrompt, presentedAdventure._id, currentStepIndex).then(
       (adventure) => {
         setPresentedAdventure(adventure);

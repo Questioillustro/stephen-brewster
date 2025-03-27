@@ -40,7 +40,7 @@ const MacroNews: React.FC = () => {
         const prompt = MACRO_NEWS_PROMPTS.join('|');
         setIsLoading(true);
 
-        openPromptService(prompt).then((data: string) => {
+        openPromptService(prompt, 'grok').then((data: string) => {
           setMacroNewsData(JSON.parse(data));
           setIsLoading(false);
         });

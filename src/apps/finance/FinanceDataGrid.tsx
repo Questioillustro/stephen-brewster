@@ -50,7 +50,7 @@ const FinanceDataGrid: React.FC = () => {
         const prompt = CALENDAR_PROMPTS.join('|');
         setIsLoading(true);
 
-        openPromptService(prompt).then((data: string) => {
+        openPromptService(prompt, 'grok').then((data: string) => {
           setCalendarData(JSON.parse(data));
           setIsLoading(false);
         });
