@@ -15,14 +15,31 @@ export interface IAdventureStep {
   imageUrl: string;
 }
 
-export const generateNewAdventure = async (id: string, prompts: string[]): Promise<IAdventure> => {
-  const response = await apiClient.post<IAdventure>(`/quickadventure/${id}`, {
-    prompts: prompts,
-  });
-  return response.data;
+export const generateNewAdventure = async (
+  id: string,
+  prompts: string[],
+  llm: string,
+  temperature?: number,
+): Promise<IAdventure> => {
+  try {
+    const response = await apiClient.post<IAdventure>(`/quickadventure/${id}`, {
+      prompts: prompts,
+      temperature: temperature ?? 0.7,
+      llm: llm ?? 'grok',
+    });
+    if (!response.data) throw new Error('No adventure data received');
+    return response.data;
+  } catch (error) {
+    throw new Error(`Failed to generate adventure: ${JSON.stringify(error)}`);
+  }
 };
 
-export const getQuickAdventures = async (storyid: string): Promise<IAdventure[]> => {
-  const response = await apiClient.get<IAdventure[]>(`/adventure/${storyid}`);
-  return response.data;
+export const getExistingAdventuresForStory = async (storyid: string): Promise<IAdventure[]> => {
+  try {
+    const response = await apiClient.get<IAdventure[]>(`/adventure/${storyid}`);
+    if (!response.data) throw new Error('No adventures found');
+    return response.data;
+  } catch (error) {
+    throw new Error(`Failed to fetch adventures: ${JSON.stringify(error)}`);
+  }
 };

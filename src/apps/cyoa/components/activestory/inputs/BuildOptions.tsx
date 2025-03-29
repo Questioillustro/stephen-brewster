@@ -3,6 +3,7 @@ import { Button, Grid, Paper, Typography } from '@mui/material';
 import MainCharacterName from '@/apps/cyoa/components/activestory/inputs/MainCharacterName';
 import ThemeSelect from '@/apps/cyoa/components/activestory/inputs/ThemeSelect';
 import QuoteSelect from '@/apps/cyoa/components/activestory/inputs/QuoteSelect';
+import GenderSelect from '@/apps/cyoa/components/activestory/inputs/GenderSelect';
 
 export interface IBuildOptionsProps {
   setPrompts: (prompts: string[]) => void;
@@ -15,9 +16,9 @@ const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) =
 
   const [quotes, setQuotes] = useState<string[]>([]);
 
-  const [age, setAge] = useState<number>(8);
-
   const [characterName, setCharacterName] = useState<string | null>(null);
+
+  const [gender, setGender] = useState<string>('Random');
 
   const buildAdventure = () => {
     setPrompts(buildPromptsArray());
@@ -68,8 +69,17 @@ const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) =
         Build-A-Venture
       </Typography>
 
-      <Grid sx={{ display: 'flex', rowGap: '1rem', flexDirection: 'column' }}>
+      <Grid
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          columnGap: '1rem',
+          width: '100%',
+          flexDirection: 'row',
+        }}
+      >
         <MainCharacterName setCharacterName={setCharacterName} />
+        <GenderSelect addGender={setGender} />
       </Grid>
 
       <Grid sx={{ display: 'flex', columnGap: '1rem', flexDirection: 'row' }}>

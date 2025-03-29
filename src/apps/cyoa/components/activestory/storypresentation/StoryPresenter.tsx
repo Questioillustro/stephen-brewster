@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { AnimationConstants } from '../../../constants/AnimationConstants';
 import { getImagesForPrompt } from '../../../api/ImageService';
-import { getQuickAdventures, IAdventure } from '../../../api/AdventureService';
+import { getExistingAdventuresForStory, IAdventure } from '../../../api/AdventureService';
 import CurrentStepTile from './CurrentStepTile';
 import BackButton from '@/apps/cyoa/components/activestory/inputs/BackButton';
 import { ActiveStoryViews } from '@/apps/cyoa/components/activestory/ActiveStory';

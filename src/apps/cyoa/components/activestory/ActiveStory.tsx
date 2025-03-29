@@ -1,12 +1,16 @@
 ﻿import { Paper } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { IStory } from '../../api/StoryService';
-import { IAdventure, generateNewAdventure, getQuickAdventures } from '../../api/AdventureService';
+import {
+  IAdventure,
+  generateNewAdventure,
+  getExistingAdventuresForStory,
+} from '../../api/AdventureService';
 import TypeSelection from '@/apps/cyoa/layout/TypeSelection';
 import { CyaViews } from '@/apps/cyoa/CyaMain';
 import BuildNew from '@/apps/cyoa/layout/BuildNew';
 import StoryPresenter from '@/apps/cyoa/components/activestory/storypresentation/StoryPresenter';
-import LoadingStory from '@/apps/cyoa/components/activestory/LoadingStory';
+import LoadingSkeleton from '@/components/loading/LoadingSkeleton';
 
 export interface ActiveStoryProps {
   story: IStory;
@@ -33,7 +37,7 @@ const ActiveStory = (props: ActiveStoryProps) => {
   const loadAdventures = () => {
     setIsLoading(true);
 
-    getQuickAdventures(story._id).then((adventures) => {
+    getExistingAdventuresForStory(story._id).then((adventures) => {
       setIsLoading(false);
 
       if (adventures.length === 0) return;
@@ -42,10 +46,10 @@ const ActiveStory = (props: ActiveStoryProps) => {
     });
   };
 
-  const getQuickAdventure = async (prompts: string[]) => {
+  const buildAVenture = async (prompts: string[]) => {
     setIsLoading(true);
 
-    generateNewAdventure(story._id, prompts).then((adventure: IAdventure) => {
+    generateNewAdventure(story._id, prompts, 'grok', 0.9).then((adventure: IAdventure) => {
       setIsLoading(false);
       setAdventures(adventures.concat(adventure));
       setActiveView('new');
@@ -58,19 +62,19 @@ const ActiveStory = (props: ActiveStoryProps) => {
 
   if (isLoading) {
     return (
-      <Paper variant={'elevation'} sx={{ display: 'flex', width: '100%', height: '100vh' }}>
-        <LoadingStory />
+      <Paper variant={'elevation'} sx={{ display: 'flex', width: '100%', height: '15rem' }}>
+        <LoadingSkeleton />
       </Paper>
     );
   } else {
     return (
-      <Paper variant={'elevation'} sx={{ display: 'flex', width: '100%' }}>
+      <Paper elevation={5} sx={{ display: 'flex', width: '100%' }}>
         {activeView === 'typeselect' && (
           <TypeSelection story={story} goBack={goBack} setActiveView={setActiveView} />
         )}
 
         {activeView === 'build' && (
-          <BuildNew story={story} setView={setActiveView} build={getQuickAdventure} />
+          <BuildNew story={story} setView={setActiveView} build={buildAVenture} />
         )}
 
         {activeView === 'revisit' && (

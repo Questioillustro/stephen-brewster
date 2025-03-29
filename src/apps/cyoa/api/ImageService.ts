@@ -14,8 +14,24 @@ export const getImagesForPrompt = async (
   id: string,
   index: number,
 ): Promise<IAdventure> => {
-  const response = await apiClient.post<IAdventure>(`/generateimages/${id}/${index}`, {
-    prompt: prompt,
-  });
-  return response.data;
+  if (!id) {
+    throw new Error('Valid ID string is required');
+  }
+  if (isNaN(index) || index < 0) {
+    throw new Error('Valid non-negative index number is required');
+  }
+
+  try {
+    const response = await apiClient.post<IAdventure>(`/generateimages/${id}/${index}`, {
+      prompt: prompt,
+    });
+
+    if (!response.data) {
+      throw new Error('No adventure data received from server');
+    }
+
+    return response.data;
+  } catch (error) {
+    throw new Error(`Failed to generate images: ${JSON.stringify(error)}`);
+  }
 };
