@@ -9,7 +9,7 @@ import React, { useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import About from '@/apps/about/About';
 import NavigationGrid from '@/components/navigation/NavigationGrid';
-import { AppsPage } from '@/layout/appspage/AppsPage';
+import { AppsPage } from '@/layout/AppsPage';
 import { WritingPage } from '@/apps/writing/WritingPage';
 
 function Layout() {

@@ -11,10 +11,6 @@ function About() {
       <Box>
         <QuoteCarousel />
       </Box>
-      <Sliding
-        direction={'left'}
-        child={<ResumeCard title={'Interests'} content={<Interests />} />}
-      />
     </div>
   );
 }
