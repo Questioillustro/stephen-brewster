@@ -4,6 +4,7 @@ import { Agents } from '@/apps/agents/Agents';
 import { Paper } from '@mui/material';
 import CyaMain from '@/apps/cyoa/CyaMain';
 import FinanceNewsPanel from '@/apps/finance/FinanceNewsPanel';
+import ReactConcepts from '@/apps/react/ReactConcepts';
 
 export const AppsPage: React.FC = () => {
   const tabs: TabData[] = [
@@ -16,13 +17,17 @@ export const AppsPage: React.FC = () => {
       content: <FinanceNewsPanel />,
     },
     {
-      label: 'Python Scripts',
-      content: <PythonScripts />,
+      label: 'React Concepts',
+      content: <ReactConcepts />,
     },
-    {
-      label: 'AI Agents',
-      content: <Agents />,
-    },
+    // {
+    //   label: 'Python Scripts',
+    //   content: <PythonScripts />,
+    // },
+    // {
+    //   label: 'AI Agents',
+    //   content: <Agents />,
+    // },
   ];
 
   return (
