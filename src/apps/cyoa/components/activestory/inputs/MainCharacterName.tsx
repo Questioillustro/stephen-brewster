@@ -10,10 +10,8 @@ const MainCharacterName = (props: MainCharacterNameProps) => {
   return (
     <TextField
       defaultValue={'Random'}
-      label={'Main Character Name'}
-      onChange={(e) =>
-        setCharacterName(`Make the main character's name ${e.target.value}`)
-      }
+      label={'Character Name'}
+      onChange={(e) => setCharacterName(`Make the main character's name ${e.target.value}`)}
     />
   );
 };

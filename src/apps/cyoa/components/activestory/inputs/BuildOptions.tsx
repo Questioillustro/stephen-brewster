@@ -1,12 +1,11 @@
 ﻿import React, { useState } from 'react';
 import { Button, Grid, Paper, Typography } from '@mui/material';
-import MainCharacterName from '@/apps/cyoa/components/activestory/inputs/MainCharacterName';
 import ThemeSelect from '@/apps/cyoa/components/activestory/inputs/ThemeSelect';
 import QuoteSelect from '@/apps/cyoa/components/activestory/inputs/QuoteSelect';
-import GenderSelect from '@/apps/cyoa/components/activestory/inputs/GenderSelect';
+import MainCharacterPanel from '@/apps/cyoa/components/activestory/inputs/MainCharacterPanel';
 
 export interface IBuildOptionsProps {
-  setPrompts: (prompts: string[]) => void;
+  setPrompts: (prompts: string[], characterPrompts: string) => void;
 }
 
 const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) => {
@@ -16,19 +15,16 @@ const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) =
 
   const [quotes, setQuotes] = useState<string[]>([]);
 
-  const [characterName, setCharacterName] = useState<string | null>(null);
-
-  const [gender, setGender] = useState<string>('Random');
+  const [mainCharacter, setMainCharacter] = useState<string>('');
 
   const buildAdventure = () => {
-    setPrompts(buildPromptsArray());
+    setPrompts(buildPromptsArray(), mainCharacter);
   };
 
   const buildPromptsArray = (): string[] => {
     let allPrompts: string[] = [];
     allPrompts = allPrompts.concat(themes);
     allPrompts = allPrompts.concat(quotes);
-    if (characterName !== null) allPrompts.push(characterName);
     return allPrompts;
   };
 
@@ -69,18 +65,7 @@ const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) =
         Build-A-Venture
       </Typography>
 
-      <Grid
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          columnGap: '1rem',
-          width: '100%',
-          flexDirection: 'row',
-        }}
-      >
-        <MainCharacterName setCharacterName={setCharacterName} />
-        <GenderSelect addGender={setGender} />
-      </Grid>
+      <MainCharacterPanel setMainCharacterPrompts={setMainCharacter} />
 
       <Grid sx={{ display: 'flex', columnGap: '1rem', flexDirection: 'row' }}>
         <ThemeSelect addTheme={addTheme} />

@@ -18,12 +18,14 @@ export interface IAdventureStep {
 export const generateNewAdventure = async (
   id: string,
   prompts: string[],
+  characterPrompts: string,
   llm: string,
   temperature?: number,
 ): Promise<IAdventure> => {
   try {
     const response = await apiClient.post<IAdventure>(`/quickadventure/${id}`, {
       prompts: prompts,
+      character: characterPrompts,
       temperature: temperature ?? 0.7,
       llm: llm ?? 'grok',
     });

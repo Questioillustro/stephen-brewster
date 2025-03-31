@@ -9,7 +9,7 @@ import { ActiveStoryViews } from '@/apps/cyoa/components/activestory/ActiveStory
 export interface IBuildNewProps {
   story: IStory;
   setView: (view: ActiveStoryViews) => void;
-  build: (prompts: string[]) => void;
+  build: (prompts: string[], characterPrompts: string) => void;
 }
 
 const BuildNew: React.FC<IBuildNewProps> = (props: IBuildNewProps) => {
@@ -19,8 +19,8 @@ const BuildNew: React.FC<IBuildNewProps> = (props: IBuildNewProps) => {
     setView('typeselect');
   };
 
-  const setPrompts = (prompts: string[]) => {
-    build(prompts);
+  const setPrompts = (prompts: string[], characterPrompts: string) => {
+    build(prompts, characterPrompts);
   };
 
   return (

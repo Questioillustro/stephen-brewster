@@ -1,14 +1,13 @@
-﻿// StyledVentureButton.tsx
-import React from 'react';
+﻿import React from 'react';
 import { Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 const StyledButton = styled(Button)({
-  flex: 1,
-  maxHeight: '250px',
   backgroundSize: 'contain',
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat',
+  padding: 0,
+  minWidth: 'auto',
 });
 
 export interface IStyledVentureButtonProps {
@@ -22,17 +21,23 @@ export const StyledVentureButton: React.FC<IStyledVentureButtonProps> = ({ image
       variant='contained'
       onClick={onClick}
       sx={{
-        backgroundImage: `url('${imageUrl}')`,
+        padding: 0,
         backgroundColor: 'black',
-        borderRadius: '12px',
-        boxShadow: '0 3px 5px 2px rgba(255, 255, 255, .3)',
+        borderRadius: '0.75rem',
+        boxShadow: '0 0.1875rem 0.3125rem 0.125rem rgba(255, 255, 255, .3)',
         '&:hover': {
           backgroundColor: '#FFFFFF',
           transform: 'scale(1.05)',
-          boxShadow: '0 5px 15px rgba(0,0,0,0.3)',
+          boxShadow: '0 0.3125rem 0.9375rem rgba(0,0,0,0.3)',
         },
       }}
-    />
+    >
+      <img
+        src={imageUrl}
+        alt=''
+        style={{ display: 'block', width: '100%', height: 'auto', borderRadius: '0.75rem' }}
+      />
+    </StyledButton>
   );
 };
 

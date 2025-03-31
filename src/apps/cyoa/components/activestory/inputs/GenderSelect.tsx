@@ -1,50 +1,54 @@
 ﻿import React, { useEffect, useState } from 'react';
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { Button, Box } from '@mui/material';
 
 export interface QuoteSelectProps {
   addGender: (prompt: string) => void;
 }
-
-export type IGender = 'Random' | 'Male' | 'Female';
-
 const GenderSelect = (props: QuoteSelectProps) => {
   const { addGender } = props;
-
-  const [gender, setGender] = useState<string>('Random');
-
-  const handleChange = (event: SelectChangeEvent) => {
-    const {
-      target: { value },
-    } = event;
-    setGender(value);
+  const [gender, setGender] = useState<string>('Male');
+  const handleGenderSelect = (selectedGender: 'Male' | 'Female') => {
+    setGender(selectedGender);
   };
-
   useEffect(() => {
-    if (gender !== 'Random') {
+    if (gender) {
       const prompt = `Main character's gender is ${gender}`;
       addGender(prompt);
-    } else {
-      addGender('');
     }
   }, [gender]);
-
   return (
-    <FormControl variant={'filled'} fullWidth>
-      <InputLabel id='gender-select-label'>Main Character Gender</InputLabel>
-      <Select
-        labelId='gender-select-label'
-        id='gender-select'
-        value={gender}
-        label='Gender'
-        defaultValue={'Random'}
-        onChange={handleChange}
+    <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', mt: 2 }}>
+      <Button
+        onClick={() => handleGenderSelect('Male')}
+        sx={{
+          padding: 0,
+          border: gender === 'Male' ? '0.25rem solid blue' : 'none',
+          borderRadius: '0.25rem',
+          '&:hover': { opacity: 0.8 },
+        }}
       >
-        <MenuItem value={'Random'}>Random</MenuItem>
-        <MenuItem value={'Male'}>Male</MenuItem>
-        <MenuItem value={'Female'}>Female</MenuItem>
-      </Select>
-    </FormControl>
+        <img
+          src='https://azurefunctionsapp2022060.blob.core.windows.net/cyoa/boy.jpg'
+          alt='Select Male'
+          style={{ width: '6.25rem', height: '6.25rem' }}
+        />
+      </Button>
+      <Button
+        onClick={() => handleGenderSelect('Female')}
+        sx={{
+          padding: 0,
+          border: gender === 'Female' ? '0.25rem solid pink' : 'none',
+          borderRadius: '0.25rem',
+          '&:hover': { opacity: 0.8 },
+        }}
+      >
+        <img
+          src='https://azurefunctionsapp2022060.blob.core.windows.net/cyoa/girl.jpg'
+          alt='Select Female'
+          style={{ width: '6.25rem', height: '6.25rem' }}
+        />
+      </Button>
+    </Box>
   );
 };
-
 export default GenderSelect;

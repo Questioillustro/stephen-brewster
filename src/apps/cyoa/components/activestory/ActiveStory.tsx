@@ -46,14 +46,16 @@ const ActiveStory = (props: ActiveStoryProps) => {
     });
   };
 
-  const buildAVenture = async (prompts: string[]) => {
+  const buildAVenture = async (prompts: string[], characterPrompts: string) => {
     setIsLoading(true);
 
-    generateNewAdventure(story._id, prompts, 'grok', 0.9).then((adventure: IAdventure) => {
-      setIsLoading(false);
-      setAdventures(adventures.concat(adventure));
-      setActiveView('new');
-    });
+    generateNewAdventure(story._id, prompts, characterPrompts, 'grok', 0.9).then(
+      (adventure: IAdventure) => {
+        setIsLoading(false);
+        setAdventures(adventures.concat(adventure));
+        setActiveView('new');
+      },
+    );
   };
 
   const goBack = () => {
