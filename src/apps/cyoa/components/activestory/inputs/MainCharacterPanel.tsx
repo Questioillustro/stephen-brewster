@@ -1,4 +1,4 @@
-﻿import { Paper } from '@mui/material';
+﻿import { Box, Paper } from '@mui/material';
 import MainCharacterName from '@/apps/cyoa/components/activestory/inputs/MainCharacterName';
 import Typography from '@mui/material/Typography';
 import GenderSelect from '@/apps/cyoa/components/activestory/inputs/GenderSelect';
@@ -38,14 +38,18 @@ const MainCharacterPanel = (props: MainCharacterPanelProps) => {
   return (
     <Paper
       elevation={5}
-      sx={{ p: 2, justifyContent: 'start', display: 'flex', flexDirection: 'column' }}
+      sx={{
+        p: 2,
+        justifyContent: 'start',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
     >
       <Typography variant={'h6'} sx={{ mb: 3 }}>
         Customize Your Main Character!
       </Typography>
 
-      <Paper
-        elevation={2}
+      <Box
         sx={{
           display: 'flex',
           flexDirection: 'row',
@@ -57,18 +61,15 @@ const MainCharacterPanel = (props: MainCharacterPanelProps) => {
       >
         <GenderSelect addGender={setGender} />
         <MainCharacterName setCharacterName={setCharacterName} />
-      </Paper>
+      </Box>
 
-      <Paper
-        elevation={2}
-        sx={{ display: 'flex', flexDirection: 'column', rowGap: '1rem', width: '100%' }}
-      >
+      <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
         <SpeciesSelect setSpecies={setSpecie} />
 
         <SkinColorSelect setSkinColor={setSkinColor} />
 
         <HairColorSelect setHairColor={setHairColor} />
-      </Paper>
+      </Box>
     </Paper>
   );
 };

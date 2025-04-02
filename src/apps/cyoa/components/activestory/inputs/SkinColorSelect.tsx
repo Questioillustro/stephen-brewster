@@ -1,4 +1,5 @@
 ﻿import { ColorSwatch } from '@/apps/cyoa/components/activestory/inputs/ColorSwatch';
+import { Box } from '@mui/material';
 
 export interface SkinColorSelectProps {
   setSkinColor: (hex: string) => void;
@@ -11,7 +12,11 @@ const MainCharacterSkinColor = (props: SkinColorSelectProps) => {
     setSkinColor(`Main character's skin color is ${color}`);
   };
 
-  return <ColorSwatch onColorSelect={colorChanged} title={'Skin Color'} />;
+  return (
+    <Box sx={{ p: 2 }}>
+      <ColorSwatch onColorSelect={colorChanged} title={'Skin Color'} />
+    </Box>
+  );
 };
 
 export default MainCharacterSkinColor;

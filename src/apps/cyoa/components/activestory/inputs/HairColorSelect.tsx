@@ -1,4 +1,5 @@
 ﻿import { ColorSwatch } from '@/apps/cyoa/components/activestory/inputs/ColorSwatch';
+import { Box } from '@mui/material';
 
 export interface HairColorSelectProps {
   setHairColor: (hex: string) => void;
@@ -11,7 +12,11 @@ const MainCharacterHairColor = (props: HairColorSelectProps) => {
     setHairColor(`Main character's hair color is ${color}`);
   };
 
-  return <ColorSwatch onColorSelect={colorChanged} title={'Hair Color'} />;
+  return (
+    <Box sx={{ p: 2 }}>
+      <ColorSwatch onColorSelect={colorChanged} title={'Hair Color'} />
+    </Box>
+  );
 };
 
 export default MainCharacterHairColor;

@@ -17,7 +17,7 @@ const Container = styled(Box)`
 const CarouselWrapper = styled(Box)`
   overflow: hidden;
   flex: 1;
-  max-width: 480px; /* 5 items * (80px width + 16px gap) = 480px */
+  max-width: 576px;
 `;
 
 const CarouselTrack = styled(Box)`
@@ -95,8 +95,8 @@ export const SpeciesSelect: React.FC<SpeciesSelectorProps> = ({ setSpecies }) =>
   };
 
   return (
-    <Box>
-      <Typography variant={'h6'} sx={{ p: 2 }}>
+    <Box sx={{ p: 2 }}>
+      <Typography variant={'h6'} sx={{ pb: 2 }}>
         Species
       </Typography>
 

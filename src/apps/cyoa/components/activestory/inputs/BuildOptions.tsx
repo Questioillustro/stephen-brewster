@@ -19,15 +19,7 @@ const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) =
   };
 
   return (
-    <Paper
-      variant={'outlined'}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        rowGap: '20px',
-      }}
-      sx={{ p: 2 }}
-    >
+    <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', rowGap: '20px', width: '100%' }}>
       <Typography variant={'h6'} color={'primary'}>
         Build-A-Venture
       </Typography>

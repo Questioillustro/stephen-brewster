@@ -27,7 +27,7 @@ const BuildNew: React.FC<IBuildNewProps> = (props: IBuildNewProps) => {
     <Paper square sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
       <BackButton onclick={goBack} />
 
-      <Paper square sx={{ display: 'flex' }}>
+      <Paper square sx={{ display: 'flex', width: '100%' }}>
         <StoryTile story={story} />
         <BuildOptions setPrompts={setPrompts} />
       </Paper>
