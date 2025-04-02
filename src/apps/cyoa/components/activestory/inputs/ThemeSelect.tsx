@@ -1,56 +1,116 @@
-﻿import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+﻿import { Autocomplete, Button, FormControl, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
 export interface ThemeSelectProps {
   addTheme: (themePrompt: string) => void;
 }
 
+interface ThemeOption {
+  value: string;
+  label: string;
+}
+
 const ThemeSelect = (props: ThemeSelectProps) => {
   const { addTheme } = props;
-
   const [theme, setTheme] = useState<string>('NONE');
+  const [inputValue, setInputValue] = useState('');
+  const [themeOptions, setThemeOptions] = useState<ThemeOption[]>([]);
 
-  const handleChange = (event: SelectChangeEvent) => {
-    const {
-      target: { value },
-    } = event;
-    setTheme(value);
+  const defaultThemes: ThemeOption[] = [
+    { value: 'NONE', label: 'None' },
+    {
+      value: 'Include a random theme from a philosophy, religion, or any common theme from stories',
+      label: 'Random',
+    },
+    { value: 'Include themes about growing old', label: 'Growing Old' },
+    { value: 'Include themes about respect', label: 'Respect' },
+    { value: 'Include themes about honesty', label: 'Honesty' },
+    { value: 'Include themes about stoicism', label: 'Stoicism' },
+    { value: 'Include themes about christianity', label: 'Christianity' },
+  ];
+
+  useEffect(() => {
+    const storedThemes = localStorage.getItem('themeOptions');
+    if (storedThemes) {
+      setThemeOptions(JSON.parse(storedThemes));
+    } else {
+      setThemeOptions(defaultThemes);
+      localStorage.setItem('themeOptions', JSON.stringify(defaultThemes));
+    }
+  }, []);
+
+  const handleAddTheme = () => {
+    if (
+      inputValue &&
+      !themeOptions.some((option) => option.label.toLowerCase() === inputValue.toLowerCase())
+    ) {
+      const newTheme = {
+        value: `Include themes about ${inputValue}`,
+        label: inputValue,
+      };
+      const updatedOptions = [...themeOptions, newTheme];
+      setThemeOptions(updatedOptions);
+      localStorage.setItem('themeOptions', JSON.stringify(updatedOptions));
+      setTheme(newTheme.value);
+      setInputValue('');
+    }
+  };
+
+  const handleThemeChange = (
+    event: React.SyntheticEvent,
+    newValue: ThemeOption | string | null,
+  ) => {
+    if (newValue) {
+      if (typeof newValue === 'string') {
+        // Handle case where user types a custom value
+        setTheme(`Include themes about ${newValue}`);
+        setInputValue(newValue);
+      } else {
+        // Handle case where user selects an existing option
+        setTheme(newValue.value);
+        setInputValue(newValue.label);
+      }
+    } else {
+      setTheme('NONE');
+      setInputValue('');
+    }
+  };
+
+  const handleInputChange = (event: React.SyntheticEvent, newInputValue: string) => {
+    setInputValue(newInputValue);
   };
 
   useEffect(() => {
     if (theme !== 'NONE') {
-      const prompt = `${theme}`;
-      addTheme(prompt);
+      addTheme(theme);
     } else {
       addTheme('');
     }
   }, [theme]);
 
   return (
-    <FormControl variant={'filled'} fullWidth>
-      <InputLabel id='theme-select-label'>Include a Theme</InputLabel>
-      <Select
-        labelId='theme-select-label'
-        id='theme-select'
-        value={theme}
-        label='Theme'
-        defaultValue={'NONE'}
-        onChange={handleChange}
+    <FormControl fullWidth sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
+      <Autocomplete
+        options={themeOptions}
+        getOptionLabel={(option) => (typeof option === 'string' ? option : option.label)}
+        value={themeOptions.find((option) => option.value === theme) || null}
+        onChange={handleThemeChange}
+        inputValue={inputValue}
+        onInputChange={handleInputChange}
+        freeSolo
+        renderInput={(params) => <TextField {...params} label='Include a Theme' variant='filled' />}
+        sx={{ flexGrow: 1 }}
+      />
+      <Button
+        variant='contained'
+        onClick={handleAddTheme}
+        disabled={
+          !inputValue ||
+          themeOptions.some((option) => option.label.toLowerCase() === inputValue.toLowerCase())
+        }
       >
-        <MenuItem value={'NONE'}>None</MenuItem>
-        <MenuItem
-          value={
-            'Include a random theme from a philosophy, religion, or any common theme from stories'
-          }
-        >
-          Random
-        </MenuItem>
-        <MenuItem value={'Include themes about growing older'}>Growing Old</MenuItem>
-        <MenuItem value={'Include themes about respecting other people'}>Respect</MenuItem>
-        <MenuItem value={'Include themes about honesty'}>Honesty</MenuItem>
-        <MenuItem value={'Include themes about stoic philosophy'}>Stoicism</MenuItem>
-        <MenuItem value={'Include themes about Christianity'}>Christianity</MenuItem>
-      </Select>
+        Add
+      </Button>
     </FormControl>
   );
 };

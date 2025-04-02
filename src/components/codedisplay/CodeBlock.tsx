@@ -5,7 +5,6 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { grey } from '@mui/material/colors';
 
-// Define props interface
 interface CodeBlockProps {
   code: string;
   language?: string;
@@ -13,7 +12,6 @@ interface CodeBlockProps {
   className?: string;
 }
 
-// Styled container component
 const CodeContainer = styled(Box)(({ theme }) => ({
   backgroundColor: grey[900],
   borderRadius: theme.shape.borderRadius,
@@ -28,13 +26,11 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   showLineNumbers = true,
   className,
 }) => {
-  // Normalize the code string:
-  // 1. Replace literal "\r\n" or "\n" with actual newlines
-  // 2. Handle cases where the string might have been escaped improperly
+  // Normalize the code string
   const normalizedCode = code
-    .replace(/\\r\\n/g, '\n') // Replace literal "\r\n" with actual newline
-    .replace(/\\n/g, '\n') // Replace literal "\n" with actual newline
-    .replace(/\\r/g, '\n'); // Replace literal "\r" with actual newline
+    .replace(/\\r\\n/g, '\n')
+    .replace(/\\n/g, '\n')
+    .replace(/\\r/g, '\n');
 
   return (
     <CodeContainer className={className}>

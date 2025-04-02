@@ -46,7 +46,7 @@ const ActiveStory = (props: ActiveStoryProps) => {
     });
   };
 
-  const buildAVenture = async (prompts: string[], characterPrompts: string) => {
+  const buildAVenture = async (prompts: string, characterPrompts: string) => {
     setIsLoading(true);
 
     generateNewAdventure(story._id, prompts, characterPrompts, 'grok', 0.9).then(

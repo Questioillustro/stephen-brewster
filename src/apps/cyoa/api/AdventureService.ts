@@ -1,4 +1,5 @@
 ﻿import apiClient from '@/api/ApiClient';
+import { IStory } from '@/apps/cyoa/api/StoryService';
 
 export interface IAdventure {
   _id: string;
@@ -7,6 +8,7 @@ export interface IAdventure {
   storyPrompts: string[];
   imageUrl: string;
   steps: IAdventureStep[];
+  story: IStory;
 }
 
 export interface IAdventureStep {
@@ -17,7 +19,7 @@ export interface IAdventureStep {
 
 export const generateNewAdventure = async (
   id: string,
-  prompts: string[],
+  prompts: string,
   characterPrompts: string,
   llm: string,
   temperature?: number,
