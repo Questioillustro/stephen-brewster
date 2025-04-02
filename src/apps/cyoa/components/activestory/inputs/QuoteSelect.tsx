@@ -23,6 +23,20 @@ const QuoteSelect = (props: QuoteSelectProps) => {
     { value: 'Abraham Lincoln', label: 'Abraham Lincoln' },
     { value: 'Friedrich Nietzsche', label: 'Friedrich Nietzsche' },
     { value: 'Sir Isaac Newton', label: 'Sir Isaac Newton' },
+    { value: 'Cleopatra', label: 'Cleopatra' },
+    { value: 'Leonardo da Vinci', label: 'Leonardo da Vinci' },
+    { value: 'William Shakespeare', label: 'William Shakespeare' },
+    { value: 'Marie Curie', label: 'Marie Curie' },
+    { value: 'Mahatma Gandhi', label: 'Mahatma Gandhi' },
+    { value: 'Joan of Arc', label: 'Joan of Arc' },
+    { value: 'Socrates', label: 'Socrates' },
+    { value: 'Queen Elizabeth I', label: 'Queen Elizabeth I' },
+    { value: 'Martin Luther King Jr.', label: 'Martin Luther King Jr.' },
+    { value: 'Charles Darwin', label: 'Charles Darwin' },
+    { value: 'Amelia Earhart', label: 'Amelia Earhart' },
+    { value: 'Wolfgang Amadeus Mozart', label: 'Wolfgang Amadeus Mozart' },
+    { value: 'Nelson Mandela', label: 'Nelson Mandela' },
+    { value: 'Hypatia', label: 'Hypatia' },
   ];
 
   useEffect(() => {
