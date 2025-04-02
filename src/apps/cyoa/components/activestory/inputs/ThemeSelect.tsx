@@ -1,4 +1,4 @@
-﻿import { Autocomplete, Button, FormControl, TextField } from '@mui/material';
+﻿import { Autocomplete, FormControl, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
 export interface ThemeSelectProps {
@@ -57,37 +57,36 @@ const ThemeSelect = (props: ThemeSelectProps) => {
     }
   }, []);
 
-  const handleAddTheme = () => {
-    if (
-      inputValue &&
-      !themeOptions.some((option) => option.label.toLowerCase() === inputValue.toLowerCase())
-    ) {
-      const newTheme = {
-        value: `Include themes about ${inputValue}`,
-        label: inputValue,
-      };
-      const updatedOptions = [...themeOptions, newTheme];
-      setThemeOptions(updatedOptions);
-      localStorage.setItem('themeOptions', JSON.stringify(updatedOptions));
-      setTheme(newTheme.value);
-      setInputValue('');
-    }
-  };
-
   const handleThemeChange = (
     event: React.SyntheticEvent,
     newValue: ThemeOption | string | null,
   ) => {
     if (newValue) {
+      let selectedValue: string;
+      let selectedLabel: string;
+
       if (typeof newValue === 'string') {
-        // Handle case where user types a custom value
-        setTheme(`Include themes about ${newValue}`);
-        setInputValue(newValue);
+        selectedValue = `Include themes about ${newValue}`;
+        selectedLabel = newValue;
       } else {
-        // Handle case where user selects an existing option
-        setTheme(newValue.value);
-        setInputValue(newValue.label);
+        selectedValue = newValue.value;
+        selectedLabel = newValue.label;
       }
+
+      if (
+        !themeOptions.some((option) => option.label.toLowerCase() === selectedLabel.toLowerCase())
+      ) {
+        const newTheme = {
+          value: selectedValue,
+          label: selectedLabel,
+        };
+        const updatedOptions = [...themeOptions, newTheme];
+        setThemeOptions(updatedOptions);
+        localStorage.setItem('themeOptions', JSON.stringify(updatedOptions));
+      }
+
+      setTheme(selectedValue);
+      setInputValue(selectedLabel);
     } else {
       setTheme('NONE');
       setInputValue('');
@@ -98,8 +97,15 @@ const ThemeSelect = (props: ThemeSelectProps) => {
     setInputValue(newInputValue);
   };
 
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    if (inputValue && inputValue.trim() !== '') {
+      // Treat the blur as a selection of a new value
+      handleThemeChange(event, inputValue);
+    }
+  };
+
   useEffect(() => {
-    if (theme !== 'NONE') {
+    if (theme.toLowerCase() !== 'none') {
       addTheme(theme);
     } else {
       addTheme('');
@@ -107,7 +113,7 @@ const ThemeSelect = (props: ThemeSelectProps) => {
   }, [theme]);
 
   return (
-    <FormControl fullWidth sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
+    <FormControl fullWidth>
       <Autocomplete
         options={themeOptions}
         getOptionLabel={(option) => (typeof option === 'string' ? option : option.label)}
@@ -116,19 +122,10 @@ const ThemeSelect = (props: ThemeSelectProps) => {
         inputValue={inputValue}
         onInputChange={handleInputChange}
         freeSolo
-        renderInput={(params) => <TextField {...params} label='Include a Theme' variant='filled' />}
-        sx={{ flexGrow: 1 }}
+        renderInput={(params) => (
+          <TextField {...params} label='Include a Theme' variant='filled' onBlur={handleBlur} />
+        )}
       />
-      <Button
-        variant='contained'
-        onClick={handleAddTheme}
-        disabled={
-          !inputValue ||
-          themeOptions.some((option) => option.label.toLowerCase() === inputValue.toLowerCase())
-        }
-      >
-        Add
-      </Button>
     </FormControl>
   );
 };

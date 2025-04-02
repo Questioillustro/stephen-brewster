@@ -1,7 +1,5 @@
 ﻿import React, { useState } from 'react';
-import { Button, Grid, Paper, Typography } from '@mui/material';
-import ThemeSelect from '@/apps/cyoa/components/activestory/inputs/ThemeSelect';
-import QuoteSelect from '@/apps/cyoa/components/activestory/inputs/QuoteSelect';
+import { Button, Paper, Typography } from '@mui/material';
 import MainCharacterPanel from '@/apps/cyoa/components/activestory/inputs/MainCharacterPanel';
 import StoryDetailsPanel from '@/apps/cyoa/components/activestory/inputs/StoryDetailsPanel';
 
@@ -25,7 +23,6 @@ const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) =
       variant={'outlined'}
       style={{
         display: 'flex',
-        width: '100%',
         flexDirection: 'column',
         rowGap: '20px',
       }}

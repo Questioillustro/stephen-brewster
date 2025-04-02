@@ -5,6 +5,7 @@ import GenderSelect from '@/apps/cyoa/components/activestory/inputs/GenderSelect
 import { useEffect, useState } from 'react';
 import SkinColorSelect from '@/apps/cyoa/components/activestory/inputs/SkinColorSelect';
 import HairColorSelect from '@/apps/cyoa/components/activestory/inputs/HairColorSelect';
+import { SpeciesSelect } from '@/apps/cyoa/components/activestory/inputs/SpeciesSelect';
 
 export interface MainCharacterPanelProps {
   setMainCharacterPrompts: (name: string) => void;
@@ -17,6 +18,7 @@ const MainCharacterPanel = (props: MainCharacterPanelProps) => {
   const [gender, setGender] = useState<string>('boy');
   const [skinColor, setSkinColor] = useState<string>('');
   const [hairColor, setHairColor] = useState<string>('');
+  const [specie, setSpecie] = useState<string>('');
 
   useEffect(() => {
     let characterAttr: string[] = [];
@@ -25,12 +27,13 @@ const MainCharacterPanel = (props: MainCharacterPanelProps) => {
     characterAttr.push(gender);
     characterAttr.push(skinColor);
     characterAttr.push(hairColor);
+    characterAttr.push(specie);
 
     const characterPrompt = characterAttr.join('|');
     setMainCharacterPrompts(characterPrompt);
 
     console.log('main character prompt', characterPrompt);
-  }, [characterName, gender, skinColor, hairColor]);
+  }, [characterName, gender, skinColor, hairColor, specie]);
 
   return (
     <Paper
@@ -56,7 +59,12 @@ const MainCharacterPanel = (props: MainCharacterPanelProps) => {
         <MainCharacterName setCharacterName={setCharacterName} />
       </Paper>
 
-      <Paper elevation={2} sx={{ display: 'flex', flexDirection: 'column', rowGap: '1rem', p: 2 }}>
+      <Paper
+        elevation={2}
+        sx={{ display: 'flex', flexDirection: 'column', rowGap: '1rem', width: '100%' }}
+      >
+        <SpeciesSelect setSpecies={setSpecie} />
+
         <SkinColorSelect setSkinColor={setSkinColor} />
 
         <HairColorSelect setHairColor={setHairColor} />

@@ -1,4 +1,4 @@
-﻿import { Autocomplete, Button, FormControl, TextField } from '@mui/material';
+﻿import { Autocomplete, FormControl, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
 export interface QuoteSelectProps {
@@ -49,35 +49,36 @@ const QuoteSelect = (props: QuoteSelectProps) => {
     }
   }, []);
 
-  const handleAddQuote = () => {
-    if (
-      inputValue &&
-      !quoteOptions.some((option) => option.label.toLowerCase() === inputValue.toLowerCase())
-    ) {
-      const newQuote = {
-        value: inputValue,
-        label: inputValue,
-      };
-      const updatedOptions = [...quoteOptions, newQuote];
-      setQuoteOptions(updatedOptions);
-      localStorage.setItem('quoteOptions', JSON.stringify(updatedOptions));
-      setQuote(newQuote.value);
-      setInputValue('');
-    }
-  };
-
   const handleQuoteChange = (
     event: React.SyntheticEvent,
     newValue: QuoteOption | string | null,
   ) => {
     if (newValue) {
+      let selectedValue: string;
+      let selectedLabel: string;
+
       if (typeof newValue === 'string') {
-        setQuote(newValue);
-        setInputValue(newValue);
+        selectedValue = newValue;
+        selectedLabel = newValue;
       } else {
-        setQuote(newValue.value);
-        setInputValue(newValue.label);
+        selectedValue = newValue.value;
+        selectedLabel = newValue.label;
       }
+
+      if (
+        !quoteOptions.some((option) => option.label.toLowerCase() === selectedLabel.toLowerCase())
+      ) {
+        const newQuote = {
+          value: selectedValue,
+          label: selectedLabel,
+        };
+        const updatedOptions = [...quoteOptions, newQuote];
+        setQuoteOptions(updatedOptions);
+        localStorage.setItem('quoteOptions', JSON.stringify(updatedOptions));
+      }
+
+      setQuote(selectedValue);
+      setInputValue(selectedLabel);
     } else {
       setQuote('NONE');
       setInputValue('');
@@ -88,8 +89,14 @@ const QuoteSelect = (props: QuoteSelectProps) => {
     setInputValue(newInputValue);
   };
 
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    if (inputValue && inputValue.trim() !== '') {
+      handleQuoteChange(event, inputValue);
+    }
+  };
+
   useEffect(() => {
-    if (quote !== 'NONE') {
+    if (quote.toLowerCase() !== 'none') {
       const prompt = `Include a quote by ${quote}`;
       addQuote(prompt);
     } else {
@@ -98,7 +105,7 @@ const QuoteSelect = (props: QuoteSelectProps) => {
   }, [quote]);
 
   return (
-    <FormControl fullWidth sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
+    <FormControl fullWidth>
       <Autocomplete
         options={quoteOptions}
         getOptionLabel={(option) => (typeof option === 'string' ? option : option.label)}
@@ -108,20 +115,9 @@ const QuoteSelect = (props: QuoteSelectProps) => {
         onInputChange={handleInputChange}
         freeSolo
         renderInput={(params) => (
-          <TextField {...params} label='Include a Quote by' variant='filled' />
+          <TextField {...params} label='Include a Quote by' variant='filled' onBlur={handleBlur} />
         )}
-        sx={{ flexGrow: 1 }}
       />
-      <Button
-        variant='contained'
-        onClick={handleAddQuote}
-        disabled={
-          !inputValue ||
-          quoteOptions.some((option) => option.label.toLowerCase() === inputValue.toLowerCase())
-        }
-      >
-        Add
-      </Button>
     </FormControl>
   );
 };

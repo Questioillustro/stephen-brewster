@@ -1,10 +1,6 @@
 ﻿import { Paper } from '@mui/material';
-import MainCharacterName from '@/apps/cyoa/components/activestory/inputs/MainCharacterName';
 import Typography from '@mui/material/Typography';
-import GenderSelect from '@/apps/cyoa/components/activestory/inputs/GenderSelect';
 import React, { useEffect, useState } from 'react';
-import SkinColorSelect from '@/apps/cyoa/components/activestory/inputs/SkinColorSelect';
-import HairColorSelect from '@/apps/cyoa/components/activestory/inputs/HairColorSelect';
 import ThemeSelect from '@/apps/cyoa/components/activestory/inputs/ThemeSelect';
 import QuoteSelect from '@/apps/cyoa/components/activestory/inputs/QuoteSelect';
 

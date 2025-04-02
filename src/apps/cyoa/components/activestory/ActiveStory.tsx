@@ -70,7 +70,7 @@ const ActiveStory = (props: ActiveStoryProps) => {
     );
   } else {
     return (
-      <Paper elevation={5} sx={{ display: 'flex', width: '100%' }}>
+      <Paper elevation={5} sx={{ display: 'flex' }}>
         {activeView === 'typeselect' && (
           <TypeSelection story={story} goBack={goBack} setActiveView={setActiveView} />
         )}
