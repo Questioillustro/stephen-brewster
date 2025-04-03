@@ -71,7 +71,7 @@ const speciesList = [
 ];
 
 export const SpeciesSelect: React.FC<SpeciesSelectorProps> = ({ setSpecies }) => {
-  const [selectedSpecies, setSelectedSpecies] = useState<string>('');
+  const [selectedSpecies, setSelectedSpecies] = useState<string>('Human');
   const [scrollPosition, setScrollPosition] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
 
