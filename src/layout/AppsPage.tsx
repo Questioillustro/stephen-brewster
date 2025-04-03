@@ -16,10 +16,10 @@ export const AppsPage: React.FC = () => {
       label: 'Finance News',
       content: <FinanceNewsPanel />,
     },
-    {
-      label: 'React Concepts',
-      content: <ReactConcepts />,
-    },
+    // {
+    //   label: 'React Concepts',
+    //   content: <ReactConcepts />,
+    // },
     // {
     //   label: 'Python Scripts',
     //   content: <PythonScripts />,
