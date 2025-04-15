@@ -1,6 +1,6 @@
 ﻿import { Grid, Paper, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { openPromptService } from '@/service/OpenPromptService';
+import { LLMIdentifier, openPromptService } from '@/service/OpenPromptService';
 import FinanceDataCard from '@/apps/finance/FinanceDataCard';
 import LoadingSkeleton from '@/components/loading/LoadingSkeleton';
 
@@ -12,6 +12,8 @@ export interface ICalendarData {
   expectedValue: string;
   marketImpact: string;
 }
+
+export const FinanceDataLlmModel: LLMIdentifier = 'grok';
 
 const FinanceDataGrid: React.FC = () => {
   const [calendarData, setCalendarData] = useState<ICalendarData[]>();
@@ -50,7 +52,7 @@ const FinanceDataGrid: React.FC = () => {
         const prompt = CALENDAR_PROMPTS.join('|');
         setIsLoading(true);
 
-        openPromptService(prompt, 'grok').then((data: string) => {
+        openPromptService(prompt, FinanceDataLlmModel, 0.2).then((data: string) => {
           setCalendarData(JSON.parse(data));
           setIsLoading(false);
         });

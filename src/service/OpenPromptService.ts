@@ -6,6 +6,7 @@ export type LLMIdentifier = 'grok' | 'chatgpt' | 'claude';
 interface OpenPromptRequest {
   prompt: string;
   llmIdentifier?: LLMIdentifier;
+  temperature?: number;
   bypassCache?: boolean;
 }
 
@@ -14,12 +15,14 @@ type OpenPromptResponse = string;
 export const openPromptService = async (
   prompt: string,
   llm?: LLMIdentifier,
+  temp?: number,
   bypassCache?: boolean,
 ): Promise<string> => {
   try {
     const requestData: OpenPromptRequest = {
       prompt: prompt,
       llmIdentifier: llm,
+      temperature: temp ?? 0.7,
       bypassCache: bypassCache ?? false,
     };
 

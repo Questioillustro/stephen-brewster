@@ -1,6 +1,6 @@
 ﻿import { Grid, Paper, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { openPromptService } from '@/service/OpenPromptService';
+import { LLMIdentifier, openPromptService } from '@/service/OpenPromptService';
 import LoadingSkeleton from '@/components/loading/LoadingSkeleton';
 import MacroNewsGrid from '@/apps/finance/MacroNewsGrid';
 
@@ -10,8 +10,10 @@ export interface IMacroNewsData {
   synopsis: string;
   sentimentScore: number;
   sentimentRationale: string;
-  searchUrl: string;
+  sources: string[];
 }
+
+export const MacroNewsLlmModel: LLMIdentifier = 'grok';
 
 const MacroNews: React.FC = () => {
   const [macroNewsData, setMacroNewsData] = useState<IMacroNewsData[]>();
@@ -21,17 +23,16 @@ const MacroNews: React.FC = () => {
   const dateString = `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`;
 
   const MACRO_NEWS_PROMPTS = [
-    `Provide a list of breaking news in macro finance for today ${dateString}, formatted as JSON.`,
+    `Provide a list of breaking news in macro finance for the past 24 hours, formatted as JSON.`,
     'Only include United States related news.',
-    `Provide at least 5 items of note.`,
     'Include a title for the news item.',
-    'Include the date that the news first broke.',
     'Include a brief synopsis of the news item.',
     'Include a sentiment score to rate the sentiment on a scale from -100 to +100 with rationale.',
     'Only respond with the data formatted as JSON',
-    `Replace the string 'TITLE' in 'https://x.com/search?q=TITLE&src=typed_query' and provide it back as the searchUrl`,
+    'Include url links to sources',
+    //`Replace the string 'TITLE' in 'https://x.com/search?q=TITLE&src=typed_query' and provide it back as the searchUrl`,
     'Do not include ```json wrapping.',
-    `JSON structured should be [{ title, date, synopsis, sentimentScore, sentimentRationale, searchUrl }]`,
+    `JSON structured should be [{ title, date, synopsis, sentimentScore, sentimentRationale, sources }]`,
   ];
 
   useEffect(() => {
@@ -40,7 +41,7 @@ const MacroNews: React.FC = () => {
         const prompt = MACRO_NEWS_PROMPTS.join('|');
         setIsLoading(true);
 
-        openPromptService(prompt, 'grok').then((data: string) => {
+        openPromptService(prompt, MacroNewsLlmModel, 0.2, true).then((data: string) => {
           setMacroNewsData(JSON.parse(data));
           setIsLoading(false);
         });

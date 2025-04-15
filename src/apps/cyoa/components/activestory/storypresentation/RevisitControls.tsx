@@ -1,6 +1,7 @@
 ﻿import { Button, Grid, Paper, Typography } from '@mui/material';
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import React from 'react';
+import StoryCarousel from '@/apps/cyoa/components/storygrid/StoryCarousel';
 
 export interface IRevisitControlsProps {
   currentVersionNumber: number;
@@ -11,6 +12,7 @@ export interface IRevisitControlsProps {
 
 const RevisitControls: React.FC<IRevisitControlsProps> = (props: IRevisitControlsProps) => {
   const { currentVersionNumber, previousVersion, nextVersion, total } = props;
+
   return (
     <Paper
       variant={'outlined'}
@@ -22,9 +24,7 @@ const RevisitControls: React.FC<IRevisitControlsProps> = (props: IRevisitControl
         rowGap: '1.25rem',
       }}
     >
-      <Typography variant={'h6'} color={'secondary'} sx={{ pt: 1 }}>
-        Revisit previously generated stories
-      </Typography>
+      <StoryCarousel />
 
       <Paper
         sx={{
@@ -42,7 +42,7 @@ const RevisitControls: React.FC<IRevisitControlsProps> = (props: IRevisitControl
         >
           Previous Version
         </Button>
-
+        {currentVersionNumber + 1} / {total}
         <Button
           endIcon={<ArrowForward />}
           onClick={nextVersion}
@@ -52,10 +52,6 @@ const RevisitControls: React.FC<IRevisitControlsProps> = (props: IRevisitControl
           Next Version
         </Button>
       </Paper>
-
-      {/*<Typography variant={'body2'} color={'secondary'}>*/}
-      {/*  Currently displaying version: {currentVersionNumber + 1} / {total}*/}
-      {/*</Typography>*/}
     </Paper>
   );
 };

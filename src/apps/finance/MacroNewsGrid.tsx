@@ -58,9 +58,13 @@ const NewsCard: React.FC<NewsCardProps> = ({ item }) => {
         </Box>
 
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
-          <Link href={item.searchUrl} target='_blank' rel='noopener noreferrer' variant='body2'>
-            Search X
-          </Link>
+          {item.sources.map((url) => {
+            return (
+              <Link href={url} target='_blank' rel='noopener noreferrer' variant='body2'>
+                {url}
+              </Link>
+            );
+          })}
         </Box>
       </CardContent>
     </Card>

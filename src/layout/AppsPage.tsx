@@ -2,7 +2,7 @@
 import { PythonScripts } from '@/apps/pythonscripts/PythonScripts';
 import { Agents } from '@/apps/agents/Agents';
 import { Paper } from '@mui/material';
-import CyaMain from '@/apps/cyoa/CyaMain';
+import BuildAVentureApp from '@/apps/cyoa/BuildAVentureApp';
 import FinanceNewsPanel from '@/apps/finance/FinanceNewsPanel';
 import ReactConcepts from '@/apps/react/ReactConcepts';
 
@@ -10,7 +10,7 @@ export const AppsPage: React.FC = () => {
   const tabs: TabData[] = [
     {
       label: 'Build-A-Venture',
-      content: <CyaMain />,
+      content: <BuildAVentureApp />,
     },
     {
       label: 'Finance News',

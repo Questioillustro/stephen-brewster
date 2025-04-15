@@ -66,6 +66,7 @@ export const ContextWithReducer = () => {
   );
 };
 
+// The component as a string for display
 export const ContextWithReducerString = `
 import { createContext, useContext, useReducer } from 'react';
 import Button from '@mui/material/Button';

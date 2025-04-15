@@ -21,7 +21,7 @@ const StoryGrid = (props: StoryGridProps) => {
       {(stories || []).map((s, idx) => (
         <Grid item key={s._id}>
           <div onClick={() => setStoryIndex(idx)} style={{ cursor: 'pointer' }}>
-            <StoryTile key={s._id} story={s} />
+            <StoryTile key={s._id} story={s} selected={false} />
           </div>
         </Grid>
       ))}

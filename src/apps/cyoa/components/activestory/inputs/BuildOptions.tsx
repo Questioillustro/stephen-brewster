@@ -20,10 +20,6 @@ const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) =
 
   return (
     <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', rowGap: '20px', width: '100%' }}>
-      <Typography variant={'h6'} color={'primary'}>
-        Build-A-Venture
-      </Typography>
-
       <MainCharacterPanel setMainCharacterPrompts={setMainCharacter} />
 
       <StoryDetailsPanel setStoryDetailsPrompt={setStoryDetails} />
