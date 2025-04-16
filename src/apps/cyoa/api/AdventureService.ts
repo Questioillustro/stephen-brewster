@@ -1,14 +1,11 @@
 ﻿import apiClient from '@/api/ApiClient';
-import { IStory } from '@/apps/cyoa/api/StoryService';
 
 export interface IAdventure {
   _id: string;
-  storyId: string;
   contextPrompts: string[];
   storyPrompts: string[];
   imageUrl: string;
   steps: IAdventureStep[];
-  story: IStory;
 }
 
 export interface IAdventureStep {
@@ -18,14 +15,13 @@ export interface IAdventureStep {
 }
 
 export const generateNewAdventure = async (
-  id: string,
   prompts: string,
   characterPrompts: string,
   llm: string,
   temperature?: number,
 ): Promise<IAdventure> => {
   try {
-    const response = await apiClient.post<IAdventure>(`/quickadventure/${id}`, {
+    const response = await apiClient.post<IAdventure>(`/buildaventure`, {
       prompts: prompts,
       character: characterPrompts,
       temperature: temperature ?? 0.7,
@@ -38,9 +34,9 @@ export const generateNewAdventure = async (
   }
 };
 
-export const getExistingAdventuresForStory = async (storyid: string): Promise<IAdventure[]> => {
+export const getExistingAdventuresForStory = async (): Promise<IAdventure[]> => {
   try {
-    const response = await apiClient.get<IAdventure[]>(`/adventure/${storyid}`);
+    const response = await apiClient.get<IAdventure[]>(`/adventures`);
     if (!response.data) throw new Error('No adventures found');
     return response.data;
   } catch (error) {

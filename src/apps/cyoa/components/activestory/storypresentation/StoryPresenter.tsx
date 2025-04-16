@@ -19,9 +19,9 @@ export type StoryPresenterViews = 'new' | 'existing';
 const StoryPresenter = (props: StoryPresenterProps) => {
   const { view } = props;
 
-  const { selectedStory, selectedAdventure, setAdventure } = useStoryContext();
+  const { selectedAdventure, setAdventure } = useStoryContext();
 
-  const { dispatch } = useContext(MainViewContext);
+  const { state, dispatch } = useContext(MainViewContext);
 
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
@@ -83,22 +83,24 @@ const StoryPresenter = (props: StoryPresenterProps) => {
 
   useEffect(() => {
     loadAdventures();
-  }, [selectedStory]);
+  }, []);
 
   useEffect(() => {
     setVersionIndex(0);
   }, [adventures]);
 
   useEffect(() => {
+    if (!state.isRevisit) return;
+
     setAdventure(adventures[versionIndex]);
   }, [versionIndex]);
 
   const loadAdventures = () => {
-    if (!selectedStory) return;
+    if (!state.isRevisit) return;
 
     setIsLoading(true);
 
-    getExistingAdventuresForStory(selectedStory._id).then((adventures) => {
+    getExistingAdventuresForStory().then((adventures) => {
       setIsLoading(false);
 
       if (adventures.length === 0) return;
@@ -129,6 +131,7 @@ const StoryPresenter = (props: StoryPresenterProps) => {
             previousVersion={navPreviousVersion}
             nextVersion={navNextVersion}
             total={adventures.length}
+            disabled={showStoryText}
           />
         )}
 

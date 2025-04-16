@@ -17,7 +17,7 @@ const reducer = (state, action) => {
     case 'BUILD':
       return { ...state, currentView: 'building' };
     case 'VIEW_NEW':
-      return { ...state, currentView: 'reading' };
+      return { ...state, currentView: 'reading', isRevisit: false };
     case 'VIEW_OLD':
       return { ...state, currentView: 'reading', isRevisit: true };
     default:

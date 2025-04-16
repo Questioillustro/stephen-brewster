@@ -1,21 +1,18 @@
-﻿import { Box, Grid, Paper } from '@mui/material';
+﻿import { Box, Paper } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react';
 import ThemeSelect from '@/apps/cyoa/components/activestory/inputs/ThemeSelect';
-import QuoteSelect from '@/apps/cyoa/components/activestory/inputs/QuoteSelect';
 import GenreSelect from '@/apps/cyoa/components/activestory/inputs/GenreSelect';
-import PlotSelect from '@/apps/cyoa/components/activestory/inputs/PlotSelect';
 import ChildrensPlotSelect from '@/apps/cyoa/components/activestory/inputs/ChildrensPlotSelect';
 
 export interface StoryDetailsPanelProps {
-  setStoryDetailsPrompt: (name: string) => void;
+  setStoryDetailsPrompts: (prompts: string[]) => void;
 }
 
 const StoryDetailsPanel = (props: StoryDetailsPanelProps) => {
-  const { setStoryDetailsPrompt } = props;
+  const { setStoryDetailsPrompts } = props;
 
   const [themes, setThemes] = useState<string | null>(null);
-  const [quotes, setQuotes] = useState<string>('boy');
   const [adventureType, setAdventureType] = useState<string>('');
   const [genre, setGenre] = useState<string>('');
   const [plot, setPlot] = useState<string>('');
@@ -24,16 +21,12 @@ const StoryDetailsPanel = (props: StoryDetailsPanelProps) => {
     let storyDetails: string[] = [];
 
     if (themes) storyDetails.push(themes);
-    if (quotes) storyDetails.push(quotes);
     if (adventureType) storyDetails.push(adventureType);
     if (genre) storyDetails.push(genre);
     if (plot) storyDetails.push(plot);
 
-    const storyPrompt = storyDetails.join('|');
-    setStoryDetailsPrompt(storyPrompt);
-
-    console.log('storyPrompt updated:', storyPrompt);
-  }, [themes, quotes, adventureType, genre, plot]);
+    setStoryDetailsPrompts(storyDetails);
+  }, [themes, adventureType, genre, plot]);
 
   return (
     <Paper

@@ -31,8 +31,6 @@ const MainCharacterPanel = (props: MainCharacterPanelProps) => {
 
     const characterPrompt = characterAttr.join('|');
     setMainCharacterPrompts(characterPrompt);
-
-    console.log('main character prompt', characterPrompt);
   }, [characterName, gender, skinColor, hairColor, specie]);
 
   return (
