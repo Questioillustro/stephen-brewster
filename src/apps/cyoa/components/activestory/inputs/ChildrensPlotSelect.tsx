@@ -1,5 +1,5 @@
 ﻿import { Autocomplete, FormControl, TextField } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 export interface ChildrensPlotSelectProps {
   addPlot: (prompt: string) => void;
@@ -45,9 +45,11 @@ const ChildrensPlotSelect = (props: ChildrensPlotSelectProps) => {
   };
 
   const initialPlot = getRandomPlot();
-  const [plot, setPlot] = useState<string>(initialPlot.value);
+  const [plot, setPlot] = useState<string>(initialPlot.label);
   const [inputValue, setInputValue] = useState<string>(initialPlot.label);
   const [plotOptions, setPlotOptions] = useState<PlotOption[]>(defaultPlots); // Initialize synchronously
+  const [open, setOpen] = useState<boolean>(false); // State to control options list visibility
+  const autocompleteRef = useRef<HTMLInputElement>(null); // Ref to focus input
 
   useEffect(() => {
     const storedPlots = localStorage.getItem('plotOptions');
@@ -85,8 +87,9 @@ const ChildrensPlotSelect = (props: ChildrensPlotSelectProps) => {
     } else {
       const randomPlot = getRandomPlot();
       setPlot(randomPlot.value);
-      setInputValue(randomPlot.label);
+      setInputValue(randomPlot.label); // Reset to a random plot when cleared
     }
+    setOpen(false); // Close the options list after selection
   };
 
   const handleInputChange = (event: React.SyntheticEvent, newInputValue: string) => {
@@ -96,36 +99,57 @@ const ChildrensPlotSelect = (props: ChildrensPlotSelectProps) => {
   const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     if (inputValue && inputValue.trim() !== '') {
       handlePlotChange(event, inputValue);
+    } else {
+      const randomPlot = getRandomPlot();
+      setPlot(randomPlot.value);
+      setInputValue(randomPlot.label); // Reset to a random plot on empty blur
+    }
+  };
+
+  const handleInputClick = () => {
+    setPlot('RANDOM'); // Clear the selected plot to 'RANDOM'
+    setInputValue(''); // Clear the input field
+    setOpen(true); // Open the options list
+    if (autocompleteRef.current) {
+      autocompleteRef.current.focus(); // Ensure input remains focused
     }
   };
 
   useEffect(() => {
+    let plotChoice;
+    const prefix = `The inspiration for the plot should be:`;
     if (plot.toLowerCase() !== 'random') {
-      const prompt = `Write a children's story inspired by the theme of ${plot}`;
-      addPlot(prompt);
+      plotChoice = ` ${plot}`;
     } else {
       const randomPlot = getRandomPlot();
-      const prompt = `Write a children's story inspired by the theme of ${randomPlot.value}`;
-      addPlot(prompt);
+      plotChoice = `${randomPlot.value}`;
     }
+    addPlot(`${prefix} ${plotChoice}`);
   }, [plot, addPlot]);
+
+  const defaultValue = plotOptions.find((option) => option.value === plot) || null;
 
   return (
     <FormControl fullWidth>
       <Autocomplete
         options={plotOptions}
         getOptionLabel={(option) => (typeof option === 'string' ? option : option.label)}
-        value={plotOptions.find((option) => option.value === plot) || null}
+        value={plotOptions.find((option) => option.value === plot) || defaultValue}
         onChange={handlePlotChange}
         inputValue={inputValue}
         onInputChange={handleInputChange}
         freeSolo
+        open={open} // Control the open state
+        onOpen={() => setOpen(true)} // Handle natural open events
+        onClose={() => setOpen(false)} // Handle natural close events
         renderInput={(params) => (
           <TextField
             {...params}
-            label="Select Children's Book Plot"
+            label='Plot'
             variant='filled'
             onBlur={handleBlur}
+            onClick={handleInputClick} // Clear and open on click
+            inputRef={autocompleteRef} // Attach ref to input
           />
         )}
       />

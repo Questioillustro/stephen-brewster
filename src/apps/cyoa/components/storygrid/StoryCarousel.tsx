@@ -58,9 +58,7 @@ const StoryCarousel = () => {
           '&::-webkit-scrollbar': { display: 'none' },
           msOverflowStyle: 'none',
           scrollbarWidth: 'none',
-          width: '95%',
-          gap: 1,
-          p: 2,
+          width: '100%',
         }}
       >
         {(allStories || []).map((s, idx) => (
@@ -94,10 +92,9 @@ const StoryCarousel = () => {
           left: 0,
           top: '50%',
           transform: 'translateY(-50%)',
-          backgroundColor: 'rgba(0,0,0,0.5)',
+          backgroundColor: 'rgba(0,0,0,1)',
           color: 'white',
-          '&:hover': { backgroundColor: 'rgba(0,0,0,0.7)' },
-          '&:disabled': { opacity: 0.3 },
+          '&:hover': { backgroundColor: 'rgba(0,0,0,1)' },
         }}
       >
         <ArrowBackIos />
@@ -112,10 +109,9 @@ const StoryCarousel = () => {
           right: 0,
           top: '50%',
           transform: 'translateY(-50%)',
-          backgroundColor: 'rgba(0,0,0,0.5)',
+          backgroundColor: 'rgba(0,0,0,1)',
           color: 'white',
-          '&:hover': { backgroundColor: 'rgba(0,0,0,0.7)' },
-          '&:disabled': { opacity: 0.3 },
+          '&:hover': { backgroundColor: 'rgba(0,0,0,1)' },
         }}
       >
         <ArrowForwardIos />

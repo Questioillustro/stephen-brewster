@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import { Button, Paper, Typography } from '@mui/material';
+import { Box, Button, Paper, Typography } from '@mui/material';
 import MainCharacterPanel from '@/apps/cyoa/components/activestory/inputs/MainCharacterPanel';
 import StoryDetailsPanel from '@/apps/cyoa/components/activestory/inputs/StoryDetailsPanel';
 
@@ -19,10 +19,12 @@ const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) =
   };
 
   return (
-    <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', rowGap: '20px', width: '100%' }}>
-      <MainCharacterPanel setMainCharacterPrompts={setMainCharacter} />
+    <Paper sx={{ display: 'flex', flexDirection: 'column', width: '100%', gap: 2 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%', gap: 2 }}>
+        <MainCharacterPanel setMainCharacterPrompts={setMainCharacter} />
 
-      <StoryDetailsPanel setStoryDetailsPrompt={setStoryDetails} />
+        <StoryDetailsPanel setStoryDetailsPrompt={setStoryDetails} />
+      </Box>
 
       <Button onClick={() => buildAdventure()} variant={'contained'}>
         Generate Story

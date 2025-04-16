@@ -1,4 +1,4 @@
-﻿import { Grid, Paper } from '@mui/material';
+﻿import { Box, Grid, Paper } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react';
 import ThemeSelect from '@/apps/cyoa/components/activestory/inputs/ThemeSelect';
@@ -32,32 +32,31 @@ const StoryDetailsPanel = (props: StoryDetailsPanelProps) => {
     const storyPrompt = storyDetails.join('|');
     setStoryDetailsPrompt(storyPrompt);
 
-    console.log('story details prompt', storyPrompt);
+    console.log('storyPrompt updated:', storyPrompt);
   }, [themes, quotes, adventureType, genre, plot]);
 
   return (
     <Paper
       elevation={5}
-      sx={{ p: 2, justifyContent: 'start', display: 'flex', flexDirection: 'column' }}
+      sx={{
+        p: 2,
+        justifyContent: 'start',
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+      }}
     >
       <Typography variant={'h6'} sx={{ mb: 3 }}>
         Customize Your Story!
       </Typography>
 
-      <Grid container spacing={2} sx={{ p: 2 }}>
-        <Grid item xs={6}>
-          <ThemeSelect addTheme={setThemes} />
-        </Grid>
-        <Grid item xs={6}>
-          <QuoteSelect addQuote={setQuotes} />
-        </Grid>
-        <Grid item xs={6}>
-          <GenreSelect addGenre={setGenre} />
-        </Grid>
-        <Grid item xs={6}>
-          <ChildrensPlotSelect addPlot={setPlot} />
-        </Grid>
-      </Grid>
+      <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', rowGap: 2 }}>
+        <ThemeSelect addTheme={setThemes} />
+
+        <GenreSelect addGenre={setGenre} />
+
+        <ChildrensPlotSelect addPlot={setPlot} />
+      </Box>
     </Paper>
   );
 };

@@ -1,5 +1,5 @@
 ﻿import { Autocomplete, FormControl, TextField } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 export interface GenreSelectProps {
   addGenre: (prompt: string) => void;
@@ -12,12 +12,9 @@ interface GenreOption {
 
 const GenreSelect = (props: GenreSelectProps) => {
   const { addGenre } = props;
-  const [genre, setGenre] = useState<string>('NONE');
-  const [inputValue, setInputValue] = useState('');
-  const [genreOptions, setGenreOptions] = useState<GenreOption[]>([]);
 
   const defaultGenres: GenreOption[] = [
-    { value: 'NONE', label: 'None' },
+    { value: 'RANDOM', label: 'Random' },
     { value: 'Fantasy', label: 'Fantasy' },
     { value: 'Science Fiction', label: 'Science Fiction' },
     { value: 'Mystery', label: 'Mystery' },
@@ -39,12 +36,25 @@ const GenreSelect = (props: GenreSelectProps) => {
     { value: 'Drama', label: 'Drama' },
   ];
 
+  // Initialize genre and inputValue with a random option (excluding 'RANDOM')
+  const getRandomGenre = () => {
+    const genreOptions = defaultGenres.filter((option) => option.value !== 'RANDOM');
+    const randomIndex = Math.floor(Math.random() * genreOptions.length);
+    return genreOptions[randomIndex];
+  };
+
+  const initialGenre = getRandomGenre();
+  const [genre, setGenre] = useState<string>(initialGenre.value);
+  const [inputValue, setInputValue] = useState<string>(initialGenre.label);
+  const [genreOptions, setGenreOptions] = useState<GenreOption[]>(defaultGenres);
+  const [open, setOpen] = useState<boolean>(false);
+  const autocompleteRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     const storedGenres = localStorage.getItem('genreOptions');
     if (storedGenres) {
       setGenreOptions(JSON.parse(storedGenres));
     } else {
-      setGenreOptions(defaultGenres);
       localStorage.setItem('genreOptions', JSON.stringify(defaultGenres));
     }
   }, []);
@@ -68,10 +78,7 @@ const GenreSelect = (props: GenreSelectProps) => {
       if (
         !genreOptions.some((option) => option.label.toLowerCase() === selectedLabel.toLowerCase())
       ) {
-        const newGenre = {
-          value: selectedValue,
-          label: selectedLabel,
-        };
+        const newGenre = { value: selectedValue, label: selectedLabel };
         const updatedOptions = [...genreOptions, newGenre];
         setGenreOptions(updatedOptions);
         localStorage.setItem('genreOptions', JSON.stringify(updatedOptions));
@@ -80,9 +87,11 @@ const GenreSelect = (props: GenreSelectProps) => {
       setGenre(selectedValue);
       setInputValue(selectedLabel);
     } else {
-      setGenre('NONE');
-      setInputValue('');
+      const randomGenre = getRandomGenre();
+      setGenre(randomGenre.value);
+      setInputValue(randomGenre.label);
     }
+    setOpen(false);
   };
 
   const handleInputChange = (event: React.SyntheticEvent, newInputValue: string) => {
@@ -92,30 +101,58 @@ const GenreSelect = (props: GenreSelectProps) => {
   const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     if (inputValue && inputValue.trim() !== '') {
       handleGenreChange(event, inputValue);
+    } else {
+      const randomGenre = getRandomGenre();
+      setGenre(randomGenre.value);
+      setInputValue(randomGenre.label);
+    }
+  };
+
+  const handleInputClick = () => {
+    setGenre('RANDOM');
+    setInputValue('');
+    setOpen(true);
+    if (autocompleteRef.current) {
+      autocompleteRef.current.focus();
     }
   };
 
   useEffect(() => {
-    if (genre.toLowerCase() !== 'none') {
-      const prompt = `The story genre should be: ${genre}`;
-      addGenre(prompt);
+    let genreChoice;
+    const prefix = `The story genre should be:`;
+    if (genre.toLowerCase() !== 'random') {
+      genreChoice = ` ${genre}`;
     } else {
-      addGenre('');
+      const randomGenre = getRandomGenre();
+      genreChoice = ` ${randomGenre.value}`;
     }
-  }, [genre]);
+    addGenre(`${prefix}${genreChoice}`);
+  }, [genre, addGenre]);
+
+  const defaultValue = genreOptions.find((option) => option.value === genre) || null;
 
   return (
     <FormControl fullWidth>
       <Autocomplete
         options={genreOptions}
         getOptionLabel={(option) => (typeof option === 'string' ? option : option.label)}
-        value={genreOptions.find((option) => option.value === genre) || null}
+        value={genreOptions.find((option) => option.value === genre) || defaultValue}
         onChange={handleGenreChange}
         inputValue={inputValue}
         onInputChange={handleInputChange}
         freeSolo
+        open={open}
+        onOpen={() => setOpen(true)}
+        onClose={() => setOpen(false)}
         renderInput={(params) => (
-          <TextField {...params} label='Select Story Genre' variant='filled' onBlur={handleBlur} />
+          <TextField
+            {...params}
+            label='Genre'
+            variant='filled'
+            onBlur={handleBlur}
+            onClick={handleInputClick}
+            inputRef={autocompleteRef}
+          />
         )}
       />
     </FormControl>
