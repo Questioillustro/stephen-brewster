@@ -5,9 +5,8 @@ import { List, ListItem } from '@mui/material';
 export const BuildAventureDescription: React.FC = () => {
   return (
     <Typography variant={'body1'} color={'primary'}>
-      Choose a story to build, choose attributes for the main character and the story themes and
-      plot. An LLM will build a short story to your specifications. You can build images for each
-      page of the story and end up with a completely unique story, built by you and our AI friends.
+      Builds a custom short story using AI. Customize the main character, theme, genre and plot. An
+      LLM will build a short story to your specifications, including pictures for each page.
       <p>
         <Typography variant={'h5'} color={'secondary'}>
           Future Features

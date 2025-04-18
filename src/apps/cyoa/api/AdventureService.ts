@@ -1,17 +1,21 @@
 ﻿import apiClient from '@/api/ApiClient';
 
-export interface IAdventure {
+export interface IAdventureWrapper {
   _id: string;
-  contextPrompts: string[];
-  storyPrompts: string[];
-  imageUrl: string;
-  steps: IAdventureStep[];
+  contextPrompts: string;
+  storyPrompts: string;
+  adventure: IAdventure;
 }
 
-export interface IAdventureStep {
+export interface IAdventurePage {
   text: string;
   imagePrompt: string;
-  imageUrl: string;
+  imageUrl?: string;
+}
+
+export interface IAdventure {
+  pages: IAdventurePage[];
+  title: string;
 }
 
 export const generateNewAdventure = async (
@@ -19,9 +23,9 @@ export const generateNewAdventure = async (
   characterPrompts: string,
   llm: string,
   temperature?: number,
-): Promise<IAdventure> => {
+): Promise<IAdventureWrapper> => {
   try {
-    const response = await apiClient.post<IAdventure>(`/buildaventure`, {
+    const response = await apiClient.post<IAdventureWrapper>(`/buildaventure`, {
       prompts: prompts,
       character: characterPrompts,
       temperature: temperature ?? 0.7,
@@ -34,9 +38,9 @@ export const generateNewAdventure = async (
   }
 };
 
-export const getExistingAdventuresForStory = async (): Promise<IAdventure[]> => {
+export const getExistingAdventuresForStory = async (): Promise<IAdventureWrapper[]> => {
   try {
-    const response = await apiClient.get<IAdventure[]>(`/adventures`);
+    const response = await apiClient.get<IAdventureWrapper[]>(`/adventures`);
     if (!response.data) throw new Error('No adventures found');
     return response.data;
   } catch (error) {

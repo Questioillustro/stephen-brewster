@@ -36,20 +36,19 @@ const FinanceDataGrid: React.FC = () => {
 
   const CALENDAR_PROMPTS = [
     `Provide a calendar of key U.S. financial data releases for the date range ${getDateRange()}, formatted as JSON.`,
+    `JSON structured should be [{ dataPoint, releaseDate, description, previousValue, expectedValue, actualValue, marketImpact }].`,
     'Include a description of what the data point is and which period of time this data point is measuring.',
     'Include previous value.',
     'Include expected values where available.',
     'Estimate the impact that the data point will have on the stock market.',
-    'Only respond with the data formatted as JSON',
-    'Sort by date ascending',
-    'Do not include ```json wrapping.',
-    `JSON structured should be [{ dataPoint, releaseDate, description, previousValue, expectedValue, actualValue, marketImpact }]`,
+    'Only respond with the JSON data, do not include ```json wrapping.',
+    'Sort by date ascending.',
   ];
 
   useEffect(() => {
     const fetchPromptResponse = async () => {
       try {
-        const prompt = CALENDAR_PROMPTS.join('|');
+        const prompt = CALENDAR_PROMPTS.join(' ');
         setIsLoading(true);
 
         openPromptService(prompt, FinanceDataLlmModel, 0.2).then((data: string) => {

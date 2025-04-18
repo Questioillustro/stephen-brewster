@@ -11,12 +11,12 @@ const BackButton: React.FC<IBackButtonProps> = (props: IBackButtonProps) => {
   return (
     <Button
       variant={'contained'}
-      color={'secondary'}
-      startIcon={<ArrowBackIosIcon color={'primary'} />}
+      color={'primary'}
+      startIcon={<ArrowBackIosIcon color={'secondary'} />}
       onClick={() => onclick()}
-      sx={{ p: 2 }}
+      sx={{ p: 2, maxWidth: '300px' }}
     >
-      <Typography variant={'h4'} color={'primary'}>
+      <Typography variant={'h4'} color={'secondary'}>
         Back
       </Typography>
     </Button>

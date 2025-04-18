@@ -1,5 +1,5 @@
 ﻿import apiClient from '@/api/ApiClient';
-import { IAdventure } from './AdventureService';
+import { IAdventureWrapper } from './AdventureService';
 
 export interface IGenerateImageRequest {
   model?: string;
@@ -13,7 +13,7 @@ export const getImagesForPrompt = async (
   prompt: string,
   id: string,
   index: number,
-): Promise<IAdventure> => {
+): Promise<IAdventureWrapper> => {
   if (!id) {
     throw new Error('Valid ID string is required');
   }
@@ -22,7 +22,7 @@ export const getImagesForPrompt = async (
   }
 
   try {
-    const response = await apiClient.post<IAdventure>(`/generateimages/${id}/${index}`, {
+    const response = await apiClient.post<IAdventureWrapper>(`/generateimages/${id}/${index}`, {
       prompt: prompt,
     });
 

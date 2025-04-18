@@ -9,7 +9,10 @@ const Landing = () => {
   const { state } = useContext(MainViewContext);
 
   return (
-    <Paper variant={'outlined'} sx={{ display: 'flex', width: '100%', flexDirection: 'column' }}>
+    <Paper
+      variant={'outlined'}
+      sx={{ display: 'flex', width: '100%', flexDirection: 'column', alignItems: 'center' }}
+    >
       {state.currentView === 'landing' && <VentureButtons />}
 
       {state.currentView === 'building' && <BuildingView />}

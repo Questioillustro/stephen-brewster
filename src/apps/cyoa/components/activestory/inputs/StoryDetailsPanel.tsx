@@ -36,7 +36,7 @@ const StoryDetailsPanel = (props: StoryDetailsPanelProps) => {
         justifyContent: 'start',
         display: 'flex',
         flexDirection: 'column',
-        width: '100%',
+        width: '90%',
       }}
     >
       <Typography variant={'h6'} sx={{ mb: 3 }}>

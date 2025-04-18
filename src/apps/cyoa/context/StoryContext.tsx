@@ -1,15 +1,15 @@
 ﻿import { createContext, useContext, useState } from 'react';
-import { IAdventure } from '@/apps/cyoa/api/AdventureService';
+import { IAdventureWrapper } from '@/apps/cyoa/api/AdventureService';
 
 export type StoryType = 'adventure' | 'education';
 
 interface StoryContextType {
   selectedType: StoryType;
   setType: (type: StoryType) => void;
-  allAdventures: IAdventure[];
-  setAdventures: (adventures: IAdventure[]) => void;
-  selectedAdventure: IAdventure | undefined;
-  setAdventure: (adventure: IAdventure) => void;
+  allAdventures: IAdventureWrapper[];
+  setAdventures: (adventures: IAdventureWrapper[]) => void;
+  selectedAdventure: IAdventureWrapper | undefined;
+  setAdventure: (adventure: IAdventureWrapper) => void;
 }
 
 export const StoryContext = createContext<StoryContextType | undefined>(undefined);
@@ -17,21 +17,21 @@ export const StoryContext = createContext<StoryContextType | undefined>(undefine
 export function StoryProvider({ children }) {
   const [selectedType, setSelectedType] = useState<StoryType>('adventure');
 
-  const [allAdventures, setAllAdventures] = useState<IAdventure[]>([]);
+  const [allAdventures, setAllAdventures] = useState<IAdventureWrapper[]>([]);
 
-  const [selectedAdventure, setSelectedAdventure] = useState<IAdventure>();
+  const [selectedAdventure, setSelectedAdventure] = useState<IAdventureWrapper>();
 
   const setType = (type: StoryType) => {
     console.log('setting story type', type);
     setSelectedType(type);
   };
 
-  const setAdventures = (adventures: IAdventure[]) => {
+  const setAdventures = (adventures: IAdventureWrapper[]) => {
     console.log('setting adventures', adventures);
     setAllAdventures(adventures);
   };
 
-  const setAdventure = (adventure: IAdventure) => {
+  const setAdventure = (adventure: IAdventureWrapper) => {
     console.log('setting adventure', adventure);
     setSelectedAdventure(adventure);
   };

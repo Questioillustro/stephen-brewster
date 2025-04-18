@@ -44,7 +44,7 @@ const MainCharacterPanel = (props: MainCharacterPanelProps) => {
       }}
     >
       <Typography variant={'h6'} sx={{ mb: 3 }}>
-        Customize Your Main Character!
+        Customize Your Character!
       </Typography>
 
       <Box

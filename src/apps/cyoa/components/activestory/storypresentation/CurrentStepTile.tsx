@@ -1,12 +1,12 @@
 ﻿import { Fade, Paper, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { IAdventureStep } from '../../../api/AdventureService';
+import { IAdventurePage } from '../../../api/AdventureService';
 import { AnimationConstants } from '../../../constants/AnimationConstants';
 import StoryPagination from './StoryPagination';
 import ImageTile from './ImageTile';
 
-export interface CurrentStepTileProps {
-  step: IAdventureStep;
+export interface CurrentPageTileProps {
+  page: IAdventurePage;
   currentPage: number;
   totalPages: number;
   generateImage: () => void;
@@ -15,8 +15,8 @@ export interface CurrentStepTileProps {
   nextPage: () => void;
 }
 
-const CurrentStepTile = (props: CurrentStepTileProps) => {
-  const { step, currentPage, totalPages, generateImage, generatingImage, previousPage, nextPage } =
+const CurrentStepTile = (props: CurrentPageTileProps) => {
+  const { page, currentPage, totalPages, generateImage, generatingImage, previousPage, nextPage } =
     props;
 
   const [showContent, setShowContent] = useState(true);
@@ -55,14 +55,14 @@ const CurrentStepTile = (props: CurrentStepTileProps) => {
             color={'secondary'}
             sx={{ p: 2 }}
             dangerouslySetInnerHTML={{
-              __html: step.text,
+              __html: page.text,
             }}
           ></Typography>
 
           <ImageTile
             generateImage={generateImage}
             generatingImage={generatingImage}
-            imageUrl={step.imageUrl}
+            imageUrl={page.imageUrl ?? ''}
           />
         </Paper>
       </Fade>

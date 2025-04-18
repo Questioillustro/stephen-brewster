@@ -28,18 +28,17 @@ const CarouselTrack = styled(Box)`
 `;
 
 const EnvironmentSquare = styled(Box)<{ selected: boolean }>`
-  width: 100px;
-  height: 100px;
+  width: 105px;
+  height: 105px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: ${({ selected }) => (selected ? '2px solid #1976d2' : '1px solid #ccc')};
+  border: ${({ selected }) => (selected ? '4px solid #1976d2' : '2px solid #ccc')};
   border-radius: 8px;
   cursor: pointer;
   background-color: ${({ selected }) => (selected ? '#BBBBBB' : '#000000')};
-  transition: all 0.2s ease-in-out;
   &:hover {
     background-color: #aaaaaa;
   }
@@ -200,7 +199,7 @@ const EnvironmentSelect: React.FC<EnvironmentSelectorProps> = ({ setEnvironment 
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%', pb: 2 }}>
       <Typography variant={'h6'} sx={{ p: 2 }}>
         Choose a Setting!
       </Typography>
@@ -225,9 +224,6 @@ const EnvironmentSelect: React.FC<EnvironmentSelectorProps> = ({ setEnvironment 
                 >
                   <EnvironmentImage src={environment.imageUrl} alt={environment.name} />
                 </EnvironmentSquare>
-                <Typography variant='caption' color='white'>
-                  {environment.name}
-                </Typography>
               </Box>
             ))}
           </CarouselTrack>

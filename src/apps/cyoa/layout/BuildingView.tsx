@@ -3,7 +3,7 @@ import { Paper } from '@mui/material';
 import BackButton from '@/apps/cyoa/components/activestory/inputs/BackButton';
 import BuildOptions from '@/apps/cyoa/components/activestory/inputs/BuildOptions';
 import { MainViewContext } from '@/apps/cyoa/context/MainViewContext';
-import { generateNewAdventure, IAdventure } from '@/apps/cyoa/api/AdventureService';
+import { generateNewAdventure, IAdventureWrapper } from '@/apps/cyoa/api/AdventureService';
 import { useStoryContext } from '@/apps/cyoa/context/StoryContext';
 import LoadingSkeleton from '@/components/loading/LoadingSkeleton';
 
@@ -21,11 +21,13 @@ const BuildingView: React.FC = () => {
   const build = async (prompts: string, characterPrompts: string) => {
     setIsLoading(true);
 
-    generateNewAdventure(prompts, characterPrompts, 'grok', 0.8).then((adventure: IAdventure) => {
-      setAdventure(adventure);
-      dispatch('VIEW_NEW');
-      setIsLoading(false);
-    });
+    generateNewAdventure(prompts, characterPrompts, 'grok', 0.8).then(
+      (adventure: IAdventureWrapper) => {
+        setAdventure(adventure);
+        dispatch('VIEW_NEW');
+        setIsLoading(false);
+      },
+    );
   };
 
   const setPrompts = (prompts: string, characterPrompts: string) => {
@@ -41,7 +43,7 @@ const BuildingView: React.FC = () => {
   } else {
     return (
       <Paper square sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-        <BackButton onclick={goBack} />
+        {/*<BackButton onclick={goBack} />*/}
 
         <Paper square sx={{ display: 'flex', width: '100%' }}>
           <BuildOptions setPrompts={setPrompts} />

@@ -3,7 +3,8 @@ import Typography from '@mui/material/Typography';
 import InfoModal from '@/apps/cyoa/components/modal/InfoModal';
 import { BuildAventureDescription } from '@/apps/cyoa/components/modal/BuildAventureDescription';
 import React, { useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
+import HelpIcon from '@mui/icons-material/Help';
 
 export const AboutBuildAVenture = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,11 +14,11 @@ export const AboutBuildAVenture = () => {
 
   return (
     <Box>
-      <Button onClick={handleOpenModal} sx={{ width: '100%' }} variant={'contained'}>
-        <Typography variant={'h5'} color={'darkslategrey'}>
-          About this App
+      <IconButton onClick={handleOpenModal}>
+        <Typography variant={'h5'} color={'primary'}>
+          About <HelpIcon />
         </Typography>
-      </Button>
+      </IconButton>
 
       <InfoModal
         title='Welcome to Build-A-Venture!'

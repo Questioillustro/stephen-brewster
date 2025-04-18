@@ -7,7 +7,7 @@ export const MainViewContext = createContext({
   dispatch: ({}) => console.warn('No view dispatch'),
 });
 
-const initialState = { currentView: 'landing', isRevisit: false };
+const initialState = { currentView: 'building', isRevisit: false };
 
 const reducer = (state, action) => {
   console.log('view reducer called', state, action);

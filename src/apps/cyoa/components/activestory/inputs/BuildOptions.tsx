@@ -29,19 +29,29 @@ const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) =
   }, [mainCharacter, setMainCharacter, storyDetails, setStoryDetails, environment, setEnvironment]);
 
   return (
-    <Paper sx={{ display: 'flex', flexDirection: 'column', width: '100%', gap: 2 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', gap: 2 }}>
       <EnvironmentSelect setEnvironment={setEnvironment} />
 
-      <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%', gap: 2 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
         <MainCharacterPanel setMainCharacterPrompts={setMainCharacter} />
 
-        <StoryDetailsPanel setStoryDetailsPrompts={setStoryDetails} />
-      </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+            alignItems: 'center',
+            width: '100%',
+          }}
+        >
+          <StoryDetailsPanel setStoryDetailsPrompts={setStoryDetails} />
 
-      <Button onClick={() => buildAdventure()} variant={'contained'}>
-        Build It!
-      </Button>
-    </Paper>
+          <Button onClick={() => buildAdventure()} variant={'contained'} sx={{ maxWidth: '300px' }}>
+            Build It!
+          </Button>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

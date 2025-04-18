@@ -7,7 +7,7 @@ import BackButton from '@/apps/cyoa/components/activestory/inputs/BackButton';
 import RevisitControls from '@/apps/cyoa/components/activestory/storypresentation/RevisitControls';
 import { useStoryContext } from '@/apps/cyoa/context/StoryContext';
 import { MainViewContext } from '@/apps/cyoa/context/MainViewContext';
-import { getExistingAdventuresForStory, IAdventure } from '@/apps/cyoa/api/AdventureService';
+import { getExistingAdventuresForStory, IAdventureWrapper } from '@/apps/cyoa/api/AdventureService';
 import LoadingSkeleton from '@/components/loading/LoadingSkeleton';
 
 export interface StoryPresenterProps {
@@ -33,13 +33,13 @@ const StoryPresenter = (props: StoryPresenterProps) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [adventures, setAdventures] = useState<IAdventure[]>([]);
+  const [adventures, setAdventures] = useState<IAdventureWrapper[]>([]);
 
   const generateImage = async () => {
     if (!selectedAdventure) return;
 
     setGeneratingImage(true);
-    const step = selectedAdventure.steps[currentStepIndex];
+    const step = selectedAdventure.adventure.pages[currentStepIndex];
 
     getImagesForPrompt(step.imagePrompt, selectedAdventure._id, currentStepIndex).then(
       (adventure) => {
@@ -58,7 +58,7 @@ const StoryPresenter = (props: StoryPresenterProps) => {
   };
 
   const goBack = () => {
-    dispatch('LANDING');
+    dispatch('BUILD');
   };
 
   const navPreviousVersion = () => {
@@ -137,9 +137,9 @@ const StoryPresenter = (props: StoryPresenterProps) => {
 
         {selectedAdventure && !isLoading && (
           <CurrentStepTile
-            step={selectedAdventure.steps[currentStepIndex]}
+            page={selectedAdventure.adventure.pages[currentStepIndex]}
             currentPage={currentStepIndex + 1}
-            totalPages={selectedAdventure.steps.length}
+            totalPages={selectedAdventure.adventure.pages.length}
             generateImage={generateImage}
             generatingImage={generatingImage}
             previousPage={previousPage}
