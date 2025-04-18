@@ -19,7 +19,7 @@ const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) =
 
   const buildAdventure = () => {
     storyDetails.push(environment);
-    setPrompts(storyDetails.join('|'), mainCharacter);
+    setPrompts(storyDetails.join(' '), mainCharacter);
   };
 
   useEffect(() => {

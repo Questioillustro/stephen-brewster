@@ -185,7 +185,7 @@ const EnvironmentSelect: React.FC<EnvironmentSelectorProps> = ({ setEnvironment 
 
   const handleEnvironmentClick = (environment: (typeof environmentList)[0]) => {
     setSelectedEnvironment(environment.name);
-    setEnvironment(`The story setting is: ${environment.prompt}`);
+    setEnvironment(`The story setting is: ${environment.prompt}.`);
   };
 
   const scrollLeft = () => {

@@ -12,7 +12,7 @@ const GenderSelect = (props: QuoteSelectProps) => {
   };
   useEffect(() => {
     if (gender) {
-      const prompt = `Main character's gender is ${gender}`;
+      const prompt = `Main character's gender is ${gender}.`;
       addGender(prompt);
     }
   }, [gender]);

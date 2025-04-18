@@ -13,31 +13,33 @@ interface ThemeOption {
 const ThemeSelect = (props: ThemeSelectProps) => {
   const { addTheme } = props;
 
+  const THEME_VERSION = '1';
+
   const defaultThemes: ThemeOption[] = [
-    { value: 'RANDOM', label: 'Random' },
-    { value: 'Include themes about growing old', label: 'Growing Old' },
-    { value: 'Include themes about respect', label: 'Respect' },
-    { value: 'Include themes about honesty', label: 'Honesty' },
-    { value: 'Include themes about stoicism', label: 'Stoicism' },
-    { value: 'Include themes about christianity', label: 'Christianity' },
-    { value: 'Include themes about friendship', label: 'Friendship' },
-    { value: 'Include themes about courage', label: 'Courage' },
-    { value: 'Include themes about kindness', label: 'Kindness' },
-    { value: 'Include themes about imagination', label: 'Imagination' },
-    { value: 'Include themes about adventure', label: 'Adventure' },
-    { value: 'Include themes about family', label: 'Family' },
-    { value: 'Include themes about self-discovery', label: 'Self-Discovery' },
-    { value: 'Include themes about teamwork', label: 'Teamwork' },
-    { value: 'Include themes about perseverance', label: 'Perseverance' },
-    { value: 'Include themes about acceptance', label: 'Acceptance' },
-    { value: 'Include themes about curiosity', label: 'Curiosity' },
-    { value: 'Include themes about love', label: 'Love' },
-    { value: 'Include themes about responsibility', label: 'Responsibility' },
-    { value: 'Include themes about hope', label: 'Hope' },
-    { value: 'Include themes about sharing', label: 'Sharing' },
-    { value: 'Include themes about growth', label: 'Growth' },
-    { value: 'Include themes about magic', label: 'Magic' },
-    { value: 'Include themes about humor', label: 'Humor' },
+    { value: 'Random', label: 'Random' },
+    { value: 'Respect', label: 'Respect' },
+    { value: 'Growing Old', label: 'Growing Old' },
+    { value: 'Honesty', label: 'Honesty' },
+    { value: 'Stoicism', label: 'Stoicism' },
+    { value: 'Christianity', label: 'Christianity' },
+    { value: 'Friendship', label: 'Friendship' },
+    { value: 'Courage', label: 'Courage' },
+    { value: 'Kindness', label: 'Kindness' },
+    { value: 'Imagination', label: 'Imagination' },
+    { value: 'Adventure', label: 'Adventure' },
+    { value: 'Family', label: 'Family' },
+    { value: 'Self-Discovery', label: 'Self-Discovery' },
+    { value: 'Teamwork', label: 'Teamwork' },
+    { value: 'Perseverance', label: 'Perseverance' },
+    { value: 'Acceptance', label: 'Acceptance' },
+    { value: 'Curiosity', label: 'Curiosity' },
+    { value: 'Love', label: 'Love' },
+    { value: 'Responsibility', label: 'Responsibility' },
+    { value: 'Hope', label: 'Hope' },
+    { value: 'Sharing', label: 'Sharing' },
+    { value: 'Growth', label: 'Growth' },
+    { value: 'Magic', label: 'Magic' },
+    { value: 'Humor', label: 'Humor' },
   ];
 
   // Initialize theme and inputValue with a random option (excluding 'RANDOM')
@@ -55,11 +57,18 @@ const ThemeSelect = (props: ThemeSelectProps) => {
   const autocompleteRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const storedThemes = localStorage.getItem('themeOptions');
-    if (storedThemes) {
-      setThemeOptions(JSON.parse(storedThemes));
-    } else {
+    const themeVersion = localStorage.getItem('themeVersion');
+
+    if (themeVersion !== THEME_VERSION) {
       localStorage.setItem('themeOptions', JSON.stringify(defaultThemes));
+      localStorage.setItem('themeVersion', THEME_VERSION);
+    } else {
+      const storedThemes = localStorage.getItem('themeOptions');
+      if (storedThemes) {
+        setThemeOptions(JSON.parse(storedThemes));
+      } else {
+        localStorage.setItem('themeOptions', JSON.stringify(defaultThemes));
+      }
     }
   }, []);
 
@@ -72,11 +81,11 @@ const ThemeSelect = (props: ThemeSelectProps) => {
       let selectedLabel: string;
 
       if (typeof newValue === 'string') {
-        selectedValue = `Include themes about ${newValue}`;
+        selectedValue = newValue;
         selectedLabel = newValue;
       } else {
         selectedValue = newValue.value;
-        selectedLabel = newValue.label;
+        selectedLabel = newValue.value;
       }
 
       if (
@@ -93,7 +102,7 @@ const ThemeSelect = (props: ThemeSelectProps) => {
     } else {
       const randomTheme = getRandomTheme();
       setTheme(randomTheme.value);
-      setInputValue(randomTheme.label);
+      setInputValue(randomTheme.value);
     }
     setOpen(false);
   };
@@ -123,14 +132,14 @@ const ThemeSelect = (props: ThemeSelectProps) => {
 
   useEffect(() => {
     let themeChoice;
-    const prefix = `The theme of the story should be:`;
+    const prefix = `Include themes about:`;
     if (theme.toLowerCase() !== 'random') {
-      themeChoice = ` ${theme}`;
+      themeChoice = `${theme}`;
     } else {
       const randomTheme = getRandomTheme();
-      themeChoice = ` ${randomTheme.value}`;
+      themeChoice = `${randomTheme.value}`;
     }
-    addTheme(`${prefix}${themeChoice}`);
+    addTheme(`${prefix} ${themeChoice}.`);
   }, [theme, addTheme]);
 
   const defaultValue = themeOptions.find((option) => option.value === theme) || null;

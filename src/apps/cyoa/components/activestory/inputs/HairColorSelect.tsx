@@ -9,7 +9,7 @@ const MainCharacterHairColor = (props: HairColorSelectProps) => {
   const { setHairColor } = props;
 
   const colorChanged = (color: string) => {
-    setHairColor(`Main character's hair color is ${color}`);
+    setHairColor(`Main character's hair color is: ${color}.`);
   };
 
   return (

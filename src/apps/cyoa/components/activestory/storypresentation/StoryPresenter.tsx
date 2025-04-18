@@ -1,4 +1,4 @@
-﻿import { Fade, Paper } from '@mui/material';
+﻿import { Fade, Paper, Typography } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { AnimationConstants } from '../../../constants/AnimationConstants';
 import { getImagesForPrompt } from '../../../api/ImageService';
@@ -23,7 +23,7 @@ const StoryPresenter = (props: StoryPresenterProps) => {
 
   const { state, dispatch } = useContext(MainViewContext);
 
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const [generatingImage, setGeneratingImage] = useState(false);
 
@@ -39,22 +39,20 @@ const StoryPresenter = (props: StoryPresenterProps) => {
     if (!selectedAdventure) return;
 
     setGeneratingImage(true);
-    const step = selectedAdventure.adventure.pages[currentStepIndex];
+    const step = selectedAdventure.adventure.pages[currentPage];
 
-    getImagesForPrompt(step.imagePrompt, selectedAdventure._id, currentStepIndex).then(
-      (adventure) => {
-        setAdventure(adventure);
-        setGeneratingImage(false);
-      },
-    );
+    getImagesForPrompt(step.imagePrompt, selectedAdventure._id, currentPage).then((adventure) => {
+      setAdventure(adventure);
+      setGeneratingImage(false);
+    });
   };
 
   const nextPage = () => {
-    setCurrentStepIndex((index) => index + 1);
+    setCurrentPage((index) => index + 1);
   };
 
   const previousPage = () => {
-    setCurrentStepIndex((index) => index - 1);
+    setCurrentPage((index) => index - 1);
   };
 
   const goBack = () => {
@@ -136,15 +134,21 @@ const StoryPresenter = (props: StoryPresenterProps) => {
         )}
 
         {selectedAdventure && !isLoading && (
-          <CurrentStepTile
-            page={selectedAdventure.adventure.pages[currentStepIndex]}
-            currentPage={currentStepIndex + 1}
-            totalPages={selectedAdventure.adventure.pages.length}
-            generateImage={generateImage}
-            generatingImage={generatingImage}
-            previousPage={previousPage}
-            nextPage={nextPage}
-          />
+          <>
+            <Typography variant={'h5'} color={'primary'}>
+              {selectedAdventure.adventure.title}
+            </Typography>
+
+            <CurrentStepTile
+              page={selectedAdventure.adventure.pages[currentPage]}
+              currentPage={currentPage + 1}
+              totalPages={selectedAdventure.adventure.pages.length}
+              generateImage={generateImage}
+              generatingImage={generatingImage}
+              previousPage={previousPage}
+              nextPage={nextPage}
+            />
+          </>
         )}
 
         {isLoading && <LoadingSkeleton />}

@@ -14,8 +14,8 @@ export interface MainCharacterPanelProps {
 const MainCharacterPanel = (props: MainCharacterPanelProps) => {
   const { setMainCharacterPrompts } = props;
 
-  const [characterName, setCharacterName] = useState<string | null>(null);
-  const [gender, setGender] = useState<string>('boy');
+  const [characterName, setCharacterName] = useState<string | null>('random');
+  const [gender, setGender] = useState<string>('male');
   const [skinColor, setSkinColor] = useState<string>('');
   const [hairColor, setHairColor] = useState<string>('');
   const [specie, setSpecie] = useState<string>('');
@@ -29,8 +29,8 @@ const MainCharacterPanel = (props: MainCharacterPanelProps) => {
     characterAttr.push(hairColor);
     characterAttr.push(specie);
 
-    const characterPrompt = characterAttr.join('|');
-    setMainCharacterPrompts(characterPrompt);
+    const characterPrompt = characterAttr.join(' ');
+    setMainCharacterPrompts(characterPrompt.trim());
   }, [characterName, gender, skinColor, hairColor, specie]);
 
   return (

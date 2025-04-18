@@ -13,6 +13,8 @@ interface GenreOption {
 const GenreSelect = (props: GenreSelectProps) => {
   const { addGenre } = props;
 
+  const GENRE_VERSION = '1';
+
   const defaultGenres: GenreOption[] = [
     { value: 'RANDOM', label: 'Random' },
     { value: 'Fantasy', label: 'Fantasy' },
@@ -51,11 +53,18 @@ const GenreSelect = (props: GenreSelectProps) => {
   const autocompleteRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const storedGenres = localStorage.getItem('genreOptions');
-    if (storedGenres) {
-      setGenreOptions(JSON.parse(storedGenres));
-    } else {
+    const genreVersion = localStorage.getItem('genreVersion');
+
+    if (genreVersion !== GENRE_VERSION) {
+      localStorage.setItem('genreVersion', GENRE_VERSION);
       localStorage.setItem('genreOptions', JSON.stringify(defaultGenres));
+    } else {
+      const storedGenres = localStorage.getItem('genreOptions');
+      if (storedGenres) {
+        setGenreOptions(JSON.parse(storedGenres));
+      } else {
+        localStorage.setItem('genreOptions', JSON.stringify(defaultGenres));
+      }
     }
   }, []);
 
@@ -126,7 +135,7 @@ const GenreSelect = (props: GenreSelectProps) => {
       const randomGenre = getRandomGenre();
       genreChoice = ` ${randomGenre.value}`;
     }
-    addGenre(`${prefix}${genreChoice}`);
+    addGenre(`${prefix} ${genreChoice}.`);
   }, [genre, addGenre]);
 
   const defaultValue = genreOptions.find((option) => option.value === genre) || null;

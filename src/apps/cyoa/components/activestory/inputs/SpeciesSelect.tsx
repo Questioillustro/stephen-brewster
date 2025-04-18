@@ -81,7 +81,7 @@ export const SpeciesSelect: React.FC<SpeciesSelectorProps> = ({ setSpecies }) =>
 
   const handleSpeciesClick = (species: string) => {
     setSelectedSpecies(species);
-    setSpecies(`Main character species is ${species}`);
+    setSpecies(`Main character species is: ${species}.`);
   };
 
   const scrollLeft = () => {

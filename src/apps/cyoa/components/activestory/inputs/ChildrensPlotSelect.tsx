@@ -13,6 +13,8 @@ interface PlotOption {
 const ChildrensPlotSelect = (props: ChildrensPlotSelectProps) => {
   const { addPlot } = props;
 
+  const PLOT_VERSION = '1';
+
   const defaultPlots: PlotOption[] = [
     { value: 'RANDOM', label: 'Random' },
     { value: 'Self_Discovery', label: 'A journey of self-discovery' },
@@ -52,11 +54,18 @@ const ChildrensPlotSelect = (props: ChildrensPlotSelectProps) => {
   const autocompleteRef = useRef<HTMLInputElement>(null); // Ref to focus input
 
   useEffect(() => {
-    const storedPlots = localStorage.getItem('plotOptions');
-    if (storedPlots) {
-      setPlotOptions(JSON.parse(storedPlots));
-    } else {
+    const plotVersion = localStorage.getItem('plotVersion');
+
+    if (plotVersion !== PLOT_VERSION) {
+      localStorage.setItem('plotVersion', PLOT_VERSION);
       localStorage.setItem('plotOptions', JSON.stringify(defaultPlots));
+    } else {
+      const storedPlots = localStorage.getItem('plotOptions');
+      if (storedPlots) {
+        setPlotOptions(JSON.parse(storedPlots));
+      } else {
+        localStorage.setItem('plotOptions', JSON.stringify(defaultPlots));
+      }
     }
   }, []);
 
@@ -82,7 +91,7 @@ const ChildrensPlotSelect = (props: ChildrensPlotSelectProps) => {
         localStorage.setItem('plotOptions', JSON.stringify(updatedOptions));
       }
 
-      setPlot(selectedValue);
+      setPlot(selectedLabel);
       setInputValue(selectedLabel);
     } else {
       const randomPlot = getRandomPlot();
@@ -122,9 +131,9 @@ const ChildrensPlotSelect = (props: ChildrensPlotSelectProps) => {
       plotChoice = ` ${plot}`;
     } else {
       const randomPlot = getRandomPlot();
-      plotChoice = `${randomPlot.value}`;
+      plotChoice = `${randomPlot.label}`;
     }
-    addPlot(`${prefix} ${plotChoice}`);
+    addPlot(`${prefix} ${plotChoice}.`);
   }, [plot, addPlot]);
 
   const defaultValue = plotOptions.find((option) => option.value === plot) || null;
