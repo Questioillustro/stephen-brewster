@@ -5,6 +5,7 @@ export interface IAdventureWrapper {
   contextPrompts: string;
   storyPrompts: string;
   adventure: IAdventure;
+  artStyle: string;
 }
 
 export interface IAdventurePage {
@@ -18,9 +19,10 @@ export interface IAdventure {
   title: string;
 }
 
-export const generateNewAdventure = async (
+export const BuildAVenture = async (
   prompts: string,
   characterPrompts: string,
+  artStyle: string,
   llm: string,
   temperature?: number,
 ): Promise<IAdventureWrapper> => {
@@ -28,6 +30,7 @@ export const generateNewAdventure = async (
     const response = await apiClient.post<IAdventureWrapper>(`/buildaventure`, {
       prompts: prompts,
       character: characterPrompts,
+      artStyle: artStyle,
       temperature: temperature ?? 0.7,
       llm: llm ?? 'grok',
     });

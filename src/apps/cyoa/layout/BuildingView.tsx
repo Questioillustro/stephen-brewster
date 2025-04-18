@@ -1,9 +1,8 @@
 ﻿import React, { useContext, useState } from 'react';
 import { Paper } from '@mui/material';
-import BackButton from '@/apps/cyoa/components/activestory/inputs/BackButton';
 import BuildOptions from '@/apps/cyoa/components/activestory/inputs/BuildOptions';
 import { MainViewContext } from '@/apps/cyoa/context/MainViewContext';
-import { generateNewAdventure, IAdventureWrapper } from '@/apps/cyoa/api/AdventureService';
+import { BuildAVenture, IAdventureWrapper } from '@/apps/cyoa/api/AdventureService';
 import { useStoryContext } from '@/apps/cyoa/context/StoryContext';
 import LoadingSkeleton from '@/components/loading/LoadingSkeleton';
 
@@ -18,10 +17,10 @@ const BuildingView: React.FC = () => {
     dispatch('LANDING');
   };
 
-  const build = async (prompts: string, characterPrompts: string) => {
+  const build = async (prompts: string, characterPrompts: string, artStyle: string) => {
     setIsLoading(true);
 
-    generateNewAdventure(prompts, characterPrompts, 'grok', 0.8).then(
+    BuildAVenture(prompts, characterPrompts, artStyle, 'grok', 0.8).then(
       (adventure: IAdventureWrapper) => {
         setAdventure(adventure);
         dispatch('VIEW_NEW');
@@ -30,8 +29,8 @@ const BuildingView: React.FC = () => {
     );
   };
 
-  const setPrompts = (prompts: string, characterPrompts: string) => {
-    build(prompts, characterPrompts);
+  const setPrompts = (prompts: string, characterPrompts: string, artStyle: string) => {
+    build(prompts, characterPrompts, artStyle);
   };
 
   if (isLoading) {

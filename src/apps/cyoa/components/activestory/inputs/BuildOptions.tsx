@@ -3,9 +3,10 @@ import { Box, Button, Paper } from '@mui/material';
 import MainCharacterPanel from '@/apps/cyoa/components/activestory/inputs/MainCharacterPanel';
 import StoryDetailsPanel from '@/apps/cyoa/components/activestory/inputs/StoryDetailsPanel';
 import EnvironmentSelect from '@/apps/cyoa/components/activestory/inputs/EnvironmentSelect';
+import ArtStyleSelector from '@/apps/cyoa/components/activestory/inputs/ArtStyleSelector';
 
 export interface IBuildOptionsProps {
-  setPrompts: (prompts: string, characterPrompts: string) => void;
+  setPrompts: (prompts: string, characterPrompts: string, artStyle: string) => void;
 }
 
 const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) => {
@@ -17,20 +18,34 @@ const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) =
 
   const [environment, setEnvironment] = useState<string>('');
 
+  const [artStyle, setArtStyle] = useState<string>('Cartoon');
+
   const buildAdventure = () => {
     storyDetails.push(environment);
-    setPrompts(storyDetails.join(' '), mainCharacter);
+    setPrompts(storyDetails.join(' '), mainCharacter, artStyle);
   };
 
   useEffect(() => {
     console.log('mainCharacter', mainCharacter);
     console.log('storyDetails', storyDetails);
     console.log('environment', environment);
-  }, [mainCharacter, setMainCharacter, storyDetails, setStoryDetails, environment, setEnvironment]);
+    console.log('art style', artStyle);
+  }, [
+    mainCharacter,
+    setMainCharacter,
+    storyDetails,
+    setStoryDetails,
+    environment,
+    setEnvironment,
+    artStyle,
+    setArtStyle,
+  ]);
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', gap: 2 }}>
       <EnvironmentSelect setEnvironment={setEnvironment} />
+
+      <ArtStyleSelector onChange={setArtStyle} />
 
       <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
         <MainCharacterPanel setMainCharacterPrompts={setMainCharacter} />

@@ -39,9 +39,10 @@ const StoryPresenter = (props: StoryPresenterProps) => {
     if (!selectedAdventure) return;
 
     setGeneratingImage(true);
-    const step = selectedAdventure.adventure.pages[currentPage];
+    const page = selectedAdventure.adventure.pages[currentPage];
+    const imagePrompt = `The art style should be: ${selectedAdventure.artStyle}. ${page.imagePrompt}`;
 
-    getImagesForPrompt(step.imagePrompt, selectedAdventure._id, currentPage).then((adventure) => {
+    getImagesForPrompt(imagePrompt, selectedAdventure._id, currentPage).then((adventure) => {
       setAdventure(adventure);
       setGeneratingImage(false);
     });
