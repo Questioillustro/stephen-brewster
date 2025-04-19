@@ -37,17 +37,18 @@ const MainCharacterPanel = (props: MainCharacterPanelProps) => {
   return (
     <Stack
       sx={{
-        justifyContent: 'center',
+        p: 2,
         alignItems: 'center',
         display: 'flex',
         flexDirection: 'column',
+        width: '100%',
       }}
     >
       <StyledDivider />
 
       <Typography variant={'h6'}>Customize Your Character!</Typography>
 
-      <Box
+      <Stack
         sx={{
           display: 'flex',
           flexDirection: 'row',
@@ -57,11 +58,11 @@ const MainCharacterPanel = (props: MainCharacterPanelProps) => {
       >
         <GenderSelect addGender={setGender} />
         <MainCharacterName setCharacterName={setCharacterName} />
-      </Box>
+      </Stack>
 
       <StyledDivider />
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+      <Stack sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
         <SpeciesSelect setSpecies={setSpecie} />
 
         <StyledDivider />
@@ -73,7 +74,7 @@ const MainCharacterPanel = (props: MainCharacterPanelProps) => {
         <HairColorSelect setHairColor={setHairColor} />
 
         <StyledDivider />
-      </Box>
+      </Stack>
     </Stack>
   );
 };

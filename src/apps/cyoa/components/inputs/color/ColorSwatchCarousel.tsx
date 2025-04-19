@@ -1,13 +1,35 @@
 ﻿import React, { useState, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { Box, Button, Stack } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
-import Typography from '@mui/material/Typography';
-import { environmentList } from '@/apps/cyoa/components/inputs/environment/environmentList';
-import StyledDivider from '@/components/dividers/StyledDivider';
 
-interface EnvironmentSelectorProps {
-  setEnvironment: (environment: string) => void;
+interface ColorOption {
+  name: string;
+  hex: string;
+}
+
+const colorOptions: ColorOption[] = [
+  { name: 'Ruby Red', hex: '#E0115F' },
+  { name: 'Coral', hex: '#FF7F50' },
+  { name: 'Tangerine', hex: '#FF8C00' },
+  { name: 'Sunflower', hex: '#FFC107' },
+  { name: 'Golden Tan', hex: '#D4A373' },
+  { name: 'Mint', hex: '#98FF98' },
+  { name: 'Emerald Green', hex: '#50C878' },
+  { name: 'Turquoise', hex: '#40E0D0' },
+  { name: 'Sky Blue', hex: '#87CEEB' },
+  { name: 'Lavender', hex: '#E6E6FA' },
+  { name: 'Amethyst', hex: '#9966CC' },
+  { name: 'Violet', hex: '#EE82EE' },
+  { name: 'Magenta', hex: '#FF00FF' },
+  { name: 'Pale Rose', hex: '#F8D8D8' },
+  { name: 'Rich Cocoa', hex: '#5C4033' },
+  { name: 'Ebony', hex: '#3A2E28' },
+];
+
+interface ColorSelectorProps {
+  onColorSelect?: (color: string) => void;
+  title?: string;
 }
 
 const Container = styled(Box)`
@@ -22,7 +44,7 @@ const Container = styled(Box)`
 const CarouselWrapper = styled(Box)`
   overflow: hidden;
   flex: 1;
-  width: 100%;
+  max-width: 100%;
 `;
 
 const CarouselTrack = styled(Box)`
@@ -31,37 +53,31 @@ const CarouselTrack = styled(Box)`
   gap: 16px;
 `;
 
-const EnvironmentSquare = styled(Box)<{ selected: boolean }>`
-  width: 105px;
-  height: 105px;
+const ColorSquare = styled(Box)<{ selected: boolean; hex: string }>`
+  width: 80px;
+  height: 80px;
   flex-shrink: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: ${({ selected }) => (selected ? '4px solid #1976d2' : '2px solid #ccc')};
+  border: ${({ selected }) => (selected ? '2px solid #1976d2' : '1px solid #ccc')};
   border-radius: 8px;
   cursor: pointer;
-  background-color: ${({ selected }) => (selected ? '#BBBBBB' : '#000000')};
+  background-color: ${({ hex }) => hex};
+  transition: all 0.2s ease-in-out;
   &:hover {
-    background-color: #aaaaaa;
+    opacity: 0.8;
   }
 `;
 
-const EnvironmentImage = styled('img')`
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 4px;
-`;
-
-const EnvironmentSelect: React.FC<EnvironmentSelectorProps> = ({ setEnvironment }) => {
-  const [selectedEnvironment, setSelectedEnvironment] = useState<string>(environmentList[0].name);
+export const ColorSwatchCarousel: React.FC<ColorSelectorProps> = ({ onColorSelect, title }) => {
+  const [selectedColor, setSelectedColor] = useState<ColorOption>(colorOptions[0]);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(4); // Initial value
-  const carouselRef = useRef<HTMLDivElement>(null);
 
-  const itemWidth = 124; // Width of each item (105px + 16px gap)
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const itemWidth = 96; // 80px (width) + 16px (gap)
+  const maxScroll = (colorOptions.length - itemsPerView) * itemWidth;
 
   // Calculate itemsPerView based on container width
   const updateItemsPerView = () => {
@@ -79,12 +95,11 @@ const EnvironmentSelect: React.FC<EnvironmentSelectorProps> = ({ setEnvironment 
     return () => window.removeEventListener('resize', updateItemsPerView);
   }, []);
 
-  // Calculate maxScroll dynamically
-  const maxScroll = (environmentList.length - itemsPerView) * itemWidth;
-
-  const handleEnvironmentClick = (environment: (typeof environmentList)[0]) => {
-    setSelectedEnvironment(environment.name);
-    setEnvironment(`The story setting is: ${environment.prompt}.`);
+  const handleColorClick = (color: ColorOption) => {
+    setSelectedColor(color);
+    if (onColorSelect) {
+      onColorSelect(color.name);
+    }
   };
 
   const scrollLeft = () => {
@@ -99,19 +114,17 @@ const EnvironmentSelect: React.FC<EnvironmentSelectorProps> = ({ setEnvironment 
 
   return (
     <Stack sx={{ width: '100%', mt: 2, pb: 2 }}>
-      <StyledDivider />
-
       <Typography
-        variant={'h6'}
+        variant='h6'
         sx={{ pb: 2, justifyContent: 'center', width: '100%', display: 'flex' }}
       >
-        Choose a Setting!
+        {title || 'Color Swatch'}
       </Typography>
 
       <Container>
         <Button
           onClick={scrollLeft}
-          variant={'contained'}
+          variant='contained'
           disabled={scrollPosition === 0}
           sx={{ display: 'flex', height: '100%', m: 1 }}
         >
@@ -124,32 +137,27 @@ const EnvironmentSelect: React.FC<EnvironmentSelectorProps> = ({ setEnvironment 
               transform: `translateX(-${scrollPosition}px)`,
             }}
           >
-            {environmentList.map((environment) => (
-              <Box key={environment._id}>
-                <EnvironmentSquare
-                  selected={selectedEnvironment === environment.name}
-                  onClick={() => handleEnvironmentClick(environment)}
-                >
-                  <EnvironmentImage src={environment.imageUrl} alt={environment.name} />
-                </EnvironmentSquare>
-              </Box>
+            {colorOptions.map((color) => (
+              <ColorSquare
+                key={color.hex}
+                selected={selectedColor.hex === color.hex}
+                hex={color.hex}
+                onClick={() => handleColorClick(color)}
+                title={color.name}
+              />
             ))}
           </CarouselTrack>
         </CarouselWrapper>
 
         <Button
           onClick={scrollRight}
-          variant={'contained'}
+          variant='contained'
           disabled={scrollPosition >= maxScroll}
           sx={{ display: 'flex', height: '100%', m: 1 }}
         >
           <ChevronRight />
         </Button>
       </Container>
-
-      <StyledDivider />
     </Stack>
   );
 };
-
-export default EnvironmentSelect;

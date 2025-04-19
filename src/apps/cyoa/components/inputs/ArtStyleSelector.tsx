@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import { Box, Button, ButtonGroup, Paper } from '@mui/material';
+import { Button, ButtonGroup, Stack } from '@mui/material';
 import styled from '@emotion/styled';
 import Typography from '@mui/material/Typography';
 import StyledDivider from '@/components/dividers/StyledDivider';
@@ -47,8 +47,7 @@ const ArtStyleSelector: React.FC<ArtStyleSelectorProps> = ({ onChange }) => {
   };
 
   return (
-    <Paper
-      elevation={2}
+    <Stack
       sx={{
         display: 'flex',
         width: '100%',
@@ -77,7 +76,7 @@ const ArtStyleSelector: React.FC<ArtStyleSelectorProps> = ({ onChange }) => {
 
         <StyledDivider />
       </Container>
-    </Paper>
+    </Stack>
   );
 };
 

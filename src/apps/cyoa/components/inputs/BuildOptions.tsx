@@ -1,5 +1,5 @@
 ﻿import React, { useEffect, useState } from 'react';
-import { Box, Button, Paper, Stack } from '@mui/material';
+import { Button, Paper, Stack } from '@mui/material';
 import MainCharacterPanel from '@/apps/cyoa/components/inputs/MainCharacterPanel';
 import StoryDetailsPanel from '@/apps/cyoa/components/inputs/StoryDetailsPanel';
 import EnvironmentSelect from '@/apps/cyoa/components/inputs/environment/EnvironmentSelect';
@@ -44,13 +44,35 @@ const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) =
 
   return (
     <Stack sx={{ display: 'flex', flexDirection: 'column', width: '100%', gap: 2 }}>
-      <EnvironmentSelect setEnvironment={setEnvironment} />
+      <Paper
+        elevation={2}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2,
+          alignItems: 'center',
+          width: '100%',
+        }}
+      >
+        <EnvironmentSelect setEnvironment={setEnvironment} />
+      </Paper>
 
-      <ArtStyleSelector onChange={setArtStyle} />
+      <Paper
+        elevation={2}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2,
+          alignItems: 'center',
+          width: '100%',
+        }}
+      >
+        <ArtStyleSelector onChange={setArtStyle} />
+      </Paper>
 
       <Stack
-        direction={{ xs: 'column', lg: 'row' }}
-        sx={{ display: 'flex', flexDirection: 'row', width: '100%', gap: 2 }}
+        direction={{ xs: 'column', sm: 'column', md: 'row', lg: 'row' }}
+        sx={{ display: 'flex', width: '100%' }}
       >
         <Paper
           elevation={2}
@@ -59,7 +81,7 @@ const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) =
             flexDirection: 'column',
             gap: 2,
             alignItems: 'center',
-            width: '100%',
+            width: { sm: '100%', xs: '100%', md: '60%' },
           }}
         >
           <MainCharacterPanel setMainCharacterPrompts={setMainCharacter} />
@@ -71,8 +93,10 @@ const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) =
             display: 'flex',
             flexDirection: 'column',
             gap: 2,
+            mt: { xs: 2, sm: 2, md: 0 },
+            ml: { xs: 0, sm: 0, md: 2 },
             alignItems: 'center',
-            width: '100%',
+            width: { sm: '100%', xs: '100%', md: '40%' },
           }}
         >
           <StoryDetailsPanel setStoryDetailsPrompts={setStoryDetails} />
@@ -84,7 +108,6 @@ const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) =
           <StyledDivider />
         </Paper>
       </Stack>
-      <StyledDivider />
     </Stack>
   );
 };

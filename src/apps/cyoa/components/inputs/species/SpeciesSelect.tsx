@@ -1,6 +1,6 @@
-﻿import React, { useState, useRef } from 'react';
+﻿import React, { useState, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { Box, IconButton, Paper, Stack } from '@mui/material';
+import { Box, Button, Stack } from '@mui/material';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import Typography from '@mui/material/Typography';
 import { speciesList } from '@/apps/cyoa/components/inputs/species/speciesList';
@@ -12,13 +12,16 @@ interface SpeciesSelectorProps {
 const Container = styled(Box)`
   display: flex;
   align-items: center;
+  flex-direction: row;
+  height: 105px;
   width: 100%;
+  max-width: 100%;
 `;
 
 const CarouselWrapper = styled(Box)`
   overflow: hidden;
   flex: 1;
-  max-width: 576px;
+  max-width: '100%';
 `;
 
 const CarouselTrack = styled(Box)`
@@ -47,11 +50,27 @@ const SpeciesSquare = styled(Box)<{ selected: boolean }>`
 export const SpeciesSelect: React.FC<SpeciesSelectorProps> = ({ setSpecies }) => {
   const [selectedSpecies, setSelectedSpecies] = useState<string>('Human');
   const [scrollPosition, setScrollPosition] = useState(0);
-  const carouselRef = useRef<HTMLDivElement>(null);
+  const [itemsPerView, setItemsPerView] = useState(4); // Initial value
 
-  const itemsPerView = 5;
+  const carouselRef = useRef<HTMLDivElement>(null);
   const itemWidth = 96; // 80px (width) + 16px (gap)
   const maxScroll = (speciesList.length - itemsPerView) * itemWidth;
+
+  // Calculate itemsPerView based on container width
+  const updateItemsPerView = () => {
+    if (carouselRef.current) {
+      const containerWidth = carouselRef.current.offsetWidth;
+      const calculatedItems = Math.floor(containerWidth / itemWidth);
+      setItemsPerView(Math.max(1, calculatedItems)); // Ensure at least 1 item
+    }
+  };
+
+  // Update itemsPerView on mount and window resize
+  useEffect(() => {
+    updateItemsPerView();
+    window.addEventListener('resize', updateItemsPerView);
+    return () => window.removeEventListener('resize', updateItemsPerView);
+  }, []);
 
   const handleSpeciesClick = (species: string) => {
     setSelectedSpecies(species);
@@ -69,15 +88,23 @@ export const SpeciesSelect: React.FC<SpeciesSelectorProps> = ({ setSpecies }) =>
   };
 
   return (
-    <Stack sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Typography variant={'h6'} sx={{ pb: 1 }}>
+    <Stack sx={{ width: '100%', mt: 2, pb: 2 }}>
+      <Typography
+        variant={'h6'}
+        sx={{ pb: 2, justifyContent: 'center', width: '100%', display: 'flex' }}
+      >
         Species
       </Typography>
 
       <Container>
-        <IconButton onClick={scrollLeft} disabled={scrollPosition === 0} sx={{ mr: 1 }}>
+        <Button
+          onClick={scrollLeft}
+          variant={'contained'}
+          disabled={scrollPosition === 0}
+          sx={{ display: 'flex', height: '100%', m: 1 }}
+        >
           <ChevronLeft />
-        </IconButton>
+        </Button>
 
         <CarouselWrapper ref={carouselRef}>
           <CarouselTrack
@@ -97,9 +124,14 @@ export const SpeciesSelect: React.FC<SpeciesSelectorProps> = ({ setSpecies }) =>
           </CarouselTrack>
         </CarouselWrapper>
 
-        <IconButton onClick={scrollRight} disabled={scrollPosition >= maxScroll} sx={{ ml: 1 }}>
+        <Button
+          onClick={scrollRight}
+          variant={'contained'}
+          disabled={scrollPosition >= maxScroll}
+          sx={{ display: 'flex', height: '100%', m: 1 }}
+        >
           <ChevronRight />
-        </IconButton>
+        </Button>
       </Container>
     </Stack>
   );

@@ -1,5 +1,5 @@
-﻿import { ColorSwatch } from '@/apps/cyoa/components/inputs/ColorSwatch';
-import { Box } from '@mui/material';
+﻿import { Box } from '@mui/material';
+import { ColorSwatchCarousel } from '@/apps/cyoa/components/inputs/color/ColorSwatchCarousel';
 
 export interface SkinColorSelectProps {
   setSkinColor: (hex: string) => void;
@@ -21,7 +21,7 @@ const MainCharacterSkinColor = (props: SkinColorSelectProps) => {
         justifyContent: 'center',
       }}
     >
-      <ColorSwatch onColorSelect={colorChanged} title={'Skin Color'} />
+      <ColorSwatchCarousel onColorSelect={colorChanged} title={'Skin Color'} />
     </Box>
   );
 };

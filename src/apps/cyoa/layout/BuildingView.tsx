@@ -1,5 +1,5 @@
 ﻿import React, { useContext, useState } from 'react';
-import { Box, Paper } from '@mui/material';
+import { Box, Paper, Stack } from '@mui/material';
 import BuildOptions from '@/apps/cyoa/components/inputs/BuildOptions';
 import { MainViewContext } from '@/apps/cyoa/context/MainViewContext';
 import { BuildAVenture, IAdventureWrapper } from '@/apps/cyoa/api/AdventureService';
@@ -42,15 +42,13 @@ const BuildingView: React.FC = () => {
     );
   } else {
     return (
-      <Paper square sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+      <Stack sx={{ display: 'flex', flexDirection: 'column', width: '100%', gap: 2 }}>
         <Box sx={{ display: 'flex', width: '100%', alignItems: 'center' }}>
           <AboutBuildAVenture />
         </Box>
 
-        <Paper square sx={{ display: 'flex', width: '100%' }}>
-          <BuildOptions setPrompts={setPrompts} />
-        </Paper>
-      </Paper>
+        <BuildOptions setPrompts={setPrompts} />
+      </Stack>
     );
   }
 };

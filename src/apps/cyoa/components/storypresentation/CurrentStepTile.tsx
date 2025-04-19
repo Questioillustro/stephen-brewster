@@ -1,4 +1,4 @@
-﻿import { Fade, Paper, Typography } from '@mui/material';
+﻿import { Fade, Paper, Stack, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { IAdventurePage } from '../../api/AdventureService';
 import { AnimationConstants } from '../../constants/AnimationConstants';
@@ -44,8 +44,11 @@ const CurrentStepTile = (props: CurrentPageTileProps) => {
   };
 
   return (
-    <Paper variant={'elevation'} elevation={5} sx={{ p: 2 }}>
-      <Fade in={showContent} timeout={AnimationConstants.QUICK_STORY_NAV_SPEED}>
+    <Fade in={showContent} timeout={AnimationConstants.QUICK_STORY_NAV_SPEED}>
+      <Stack
+        direction={{ xs: 'column', sm: 'column', md: 'row', lg: 'row' }}
+        sx={{ display: 'flex', width: '100%' }}
+      >
         <Paper
           variant={'outlined'}
           style={{ width: '100%', flexDirection: 'row', display: 'flex' }}
@@ -58,17 +61,22 @@ const CurrentStepTile = (props: CurrentPageTileProps) => {
               __html: page.text,
             }}
           ></Typography>
+        </Paper>
 
+        <Paper
+          variant={'outlined'}
+          style={{ width: '100%', flexDirection: 'row', display: 'flex' }}
+        >
           <ImageTile
             generateImage={generateImage}
             generatingImage={generatingImage}
             imageUrl={page.imageUrl ?? ''}
           />
         </Paper>
-      </Fade>
 
-      <StoryPagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />
-    </Paper>
+        <StoryPagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />
+      </Stack>
+    </Fade>
   );
 };
 
