@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { Box, IconButton, Paper } from '@mui/material';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import Typography from '@mui/material/Typography';
+import { speciesList } from '@/apps/cyoa/components/inputs/species/speciesList';
 
 interface SpeciesSelectorProps {
   setSpecies: (species: string) => void;
@@ -42,33 +43,6 @@ const SpeciesSquare = styled(Box)<{ selected: boolean }>`
     background-color: #aaaaaa;
   }
 `;
-
-const speciesList = [
-  'Human',
-  'Dog',
-  'Cat',
-  'Mouse',
-  'Rabbit',
-  'Bear',
-  'Fox',
-  'Wolf',
-  'Deer',
-  'Squirrel',
-  'Hedgehog',
-  'Owl',
-  'Frog',
-  'Duck',
-  'Goose',
-  'Pig',
-  'Sheep',
-  'Cow',
-  'Horse',
-  'Chicken',
-  'Elephant',
-  'Giraffe',
-  'Lion',
-  'Tiger',
-];
 
 export const SpeciesSelect: React.FC<SpeciesSelectorProps> = ({ setSpecies }) => {
   const [selectedSpecies, setSelectedSpecies] = useState<string>('Human');

@@ -1,12 +1,12 @@
 ﻿import { Paper } from '@mui/material';
 import FinanceDataGrid from '@/apps/finance/FinanceDataGrid';
 import MacroNews from '@/apps/finance/MacroNews';
-import { BuildAventureDescription } from '@/apps/cyoa/components/modal/BuildAventureDescription';
-import InfoModal from '@/apps/cyoa/components/modal/InfoModal';
+import { BuildAventureDescription } from '@/apps/modal/BuildAventureDescription';
+import InfoModal from '@/apps/modal/InfoModal';
 import React, { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { FinanceNewsDescription } from '@/apps/cyoa/components/modal/FinanceNewsDescription';
+import { FinanceNewsDescription } from '@/apps/modal/FinanceNewsDescription';
 
 export interface IFinanceNewsPanelProps {}
 

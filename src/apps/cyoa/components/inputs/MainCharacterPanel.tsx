@@ -5,7 +5,7 @@ import GenderSelect from '@/apps/cyoa/components/inputs/GenderSelect';
 import { useEffect, useState } from 'react';
 import SkinColorSelect from '@/apps/cyoa/components/inputs/SkinColorSelect';
 import HairColorSelect from '@/apps/cyoa/components/inputs/HairColorSelect';
-import { SpeciesSelect } from '@/apps/cyoa/components/inputs/SpeciesSelect';
+import { SpeciesSelect } from '@/apps/cyoa/components/inputs/species/SpeciesSelect';
 
 export interface MainCharacterPanelProps {
   setMainCharacterPrompts: (name: string) => void;

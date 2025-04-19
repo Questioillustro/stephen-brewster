@@ -10,6 +10,7 @@ const LoadingSkeleton = () => {
         flexDirection: 'column',
         width: '100%',
         height: '100%',
+        minHeight: '300px',
         textAlign: 'center',
         rowGap: '1rem',
       }}

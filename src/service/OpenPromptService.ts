@@ -10,7 +10,7 @@ interface OpenPromptRequest {
   bypassCache?: boolean;
 }
 
-type OpenPromptResponse = string;
+export type OpenPromptResponse = any;
 
 export const openPromptService = async (
   prompt: string,

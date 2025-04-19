@@ -1,7 +1,12 @@
-﻿import { Box } from '@mui/material';
+﻿import FrontEndComponent from '@/apps/codeassistant/codegen/FrontEndComponent';
+import { CodegenProvider } from '@/apps/codeassistant/codegen/context/CodegenContext';
 
 const CodeAssistant = () => {
-  return <Box>Code assistant</Box>;
+  return (
+    <CodegenProvider>
+      <FrontEndComponent />
+    </CodegenProvider>
+  );
 };
 
 export default CodeAssistant;

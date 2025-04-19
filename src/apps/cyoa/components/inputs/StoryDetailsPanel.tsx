@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react';
 import ThemeSelect from '@/apps/cyoa/components/inputs/ThemeSelect';
 import GenreSelect from '@/apps/cyoa/components/inputs/GenreSelect';
-import ChildrensPlotSelect from '@/apps/cyoa/components/inputs/ChildrensPlotSelect';
+import ChildrensPlotSelect from '@/apps/cyoa/components/inputs/plot/ChildrensPlotSelect';
 
 export interface StoryDetailsPanelProps {
   setStoryDetailsPrompts: (prompts: string[]) => void;
