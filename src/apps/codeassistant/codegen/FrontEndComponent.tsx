@@ -1,14 +1,14 @@
 ﻿import FrameworkButtonGroup from '@/apps/codeassistant/codegen/components/FrameworkButtonGroup';
-import { Container, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import TypescriptCheckbox from '@/apps/codeassistant/codegen/components/TypescriptCheckbox';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
 import GenericButtonGroup from '@/apps/codeassistant/codegen/components/GenericButtonGroup';
 import PromptField from '@/apps/codeassistant/codegen/components/PromptField';
 import SendPromptButton from '@/apps/codeassistant/codegen/components/SendPromptButton';
-import CodeBlock from '@/components/codedisplay/CodeBlock';
-import Spinner from '@/apps/codeassistant/codegen/components/Spinner';
 import CommentsCheckbox from '@/apps/codeassistant/codegen/components/CommentsCheckbox';
 import PromptDisplay from '@/apps/codeassistant/codegen/components/PromptDisplay';
+import SeparateStylesFile from '@/apps/codeassistant/codegen/components/SeparateStylesFile';
+import CodeTabs from '@/apps/codeassistant/codegen/components/CodeTabs';
 
 const FrontEndComponent = () => {
   const context = useCodegenContext();
@@ -28,6 +28,8 @@ const FrontEndComponent = () => {
           <Stack direction={'row'} sx={{ width: '100%' }}>
             <CommentsCheckbox />
 
+            <SeparateStylesFile />
+
             {context.framework.tsOption && <TypescriptCheckbox />}
           </Stack>
 
@@ -42,11 +44,7 @@ const FrontEndComponent = () => {
         </Stack>
       </Stack>
 
-      <Stack>
-        {context.codeDisplay && !context.loading && (
-          <CodeBlock code={context.codeDisplay} language={context.framework.syntaxHighlighter} />
-        )}
-      </Stack>
+      <Stack>{context.codeDisplay && !context.loading && <CodeTabs />}</Stack>
     </Stack>
   );
 };

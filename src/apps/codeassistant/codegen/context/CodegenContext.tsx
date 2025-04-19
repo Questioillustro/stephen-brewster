@@ -10,18 +10,21 @@ interface CodegenContextType {
   setUseTypescript: (isTypescript: boolean) => void;
   inclComments: boolean;
   setInclComments: (inclComments: boolean) => void;
+  separateStyles: boolean;
+  setSeparateStyles: (separateStyles: boolean) => void;
   uiLibrary: string;
   addUiLibrary: (library: string) => void;
   prompt: string;
   addPrompt: (prompt: string) => void;
   sendRequest: () => void;
-  codeDisplay: string;
+  codeDisplay: CodegenResponse | undefined;
   loading: boolean;
   fullPrompt: string;
 }
 
 interface CodegenResponse {
   code: string;
+  styles: string;
 }
 
 export const CodegenContext = createContext<CodegenContextType | undefined>(undefined);
@@ -35,9 +38,11 @@ export function CodegenProvider({ children }) {
 
   const [inclComments, setInclComments] = useState<boolean>(false);
 
+  const [separateStyles, setSeparateStyles] = useState<boolean>(false);
+
   const [prompt, setPrompt] = useState<string>('');
 
-  const [codeDisplay, setCodeDisplay] = useState<string>('');
+  const [codeDisplay, setCodeDisplay] = useState<CodegenResponse>();
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -58,6 +63,11 @@ export function CodegenProvider({ children }) {
     setInclComments(isComments);
   };
 
+  const toggleSeparateStyles = (isSeparate: boolean) => {
+    console.log('toggling separate styles', isSeparate);
+    setSeparateStyles(isSeparate);
+  };
+
   const addUiLibrary = (library: string) => {
     console.log('adding ui library', library);
     setUiLibrary(library);
@@ -73,27 +83,32 @@ export function CodegenProvider({ children }) {
 
     openPromptService(fullPrompt, 'grok', 0.7).then((response: OpenPromptResponse) => {
       console.log(response);
-      setCodeDisplay(JSON.parse(response).code);
+      setCodeDisplay(JSON.parse(response));
       setLoading(false);
     });
   };
 
   useEffect(() => {
     buildPrompt();
-  }, [framework, prompt, uiLibrary, useTypescript, inclComments]);
+  }, [framework, prompt, uiLibrary, useTypescript, inclComments, separateStyles]);
 
   const buildPrompt = () => {
-    const basePrompt = `Format the response json as: { code }.`;
+    const basePrompt = separateStyles
+      ? `Format the response json as: { code, styles }.`
+      : `Format the response json as: { code }.`;
     const frameworkPrompt = `Using framework: ${framework.framework}.`;
     const libraryPrompt = uiLibrary ? `Using ui library: ${uiLibrary}.` : '';
     const typescriptPrompt = useTypescript ? `Using typescript.` : '';
+    const separateStylesPrompt = separateStyles
+      ? `Separate styles into their own file.`
+      : `Use inline styles.`;
     const commentsPrompt = inclComments
       ? `Include detailed comments.`
       : `Do not include any comments.`;
     const userPrompt = prompt ? `${prompt}.` : '';
 
     const fullPrompt =
-      `${frameworkPrompt} ${typescriptPrompt} ${libraryPrompt} ${userPrompt} ${basePrompt} ${commentsPrompt}`.trim();
+      `${frameworkPrompt} ${typescriptPrompt} ${separateStylesPrompt} ${libraryPrompt} ${userPrompt} ${basePrompt} ${commentsPrompt}`.trim();
 
     setFullPrompt(fullPrompt);
   };
@@ -105,6 +120,8 @@ export function CodegenProvider({ children }) {
     setUseTypescript: toggleTypescript,
     inclComments: inclComments,
     setInclComments: toggleComments,
+    separateStyles: separateStyles,
+    setSeparateStyles: toggleSeparateStyles,
     uiLibrary: uiLibrary,
     addUiLibrary: addUiLibrary,
     prompt: prompt,
