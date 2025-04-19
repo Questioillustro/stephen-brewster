@@ -41,7 +41,7 @@ export const ColorSwatch: React.FC<ColorSelectorProps> = ({ onColorSelect, title
   };
 
   return (
-    <Box>
+    <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
       <Typography variant='h6' gutterBottom>
         {title}
       </Typography>

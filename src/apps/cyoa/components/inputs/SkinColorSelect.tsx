@@ -13,7 +13,15 @@ const MainCharacterSkinColor = (props: SkinColorSelectProps) => {
   };
 
   return (
-    <Box sx={{ p: 2 }}>
+    <Box
+      sx={{
+        p: 2,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <ColorSwatch onColorSelect={colorChanged} title={'Skin Color'} />
     </Box>
   );

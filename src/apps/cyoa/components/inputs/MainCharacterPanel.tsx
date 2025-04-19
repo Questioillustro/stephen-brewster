@@ -35,26 +35,23 @@ const MainCharacterPanel = (props: MainCharacterPanelProps) => {
 
   return (
     <Paper
-      elevation={5}
+      elevation={2}
       sx={{
-        p: 2,
-        justifyContent: 'start',
+        pt: 2,
+        justifyContent: 'center',
+        alignItems: 'center',
         display: 'flex',
         flexDirection: 'column',
       }}
     >
-      <Typography variant={'h6'} sx={{ mb: 3 }}>
-        Customize Your Character!
-      </Typography>
+      <Typography variant={'h6'}>Customize Your Character!</Typography>
 
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
-          justifyContent: 'start',
           columnGap: '2rem',
-          pl: 2,
         }}
       >
         <GenderSelect addGender={setGender} />

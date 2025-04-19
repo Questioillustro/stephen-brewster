@@ -61,7 +61,7 @@ const EnvironmentSelect: React.FC<EnvironmentSelectorProps> = ({ setEnvironment 
   const [itemsPerView, setItemsPerView] = useState(4); // Initial value
   const carouselRef = useRef<HTMLDivElement>(null);
 
-  const itemWidth = 124; // Width of each item (105px + 16px gap)
+  const itemWidth = 123; // Width of each item (105px + 16px gap)
 
   // Calculate itemsPerView based on container width
   const updateItemsPerView = () => {
@@ -99,7 +99,10 @@ const EnvironmentSelect: React.FC<EnvironmentSelectorProps> = ({ setEnvironment 
 
   return (
     <Paper elevation={2} sx={{ width: '100%', mt: 2, pb: 2 }}>
-      <Typography variant={'h6'} sx={{ p: 2 }}>
+      <Typography
+        variant={'h6'}
+        sx={{ p: 2, justifyContent: 'center', width: '100%', display: 'flex' }}
+      >
         Choose a Setting!
       </Typography>
 

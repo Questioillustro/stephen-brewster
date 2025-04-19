@@ -9,7 +9,9 @@ const artStyles = ['Anime', 'Watercolor', 'Studio Ghibli', 'Whimsical Fantasy', 
 // Styled component for the container to center the buttons
 const Container = styled.div`
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
   padding: 20px;
 `;
 
@@ -44,22 +46,32 @@ const ArtStyleSelector: React.FC<ArtStyleSelectorProps> = ({ onChange }) => {
   };
 
   return (
-    <Paper elevation={2} sx={{ display: 'flex', flexDirection: 'column', p: 2, m: 2 }}>
-      <Typography variant={'h6'} sx={{ mb: 2 }}>
-        Choose Your Art Style!
-      </Typography>
+    <Paper
+      elevation={2}
+      sx={{
+        display: 'flex',
+        width: '100%',
+        justifyContent: 'center',
+        flexDirection: 'column',
+      }}
+    >
+      <Container>
+        <Typography variant={'h6'} sx={{ mb: 2 }}>
+          Choose Your Art Style!
+        </Typography>
 
-      <StyledButtonGroup variant='outlined'>
-        {artStyles.map((style) => (
-          <Button
-            key={style}
-            onClick={() => handleButtonClick(style)}
-            className={selectedStyle === style ? 'Mui-selected' : ''}
-          >
-            {style}
-          </Button>
-        ))}
-      </StyledButtonGroup>
+        <StyledButtonGroup variant='outlined'>
+          {artStyles.map((style) => (
+            <Button
+              key={style}
+              onClick={() => handleButtonClick(style)}
+              className={selectedStyle === style ? 'Mui-selected' : ''}
+            >
+              {style}
+            </Button>
+          ))}
+        </StyledButtonGroup>
+      </Container>
     </Paper>
   );
 };

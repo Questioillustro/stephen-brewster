@@ -95,7 +95,7 @@ export const SpeciesSelect: React.FC<SpeciesSelectorProps> = ({ setSpecies }) =>
   };
 
   return (
-    <Box sx={{ p: 2 }}>
+    <Box sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <Typography variant={'h6'} sx={{ pb: 2 }}>
         Species
       </Typography>

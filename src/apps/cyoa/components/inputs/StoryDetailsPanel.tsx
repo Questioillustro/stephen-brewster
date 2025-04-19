@@ -30,13 +30,13 @@ const StoryDetailsPanel = (props: StoryDetailsPanelProps) => {
 
   return (
     <Paper
-      elevation={5}
+      elevation={2}
       sx={{
         p: 2,
         justifyContent: 'start',
         display: 'flex',
         flexDirection: 'column',
-        width: '90%',
+        width: '80%',
       }}
     >
       <Typography variant={'h6'} sx={{ mb: 3 }}>
