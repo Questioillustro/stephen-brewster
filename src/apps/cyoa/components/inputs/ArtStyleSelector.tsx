@@ -2,6 +2,7 @@
 import { Box, Button, ButtonGroup, Paper } from '@mui/material';
 import styled from '@emotion/styled';
 import Typography from '@mui/material/Typography';
+import StyledDivider from '@/components/dividers/StyledDivider';
 
 // Define the art styles as a constant array
 const artStyles = ['Anime', 'Watercolor', 'Studio Ghibli', 'Whimsical Fantasy', 'Cartoon'];
@@ -56,7 +57,9 @@ const ArtStyleSelector: React.FC<ArtStyleSelectorProps> = ({ onChange }) => {
       }}
     >
       <Container>
-        <Typography variant={'h6'} sx={{ mb: 2 }}>
+        <StyledDivider />
+
+        <Typography variant={'h6'} sx={{ pb: 2 }}>
           Choose Your Art Style!
         </Typography>
 
@@ -71,6 +74,8 @@ const ArtStyleSelector: React.FC<ArtStyleSelectorProps> = ({ onChange }) => {
             </Button>
           ))}
         </StyledButtonGroup>
+
+        <StyledDivider />
       </Container>
     </Paper>
   );

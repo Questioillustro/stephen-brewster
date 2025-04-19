@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { environmentList } from '@/apps/cyoa/components/inputs/environment/environmentList';
+import StyledDivider from '@/components/dividers/StyledDivider';
 
 interface EnvironmentSelectorProps {
   setEnvironment: (environment: string) => void;
@@ -99,9 +100,11 @@ const EnvironmentSelect: React.FC<EnvironmentSelectorProps> = ({ setEnvironment 
 
   return (
     <Paper elevation={2} sx={{ width: '100%', mt: 2, pb: 2 }}>
+      <StyledDivider />
+
       <Typography
         variant={'h6'}
-        sx={{ p: 2, justifyContent: 'center', width: '100%', display: 'flex' }}
+        sx={{ pb: 2, justifyContent: 'center', width: '100%', display: 'flex' }}
       >
         Choose a Setting!
       </Typography>
@@ -144,6 +147,8 @@ const EnvironmentSelect: React.FC<EnvironmentSelectorProps> = ({ setEnvironment 
           <ChevronRight />
         </Button>
       </Container>
+
+      <StyledDivider />
     </Paper>
   );
 };

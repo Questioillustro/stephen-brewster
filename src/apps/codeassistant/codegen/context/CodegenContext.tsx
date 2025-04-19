@@ -32,7 +32,7 @@ export const CodegenContext = createContext<CodegenContextType | undefined>(unde
 export function CodegenProvider({ children }) {
   const [framework, setFramework] = useState<IFrontEndFrameworkOption>(ReactOptions);
 
-  const [useTypescript, setUseTypescript] = useState<boolean>(false);
+  const [useTypescript, setUseTypescript] = useState<boolean>(true);
 
   const [uiLibrary, setUiLibrary] = useState<string>('');
 
@@ -96,9 +96,9 @@ export function CodegenProvider({ children }) {
     const basePrompt = separateStyles
       ? `Format the response json as: { code, styles }.`
       : `Format the response json as: { code }.`;
-    const frameworkPrompt = `Using framework: ${framework.framework}.`;
-    const libraryPrompt = uiLibrary ? `Using ui library: ${uiLibrary}.` : '';
-    const typescriptPrompt = useTypescript ? `Using typescript.` : '';
+    const frameworkPrompt = `Use framework: ${framework.framework}.`;
+    const libraryPrompt = uiLibrary ? `Use UI library: ${uiLibrary}.` : '';
+    const typescriptPrompt = useTypescript ? `Use typescript.` : '';
     const separateStylesPrompt = separateStyles
       ? `Separate styles into their own file.`
       : `Use inline styles.`;

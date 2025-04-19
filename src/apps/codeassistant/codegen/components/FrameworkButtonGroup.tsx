@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import { ButtonGroup, Button, Stack } from '@mui/material';
+import { ButtonGroup, Button, Stack, Paper } from '@mui/material';
 import { css } from '@emotion/react';
 import { styled } from '@mui/material/styles';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
@@ -41,23 +41,25 @@ const FrameworkButtonGroup: React.FC = () => {
   };
 
   return (
-    <Stack direction={'column'}>
-      <Typography variant={'body1'} sx={{ mb: 1 }}>
-        Framework
-      </Typography>
+    <Paper elevation={2} sx={{ p: 2 }}>
+      <Stack direction={'column'}>
+        <Typography variant={'body1'} sx={{ mb: 1 }}>
+          Framework
+        </Typography>
 
-      <StyledButtonGroup aria-label='framework selection'>
-        {FrontEndFrameworkOptions.map((framework) => (
-          <Button
-            key={framework.framework}
-            onClick={() => handleClick(framework)}
-            className={selected === framework.framework ? 'Mui-selected' : ''}
-          >
-            {framework.framework}
-          </Button>
-        ))}
-      </StyledButtonGroup>
-    </Stack>
+        <StyledButtonGroup aria-label='framework selection'>
+          {FrontEndFrameworkOptions.map((framework) => (
+            <Button
+              key={framework.framework}
+              onClick={() => handleClick(framework)}
+              className={selected === framework.framework ? 'Mui-selected' : ''}
+            >
+              {framework.framework}
+            </Button>
+          ))}
+        </StyledButtonGroup>
+      </Stack>
+    </Paper>
   );
 };
 

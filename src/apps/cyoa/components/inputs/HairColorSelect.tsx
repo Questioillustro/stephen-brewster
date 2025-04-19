@@ -13,7 +13,7 @@ const MainCharacterHairColor = (props: HairColorSelectProps) => {
   };
 
   return (
-    <Box sx={{ p: 2 }}>
+    <Box sx={{ p: 0 }}>
       <ColorSwatch onColorSelect={colorChanged} title={'Hair Color'} />
     </Box>
   );

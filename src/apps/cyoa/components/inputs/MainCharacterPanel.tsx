@@ -1,11 +1,12 @@
-﻿import { Box, Paper } from '@mui/material';
+﻿import { Box, Paper, Stack } from '@mui/material';
 import MainCharacterName from '@/apps/cyoa/components/inputs/MainCharacterName';
 import Typography from '@mui/material/Typography';
 import GenderSelect from '@/apps/cyoa/components/inputs/GenderSelect';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SkinColorSelect from '@/apps/cyoa/components/inputs/SkinColorSelect';
 import HairColorSelect from '@/apps/cyoa/components/inputs/HairColorSelect';
 import { SpeciesSelect } from '@/apps/cyoa/components/inputs/species/SpeciesSelect';
+import StyledDivider from '@/components/dividers/StyledDivider';
 
 export interface MainCharacterPanelProps {
   setMainCharacterPrompts: (name: string) => void;
@@ -34,16 +35,16 @@ const MainCharacterPanel = (props: MainCharacterPanelProps) => {
   }, [characterName, gender, skinColor, hairColor, specie]);
 
   return (
-    <Paper
-      elevation={2}
+    <Stack
       sx={{
-        pt: 2,
         justifyContent: 'center',
         alignItems: 'center',
         display: 'flex',
         flexDirection: 'column',
       }}
     >
+      <StyledDivider />
+
       <Typography variant={'h6'}>Customize Your Character!</Typography>
 
       <Box
@@ -58,14 +59,22 @@ const MainCharacterPanel = (props: MainCharacterPanelProps) => {
         <MainCharacterName setCharacterName={setCharacterName} />
       </Box>
 
+      <StyledDivider />
+
       <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
         <SpeciesSelect setSpecies={setSpecie} />
 
+        <StyledDivider />
+
         <SkinColorSelect setSkinColor={setSkinColor} />
 
+        <StyledDivider />
+
         <HairColorSelect setHairColor={setHairColor} />
+
+        <StyledDivider />
       </Box>
-    </Paper>
+    </Stack>
   );
 };
 

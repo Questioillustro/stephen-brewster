@@ -1,5 +1,5 @@
 ﻿import React, { useEffect, useState } from 'react';
-import { ButtonGroup, Button, Stack } from '@mui/material';
+import { ButtonGroup, Button, Stack, Paper } from '@mui/material';
 import { css } from '@emotion/react';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
@@ -51,22 +51,24 @@ const GenericButtonGroup: React.FC<GenericButtonGroupProps> = ({
   };
 
   return (
-    <Stack direction='column'>
-      <Typography variant='body1' sx={{ mb: 1 }}>
-        {label}
-      </Typography>
-      <StyledButtonGroup aria-label='selection'>
-        {labels.map((value) => (
-          <Button
-            key={value}
-            onClick={() => handleClick(value)}
-            className={selected === value ? 'Mui-selected' : ''}
-          >
-            {value}
-          </Button>
-        ))}
-      </StyledButtonGroup>
-    </Stack>
+    <Paper elevation={2} sx={{ p: 2 }}>
+      <Stack direction='column'>
+        <Typography variant='body1' sx={{ mb: 1 }}>
+          {label}
+        </Typography>
+        <StyledButtonGroup aria-label='selection'>
+          {labels.map((value) => (
+            <Button
+              key={value}
+              onClick={() => handleClick(value)}
+              className={selected === value ? 'Mui-selected' : ''}
+            >
+              {value}
+            </Button>
+          ))}
+        </StyledButtonGroup>
+      </Stack>
+    </Paper>
   );
 };
 

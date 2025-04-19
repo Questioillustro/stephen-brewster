@@ -1,9 +1,10 @@
-﻿import { Box, Paper } from '@mui/material';
+﻿import { Box, Paper, Stack } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react';
 import ThemeSelect from '@/apps/cyoa/components/inputs/ThemeSelect';
 import GenreSelect from '@/apps/cyoa/components/inputs/GenreSelect';
 import ChildrensPlotSelect from '@/apps/cyoa/components/inputs/plot/ChildrensPlotSelect';
+import StyledDivider from '@/components/dividers/StyledDivider';
 
 export interface StoryDetailsPanelProps {
   setStoryDetailsPrompts: (prompts: string[]) => void;
@@ -29,16 +30,17 @@ const StoryDetailsPanel = (props: StoryDetailsPanelProps) => {
   }, [themes, adventureType, genre, plot]);
 
   return (
-    <Paper
-      elevation={2}
+    <Stack
       sx={{
         p: 2,
-        justifyContent: 'start',
+        alignItems: 'center',
         display: 'flex',
         flexDirection: 'column',
         width: '80%',
       }}
     >
+      <StyledDivider />
+
       <Typography variant={'h6'} sx={{ mb: 3 }}>
         Customize Your Story!
       </Typography>
@@ -50,7 +52,7 @@ const StoryDetailsPanel = (props: StoryDetailsPanelProps) => {
 
         <ChildrensPlotSelect addPlot={setPlot} />
       </Box>
-    </Paper>
+    </Stack>
   );
 };
 

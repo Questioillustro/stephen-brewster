@@ -1,5 +1,5 @@
 ﻿import FrameworkButtonGroup from '@/apps/codeassistant/codegen/components/FrameworkButtonGroup';
-import { Stack } from '@mui/material';
+import { Paper, Stack } from '@mui/material';
 import TypescriptCheckbox from '@/apps/codeassistant/codegen/components/TypescriptCheckbox';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
 import GenericButtonGroup from '@/apps/codeassistant/codegen/components/GenericButtonGroup';
@@ -25,26 +25,34 @@ const FrontEndComponent = () => {
             onSelect={context.addUiLibrary}
           />
 
-          <Stack direction={'row'} sx={{ width: '100%' }}>
-            <CommentsCheckbox />
+          <Paper elevation={2} sx={{ p: 2 }}>
+            <Stack direction={'row'} sx={{ width: '100%' }}>
+              <CommentsCheckbox />
 
-            <SeparateStylesFile />
+              <SeparateStylesFile />
 
-            {context.framework.tsOption && <TypescriptCheckbox />}
-          </Stack>
+              {context.framework.tsOption && <TypescriptCheckbox />}
+            </Stack>
+          </Paper>
 
-          <Stack direction={'row'} sx={{ display: 'flex', width: '80%', gap: 2 }}>
-            <PromptField />
-            <SendPromptButton />
-          </Stack>
+          <Paper elevation={2} sx={{ p: 2 }}>
+            <Stack direction={'row'} sx={{ display: 'flex', width: '100%', gap: 2 }}>
+              <PromptField />
+              <SendPromptButton />
+            </Stack>
+          </Paper>
         </Stack>
 
-        <Stack sx={{ width: '40%' }}>
-          <PromptDisplay />
-        </Stack>
+        <Paper elevation={2} sx={{ p: 2, width: '45%' }}>
+          <Stack>
+            <PromptDisplay />
+          </Stack>
+        </Paper>
       </Stack>
 
-      <Stack>{context.codeDisplay && !context.loading && <CodeTabs />}</Stack>
+      <Paper elevation={2} sx={{ p: 0 }}>
+        <Stack>{context.codeDisplay && !context.loading && <CodeTabs />}</Stack>
+      </Paper>
     </Stack>
   );
 };

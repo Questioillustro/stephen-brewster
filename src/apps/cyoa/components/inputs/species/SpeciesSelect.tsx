@@ -1,6 +1,6 @@
 ﻿import React, { useState, useRef } from 'react';
 import styled from '@emotion/styled';
-import { Box, IconButton, Paper } from '@mui/material';
+import { Box, IconButton, Paper, Stack } from '@mui/material';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import Typography from '@mui/material/Typography';
 import { speciesList } from '@/apps/cyoa/components/inputs/species/speciesList';
@@ -69,8 +69,8 @@ export const SpeciesSelect: React.FC<SpeciesSelectorProps> = ({ setSpecies }) =>
   };
 
   return (
-    <Box sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Typography variant={'h6'} sx={{ pb: 2 }}>
+    <Stack sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Typography variant={'h6'} sx={{ pb: 1 }}>
         Species
       </Typography>
 
@@ -101,6 +101,6 @@ export const SpeciesSelect: React.FC<SpeciesSelectorProps> = ({ setSpecies }) =>
           <ChevronRight />
         </IconButton>
       </Container>
-    </Box>
+    </Stack>
   );
 };

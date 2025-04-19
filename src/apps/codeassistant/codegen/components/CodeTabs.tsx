@@ -16,6 +16,7 @@ const CodeTabs: React.FC = () => {
     <Box>
       <Tabs value={value} onChange={handleChange}>
         <Tab label='Code' />
+
         {context.codeDisplay?.styles && <Tab label='Styles' />}
       </Tabs>
 
