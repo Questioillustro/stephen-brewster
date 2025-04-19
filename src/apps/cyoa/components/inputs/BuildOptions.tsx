@@ -2,7 +2,7 @@
 import { Box, Button, Paper } from '@mui/material';
 import MainCharacterPanel from '@/apps/cyoa/components/inputs/MainCharacterPanel';
 import StoryDetailsPanel from '@/apps/cyoa/components/inputs/StoryDetailsPanel';
-import EnvironmentSelect from '@/apps/cyoa/components/inputs/EnvironmentSelect';
+import EnvironmentSelect from '@/apps/cyoa/components/inputs/environment/EnvironmentSelect';
 import ArtStyleSelector from '@/apps/cyoa/components/inputs/ArtStyleSelector';
 
 export interface IBuildOptionsProps {

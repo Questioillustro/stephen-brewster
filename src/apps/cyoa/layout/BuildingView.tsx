@@ -1,10 +1,11 @@
 ﻿import React, { useContext, useState } from 'react';
-import { Paper } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import BuildOptions from '@/apps/cyoa/components/inputs/BuildOptions';
 import { MainViewContext } from '@/apps/cyoa/context/MainViewContext';
 import { BuildAVenture, IAdventureWrapper } from '@/apps/cyoa/api/AdventureService';
 import { useStoryContext } from '@/apps/cyoa/context/StoryContext';
 import LoadingSkeleton from '@/components/loading/LoadingSkeleton';
+import { AboutBuildAVenture } from '@/apps/cyoa/layout/AboutBuildAVenture';
 
 const BuildingView: React.FC = () => {
   const { state, dispatch } = useContext(MainViewContext);
@@ -42,7 +43,9 @@ const BuildingView: React.FC = () => {
   } else {
     return (
       <Paper square sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-        {/*<BackButton onclick={goBack} />*/}
+        <Box sx={{ display: 'flex', width: '100%', alignItems: 'center' }}>
+          <AboutBuildAVenture />
+        </Box>
 
         <Paper square sx={{ display: 'flex', width: '100%' }}>
           <BuildOptions setPrompts={setPrompts} />

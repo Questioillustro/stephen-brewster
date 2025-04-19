@@ -1,9 +1,10 @@
-﻿import { Paper } from '@mui/material';
+﻿import { Box, Paper } from '@mui/material';
 import React, { useContext } from 'react';
 import { MainViewContext } from '@/apps/cyoa/context/MainViewContext';
 import VentureButtons from '@/apps/cyoa/components/inputs/VentureButtons';
 import BuildingView from '@/apps/cyoa/layout/BuildingView';
 import StoryPresenter from '@/apps/cyoa/components/storypresentation/StoryPresenter';
+import { AboutBuildAVenture } from '@/apps/cyoa/layout/AboutBuildAVenture';
 
 const Landing = () => {
   const { state } = useContext(MainViewContext);

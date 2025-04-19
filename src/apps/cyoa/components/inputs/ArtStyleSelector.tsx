@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import { Box, Button, ButtonGroup } from '@mui/material';
+import { Box, Button, ButtonGroup, Paper } from '@mui/material';
 import styled from '@emotion/styled';
 import Typography from '@mui/material/Typography';
 
@@ -44,7 +44,7 @@ const ArtStyleSelector: React.FC<ArtStyleSelectorProps> = ({ onChange }) => {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', p: 2 }}>
+    <Paper elevation={2} sx={{ display: 'flex', flexDirection: 'column', p: 2, m: 2 }}>
       <Typography variant={'h6'} sx={{ mb: 2 }}>
         Choose Your Art Style!
       </Typography>
@@ -60,7 +60,7 @@ const ArtStyleSelector: React.FC<ArtStyleSelectorProps> = ({ onChange }) => {
           </Button>
         ))}
       </StyledButtonGroup>
-    </Box>
+    </Paper>
   );
 };
 
