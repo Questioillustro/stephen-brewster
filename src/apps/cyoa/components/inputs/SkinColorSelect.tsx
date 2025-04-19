@@ -1,4 +1,4 @@
-﻿import { ColorSwatch } from '@/apps/cyoa/components/activestory/inputs/ColorSwatch';
+﻿import { ColorSwatch } from '@/apps/cyoa/components/inputs/ColorSwatch';
 import { Box } from '@mui/material';
 
 export interface SkinColorSelectProps {

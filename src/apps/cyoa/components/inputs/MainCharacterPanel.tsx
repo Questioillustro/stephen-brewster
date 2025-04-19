@@ -1,11 +1,11 @@
 ﻿import { Box, Paper } from '@mui/material';
-import MainCharacterName from '@/apps/cyoa/components/activestory/inputs/MainCharacterName';
+import MainCharacterName from '@/apps/cyoa/components/inputs/MainCharacterName';
 import Typography from '@mui/material/Typography';
-import GenderSelect from '@/apps/cyoa/components/activestory/inputs/GenderSelect';
+import GenderSelect from '@/apps/cyoa/components/inputs/GenderSelect';
 import { useEffect, useState } from 'react';
-import SkinColorSelect from '@/apps/cyoa/components/activestory/inputs/SkinColorSelect';
-import HairColorSelect from '@/apps/cyoa/components/activestory/inputs/HairColorSelect';
-import { SpeciesSelect } from '@/apps/cyoa/components/activestory/inputs/SpeciesSelect';
+import SkinColorSelect from '@/apps/cyoa/components/inputs/SkinColorSelect';
+import HairColorSelect from '@/apps/cyoa/components/inputs/HairColorSelect';
+import { SpeciesSelect } from '@/apps/cyoa/components/inputs/SpeciesSelect';
 
 export interface MainCharacterPanelProps {
   setMainCharacterPrompts: (name: string) => void;

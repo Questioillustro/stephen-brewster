@@ -5,6 +5,7 @@ import { Paper } from '@mui/material';
 import BuildAVentureApp from '@/apps/cyoa/BuildAVentureApp';
 import FinanceNewsPanel from '@/apps/finance/FinanceNewsPanel';
 import ReactConcepts from '@/apps/react/ReactConcepts';
+import CodeAssistant from '@/apps/codeassistant/CodeAssistant';
 
 export const AppsPage: React.FC = () => {
   const tabs: TabData[] = [
@@ -12,9 +13,13 @@ export const AppsPage: React.FC = () => {
       label: 'Build-A-Venture',
       content: <BuildAVentureApp />,
     },
+    // {
+    //   label: 'Finance News',
+    //   content: <FinanceNewsPanel />,
+    // },
     {
-      label: 'Finance News',
-      content: <FinanceNewsPanel />,
+      label: 'Code Assistant',
+      content: <CodeAssistant />,
     },
     // {
     //   label: 'React Concepts',

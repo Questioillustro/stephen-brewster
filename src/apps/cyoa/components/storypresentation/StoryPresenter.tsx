@@ -1,10 +1,10 @@
 ﻿import { Fade, Paper, Typography } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
-import { AnimationConstants } from '../../../constants/AnimationConstants';
-import { getImagesForPrompt } from '../../../api/ImageService';
+import { AnimationConstants } from '../../constants/AnimationConstants';
+import { getImagesForPrompt } from '../../api/ImageService';
 import CurrentStepTile from './CurrentStepTile';
-import BackButton from '@/apps/cyoa/components/activestory/inputs/BackButton';
-import RevisitControls from '@/apps/cyoa/components/activestory/storypresentation/RevisitControls';
+import BackButton from '@/apps/cyoa/components/inputs/BackButton';
+import RevisitControls from '@/apps/cyoa/components/storypresentation/RevisitControls';
 import { useStoryContext } from '@/apps/cyoa/context/StoryContext';
 import { MainViewContext } from '@/apps/cyoa/context/MainViewContext';
 import { getExistingAdventuresForStory, IAdventureWrapper } from '@/apps/cyoa/api/AdventureService';

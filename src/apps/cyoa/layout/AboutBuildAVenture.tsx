@@ -1,7 +1,6 @@
-﻿import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import InfoModal from '@/apps/cyoa/components/modal/InfoModal';
-import { BuildAventureDescription } from '@/apps/cyoa/components/modal/BuildAventureDescription';
+﻿import Typography from '@mui/material/Typography';
+import InfoModal from '@/apps/modal/InfoModal';
+import { BuildAventureDescription } from '@/apps/modal/BuildAventureDescription';
 import React, { useState } from 'react';
 import { Box, IconButton } from '@mui/material';
 import HelpIcon from '@mui/icons-material/Help';

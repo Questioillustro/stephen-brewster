@@ -1,6 +1,6 @@
 ﻿import React, { useContext, useState } from 'react';
 import { Paper } from '@mui/material';
-import BuildOptions from '@/apps/cyoa/components/activestory/inputs/BuildOptions';
+import BuildOptions from '@/apps/cyoa/components/inputs/BuildOptions';
 import { MainViewContext } from '@/apps/cyoa/context/MainViewContext';
 import { BuildAVenture, IAdventureWrapper } from '@/apps/cyoa/api/AdventureService';
 import { useStoryContext } from '@/apps/cyoa/context/StoryContext';
@@ -20,7 +20,7 @@ const BuildingView: React.FC = () => {
   const build = async (prompts: string, characterPrompts: string, artStyle: string) => {
     setIsLoading(true);
 
-    BuildAVenture(prompts, characterPrompts, artStyle, 'grok', 0.8).then(
+    BuildAVenture(prompts, characterPrompts, artStyle, 'grok', 0.9).then(
       (adventure: IAdventureWrapper) => {
         setAdventure(adventure);
         dispatch('VIEW_NEW');

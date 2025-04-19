@@ -1,7 +1,7 @@
 ﻿import { Fade, Paper, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { IAdventurePage } from '../../../api/AdventureService';
-import { AnimationConstants } from '../../../constants/AnimationConstants';
+import { IAdventurePage } from '../../api/AdventureService';
+import { AnimationConstants } from '../../constants/AnimationConstants';
 import StoryPagination from './StoryPagination';
 import ImageTile from './ImageTile';
 

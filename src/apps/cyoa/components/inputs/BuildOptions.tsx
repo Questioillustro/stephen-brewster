@@ -1,9 +1,9 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { Box, Button, Paper } from '@mui/material';
-import MainCharacterPanel from '@/apps/cyoa/components/activestory/inputs/MainCharacterPanel';
-import StoryDetailsPanel from '@/apps/cyoa/components/activestory/inputs/StoryDetailsPanel';
-import EnvironmentSelect from '@/apps/cyoa/components/activestory/inputs/EnvironmentSelect';
-import ArtStyleSelector from '@/apps/cyoa/components/activestory/inputs/ArtStyleSelector';
+import MainCharacterPanel from '@/apps/cyoa/components/inputs/MainCharacterPanel';
+import StoryDetailsPanel from '@/apps/cyoa/components/inputs/StoryDetailsPanel';
+import EnvironmentSelect from '@/apps/cyoa/components/inputs/EnvironmentSelect';
+import ArtStyleSelector from '@/apps/cyoa/components/inputs/ArtStyleSelector';
 
 export interface IBuildOptionsProps {
   setPrompts: (prompts: string, characterPrompts: string, artStyle: string) => void;

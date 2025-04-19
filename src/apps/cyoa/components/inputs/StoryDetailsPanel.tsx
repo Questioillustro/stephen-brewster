@@ -1,9 +1,9 @@
 ﻿import { Box, Paper } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react';
-import ThemeSelect from '@/apps/cyoa/components/activestory/inputs/ThemeSelect';
-import GenreSelect from '@/apps/cyoa/components/activestory/inputs/GenreSelect';
-import ChildrensPlotSelect from '@/apps/cyoa/components/activestory/inputs/ChildrensPlotSelect';
+import ThemeSelect from '@/apps/cyoa/components/inputs/ThemeSelect';
+import GenreSelect from '@/apps/cyoa/components/inputs/GenreSelect';
+import ChildrensPlotSelect from '@/apps/cyoa/components/inputs/ChildrensPlotSelect';
 
 export interface StoryDetailsPanelProps {
   setStoryDetailsPrompts: (prompts: string[]) => void;
