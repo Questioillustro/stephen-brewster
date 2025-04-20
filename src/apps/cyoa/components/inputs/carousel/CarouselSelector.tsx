@@ -1,0 +1,168 @@
+﻿import React, { useState, useRef, useEffect, useCallback } from 'react';
+import styled from '@emotion/styled';
+import { Box, Button, Stack, Typography } from '@mui/material';
+import { ChevronLeft, ChevronRight } from '@mui/icons-material';
+import StyledDivider from '@/components/dividers/StyledDivider';
+
+export interface CarouselItem {
+  id: string;
+  name: string;
+  [key: string]: any; // Allow additional properties (e.g., hex, imageUrl, prompt)
+}
+
+interface CarouselSelectorProps {
+  items: CarouselItem[]; // Array of items to display
+  title: string; // Title for the carousel
+  itemWidth: number; // Width of each item (including gap)
+  defaultSelectedId?: string; // Optional default selected item ID
+  onSelect: (item: CarouselItem) => void; // Callback when an item is selected
+  renderItem: (item: CarouselItem, selected: boolean, onClick: () => void) => JSX.Element; // Custom render function for items
+  useDividers?: boolean; // Optional: Show dividers above and below
+}
+
+const Container = styled(Box)`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  height: 105px;
+  width: 100%;
+  max-width: 100%;
+`;
+
+const CarouselWrapper = styled(Box)`
+  overflow: hidden;
+  flex: 1;
+  max-width: 100%;
+`;
+
+const CarouselTrack = styled(Box)`
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+  gap: 16px;
+`;
+
+const debounce = (func: (...args: any[]) => void, wait: number) => {
+  let timeout: NodeJS.Timeout;
+  return (...args: any[]) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), wait);
+  };
+};
+
+const CarouselSelector: React.FC<CarouselSelectorProps> = ({
+  items,
+  title,
+  itemWidth,
+  defaultSelectedId,
+  onSelect,
+  renderItem,
+  useDividers = false,
+}) => {
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(
+    defaultSelectedId || items[0]?.id || null,
+  );
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [itemsPerView, setItemsPerView] = useState(4); // Initial value
+
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const maxScroll = (items.length - itemsPerView) * itemWidth;
+
+  // Update itemsPerView with debouncing
+  const updateItemsPerView = useCallback(
+    debounce(() => {
+      if (carouselRef.current) {
+        const containerWidth = carouselRef.current.offsetWidth;
+        const calculatedItems = Math.floor(containerWidth / itemWidth);
+        const newItemsPerView = Math.max(1, calculatedItems);
+        if (newItemsPerView !== itemsPerView) {
+          setItemsPerView(newItemsPerView);
+        }
+      }
+    }, 100),
+    [itemsPerView, itemWidth],
+  );
+
+  // Set up ResizeObserver
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver(() => updateItemsPerView());
+    if (carouselRef.current) {
+      resizeObserver.observe(carouselRef.current);
+    }
+
+    // Initial calculation
+    updateItemsPerView();
+
+    // Clean up
+    return () => {
+      if (carouselRef.current) {
+        resizeObserver.unobserve(carouselRef.current);
+      }
+      resizeObserver.disconnect();
+    };
+  }, [updateItemsPerView]);
+
+  const handleItemClick = (item: CarouselItem) => {
+    setSelectedItemId(item.id);
+    onSelect(item);
+  };
+
+  const scrollLeft = () => {
+    const newPosition = Math.max(scrollPosition - itemWidth * itemsPerView, 0);
+    setScrollPosition(newPosition);
+  };
+
+  const scrollRight = () => {
+    const newPosition = Math.min(scrollPosition + itemWidth * itemsPerView, maxScroll);
+    setScrollPosition(newPosition);
+  };
+
+  return (
+    <Stack sx={{ width: '100%', mt: useDividers ? 2 : 0, pb: useDividers ? 2 : 0 }}>
+      {useDividers && <StyledDivider />}
+      <Typography
+        variant='h6'
+        sx={{ pb: 2, justifyContent: 'center', width: '100%', display: 'flex' }}
+      >
+        {title}
+      </Typography>
+
+      <Container>
+        <Button
+          onClick={scrollLeft}
+          variant='contained'
+          disabled={scrollPosition === 0}
+          sx={{ display: 'flex', height: '100%', m: 1 }}
+        >
+          <ChevronLeft />
+        </Button>
+
+        <CarouselWrapper ref={carouselRef}>
+          <CarouselTrack
+            sx={{
+              transform: `translateX(-${scrollPosition}px)`,
+            }}
+          >
+            {items.map((item) => (
+              <Box key={item.id}>
+                {renderItem(item, selectedItemId === item.id, () => handleItemClick(item))}
+              </Box>
+            ))}
+          </CarouselTrack>
+        </CarouselWrapper>
+
+        <Button
+          onClick={scrollRight}
+          variant='contained'
+          disabled={scrollPosition >= maxScroll}
+          sx={{ display: 'flex', height: '100%', m: 1 }}
+        >
+          <ChevronRight />
+        </Button>
+      </Container>
+
+      {useDividers && <StyledDivider />}
+    </Stack>
+  );
+};
+
+export default CarouselSelector;

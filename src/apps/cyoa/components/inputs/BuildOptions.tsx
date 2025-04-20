@@ -2,10 +2,9 @@
 import { Button, Paper, Stack } from '@mui/material';
 import MainCharacterPanel from '@/apps/cyoa/components/inputs/MainCharacterPanel';
 import StoryDetailsPanel from '@/apps/cyoa/components/inputs/StoryDetailsPanel';
-import EnvironmentSelect from '@/apps/cyoa/components/inputs/environment/EnvironmentSelect';
-import ArtStyleSelector from '@/apps/cyoa/components/inputs/ArtStyleSelector';
 import StyledDivider from '@/components/dividers/StyledDivider';
 import ArtStyleCarousel from '@/apps/cyoa/components/inputs/artstyle/ArtStyleCarousel';
+import EnvironmentCarousel from '@/apps/cyoa/components/inputs/environment/EnvironmentCarousel';
 
 export interface IBuildOptionsProps {
   setPrompts: (prompts: string, characterPrompts: string, artStyle: string) => void;
@@ -55,7 +54,7 @@ const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) =
           width: '100%',
         }}
       >
-        <EnvironmentSelect setEnvironment={setEnvironment} />
+        <EnvironmentCarousel setEnvironment={setEnvironment} />
       </Paper>
 
       <Paper

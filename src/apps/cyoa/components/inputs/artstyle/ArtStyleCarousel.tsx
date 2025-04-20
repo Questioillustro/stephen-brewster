@@ -1,36 +1,15 @@
-﻿import React, { useState, useRef, useEffect } from 'react';
+﻿import React from 'react';
+import { Box, Stack } from '@mui/material';
 import styled from '@emotion/styled';
-import { Box, Button, Stack, Typography } from '@mui/material';
-import { ChevronLeft, ChevronRight } from '@mui/icons-material';
-import StyledDivider from '@/components/dividers/StyledDivider';
+import CarouselSelector from '@/apps/cyoa/components/inputs/carousel/CarouselSelector';
 
-// Define the art styles as a constant array
-const artStyles = ['Anime', 'Watercolor', 'Studio Ghibli', 'Whimsical Fantasy', 'Cartoon'];
-
-interface ArtStyleSelectorProps {
-  onChange: (selectedStyle: string) => void;
-}
-
-const Container = styled(Box)`
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  height: 105px;
-  width: 100%;
-  max-width: 100%;
-`;
-
-const CarouselWrapper = styled(Box)`
-  overflow: hidden;
-  flex: 1;
-  max-width: 100%;
-`;
-
-const CarouselTrack = styled(Box)`
-  display: flex;
-  transition: transform 0.3s ease-in-out;
-  gap: 16px;
-`;
+const artStyles = [
+  { id: '1', name: 'Anime' },
+  { id: '2', name: 'Watercolor' },
+  { id: '3', name: 'Studio Ghibli' },
+  { id: '4', name: 'Whimsical Fantasy' },
+  { id: '5', name: 'Cartoon' },
+];
 
 const StyleSquare = styled(Box)<{ selected: boolean }>`
   width: 80px;
@@ -53,95 +32,21 @@ const StyleSquare = styled(Box)<{ selected: boolean }>`
   }
 `;
 
-const ArtStyleCarousel: React.FC<ArtStyleSelectorProps> = ({ onChange }) => {
-  const [selectedStyle, setSelectedStyle] = useState<string | null>(null);
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [itemsPerView, setItemsPerView] = useState(4); // Initial value
-
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const itemWidth = 96; // 80px (width) + 16px (gap)
-  const maxScroll = (artStyles.length - itemsPerView) * itemWidth;
-
-  // Calculate itemsPerView based on container width
-  const updateItemsPerView = () => {
-    if (carouselRef.current) {
-      const containerWidth = carouselRef.current.offsetWidth;
-      const calculatedItems = Math.floor(containerWidth / itemWidth);
-      setItemsPerView(Math.max(1, calculatedItems)); // Ensure at least 1 item
-    }
-  };
-
-  // Update itemsPerView on mount and window resize
-  useEffect(() => {
-    updateItemsPerView();
-    window.addEventListener('resize', updateItemsPerView);
-    return () => window.removeEventListener('resize', updateItemsPerView);
-  }, []);
-
-  const handleStyleClick = (style: string) => {
-    setSelectedStyle(style);
-    onChange(style);
-  };
-
-  const scrollLeft = () => {
-    const newPosition = Math.max(scrollPosition - itemWidth * itemsPerView, 0);
-    setScrollPosition(newPosition);
-  };
-
-  const scrollRight = () => {
-    const newPosition = Math.min(scrollPosition + itemWidth * itemsPerView, maxScroll);
-    setScrollPosition(newPosition);
-  };
-
+const ArtStyleSelector: React.FC<{ onChange: (style: string) => void }> = ({ onChange }) => {
   return (
-    <Stack sx={{ maxWidth: '100%', justifyContent: 'center', flexDirection: 'column' }}>
-      <StyledDivider />
-
-      <Typography variant='h6' sx={{ justifyContent: 'center', width: '100%', display: 'flex' }}>
-        Choose Your Art Style!
-      </Typography>
-
-      <Container>
-        <Button
-          onClick={scrollLeft}
-          variant='contained'
-          disabled={scrollPosition === 0}
-          sx={{ display: 'flex', height: '100%', m: 1 }}
-        >
-          <ChevronLeft />
-        </Button>
-
-        <CarouselWrapper ref={carouselRef}>
-          <CarouselTrack
-            sx={{
-              transform: `translateX(-${scrollPosition}px)`,
-            }}
-          >
-            {artStyles.map((style) => (
-              <StyleSquare
-                key={style}
-                selected={selectedStyle === style}
-                onClick={() => handleStyleClick(style)}
-              >
-                {style}
-              </StyleSquare>
-            ))}
-          </CarouselTrack>
-        </CarouselWrapper>
-
-        <Button
-          onClick={scrollRight}
-          variant='contained'
-          disabled={scrollPosition >= maxScroll}
-          sx={{ display: 'flex', height: '100%', m: 1 }}
-        >
-          <ChevronRight />
-        </Button>
-      </Container>
-
-      <StyledDivider />
-    </Stack>
+    <CarouselSelector
+      items={artStyles}
+      title='Choose Your Art Style!'
+      itemWidth={96} // 80px width + 16px gap
+      onSelect={(item) => onChange(item.name)}
+      useDividers
+      renderItem={(item, selected, onClick) => (
+        <StyleSquare selected={selected} onClick={onClick}>
+          {item.name}
+        </StyleSquare>
+      )}
+    />
   );
 };
 
-export default ArtStyleCarousel;
+export default ArtStyleSelector;

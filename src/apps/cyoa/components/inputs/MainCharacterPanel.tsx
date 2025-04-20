@@ -3,10 +3,10 @@ import MainCharacterName from '@/apps/cyoa/components/inputs/MainCharacterName';
 import Typography from '@mui/material/Typography';
 import GenderSelect from '@/apps/cyoa/components/inputs/GenderSelect';
 import React, { useEffect, useState } from 'react';
-import SkinColorSelect from '@/apps/cyoa/components/inputs/SkinColorSelect';
-import HairColorSelect from '@/apps/cyoa/components/inputs/HairColorSelect';
 import { SpeciesCarousel } from '@/apps/cyoa/components/inputs/species/SpeciesCarousel';
 import StyledDivider from '@/components/dividers/StyledDivider';
+import SkinColorSelect from '@/apps/cyoa/components/inputs/color/SkinColorSelect';
+import HairColorSelect from '@/apps/cyoa/components/inputs/color/HairColorSelect';
 
 export interface MainCharacterPanelProps {
   setMainCharacterPrompts: (name: string) => void;

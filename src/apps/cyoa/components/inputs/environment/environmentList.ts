@@ -1,4 +1,25 @@
-﻿export const environmentList = [
+﻿import { CarouselItem } from '@/apps/cyoa/components/inputs/carousel/CarouselSelector';
+
+export interface IEnvironmentItem {
+  _id: string;
+  name: string;
+  imageUrl: string;
+  prompt: string;
+}
+
+// Method to convert an environment list item to a CarouselItem
+export const convertEnvironmentToCarouselItem = (
+  environment: (typeof environmentList)[0],
+): CarouselItem => {
+  return {
+    id: environment._id,
+    name: environment.name,
+    imageUrl: environment.imageUrl,
+    prompt: environment.prompt,
+  };
+};
+
+export const environmentList = [
   {
     _id: '1',
     name: 'Forest',
@@ -120,3 +141,8 @@
     prompt: 'a hidden pirate cove with docked ships and buried treasure',
   },
 ];
+
+// Example usage: Convert the entire environmentList
+export const envCarouselItems: CarouselItem[] = environmentList.map(
+  convertEnvironmentToCarouselItem,
+);

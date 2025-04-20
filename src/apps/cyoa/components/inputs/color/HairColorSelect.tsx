@@ -1,5 +1,5 @@
 ﻿import { Box } from '@mui/material';
-import { ColorSwatchCarousel } from '@/apps/cyoa/components/inputs/color/ColorSwatchCarousel';
+import ColorSwatchCarousel from '@/apps/cyoa/components/inputs/color/ColorSwatchCarousel';
 
 export interface HairColorSelectProps {
   setHairColor: (hex: string) => void;

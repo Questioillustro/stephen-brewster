@@ -1,57 +1,8 @@
-﻿import React, { useState, useRef, useEffect } from 'react';
+﻿import React from 'react';
+import { Box } from '@mui/material';
 import styled from '@emotion/styled';
-import { Box, Button, Stack, Typography } from '@mui/material';
-import { ChevronLeft, ChevronRight } from '@mui/icons-material';
-
-interface ColorOption {
-  name: string;
-  hex: string;
-}
-
-const colorOptions: ColorOption[] = [
-  { name: 'Ruby Red', hex: '#E0115F' },
-  { name: 'Coral', hex: '#FF7F50' },
-  { name: 'Tangerine', hex: '#FF8C00' },
-  { name: 'Sunflower', hex: '#FFC107' },
-  { name: 'Golden Tan', hex: '#D4A373' },
-  { name: 'Mint', hex: '#98FF98' },
-  { name: 'Emerald Green', hex: '#50C878' },
-  { name: 'Turquoise', hex: '#40E0D0' },
-  { name: 'Sky Blue', hex: '#87CEEB' },
-  { name: 'Lavender', hex: '#E6E6FA' },
-  { name: 'Amethyst', hex: '#9966CC' },
-  { name: 'Violet', hex: '#EE82EE' },
-  { name: 'Magenta', hex: '#FF00FF' },
-  { name: 'Pale Rose', hex: '#F8D8D8' },
-  { name: 'Rich Cocoa', hex: '#5C4033' },
-  { name: 'Ebony', hex: '#3A2E28' },
-];
-
-interface ColorSelectorProps {
-  onColorSelect?: (color: string) => void;
-  title?: string;
-}
-
-const Container = styled(Box)`
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  height: 105px;
-  width: 100%;
-  max-width: 100%;
-`;
-
-const CarouselWrapper = styled(Box)`
-  overflow: hidden;
-  flex: 1;
-  max-width: 100%;
-`;
-
-const CarouselTrack = styled(Box)`
-  display: flex;
-  transition: transform 0.3s ease-in-out;
-  gap: 16px;
-`;
+import CarouselSelector from '@/apps/cyoa/components/inputs/carousel/CarouselSelector';
+import { colorCarouselItems } from '@/apps/cyoa/components/inputs/color/ColorSwatchList';
 
 const ColorSquare = styled(Box)<{ selected: boolean; hex: string }>`
   width: 60px;
@@ -70,91 +21,21 @@ const ColorSquare = styled(Box)<{ selected: boolean; hex: string }>`
   }
 `;
 
-export const ColorSwatchCarousel: React.FC<ColorSelectorProps> = ({ onColorSelect, title }) => {
-  const [selectedColor, setSelectedColor] = useState<ColorOption>(colorOptions[0]);
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [itemsPerView, setItemsPerView] = useState(4); // Initial value
-
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const itemWidth = 80; // 80px (width) + 16px (gap)
-  const maxScroll = (colorOptions.length - itemsPerView) * itemWidth;
-
-  // Calculate itemsPerView based on container width
-  const updateItemsPerView = () => {
-    if (carouselRef.current) {
-      const containerWidth = carouselRef.current.offsetWidth;
-      const calculatedItems = Math.floor(containerWidth / itemWidth);
-      setItemsPerView(Math.max(1, calculatedItems)); // Ensure at least 1 item
-    }
-  };
-
-  // Update itemsPerView on mount and window resize
-  useEffect(() => {
-    updateItemsPerView();
-    window.addEventListener('resize', updateItemsPerView);
-    return () => window.removeEventListener('resize', updateItemsPerView);
-  }, []);
-
-  const handleColorClick = (color: ColorOption) => {
-    setSelectedColor(color);
-    if (onColorSelect) {
-      onColorSelect(color.name);
-    }
-  };
-
-  const scrollLeft = () => {
-    const newPosition = Math.max(scrollPosition - itemWidth * itemsPerView, 0);
-    setScrollPosition(newPosition);
-  };
-
-  const scrollRight = () => {
-    const newPosition = Math.min(scrollPosition + itemWidth * itemsPerView, maxScroll);
-    setScrollPosition(newPosition);
-  };
-
+const ColorSwatchCarousel: React.FC<{
+  onColorSelect?: (color: string) => void;
+  title?: string;
+}> = ({ onColorSelect, title }) => {
   return (
-    <Stack sx={{ width: '100%' }}>
-      <Typography variant='h6' sx={{ justifyContent: 'center', width: '100%', display: 'flex' }}>
-        {title || 'Color Swatch'}
-      </Typography>
-
-      <Container>
-        <Button
-          onClick={scrollLeft}
-          variant='contained'
-          disabled={scrollPosition === 0}
-          sx={{ display: 'flex', height: '100%', m: 1 }}
-        >
-          <ChevronLeft />
-        </Button>
-
-        <CarouselWrapper ref={carouselRef}>
-          <CarouselTrack
-            sx={{
-              transform: `translateX(-${scrollPosition}px)`,
-            }}
-          >
-            {colorOptions.map((color) => (
-              <ColorSquare
-                key={color.hex}
-                selected={selectedColor.hex === color.hex}
-                hex={color.hex}
-                onClick={() => handleColorClick(color)}
-                title={color.name}
-              />
-            ))}
-          </CarouselTrack>
-        </CarouselWrapper>
-
-        <Button
-          onClick={scrollRight}
-          variant='contained'
-          disabled={scrollPosition >= maxScroll}
-          sx={{ display: 'flex', height: '100%', m: 1 }}
-        >
-          <ChevronRight />
-        </Button>
-      </Container>
-    </Stack>
+    <CarouselSelector
+      items={colorCarouselItems}
+      title={title || 'Color Swatch'}
+      itemWidth={80} // 60px width + 16px gap
+      onSelect={(item) => onColorSelect && onColorSelect(item.name)}
+      renderItem={(item, selected, onClick) => (
+        <ColorSquare selected={selected} hex={item.hex} onClick={onClick} title={item.name} />
+      )}
+    />
   );
 };
+
+export default ColorSwatchCarousel;

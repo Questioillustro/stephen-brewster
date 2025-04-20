@@ -15,8 +15,8 @@ export const LayoutStyle = {
     justifyContent: 'center',
   }),
   content: css({
-    minHeight: '100vh',
-    width: '80%',
+    minHeight: '93vh',
+    width: '95%',
     [Constants.MID_MEDIA_QUERY]: {
       width: '95%',
       padding: '1.25rem 0',
