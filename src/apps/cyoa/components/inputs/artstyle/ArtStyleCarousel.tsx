@@ -94,17 +94,9 @@ const ArtStyleCarousel: React.FC<ArtStyleSelectorProps> = ({ onChange }) => {
   };
 
   return (
-    <Stack
-      sx={{
-        display: 'flex',
-        width: '100%',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        mt: 2,
-        pb: 2,
-      }}
-    >
+    <Stack sx={{ maxWidth: '100%', justifyContent: 'center', flexDirection: 'column' }}>
       <StyledDivider />
+
       <Typography variant='h6' sx={{ justifyContent: 'center', width: '100%', display: 'flex' }}>
         Choose Your Art Style!
       </Typography>
