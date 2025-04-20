@@ -5,6 +5,7 @@ import StoryDetailsPanel from '@/apps/cyoa/components/inputs/StoryDetailsPanel';
 import EnvironmentSelect from '@/apps/cyoa/components/inputs/environment/EnvironmentSelect';
 import ArtStyleSelector from '@/apps/cyoa/components/inputs/ArtStyleSelector';
 import StyledDivider from '@/components/dividers/StyledDivider';
+import ArtStyleCarousel from '@/apps/cyoa/components/inputs/artstyle/ArtStyleCarousel';
 
 export interface IBuildOptionsProps {
   setPrompts: (prompts: string, characterPrompts: string, artStyle: string) => void;
@@ -67,7 +68,7 @@ const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) =
           width: '100%',
         }}
       >
-        <ArtStyleSelector onChange={setArtStyle} />
+        <ArtStyleCarousel onChange={setArtStyle} />
       </Paper>
 
       <Stack

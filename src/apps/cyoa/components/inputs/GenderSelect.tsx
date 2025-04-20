@@ -1,5 +1,5 @@
 ﻿import React, { useEffect, useState } from 'react';
-import { Button, Box } from '@mui/material';
+import { Button, Box, Stack } from '@mui/material';
 
 export interface QuoteSelectProps {
   addGender: (prompt: string) => void;
@@ -17,7 +17,7 @@ const GenderSelect = (props: QuoteSelectProps) => {
     }
   }, [gender]);
   return (
-    <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', mt: 2 }}>
+    <Stack direction={'row'} sx={{ display: 'flex', gap: 2, justifyContent: 'center', mt: 2 }}>
       <Button
         onClick={() => handleGenderSelect('Male')}
         sx={{
@@ -48,7 +48,7 @@ const GenderSelect = (props: QuoteSelectProps) => {
           style={{ width: '6.25rem', height: '6.25rem' }}
         />
       </Button>
-    </Box>
+    </Stack>
   );
 };
 export default GenderSelect;

@@ -5,7 +5,7 @@ import GenderSelect from '@/apps/cyoa/components/inputs/GenderSelect';
 import React, { useEffect, useState } from 'react';
 import SkinColorSelect from '@/apps/cyoa/components/inputs/SkinColorSelect';
 import HairColorSelect from '@/apps/cyoa/components/inputs/HairColorSelect';
-import { SpeciesSelect } from '@/apps/cyoa/components/inputs/species/SpeciesSelect';
+import { SpeciesCarousel } from '@/apps/cyoa/components/inputs/species/SpeciesCarousel';
 import StyledDivider from '@/components/dividers/StyledDivider';
 
 export interface MainCharacterPanelProps {
@@ -46,24 +46,26 @@ const MainCharacterPanel = (props: MainCharacterPanelProps) => {
     >
       <StyledDivider />
 
-      <Typography variant={'h6'}>Customize Your Character!</Typography>
+      <Typography variant={'h6'} sx={{ mb: 2 }}>
+        Customize Your Character!
+      </Typography>
 
       <Stack
         sx={{
           display: 'flex',
-          flexDirection: 'row',
+          direction: 'column',
           alignItems: 'center',
           columnGap: '2rem',
         }}
       >
-        <GenderSelect addGender={setGender} />
         <MainCharacterName setCharacterName={setCharacterName} />
+        <GenderSelect addGender={setGender} />
       </Stack>
 
       <StyledDivider />
 
       <Stack sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-        <SpeciesSelect setSpecies={setSpecie} />
+        <SpeciesCarousel setSpecies={setSpecie} />
 
         <StyledDivider />
 

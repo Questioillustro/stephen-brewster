@@ -1,12 +1,14 @@
 ﻿import React, { useState, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { Box, Button, Stack } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
-import Typography from '@mui/material/Typography';
-import { speciesList } from '@/apps/cyoa/components/inputs/species/speciesList';
+import StyledDivider from '@/components/dividers/StyledDivider';
 
-interface SpeciesSelectorProps {
-  setSpecies: (species: string) => void;
+// Define the art styles as a constant array
+const artStyles = ['Anime', 'Watercolor', 'Studio Ghibli', 'Whimsical Fantasy', 'Cartoon'];
+
+interface ArtStyleSelectorProps {
+  onChange: (selectedStyle: string) => void;
 }
 
 const Container = styled(Box)`
@@ -21,7 +23,7 @@ const Container = styled(Box)`
 const CarouselWrapper = styled(Box)`
   overflow: hidden;
   flex: 1;
-  max-width: '100%';
+  max-width: 100%;
 `;
 
 const CarouselTrack = styled(Box)`
@@ -30,7 +32,7 @@ const CarouselTrack = styled(Box)`
   gap: 16px;
 `;
 
-const SpeciesSquare = styled(Box)<{ selected: boolean }>`
+const StyleSquare = styled(Box)<{ selected: boolean }>`
   width: 80px;
   height: 80px;
   flex-shrink: 0;
@@ -41,20 +43,24 @@ const SpeciesSquare = styled(Box)<{ selected: boolean }>`
   border-radius: 8px;
   cursor: pointer;
   background-color: ${({ selected }) => (selected ? '#BBBBBB' : '#000000')};
+  color: ${({ selected }) => (selected ? '#fff' : '#fff')};
+  font-size: 12px;
+  text-align: center;
+  padding: 4px;
   transition: all 0.2s ease-in-out;
   &:hover {
     background-color: #aaaaaa;
   }
 `;
 
-export const SpeciesSelect: React.FC<SpeciesSelectorProps> = ({ setSpecies }) => {
-  const [selectedSpecies, setSelectedSpecies] = useState<string>('Human');
+const ArtStyleCarousel: React.FC<ArtStyleSelectorProps> = ({ onChange }) => {
+  const [selectedStyle, setSelectedStyle] = useState<string | null>(null);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(4); // Initial value
 
   const carouselRef = useRef<HTMLDivElement>(null);
   const itemWidth = 96; // 80px (width) + 16px (gap)
-  const maxScroll = (speciesList.length - itemsPerView) * itemWidth;
+  const maxScroll = (artStyles.length - itemsPerView) * itemWidth;
 
   // Calculate itemsPerView based on container width
   const updateItemsPerView = () => {
@@ -72,9 +78,9 @@ export const SpeciesSelect: React.FC<SpeciesSelectorProps> = ({ setSpecies }) =>
     return () => window.removeEventListener('resize', updateItemsPerView);
   }, []);
 
-  const handleSpeciesClick = (species: string) => {
-    setSelectedSpecies(species);
-    setSpecies(`Main character species is: ${species}.`);
+  const handleStyleClick = (style: string) => {
+    setSelectedStyle(style);
+    onChange(style);
   };
 
   const scrollLeft = () => {
@@ -88,18 +94,25 @@ export const SpeciesSelect: React.FC<SpeciesSelectorProps> = ({ setSpecies }) =>
   };
 
   return (
-    <Stack sx={{ width: '100%', mt: 2, pb: 2 }}>
-      <Typography
-        variant={'h6'}
-        sx={{ pb: 2, justifyContent: 'center', width: '100%', display: 'flex' }}
-      >
-        Species
+    <Stack
+      sx={{
+        display: 'flex',
+        width: '100%',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        mt: 2,
+        pb: 2,
+      }}
+    >
+      <StyledDivider />
+      <Typography variant='h6' sx={{ justifyContent: 'center', width: '100%', display: 'flex' }}>
+        Choose Your Art Style!
       </Typography>
 
       <Container>
         <Button
           onClick={scrollLeft}
-          variant={'contained'}
+          variant='contained'
           disabled={scrollPosition === 0}
           sx={{ display: 'flex', height: '100%', m: 1 }}
         >
@@ -112,27 +125,31 @@ export const SpeciesSelect: React.FC<SpeciesSelectorProps> = ({ setSpecies }) =>
               transform: `translateX(-${scrollPosition}px)`,
             }}
           >
-            {speciesList.map((species) => (
-              <SpeciesSquare
-                key={species}
-                selected={selectedSpecies === species}
-                onClick={() => handleSpeciesClick(species)}
+            {artStyles.map((style) => (
+              <StyleSquare
+                key={style}
+                selected={selectedStyle === style}
+                onClick={() => handleStyleClick(style)}
               >
-                {species}
-              </SpeciesSquare>
+                {style}
+              </StyleSquare>
             ))}
           </CarouselTrack>
         </CarouselWrapper>
 
         <Button
           onClick={scrollRight}
-          variant={'contained'}
+          variant='contained'
           disabled={scrollPosition >= maxScroll}
           sx={{ display: 'flex', height: '100%', m: 1 }}
         >
           <ChevronRight />
         </Button>
       </Container>
+
+      <StyledDivider />
     </Stack>
   );
 };
+
+export default ArtStyleCarousel;
