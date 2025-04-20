@@ -1,4 +1,4 @@
-﻿import { Fade, Paper, Typography } from '@mui/material';
+﻿import { Fade, Paper, Stack, Typography } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { AnimationConstants } from '../../constants/AnimationConstants';
 import { getImagesForPrompt } from '../../api/ImageService';
@@ -135,8 +135,8 @@ const StoryPresenter = (props: StoryPresenterProps) => {
         )}
 
         {selectedAdventure && !isLoading && (
-          <>
-            <Typography variant={'h5'} color={'primary'}>
+          <Stack sx={{ display: 'flex', alignItems: 'end' }}>
+            <Typography variant={'h4'} color={'primary'}>
               {selectedAdventure.adventure.title}
             </Typography>
 
@@ -149,7 +149,7 @@ const StoryPresenter = (props: StoryPresenterProps) => {
               previousPage={previousPage}
               nextPage={nextPage}
             />
-          </>
+          </Stack>
         )}
 
         {isLoading && <LoadingSkeleton />}

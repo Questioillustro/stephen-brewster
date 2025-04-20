@@ -1,4 +1,4 @@
-﻿import { CarouselItem } from '@/apps/cyoa/components/inputs/carousel/CarouselSelector';
+﻿import { CarouselItem } from '@/apps/cyoa/components/carousel/CarouselSelector';
 
 export interface ColorOption {
   name: string;

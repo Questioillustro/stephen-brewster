@@ -1,4 +1,4 @@
-﻿import { CarouselItem } from '@/apps/cyoa/components/inputs/carousel/CarouselSelector';
+﻿import { CarouselItem } from '@/apps/cyoa/components/carousel/CarouselSelector';
 
 export interface IEnvironmentItem {
   _id: string;
@@ -9,7 +9,7 @@ export interface IEnvironmentItem {
 
 // Method to convert an environment list item to a CarouselItem
 export const convertEnvironmentToCarouselItem = (
-  environment: (typeof environmentList)[0],
+  environment: (typeof EnvironmentList)[0],
 ): CarouselItem => {
   return {
     id: environment._id,
@@ -19,7 +19,7 @@ export const convertEnvironmentToCarouselItem = (
   };
 };
 
-export const environmentList = [
+export const EnvironmentList = [
   {
     _id: '1',
     name: 'Forest',
@@ -143,6 +143,6 @@ export const environmentList = [
 ];
 
 // Example usage: Convert the entire environmentList
-export const envCarouselItems: CarouselItem[] = environmentList.map(
+export const envCarouselItems: CarouselItem[] = EnvironmentList.map(
   convertEnvironmentToCarouselItem,
 );

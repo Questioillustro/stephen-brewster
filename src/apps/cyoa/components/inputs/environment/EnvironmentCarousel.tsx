@@ -1,8 +1,8 @@
 ﻿import React from 'react';
 import { Box } from '@mui/material';
 import styled from '@emotion/styled';
-import { envCarouselItems } from './environmentList';
-import CarouselSelector from '@/apps/cyoa/components/inputs/carousel/CarouselSelector';
+import { envCarouselItems } from './EnvironmentList';
+import CarouselSelector from '@/apps/cyoa/components/carousel/CarouselSelector';
 
 const EnvironmentSquare = styled(Box)<{ selected: boolean }>`
   width: 105px;

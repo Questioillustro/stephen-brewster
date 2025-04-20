@@ -1,7 +1,7 @@
 ﻿import React from 'react';
-import { Box, Stack } from '@mui/material';
+import { Box } from '@mui/material';
 import styled from '@emotion/styled';
-import CarouselSelector from '@/apps/cyoa/components/inputs/carousel/CarouselSelector';
+import CarouselSelector from '@/apps/cyoa/components/carousel/CarouselSelector';
 
 const artStyles = [
   { id: '1', name: 'Anime' },

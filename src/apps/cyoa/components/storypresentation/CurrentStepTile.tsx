@@ -45,10 +45,18 @@ const CurrentStepTile = (props: CurrentPageTileProps) => {
 
   return (
     <Fade in={showContent} timeout={AnimationConstants.QUICK_STORY_NAV_SPEED}>
-      <Stack
-        direction={{ xs: 'column', sm: 'column', md: 'row', lg: 'row' }}
-        sx={{ display: 'flex', width: '100%' }}
-      >
+      <Stack direction={'column'} sx={{ display: 'flex', width: '100%' }}>
+        <Paper
+          variant={'outlined'}
+          style={{ width: '100%', justifyContent: 'center', alignItems: 'center', display: 'flex' }}
+        >
+          <ImageTile
+            generateImage={generateImage}
+            generatingImage={generatingImage}
+            imageUrl={page.imageUrl ?? ''}
+          />
+        </Paper>
+
         <Paper
           variant={'outlined'}
           style={{ width: '100%', flexDirection: 'row', display: 'flex' }}
@@ -61,17 +69,6 @@ const CurrentStepTile = (props: CurrentPageTileProps) => {
               __html: page.text,
             }}
           ></Typography>
-        </Paper>
-
-        <Paper
-          variant={'outlined'}
-          style={{ width: '100%', flexDirection: 'row', display: 'flex' }}
-        >
-          <ImageTile
-            generateImage={generateImage}
-            generatingImage={generatingImage}
-            imageUrl={page.imageUrl ?? ''}
-          />
         </Paper>
 
         <StoryPagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />

@@ -2,7 +2,7 @@
 import { Box, Stack } from '@mui/material';
 import styled from '@emotion/styled';
 import { speciesList } from '@/apps/cyoa/components/inputs/species/speciesList';
-import CarouselSelector from '@/apps/cyoa/components/inputs/carousel/CarouselSelector';
+import CarouselSelector from '@/apps/cyoa/components/carousel/CarouselSelector';
 
 interface SpeciesSelectorProps {
   setSpecies: (species: string) => void;

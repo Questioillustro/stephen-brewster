@@ -14,10 +14,8 @@ const ImageTile = (props: ImageTileProps) => {
   return (
     <>
       {!imageUrl && (
-        <div style={{ display: 'flex', minWidth: '450px', minHeight: '450px' }}>
-          {!generatingImage && (
-            <BuildPictureButton generateImage={generateImage} />
-          )}
+        <div style={{ display: 'flex', maxWidth: '250px', maxHeight: '250px' }}>
+          {!generatingImage && <BuildPictureButton generateImage={generateImage} />}
 
           {generatingImage && <GeneratingImageSkeleton />}
         </div>

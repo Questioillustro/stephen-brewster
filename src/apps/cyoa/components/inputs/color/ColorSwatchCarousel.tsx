@@ -1,8 +1,8 @@
 ﻿import React from 'react';
 import { Box } from '@mui/material';
 import styled from '@emotion/styled';
-import CarouselSelector from '@/apps/cyoa/components/inputs/carousel/CarouselSelector';
 import { colorCarouselItems } from '@/apps/cyoa/components/inputs/color/ColorSwatchList';
+import CarouselSelector from '@/apps/cyoa/components/carousel/CarouselSelector';
 
 const ColorSquare = styled(Box)<{ selected: boolean; hex: string }>`
   width: 60px;
