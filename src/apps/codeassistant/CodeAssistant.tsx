@@ -1,10 +1,16 @@
 ﻿import FrontEndComponent from '@/apps/codeassistant/codegen/FrontEndComponent';
 import { CodegenProvider } from '@/apps/codeassistant/codegen/context/CodegenContext';
+import AppHeader from '@/layout/apps/AppHeader';
+import { Stack } from '@mui/material';
+import { AboutCodeAssistant } from '@/apps/codeassistant/AboutCodeAssistant';
 
 const CodeAssistant = () => {
   return (
     <CodegenProvider>
-      <FrontEndComponent />
+      <Stack direction={'column'} sx={{ gap: 2, display: 'flex', width: '100%' }}>
+        <AppHeader about={<AboutCodeAssistant />} />
+        <FrontEndComponent />
+      </Stack>
     </CodegenProvider>
   );
 };

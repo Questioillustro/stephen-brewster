@@ -41,15 +41,7 @@ const BuildingView: React.FC = () => {
       </Paper>
     );
   } else {
-    return (
-      <Stack sx={{ display: 'flex', flexDirection: 'column', width: '100%', gap: 2 }}>
-        <Box sx={{ display: 'flex', width: '100%', alignItems: 'center' }}>
-          <AboutBuildAVenture />
-        </Box>
-
-        <BuildOptions setPrompts={setPrompts} />
-      </Stack>
-    );
+    return <BuildOptions setPrompts={setPrompts} />;
   }
 };
 

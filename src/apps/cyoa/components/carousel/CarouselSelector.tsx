@@ -7,17 +7,17 @@ import StyledDivider from '@/components/dividers/StyledDivider';
 export interface CarouselItem {
   id: string;
   name: string;
-  [key: string]: any; // Allow additional properties (e.g., hex, imageUrl, prompt)
+  [key: string]: any;
 }
 
 interface CarouselSelectorProps {
-  items: CarouselItem[]; // Array of items to display
-  title: string; // Title for the carousel
-  itemWidth: number; // Width of each item (including gap)
-  defaultSelectedId?: string; // Optional default selected item ID
-  onSelect: (item: CarouselItem) => void; // Callback when an item is selected
-  renderItem: (item: CarouselItem, selected: boolean, onClick: () => void) => JSX.Element; // Custom render function for items
-  useDividers?: boolean; // Optional: Show dividers above and below
+  items: CarouselItem[];
+  title: string;
+  itemWidth: number;
+  defaultSelectedId?: string;
+  onSelect: (item: CarouselItem) => void;
+  renderItem: (item: CarouselItem, selected: boolean, onClick: () => void) => JSX.Element;
+  useDividers?: boolean;
 }
 
 const Container = styled(Box)`
@@ -62,21 +62,29 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
     defaultSelectedId || items[0]?.id || null,
   );
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [itemsPerView, setItemsPerView] = useState(4); // Initial value
+  const [itemsPerView, setItemsPerView] = useState(4);
+  const [containerWidth, setContainerWidth] = useState(0);
 
   const carouselRef = useRef<HTMLDivElement>(null);
-  const maxScroll = (items.length - itemsPerView) * itemWidth;
+  const totalItemsWidth = items.length * itemWidth;
+  const maxScroll = Math.max(totalItemsWidth - containerWidth, 0);
 
-  // Update itemsPerView with debouncing
-  const updateItemsPerView = useCallback(
+  // Update itemsPerView and containerWidth with debouncing
+  const updateDimensions = useCallback(
     debounce(() => {
       if (carouselRef.current) {
-        const containerWidth = carouselRef.current.offsetWidth;
-        const calculatedItems = Math.floor(containerWidth / itemWidth);
+        const newContainerWidth = carouselRef.current.offsetWidth;
+        const calculatedItems = Math.floor(newContainerWidth / itemWidth);
         const newItemsPerView = Math.max(1, calculatedItems);
+        setContainerWidth(newContainerWidth);
         if (newItemsPerView !== itemsPerView) {
           setItemsPerView(newItemsPerView);
         }
+        // Recalculate scroll position to keep items centered
+        setScrollPosition((prev) => {
+          const centerOffset = (newContainerWidth - itemWidth * newItemsPerView) / 2;
+          return Math.min(Math.max(prev, -centerOffset), maxScroll);
+        });
       }
     }, 100),
     [itemsPerView, itemWidth],
@@ -84,13 +92,13 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
 
   // Set up ResizeObserver
   useEffect(() => {
-    const resizeObserver = new ResizeObserver(() => updateItemsPerView());
+    const resizeObserver = new ResizeObserver(() => updateDimensions());
     if (carouselRef.current) {
       resizeObserver.observe(carouselRef.current);
     }
 
     // Initial calculation
-    updateItemsPerView();
+    updateDimensions();
 
     // Clean up
     return () => {
@@ -99,22 +107,36 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
       }
       resizeObserver.disconnect();
     };
-  }, [updateItemsPerView]);
+  }, [updateDimensions]);
 
   const handleItemClick = (item: CarouselItem) => {
     setSelectedItemId(item.id);
     onSelect(item);
+    // Center the selected item
+    const itemIndex = items.findIndex((i) => i.id === item.id);
+    const centerOffset = (containerWidth - itemWidth) / 2;
+    const newScroll = itemIndex * itemWidth - centerOffset;
+    setScrollPosition(Math.max(0, Math.min(newScroll, maxScroll)));
   };
 
   const scrollLeft = () => {
-    const newPosition = Math.max(scrollPosition - itemWidth * itemsPerView, 0);
+    const centerOffset = (containerWidth - itemWidth * itemsPerView) / 2;
+    const newPosition = Math.max(scrollPosition - itemWidth * itemsPerView, -centerOffset);
     setScrollPosition(newPosition);
   };
 
   const scrollRight = () => {
-    const newPosition = Math.min(scrollPosition + itemWidth * itemsPerView, maxScroll);
+    const centerOffset = (containerWidth - itemWidth * itemsPerView) / 2;
+    const newPosition = Math.min(
+      scrollPosition + itemWidth * itemsPerView,
+      maxScroll + centerOffset,
+    );
     setScrollPosition(newPosition);
   };
+
+  // Calculate transform with centering
+  const centerOffset = (containerWidth - itemWidth * itemsPerView) / 2;
+  const adjustedScroll = scrollPosition + centerOffset;
 
   return (
     <Stack sx={{ width: '100%', mt: useDividers ? 2 : 0, pb: useDividers ? 2 : 0 }}>
@@ -130,7 +152,7 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
         <Button
           onClick={scrollLeft}
           variant='contained'
-          disabled={scrollPosition === 0}
+          disabled={scrollPosition <= -centerOffset}
           sx={{ display: 'flex', height: '100%', m: 1 }}
         >
           <ChevronLeft />
@@ -139,7 +161,7 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
         <CarouselWrapper ref={carouselRef}>
           <CarouselTrack
             sx={{
-              transform: `translateX(-${scrollPosition}px)`,
+              transform: `translateX(-${adjustedScroll}px)`,
             }}
           >
             {items.map((item) => (
@@ -153,7 +175,7 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
         <Button
           onClick={scrollRight}
           variant='contained'
-          disabled={scrollPosition >= maxScroll}
+          disabled={scrollPosition >= maxScroll + centerOffset}
           sx={{ display: 'flex', height: '100%', m: 1 }}
         >
           <ChevronRight />

@@ -9,8 +9,10 @@ import React, { useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import About from '@/apps/about/About';
 import NavigationGrid from '@/components/navigation/NavigationGrid';
-import { AppsPage } from '@/layout/AppsPage';
+import { AppsPage } from '@/layout/apps/AppsPage';
 import { WritingPage } from '@/apps/writing/WritingPage';
+import BuildAVentureApp from '@/apps/cyoa/BuildAVentureApp';
+import CodeAssistant from '@/apps/codeassistant/CodeAssistant';
 
 function Layout() {
   const { theme } = useContext(ThemeContext);
@@ -27,6 +29,8 @@ function Layout() {
             <Routes>
               <Route path='/' element={<About />} />
               <Route path='/apps' element={<AppsPage />} />
+              <Route path='/apps/bav' element={<BuildAVentureApp />} />
+              <Route path='/apps/codeassistant' element={<CodeAssistant />} />
               <Route path='/resume' element={<Resume />} />
               <Route path='/writing' element={<WritingPage />} />
               <Route path='/pictures' element={<div>pictures</div>} />

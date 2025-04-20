@@ -14,7 +14,7 @@ const BackButton: React.FC<IBackButtonProps> = (props: IBackButtonProps) => {
       color={'primary'}
       startIcon={<ArrowBackIosIcon color={'secondary'} />}
       onClick={() => onclick()}
-      sx={{ p: 2, maxWidth: '150px' }}
+      sx={{ m: 2, width: '200px' }}
     >
       <Typography variant={'h6'} color={'secondary'}>
         Back
