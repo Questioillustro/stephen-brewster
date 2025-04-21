@@ -67,12 +67,13 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
   const [itemsPerView, setItemsPerView] = useState(4);
   const [containerWidth, setContainerWidth] = useState(0);
   const [isCentered, setIsCentered] = useState(false);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchCurrentX, setTouchCurrentX] = useState<number | null>(null);
 
   const carouselRef = useRef<HTMLDivElement>(null);
   const totalItemsWidth = items.length * itemWidth;
   const maxScroll = Math.max(totalItemsWidth - containerWidth, 0);
 
-  // Update itemsPerView, containerWidth, and centering logic with debouncing
   const updateDimensions = useCallback(
     debounce(() => {
       if (carouselRef.current) {
@@ -89,17 +90,14 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
     [itemsPerView, itemWidth, totalItemsWidth],
   );
 
-  // Set up ResizeObserver
   useEffect(() => {
     const resizeObserver = new ResizeObserver(() => updateDimensions());
     if (carouselRef.current) {
       resizeObserver.observe(carouselRef.current);
     }
 
-    // Initial calculation
     updateDimensions();
 
-    // Clean up
     return () => {
       if (carouselRef.current) {
         resizeObserver.unobserve(carouselRef.current);
@@ -123,6 +121,35 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
     setScrollPosition(newPosition);
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+    setTouchCurrentX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStartX !== null) {
+      setTouchCurrentX(e.touches[0].clientX);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX !== null && touchCurrentX !== null) {
+      const deltaX = touchStartX - touchCurrentX;
+      const swipeThreshold = 50;
+
+      if (Math.abs(deltaX) > swipeThreshold) {
+        if (deltaX > 0) {
+          scrollRight();
+        } else {
+          scrollLeft();
+        }
+      }
+    }
+
+    setTouchStartX(null);
+    setTouchCurrentX(null);
+  };
+
   return (
     <Fade in={true} timeout={AnimationConstants.QUICK_STORY_NAV_SPEED}>
       <Stack sx={{ mt: useDividers ? 2 : 0, pb: useDividers ? 2 : 0 }}>
@@ -140,7 +167,7 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
             variant='contained'
             disabled={scrollPosition <= 0 || isCentered}
             sx={{
-              display: 'flex',
+              display: { xs: 'none', sm: 'flex' }, // Hide buttons on mobile
               height: '100%',
               m: 1,
               minWidth: { xs: '30px', sm: '40px' },
@@ -150,7 +177,12 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
             <ChevronLeft sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
           </Button>
 
-          <CarouselWrapper ref={carouselRef}>
+          <CarouselWrapper
+            ref={carouselRef}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             <CarouselTrack
               isCentered={isCentered}
               sx={{
@@ -170,7 +202,7 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
             variant='contained'
             disabled={scrollPosition >= maxScroll || isCentered}
             sx={{
-              display: 'flex',
+              display: { xs: 'none', sm: 'flex' }, // Hide buttons on mobile
               height: '100%',
               m: 1,
               minWidth: { xs: '30px', sm: '40px' },

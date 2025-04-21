@@ -15,7 +15,7 @@ export const AboutCodeAssistant = () => {
     <Paper elevation={2} sx={{ display: 'flex', width: '100%', justifyContent: 'end' }}>
       <IconButton onClick={handleOpenModal}>
         <Typography variant={'h5'} color={'primary'}>
-          About <HelpIcon />
+          <HelpIcon />
         </Typography>
       </IconButton>
 
