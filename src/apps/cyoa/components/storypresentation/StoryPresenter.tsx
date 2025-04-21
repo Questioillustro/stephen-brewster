@@ -115,7 +115,7 @@ const StoryPresenter = (props: StoryPresenterProps) => {
     <Fade in={true} timeout={AnimationConstants.QUICK_STORY_NAV_SPEED}>
       <Paper
         elevation={2}
-        sx={{ width: { md: '80%' } }}
+        sx={{ width: { md: '80%', lg: '60%' } }}
         style={{
           textAlign: 'left',
           display: 'flex',
@@ -149,7 +149,7 @@ const StoryPresenter = (props: StoryPresenterProps) => {
 
         {storyContext.selectedAdventure && !isLoading && (
           <Stack sx={{ display: 'flex', alignItems: 'end', width: '100%', gap: 2 }}>
-            <Paper elevation={10} sx={{ width: '100%', p: { md: 3, lg: 4, sm: 2, xs: 0 } }}>
+            <Paper elevation={10} sx={{ width: '100%', p: { md: 2, lg: 2, sm: 2, xs: 0 } }}>
               <TitleTile title={storyContext.selectedAdventure.adventure.title} />
             </Paper>
 
