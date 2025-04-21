@@ -134,9 +134,16 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
           onClick={scrollLeft}
           variant='contained'
           disabled={scrollPosition <= 0}
-          sx={{ display: 'flex', height: '100%', m: 1 }}
+          sx={{
+            display: 'flex',
+            height: '100%',
+            m: 1,
+            minWidth: { xs: '30px', sm: '40px' }, // Skinnier on xs screens
+            padding: { xs: '0 4px', sm: '0 8px' }, // Reduced padding on xs
+          }}
         >
-          <ChevronLeft />
+          <ChevronLeft sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />{' '}
+          {/* Smaller icon on xs */}
         </Button>
 
         <CarouselWrapper ref={carouselRef}>
@@ -157,9 +164,16 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
           onClick={scrollRight}
           variant='contained'
           disabled={scrollPosition >= maxScroll}
-          sx={{ display: 'flex', height: '100%', m: 1 }}
+          sx={{
+            display: 'flex',
+            height: '100%',
+            m: 1,
+            minWidth: { xs: '30px', sm: '40px' }, // Skinnier on xs screens
+            padding: { xs: '0 4px', sm: '0 8px' }, // Reduced padding on xs
+          }}
         >
-          <ChevronRight />
+          <ChevronRight sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />{' '}
+          {/* Smaller icon on xs */}
         </Button>
       </Container>
 

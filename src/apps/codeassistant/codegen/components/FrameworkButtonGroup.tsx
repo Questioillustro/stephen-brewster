@@ -41,25 +41,23 @@ const FrameworkButtonGroup: React.FC = () => {
   };
 
   return (
-    <Paper elevation={2} sx={{ p: 2 }}>
-      <Stack direction={'column'}>
-        <Typography variant={'body1'} sx={{ mb: 1 }}>
-          Framework
-        </Typography>
+    <Stack direction={'column'} sx={{ p: 2 }}>
+      <Typography variant={'body1'} sx={{ mb: 1 }}>
+        Framework
+      </Typography>
 
-        <StyledButtonGroup aria-label='framework selection'>
-          {FrontEndFrameworkOptions.map((framework) => (
-            <Button
-              key={framework.framework}
-              onClick={() => handleClick(framework)}
-              className={selected === framework.framework ? 'Mui-selected' : ''}
-            >
-              {framework.framework}
-            </Button>
-          ))}
-        </StyledButtonGroup>
-      </Stack>
-    </Paper>
+      <StyledButtonGroup aria-label='framework selection'>
+        {FrontEndFrameworkOptions.map((framework) => (
+          <Button
+            key={framework.framework}
+            onClick={() => handleClick(framework)}
+            className={selected === framework.framework ? 'Mui-selected' : ''}
+          >
+            {framework.framework}
+          </Button>
+        ))}
+      </StyledButtonGroup>
+    </Stack>
   );
 };
 

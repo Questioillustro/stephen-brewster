@@ -4,9 +4,6 @@ import { Grid, Card, CardActionArea, CardContent, Typography, Box } from '@mui/m
 import HomeIcon from '@mui/icons-material/Home';
 import AppsIcon from '@mui/icons-material/Apps';
 import DescriptionIcon from '@mui/icons-material/Description';
-import PersonIcon from '@mui/icons-material/Person';
-import ArticleIcon from '@mui/icons-material/Article';
-import PhotoIcon from '@mui/icons-material/Photo';
 
 interface NavItem {
   title: string;
@@ -28,18 +25,6 @@ const navItems: NavItem[] = [
     icon: <DescriptionIcon />,
     description: 'View my professional experience',
   },
-  // {
-  //   title: 'Writing',
-  //   path: '/writing',
-  //   icon: <ArticleIcon />,
-  //   description: 'Read my latest posts',
-  // },
-  // {
-  //   title: 'Pictures',
-  //   path: '/pictures',
-  //   icon: <PhotoIcon />,
-  //   description: 'View my photo gallery',
-  // },
 ];
 
 const NavigationGrid: React.FC<NavigationGridProps> = ({ compact = false }) => {

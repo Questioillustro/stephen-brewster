@@ -1,8 +1,4 @@
-﻿/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-
-import { Paper, ThemeProvider } from '@mui/material';
-import { LayoutStyle } from './Layout.style';
+﻿import { Paper, Stack, ThemeProvider } from '@mui/material';
 import Resume from '@/apps/resume/Resume';
 import { ThemeContext } from '@/contexts/ThemeContext';
 import React, { useContext } from 'react';
@@ -20,26 +16,24 @@ function Layout() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div css={LayoutStyle.root}>
+      <Stack sx={{ display: 'flex', height: '100vh' }}>
         <Paper square>
           <NavigationGrid compact />
         </Paper>
 
-        <Paper elevation={10} css={LayoutStyle.contentWrapper} square>
-          <div css={LayoutStyle.content}>
-            <Routes>
-              <Route path='/' element={<About />} />
-              <Route path='/apps' element={<AppsPage />} />
-              <Route path='/apps/bav' element={<BuildAVentureApp />} />
-              <Route path='/apps/codeassistant' element={<CodeAssistant />} />
-              <Route path='/apps/wordle' element={<WordleApp />} />
-              <Route path='/resume' element={<Resume />} />
-              <Route path='/writing' element={<WritingPage />} />
-              <Route path='/pictures' element={<div>pictures</div>} />
-            </Routes>
-          </div>
+        <Paper square elevation={0} sx={{ flexGrow: 1, display: 'flex', overflow: 'auto' }}>
+          <Routes>
+            <Route path='/' element={<About />} />
+            <Route path='/apps' element={<AppsPage />} />
+            <Route path='/apps/bav' element={<BuildAVentureApp />} />
+            <Route path='/apps/codeassistant' element={<CodeAssistant />} />
+            <Route path='/apps/wordle' element={<WordleApp />} />
+            <Route path='/resume' element={<Resume />} />
+            <Route path='/writing' element={<WritingPage />} />
+            <Route path='/pictures' element={<div>pictures</div>} />
+          </Routes>
         </Paper>
-      </div>
+      </Stack>
     </ThemeProvider>
   );
 }

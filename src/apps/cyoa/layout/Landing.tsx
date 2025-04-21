@@ -10,9 +10,7 @@ const Landing = () => {
   const { state } = useContext(MainViewContext);
 
   return (
-    <Stack
-      sx={{ display: 'flex', width: '100%', flexDirection: 'column', alignItems: 'center', gap: 2 }}
-    >
+    <Stack sx={{ display: 'flex', width: '100%', flexDirection: 'column', alignItems: 'center' }}>
       <AppHeader about={<AboutBuildAVenture />} />
 
       {state.currentView === 'building' && <BuildingView />}

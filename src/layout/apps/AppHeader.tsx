@@ -15,9 +15,24 @@ const AppHeader = (props: IAppHeaderProps) => {
   };
 
   return (
-    <Stack direction={'row'} sx={{ display: 'flex', width: '100%' }}>
+    <Stack
+      direction={'row'}
+      sx={{
+        display: 'flex',
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <BackButton onclick={goBack} />
-      {props.about}
+      <Stack
+        sx={{
+          display: 'flex',
+          width: '100%',
+        }}
+      >
+        {props.about}
+      </Stack>
     </Stack>
   );
 };

@@ -7,7 +7,7 @@ import { AboutCodeAssistant } from '@/apps/codeassistant/AboutCodeAssistant';
 const CodeAssistant = () => {
   return (
     <CodegenProvider>
-      <Stack direction={'column'} sx={{ gap: 2, display: 'flex', width: '100%' }}>
+      <Stack direction={'column'} sx={{ display: 'flex', width: '100%' }}>
         <AppHeader about={<AboutCodeAssistant />} />
         <FrontEndComponent />
       </Stack>

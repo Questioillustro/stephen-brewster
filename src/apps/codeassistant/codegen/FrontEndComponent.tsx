@@ -16,14 +16,21 @@ const FrontEndComponent = () => {
   return (
     <Stack direction={'column'} sx={{ gap: 2 }}>
       <Stack direction={'row'} sx={{ gap: 2, display: 'flex', width: '100%' }}>
-        <Stack direction={'column'} sx={{ gap: 2, display: 'flex', width: '60%' }}>
-          <FrameworkButtonGroup />
+        <Stack
+          direction={'column'}
+          sx={{ gap: 2, display: 'flex', width: { xs: '100%', sm: '100%', md: '60%' } }}
+        >
+          <Paper elevation={2} sx={{ display: 'flex', width: '100%' }}>
+            <FrameworkButtonGroup />
+          </Paper>
 
-          <GenericButtonGroup
-            labels={context.framework.uiLibraries}
-            label={'UI Library'}
-            onSelect={context.addUiLibrary}
-          />
+          <Paper elevation={2} sx={{ display: 'flex', width: '100%' }}>
+            <GenericButtonGroup
+              labels={context.framework.uiLibraries}
+              label={'UI Library'}
+              onSelect={context.addUiLibrary}
+            />
+          </Paper>
 
           <Paper elevation={2} sx={{ p: 2 }}>
             <Stack direction={'row'} sx={{ width: '100%' }}>
@@ -43,10 +50,11 @@ const FrontEndComponent = () => {
           </Paper>
         </Stack>
 
-        <Paper elevation={2} sx={{ p: 2, width: '45%' }}>
-          <Stack>
-            <PromptDisplay />
-          </Stack>
+        <Paper
+          elevation={2}
+          sx={{ p: 2, display: { xs: 'none', sm: 'none', md: 'flex' }, width: '45%' }}
+        >
+          <PromptDisplay />
         </Paper>
       </Stack>
 

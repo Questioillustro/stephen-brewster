@@ -51,24 +51,22 @@ const GenericButtonGroup: React.FC<GenericButtonGroupProps> = ({
   };
 
   return (
-    <Paper elevation={2} sx={{ p: 2 }}>
-      <Stack direction='column'>
-        <Typography variant='body1' sx={{ mb: 1 }}>
-          {label}
-        </Typography>
-        <StyledButtonGroup aria-label='selection'>
-          {labels.map((value) => (
-            <Button
-              key={value}
-              onClick={() => handleClick(value)}
-              className={selected === value ? 'Mui-selected' : ''}
-            >
-              {value}
-            </Button>
-          ))}
-        </StyledButtonGroup>
-      </Stack>
-    </Paper>
+    <Stack direction='column' sx={{ p: 2 }}>
+      <Typography variant='body1' sx={{ mb: 1 }}>
+        {label}
+      </Typography>
+      <StyledButtonGroup aria-label='selection'>
+        {labels.map((value) => (
+          <Button
+            key={value}
+            onClick={() => handleClick(value)}
+            className={selected === value ? 'Mui-selected' : ''}
+          >
+            {value}
+          </Button>
+        ))}
+      </StyledButtonGroup>
+    </Stack>
   );
 };
 
