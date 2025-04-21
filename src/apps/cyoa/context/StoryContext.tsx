@@ -4,7 +4,7 @@ import { LlmOptionType } from '@/apps/codeassistant/codegen/context/CodegenConte
 
 export type StoryType = 'adventure' | 'education';
 
-export const defaultLlm: LlmOptionType = 'chatgpt';
+export const defaultLlm: LlmOptionType = 'grok';
 
 interface StoryContextType {
   selectedType: StoryType;
