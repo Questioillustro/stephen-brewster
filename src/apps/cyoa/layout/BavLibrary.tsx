@@ -17,7 +17,10 @@ export const BavLibrary = () => {
   }, []);
 
   useEffect(() => {
-    if (library && library.myStories.length > 0) storyContext.setAdventures(library.myStories);
+    if (library && library.myStories.length > 0) {
+      storyContext.setAdventures(library.myStories);
+      storyContext.setAdventure(library.myStories[0]);
+    }
   }, [library]);
 
   const getStoredLibrary = () => {
@@ -25,7 +28,8 @@ export const BavLibrary = () => {
       const myLibrary: IBavLibrary = JSON.parse(localStorage.getItem('bavLibrary') ?? '');
       if (myLibrary) setLibrary(myLibrary);
     } catch {
-      console.log('no library found');
+      let library: IBavLibrary = { myStories: [] };
+      localStorage.setItem('bavLibrary', JSON.stringify(library));
     }
   };
 

@@ -1,5 +1,5 @@
 ﻿import React, { useContext, useEffect, useState } from 'react';
-import { Paper } from '@mui/material';
+import { Fade, Paper, Stack } from '@mui/material';
 import BuildOptions from '@/apps/cyoa/components/inputs/BuildOptions';
 import { MainViewContext } from '@/apps/cyoa/context/MainViewContext';
 import { BuildAVenture } from '@/apps/cyoa/api/AdventureService';
@@ -7,17 +7,15 @@ import { useStoryContext } from '@/apps/cyoa/context/StoryContext';
 import { Building } from '@/apps/cyoa/components/storypresentation/Building';
 import { IAdventureWrapper } from '@/apps/cyoa/types/adventure';
 import { IBavLibrary } from '@/apps/cyoa/types/library';
+import { AnimationConstants } from '@/apps/cyoa/constants/AnimationConstants';
 
 const BuildingView: React.FC = () => {
   const { state, dispatch } = useContext(MainViewContext);
-
   const { setAdventure } = useStoryContext();
-
   const [isLoading, setIsLoading] = useState(false);
 
   const build = async (prompts: string, characterPrompts: string, artStyle: string) => {
     setIsLoading(true);
-
     BuildAVenture(prompts, characterPrompts, artStyle, 'grok', 0.9).then(
       (adventure: IAdventureWrapper) => {
         addToLibrary(adventure);
@@ -31,13 +29,10 @@ const BuildingView: React.FC = () => {
   const addToLibrary = (adventure: IAdventureWrapper) => {
     try {
       const storedLibrary: IBavLibrary = JSON.parse(localStorage.getItem('bavLibrary') ?? '');
-      if (storedLibrary) {
-        storedLibrary.myStories.push(adventure);
-        localStorage.setItem('bavLibrary', JSON.stringify(storedLibrary));
-      }
+      storedLibrary.myStories.push(adventure);
+      localStorage.setItem('bavLibrary', JSON.stringify(storedLibrary));
     } catch {
-      let library: IBavLibrary = { myStories: [] };
-      localStorage.setItem('bavLibrary', JSON.stringify(library));
+      console.log('failed to add story to library');
     }
   };
 
@@ -45,15 +40,13 @@ const BuildingView: React.FC = () => {
     build(prompts, characterPrompts, artStyle);
   };
 
-  if (isLoading) {
-    return (
-      <Paper variant={'elevation'} sx={{ display: 'flex', width: '100%', height: '512px' }}>
-        <Building />
-      </Paper>
-    );
-  } else {
-    return <BuildOptions setPrompts={setPrompts} />;
-  }
+  return (
+    <Stack sx={{ width: '100%' }}>
+      {isLoading && <Building />}
+
+      {!isLoading && <BuildOptions setPrompts={setPrompts} />}
+    </Stack>
+  );
 };
 
 export default BuildingView;
