@@ -12,29 +12,30 @@ export const BavLibrary = () => {
 
   const { state, dispatch } = useContext(MainViewContext);
 
-  useEffect(() => {
-    getStoredLibrary();
-  }, []);
+  const getStoredLibrary = (): IBavLibrary => {
+    let library: IBavLibrary = { myStories: [] };
 
-  useEffect(() => {
-    if (library && library.myStories.length > 0) {
-      storyContext.setAdventures(library.myStories);
-      storyContext.setAdventure(library.myStories[0]);
-    }
-  }, [library]);
-
-  const getStoredLibrary = () => {
     try {
       const myLibrary: IBavLibrary = JSON.parse(localStorage.getItem('bavLibrary') ?? '');
-      if (myLibrary) setLibrary(myLibrary);
+      if (myLibrary) {
+        setLibrary(myLibrary);
+        return myLibrary;
+      } else return library;
     } catch {
-      let library: IBavLibrary = { myStories: [] };
       localStorage.setItem('bavLibrary', JSON.stringify(library));
+      return library;
+    } finally {
     }
   };
 
   const viewLibrary = () => {
-    getStoredLibrary();
+    const library = getStoredLibrary();
+
+    if (library && library.myStories.length > 0) {
+      storyContext.setAdventures(library.myStories);
+      storyContext.setAdventure(library.myStories[0]);
+    }
+
     dispatch('VIEW_LIBRARY');
   };
 
