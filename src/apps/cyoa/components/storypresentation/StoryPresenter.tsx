@@ -149,7 +149,7 @@ const StoryPresenter = (props: StoryPresenterProps) => {
 
         {storyContext.selectedAdventure && !isLoading && (
           <Stack sx={{ display: 'flex', alignItems: 'end', width: '100%', gap: 2 }}>
-            <Paper elevation={10} sx={{ width: '100%', p: { md: 4, lg: 4, sm: 2, xs: 0 } }}>
+            <Paper elevation={10} sx={{ width: '100%', p: { md: 3, lg: 4, sm: 2, xs: 0 } }}>
               <TitleTile title={storyContext.selectedAdventure.adventure.title} />
             </Paper>
 

@@ -38,7 +38,7 @@ const RevisitControls: React.FC<IRevisitControlsProps> = (props: IRevisitControl
           disabled={currentVersionNumber === 0}
           variant={'outlined'}
         >
-          Previous Adventure
+          Previous Story
         </Button>
 
         <Button
@@ -47,7 +47,7 @@ const RevisitControls: React.FC<IRevisitControlsProps> = (props: IRevisitControl
           disabled={currentVersionNumber + 1 === total}
           variant={'outlined'}
         >
-          Next Adventure
+          Next Story
         </Button>
       </Paper>
     </Paper>

@@ -13,6 +13,7 @@ const TypescriptCheckbox: React.FC = () => {
     <FormControlLabel
       control={<Checkbox checked={useTypescript} onChange={handleChange} color='primary' />}
       label='Typescript'
+      sx={{ '& .MuiFormControlLabel-label': { fontSize: { xs: '12px', sm: '12px', md: '16px' } } }}
     />
   );
 };

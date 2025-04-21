@@ -61,6 +61,7 @@ const GenericButtonGroup: React.FC<GenericButtonGroupProps> = ({
             key={value}
             onClick={() => handleClick(value)}
             className={selected === value ? 'Mui-selected' : ''}
+            sx={{ fontSize: { xs: '8px', sm: '10px', md: '16px' } }}
           >
             {value}
           </Button>

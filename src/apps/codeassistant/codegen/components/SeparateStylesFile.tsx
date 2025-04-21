@@ -13,6 +13,7 @@ const SeparateStylesFile = () => {
     <FormControlLabel
       control={<Checkbox checked={separateStyles} onChange={handleChange} color='primary' />}
       label='Styles File'
+      sx={{ '& .MuiFormControlLabel-label': { fontSize: { xs: '12px', sm: '12px', md: '16px' } } }}
     />
   );
 };

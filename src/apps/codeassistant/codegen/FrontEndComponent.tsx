@@ -14,7 +14,7 @@ const FrontEndComponent = () => {
   const context = useCodegenContext();
 
   return (
-    <Stack direction={'column'} sx={{ gap: 2 }}>
+    <Stack direction={'column'} sx={{ gap: 2, fontSize: { xs: '8px', sm: '10px', md: '16px' } }}>
       <Stack direction={'row'} sx={{ gap: 2, display: 'flex', width: '100%' }}>
         <Stack
           direction={'column'}

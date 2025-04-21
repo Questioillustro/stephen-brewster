@@ -51,6 +51,7 @@ const FrameworkButtonGroup: React.FC = () => {
           <Button
             key={framework.framework}
             onClick={() => handleClick(framework)}
+            sx={{ fontSize: { xs: '8px', sm: '10px', md: '16px' } }}
             className={selected === framework.framework ? 'Mui-selected' : ''}
           >
             {framework.framework}
