@@ -9,6 +9,8 @@ import { useStoryContext } from '@/apps/cyoa/context/StoryContext';
 import { MainViewContext } from '@/apps/cyoa/context/MainViewContext';
 import { getExistingAdventuresForStory, IAdventureWrapper } from '@/apps/cyoa/api/AdventureService';
 import LoadingSkeleton from '@/components/loading/LoadingSkeleton';
+import { Building } from '@/apps/cyoa/components/storypresentation/Building';
+import { TitleTile } from '@/apps/cyoa/components/storypresentation/TitleTile';
 
 export interface StoryPresenterProps {
   view: StoryPresenterViews;
@@ -42,10 +44,12 @@ const StoryPresenter = (props: StoryPresenterProps) => {
     const page = selectedAdventure.adventure.pages[currentPage];
     const imagePrompt = `The art style should be: ${selectedAdventure.artStyle}. ${page.imagePrompt}`;
 
-    getImagesForPrompt(imagePrompt, selectedAdventure._id, currentPage).then((adventure) => {
-      setAdventure(adventure);
-      setGeneratingImage(false);
-    });
+    getImagesForPrompt(imagePrompt, selectedAdventure._id, '1792x1024', currentPage).then(
+      (adventure) => {
+        setAdventure(adventure);
+        setGeneratingImage(false);
+      },
+    );
   };
 
   const nextPage = () => {
@@ -113,17 +117,16 @@ const StoryPresenter = (props: StoryPresenterProps) => {
   return (
     <Fade in={true} timeout={AnimationConstants.QUICK_STORY_NAV_SPEED}>
       <Paper
-        variant={'outlined'}
-        sx={{ p: 2 }}
+        elevation={2}
+        sx={{ p: 2, width: { md: '80%' } }}
         style={{
           textAlign: 'left',
           display: 'flex',
           flexDirection: 'column',
+
           rowGap: '10px',
         }}
       >
-        <BackButton onclick={goBack} />
-
         {view === 'existing' && (
           <RevisitControls
             currentVersionNumber={versionIndex}
@@ -135,10 +138,10 @@ const StoryPresenter = (props: StoryPresenterProps) => {
         )}
 
         {selectedAdventure && !isLoading && (
-          <Stack sx={{ display: 'flex', alignItems: 'end' }}>
-            <Typography variant={'h4'} color={'primary'}>
-              {selectedAdventure.adventure.title}
-            </Typography>
+          <Stack sx={{ display: 'flex', alignItems: 'end', width: '100%', p: 1, gap: 2 }}>
+            <Paper elevation={10} sx={{ width: '100%', p: { md: 4, lg: 4, sm: 2, xs: 2 } }}>
+              <TitleTile title={selectedAdventure.adventure.title} />
+            </Paper>
 
             <CurrentStepTile
               page={selectedAdventure.adventure.pages[currentPage]}
@@ -152,7 +155,7 @@ const StoryPresenter = (props: StoryPresenterProps) => {
           </Stack>
         )}
 
-        {isLoading && <LoadingSkeleton />}
+        {isLoading && <Building />}
       </Paper>
     </Fade>
   );

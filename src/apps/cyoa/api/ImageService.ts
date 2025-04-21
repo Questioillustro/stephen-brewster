@@ -9,9 +9,19 @@ export interface IGenerateImageRequest {
   prompt: string;
 }
 
+export type imageSizeType =
+  | '1024x1024'
+  | '256x256'
+  | '512x512'
+  | '1792x1024'
+  | '1024x1792'
+  | null
+  | undefined;
+
 export const getImagesForPrompt = async (
   prompt: string,
   id: string,
+  size: imageSizeType = '1024x1024',
   index: number,
 ): Promise<IAdventureWrapper> => {
   if (!id) {
@@ -24,6 +34,7 @@ export const getImagesForPrompt = async (
   try {
     const response = await apiClient.post<IAdventureWrapper>(`/generateimages/${id}/${index}`, {
       prompt: prompt,
+      size: size,
     });
 
     if (!response.data) {

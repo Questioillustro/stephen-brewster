@@ -1,4 +1,4 @@
-﻿import { Button, Paper, Typography } from '@mui/material';
+﻿import { Button, Paper, Stack, Typography } from '@mui/material';
 import React from 'react';
 
 export interface StoryPaginationProps {
@@ -11,8 +11,8 @@ const StoryPagination = (props: StoryPaginationProps) => {
   const { currentPage, totalPages, paginate } = props;
 
   return (
-    <Paper
-      variant={'outlined'}
+    <Stack
+      direction={'row'}
       style={{
         display: 'flex',
         justifyContent: 'space-evenly',
@@ -38,7 +38,7 @@ const StoryPagination = (props: StoryPaginationProps) => {
       >
         Next Page
       </Button>
-    </Paper>
+    </Stack>
   );
 };
 

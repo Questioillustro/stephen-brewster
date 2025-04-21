@@ -1,6 +1,8 @@
 ﻿import BuildPictureButton from '../inputs/BuildPictureButton';
-import GeneratingImageSkeleton from './GeneratingImageSkeleton';
 import React from 'react';
+import { Stack } from '@mui/material';
+import { Building } from '@/apps/cyoa/components/storypresentation/Building';
+import { StoryArtTile } from '@/apps/cyoa/components/storypresentation/StoryArtTile';
 
 export interface ImageTileProps {
   generateImage: () => void;
@@ -9,20 +11,18 @@ export interface ImageTileProps {
 }
 
 const ImageTile = (props: ImageTileProps) => {
-  const { generateImage, generatingImage, imageUrl } = props;
-
   return (
-    <>
-      {!imageUrl && (
-        <div style={{ display: 'flex', maxWidth: '250px', maxHeight: '250px' }}>
-          {!generatingImage && <BuildPictureButton generateImage={generateImage} />}
+    <Stack sx={{ width: '100%', display: 'flex' }}>
+      {!props.imageUrl && (
+        <div>
+          {!props.generatingImage && <BuildPictureButton generateImage={props.generateImage} />}
 
-          {generatingImage && <GeneratingImageSkeleton />}
+          {props.generatingImage && <Building />}
         </div>
       )}
 
-      {imageUrl && <img src={imageUrl} width={450} height={450} />}
-    </>
+      {props.imageUrl && <StoryArtTile url={props.imageUrl} />}
+    </Stack>
   );
 };
 

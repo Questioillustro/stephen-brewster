@@ -4,12 +4,6 @@ export interface BuildPictureButtonProps {
   generateImage: () => void;
 }
 
-/**
- * Ideas
- * 1. Add controls for extra prompts - edit current prompt
- *
- */
-
 const BuildPictureButton = (props: BuildPictureButtonProps) => {
   const { generateImage } = props;
 
@@ -19,9 +13,7 @@ const BuildPictureButton = (props: BuildPictureButtonProps) => {
       onClick={() => generateImage()}
     >
       <img
-        src={
-          'https://azurefunctionsapp2022060.blob.core.windows.net/cyoa/buildapicture2.png'
-        }
+        src={'https://azurefunctionsapp2022060.blob.core.windows.net/cyoa/build-a-picture.jpg'}
         width={'100%'}
       />
     </div>
