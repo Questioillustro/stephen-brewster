@@ -1,4 +1,4 @@
-﻿import { Fade, Paper, Stack } from '@mui/material';
+﻿import { CardMedia, Fade, Paper, Stack } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { AnimationConstants } from '../../constants/AnimationConstants';
 import { getImagesForPrompt } from '../../api/ImageService';
@@ -20,7 +20,7 @@ export type StoryPresenterViews = 'new' | 'existing';
 const StoryPresenter = (props: StoryPresenterProps) => {
   const { view } = props;
 
-  const { selectedAdventure, setAdventure, allAdventures } = useStoryContext();
+  const storyContext = useStoryContext();
 
   const { state, dispatch } = useContext(MainViewContext);
 
@@ -35,19 +35,22 @@ const StoryPresenter = (props: StoryPresenterProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const generateImage = async () => {
-    if (!selectedAdventure) return;
+    if (!storyContext.selectedAdventure) return;
 
     setGeneratingImage(true);
-    const page = selectedAdventure.adventure.pages[currentPage];
-    const imagePrompt = `The art style should be: ${selectedAdventure.artStyle}. ${page.imagePrompt}`;
+    const page = storyContext.selectedAdventure.adventure.pages[currentPage];
+    const imagePrompt = `The art style should be: ${storyContext.selectedAdventure.artStyle}. ${page.imagePrompt}`;
 
-    getImagesForPrompt(imagePrompt, selectedAdventure._id, '1792x1024', currentPage).then(
-      (adventure) => {
-        updateLibraryItem(adventure);
-        setAdventure(adventure);
-        setGeneratingImage(false);
-      },
-    );
+    getImagesForPrompt(
+      imagePrompt,
+      storyContext.selectedAdventure._id,
+      '1792x1024',
+      currentPage,
+    ).then((adventure) => {
+      updateLibraryItem(adventure);
+      storyContext.setAdventure(adventure);
+      setGeneratingImage(false);
+    });
   };
 
   const updateLibraryItem = (adventure: IAdventureWrapper) => {
@@ -99,13 +102,13 @@ const StoryPresenter = (props: StoryPresenterProps) => {
 
   useEffect(() => {
     setVersionIndex(0);
-  }, [allAdventures]);
+  }, [storyContext.allAdventures]);
 
   useEffect(() => {
     if (!state.isRevisit) return;
 
     setCurrentPage(0);
-    setAdventure(allAdventures[versionIndex]);
+    storyContext.setAdventure(storyContext.allAdventures[versionIndex]);
   }, [versionIndex]);
 
   return (
@@ -120,26 +123,40 @@ const StoryPresenter = (props: StoryPresenterProps) => {
           rowGap: '10px',
         }}
       >
-        {view === 'existing' && (
+        {view === 'existing' && storyContext.allAdventures.length > 0 && (
           <RevisitControls
             currentVersionNumber={versionIndex}
             previousVersion={navPreviousVersion}
             nextVersion={navNextVersion}
-            total={allAdventures.length}
+            total={storyContext.allAdventures.length}
             disabled={showStoryText}
           />
         )}
 
-        {selectedAdventure && !isLoading && (
+        {view === 'existing' && storyContext.allAdventures.length === 0 && (
+          <CardMedia
+            component='img'
+            sx={{
+              width: '100%',
+              height: 'auto',
+              objectFit: 'cover',
+            }}
+            image={'/bav/emptylibrary.jpg'}
+            title={'empty library'}
+            alt={'empty library'}
+          />
+        )}
+
+        {storyContext.selectedAdventure && !isLoading && (
           <Stack sx={{ display: 'flex', alignItems: 'end', width: '100%', gap: 2 }}>
             <Paper elevation={10} sx={{ width: '100%', p: { md: 4, lg: 4, sm: 2, xs: 0 } }}>
-              <TitleTile title={selectedAdventure.adventure.title} />
+              <TitleTile title={storyContext.selectedAdventure.adventure.title} />
             </Paper>
 
             <CurrentStepTile
-              page={selectedAdventure.adventure.pages[currentPage]}
+              page={storyContext.selectedAdventure.adventure.pages[currentPage]}
               currentPage={currentPage + 1}
-              totalPages={selectedAdventure.adventure.pages.length}
+              totalPages={storyContext.selectedAdventure.adventure.pages.length}
               generateImage={generateImage}
               generatingImage={generatingImage}
               previousPage={previousPage}
