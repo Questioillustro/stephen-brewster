@@ -21,7 +21,7 @@ function Layout() {
           <NavigationGrid compact />
         </Paper>
 
-        <Paper square elevation={0} sx={{ flexGrow: 1, display: 'flex', overflow: 'auto' }}>
+        <Paper square elevation={0} sx={{ flexGrow: 1, display: 'flex', overflowX: 'hidden' }}>
           <Routes>
             <Route path='/' element={<About />} />
             <Route path='/apps' element={<AppsPage />} />
@@ -30,7 +30,6 @@ function Layout() {
             <Route path='/apps/wordle' element={<WordleApp />} />
             <Route path='/resume' element={<Resume />} />
             <Route path='/writing' element={<WritingPage />} />
-            <Route path='/pictures' element={<div>pictures</div>} />
           </Routes>
         </Paper>
       </Stack>

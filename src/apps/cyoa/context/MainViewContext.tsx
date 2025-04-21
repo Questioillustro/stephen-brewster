@@ -12,8 +12,6 @@ const initialState = { currentView: 'building', isRevisit: false };
 const reducer = (state, action) => {
   console.log('view reducer called', state, action);
   switch (action) {
-    case 'BACK':
-      return { ...state, currentView: 'landing' };
     case 'BUILD':
       return { ...state, currentView: 'building' };
     case 'VIEW_NEW':
@@ -21,7 +19,7 @@ const reducer = (state, action) => {
     case 'VIEW_LIBRARY':
       return { ...state, currentView: 'reading', isRevisit: true };
     default:
-      return { ...state, currentView: 'landing' };
+      return { ...state, currentView: 'building' };
   }
 };
 

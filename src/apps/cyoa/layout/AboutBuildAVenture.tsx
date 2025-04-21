@@ -2,7 +2,7 @@
 import InfoModal from '@/apps/modal/InfoModal';
 import { BuildAventureDescription } from '@/apps/modal/BuildAventureDescription';
 import React, { useState } from 'react';
-import { IconButton, Paper, Stack } from '@mui/material';
+import { IconButton, Stack } from '@mui/material';
 import HelpIcon from '@mui/icons-material/Help';
 
 export const AboutBuildAVenture = () => {
@@ -12,10 +12,10 @@ export const AboutBuildAVenture = () => {
   const handleCloseModal = () => setIsModalOpen(false);
 
   return (
-    <Stack sx={{ display: 'flex', justifyContent: 'end' }}>
+    <Stack sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <IconButton onClick={handleOpenModal}>
         <Typography variant={'h5'} color={'primary'}>
-          About <HelpIcon />
+          <HelpIcon />
         </Typography>
       </IconButton>
 

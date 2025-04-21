@@ -10,32 +10,53 @@ export const BavLibrary = () => {
 
   const storyContext = useStoryContext();
 
-  const { dispatch } = useContext(MainViewContext);
+  const { state, dispatch } = useContext(MainViewContext);
 
   useEffect(() => {
-    try {
-      const myLibrary: IBavLibrary = JSON.parse(localStorage.getItem('bavLibrary') ?? '');
-      if (myLibrary) setLibrary(myLibrary);
-    } catch {
-      console.log('no library found');
-    }
+    getStoredLibrary();
   }, []);
 
   useEffect(() => {
     if (library && library.myStories.length > 0) storyContext.setAdventures(library.myStories);
   }, [library]);
 
+  const getStoredLibrary = () => {
+    try {
+      const myLibrary: IBavLibrary = JSON.parse(localStorage.getItem('bavLibrary') ?? '');
+      if (myLibrary) setLibrary(myLibrary);
+    } catch {
+      console.log('no library found');
+    }
+  };
+
+  const viewLibrary = () => {
+    getStoredLibrary();
+    dispatch('VIEW_LIBRARY');
+  };
+
   return (
     <Stack
       sx={{
         display: 'flex',
         alignItems: 'center',
-        height: 'auto',
         justifyContent: 'center',
       }}
     >
-      <Button variant={'outlined'} onClick={() => dispatch('VIEW_LIBRARY')}>
-        My Library ({library?.myStories.length})
+      <Button
+        variant={'outlined'}
+        onClick={viewLibrary}
+        sx={{
+          ...(state.currentView === 'reading' && {
+            backgroundColor: '#1976d2',
+            color: '#fff',
+            borderColor: '#115293',
+            '&:hover': {
+              backgroundColor: '#115293',
+            },
+          }),
+        }}
+      >
+        Library
       </Button>
     </Stack>
   );

@@ -9,6 +9,7 @@ import { MainViewContext } from '@/apps/cyoa/context/MainViewContext';
 import { Building } from '@/apps/cyoa/components/storypresentation/Building';
 import { TitleTile } from '@/apps/cyoa/components/storypresentation/TitleTile';
 import { IAdventureWrapper } from '@/apps/cyoa/types/adventure';
+import { IBavLibrary } from '@/apps/cyoa/types/library';
 
 export interface StoryPresenterProps {
   view: StoryPresenterViews;
@@ -42,10 +43,26 @@ const StoryPresenter = (props: StoryPresenterProps) => {
 
     getImagesForPrompt(imagePrompt, selectedAdventure._id, '1792x1024', currentPage).then(
       (adventure) => {
+        updateLibraryItem(adventure);
         setAdventure(adventure);
         setGeneratingImage(false);
       },
     );
+  };
+
+  const updateLibraryItem = (adventure: IAdventureWrapper) => {
+    try {
+      const library: IBavLibrary = JSON.parse(localStorage.getItem('bavLibrary') ?? '{}');
+      const index = library.myStories.findIndex((m) => m._id === adventure._id);
+      if (index !== -1) {
+        library.myStories[index] = adventure; // Replace the matching story
+        localStorage.setItem('bavLibrary', JSON.stringify(library)); // Save updated library
+      } else {
+        console.log('Story not found in library');
+      }
+    } catch (error) {
+      console.error('Failed to update library item:', error);
+    }
   };
 
   const nextPage = () => {
@@ -87,6 +104,7 @@ const StoryPresenter = (props: StoryPresenterProps) => {
   useEffect(() => {
     if (!state.isRevisit) return;
 
+    setCurrentPage(0);
     setAdventure(allAdventures[versionIndex]);
   }, [versionIndex]);
 
