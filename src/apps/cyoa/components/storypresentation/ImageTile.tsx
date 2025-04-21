@@ -1,5 +1,5 @@
 ﻿import BuildPictureButton from '../inputs/BuildPictureButton';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Stack } from '@mui/material';
 import { StoryArtTile } from '@/apps/cyoa/components/storypresentation/StoryArtTile';
 import { Painting } from '@/apps/cyoa/components/storypresentation/Painting';
@@ -11,6 +11,10 @@ export interface ImageTileProps {
 }
 
 const ImageTile = (props: ImageTileProps) => {
+  useEffect(() => {
+    if (!props.imageUrl) props.generateImage();
+  }, [props.imageUrl]);
+
   return (
     <Stack sx={{ width: '100%', display: 'flex' }}>
       {!props.imageUrl && (
