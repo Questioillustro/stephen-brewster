@@ -20,12 +20,16 @@ interface CodegenContextType {
   codeDisplay: CodegenResponse | undefined;
   loading: boolean;
   fullPrompt: string;
+  llmOption: LlmOptionType;
+  setLlmOption: (llm: LlmOptionType) => void;
 }
 
 interface CodegenResponse {
   code: string;
   styles: string;
 }
+
+export type LlmOptionType = 'grok' | 'chatgpt';
 
 export const CodegenContext = createContext<CodegenContextType | undefined>(undefined);
 
@@ -47,6 +51,8 @@ export function CodegenProvider({ children }) {
   const [loading, setLoading] = useState<boolean>(false);
 
   const [fullPrompt, setFullPrompt] = useState<string>('');
+
+  const [llm, setLlm] = useState<LlmOptionType>('chatgpt');
 
   const addFramework = (framework: IFrontEndFrameworkOption) => {
     console.log('adding framework', framework);
@@ -78,11 +84,14 @@ export function CodegenProvider({ children }) {
     setPrompt(prompt);
   };
 
+  const setLlmOption = (llm: LlmOptionType) => {
+    setLlm(llm);
+  };
+
   const sendRequest = () => {
     setLoading(true);
 
-    openPromptService(fullPrompt, 'grok', 0.7).then((response: OpenPromptResponse) => {
-      console.log(response);
+    openPromptService(fullPrompt, llm, 0.7).then((response: OpenPromptResponse) => {
       setCodeDisplay(JSON.parse(response));
       setLoading(false);
     });
@@ -130,6 +139,8 @@ export function CodegenProvider({ children }) {
     codeDisplay: codeDisplay,
     loading: loading,
     fullPrompt: fullPrompt,
+    llmOption: llm,
+    setLlmOption: setLlmOption,
   };
 
   return <CodegenContext.Provider value={value}>{children}</CodegenContext.Provider>;

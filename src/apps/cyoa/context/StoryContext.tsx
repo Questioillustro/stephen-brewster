@@ -1,7 +1,10 @@
 ﻿import { createContext, useContext, useState } from 'react';
 import { IAdventureWrapper } from '@/apps/cyoa/types/adventure';
+import { LlmOptionType } from '@/apps/codeassistant/codegen/context/CodegenContext';
 
 export type StoryType = 'adventure' | 'education';
+
+export const defaultLlm: LlmOptionType = 'chatgpt';
 
 interface StoryContextType {
   selectedType: StoryType;

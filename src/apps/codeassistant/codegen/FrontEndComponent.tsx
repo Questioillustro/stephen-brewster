@@ -9,6 +9,7 @@ import CommentsCheckbox from '@/apps/codeassistant/codegen/components/CommentsCh
 import PromptDisplay from '@/apps/codeassistant/codegen/components/PromptDisplay';
 import SeparateStylesFile from '@/apps/codeassistant/codegen/components/SeparateStylesFile';
 import CodeTabs from '@/apps/codeassistant/codegen/components/CodeTabs';
+import LlmSelect from '@/apps/codeassistant/codegen/components/LlmSelect';
 
 const FrontEndComponent = () => {
   const context = useCodegenContext();
@@ -43,7 +44,9 @@ const FrontEndComponent = () => {
           </Paper>
 
           <Paper elevation={2} sx={{ p: 2 }}>
-            <Stack direction={'row'} sx={{ display: 'flex', width: '100%', gap: 2 }}>
+            <LlmSelect />
+
+            <Stack direction={'row'} sx={{ display: 'flex', width: '100%', gap: 2, pt: 1 }}>
               <PromptField />
               <SendPromptButton />
             </Stack>

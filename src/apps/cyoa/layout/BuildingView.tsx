@@ -1,13 +1,12 @@
-﻿import React, { useContext, useEffect, useState } from 'react';
-import { Fade, Paper, Stack } from '@mui/material';
+﻿import React, { useContext, useState } from 'react';
+import { Stack } from '@mui/material';
 import BuildOptions from '@/apps/cyoa/components/inputs/BuildOptions';
 import { MainViewContext } from '@/apps/cyoa/context/MainViewContext';
 import { BuildAVenture } from '@/apps/cyoa/api/AdventureService';
-import { useStoryContext } from '@/apps/cyoa/context/StoryContext';
+import { defaultLlm, useStoryContext } from '@/apps/cyoa/context/StoryContext';
 import { Building } from '@/apps/cyoa/components/storypresentation/Building';
 import { IAdventureWrapper } from '@/apps/cyoa/types/adventure';
 import { IBavLibrary } from '@/apps/cyoa/types/library';
-import { AnimationConstants } from '@/apps/cyoa/constants/AnimationConstants';
 
 const BuildingView: React.FC = () => {
   const { state, dispatch } = useContext(MainViewContext);
@@ -16,7 +15,7 @@ const BuildingView: React.FC = () => {
 
   const build = async (prompts: string, characterPrompts: string, artStyle: string) => {
     setIsLoading(true);
-    BuildAVenture(prompts, characterPrompts, artStyle, 'grok', 0.9).then(
+    BuildAVenture(prompts, characterPrompts, artStyle, defaultLlm, 0.9).then(
       (adventure: IAdventureWrapper) => {
         addToLibrary(adventure);
         setAdventure(adventure);

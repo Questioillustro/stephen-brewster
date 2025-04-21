@@ -1,11 +1,12 @@
 ﻿import apiClient from '@/api/ApiClient';
 import { IAdventureWrapper } from '@/apps/cyoa/types/adventure';
+import { LlmOptionType } from '@/apps/codeassistant/codegen/context/CodegenContext';
 
 export const BuildAVenture = async (
   prompts: string,
   characterPrompts: string,
   artStyle: string,
-  llm: string,
+  llm: LlmOptionType,
   temperature?: number,
 ): Promise<IAdventureWrapper> => {
   try {
