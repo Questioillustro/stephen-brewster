@@ -1,8 +1,9 @@
 ﻿import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styled from '@emotion/styled';
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { Box, Button, Fade, Stack, Typography } from '@mui/material';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import StyledDivider from '@/components/dividers/StyledDivider';
+import { AnimationConstants } from '@/apps/cyoa/constants/AnimationConstants';
 
 export interface CarouselItem {
   id: string;
@@ -123,64 +124,66 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
   };
 
   return (
-    <Stack sx={{ mt: useDividers ? 2 : 0, pb: useDividers ? 2 : 0 }}>
-      {useDividers && <StyledDivider />}
-      <Typography
-        variant='h6'
-        sx={{ pb: 2, justifyContent: 'center', width: '100%', display: 'flex' }}
-      >
-        {title}
-      </Typography>
-
-      <Container>
-        <Button
-          onClick={scrollLeft}
-          variant='contained'
-          disabled={scrollPosition <= 0 || isCentered}
-          sx={{
-            display: 'flex',
-            height: '100%',
-            m: 1,
-            minWidth: { xs: '30px', sm: '40px' },
-            padding: { xs: '0 4px', sm: '0 8px' },
-          }}
+    <Fade in={true} timeout={AnimationConstants.QUICK_STORY_NAV_SPEED}>
+      <Stack sx={{ mt: useDividers ? 2 : 0, pb: useDividers ? 2 : 0 }}>
+        {useDividers && <StyledDivider />}
+        <Typography
+          variant='h6'
+          sx={{ pb: 2, justifyContent: 'center', width: '100%', display: 'flex' }}
         >
-          <ChevronLeft sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
-        </Button>
+          {title}
+        </Typography>
 
-        <CarouselWrapper ref={carouselRef}>
-          <CarouselTrack
-            isCentered={isCentered}
+        <Container>
+          <Button
+            onClick={scrollLeft}
+            variant='contained'
+            disabled={scrollPosition <= 0 || isCentered}
             sx={{
-              transform: `translateX(-${scrollPosition}px)`,
+              display: 'flex',
+              height: '100%',
+              m: 1,
+              minWidth: { xs: '30px', sm: '40px' },
+              padding: { xs: '0 4px', sm: '0 8px' },
             }}
           >
-            {items.map((item) => (
-              <Box key={item.id} sx={{ flexShrink: 0 }}>
-                {renderItem(item, selectedItemId === item.id, () => handleItemClick(item))}
-              </Box>
-            ))}
-          </CarouselTrack>
-        </CarouselWrapper>
+            <ChevronLeft sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
+          </Button>
 
-        <Button
-          onClick={scrollRight}
-          variant='contained'
-          disabled={scrollPosition >= maxScroll || isCentered}
-          sx={{
-            display: 'flex',
-            height: '100%',
-            m: 1,
-            minWidth: { xs: '30px', sm: '40px' },
-            padding: { xs: '0 4px', sm: '0 8px' },
-          }}
-        >
-          <ChevronRight sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
-        </Button>
-      </Container>
+          <CarouselWrapper ref={carouselRef}>
+            <CarouselTrack
+              isCentered={isCentered}
+              sx={{
+                transform: `translateX(-${scrollPosition}px)`,
+              }}
+            >
+              {items.map((item) => (
+                <Box key={item.id} sx={{ flexShrink: 0 }}>
+                  {renderItem(item, selectedItemId === item.id, () => handleItemClick(item))}
+                </Box>
+              ))}
+            </CarouselTrack>
+          </CarouselWrapper>
 
-      {useDividers && <StyledDivider />}
-    </Stack>
+          <Button
+            onClick={scrollRight}
+            variant='contained'
+            disabled={scrollPosition >= maxScroll || isCentered}
+            sx={{
+              display: 'flex',
+              height: '100%',
+              m: 1,
+              minWidth: { xs: '30px', sm: '40px' },
+              padding: { xs: '0 4px', sm: '0 8px' },
+            }}
+          >
+            <ChevronRight sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
+          </Button>
+        </Container>
+
+        {useDividers && <StyledDivider />}
+      </Stack>
+    </Fade>
   );
 };
 

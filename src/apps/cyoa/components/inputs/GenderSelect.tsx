@@ -1,5 +1,6 @@
 ﻿import React, { useEffect, useState } from 'react';
-import { Button, Box, Stack } from '@mui/material';
+import { Button, Box, Stack, Fade } from '@mui/material';
+import { AnimationConstants } from '@/apps/cyoa/constants/AnimationConstants';
 
 export interface QuoteSelectProps {
   addGender: (prompt: string) => void;
@@ -21,35 +22,41 @@ const GenderSelect = (props: QuoteSelectProps) => {
   }, [gender]);
 
   return (
-    <Stack direction={'row'} sx={{ display: 'flex', gap: 2, justifyContent: 'center', mt: 2 }}>
-      <Button
-        onClick={() => handleGenderSelect('Male')}
-        sx={{
-          padding: 0,
-          border: gender === 'Male' ? '0.25rem solid blue' : 'none',
-          borderRadius: '0.25rem',
-          '&:hover': { opacity: 0.8 },
-        }}
-      >
-        <img src='/bav/boy.jpg' alt='Select Male' style={{ width: '6.25rem', height: '6.25rem' }} />
-      </Button>
+    <Fade in={true} timeout={AnimationConstants.QUICK_STORY_NAV_SPEED}>
+      <Stack direction={'row'} sx={{ display: 'flex', gap: 2, justifyContent: 'center', mt: 2 }}>
+        <Button
+          onClick={() => handleGenderSelect('Male')}
+          sx={{
+            padding: 0,
+            border: gender === 'Male' ? '0.25rem solid blue' : 'none',
+            borderRadius: '0.25rem',
+            '&:hover': { opacity: 0.8 },
+          }}
+        >
+          <img
+            src='/bav/boy.jpg'
+            alt='Select Male'
+            style={{ width: '6.25rem', height: '6.25rem' }}
+          />
+        </Button>
 
-      <Button
-        onClick={() => handleGenderSelect('Female')}
-        sx={{
-          padding: 0,
-          border: gender === 'Female' ? '0.25rem solid pink' : 'none',
-          borderRadius: '0.25rem',
-          '&:hover': { opacity: 0.8 },
-        }}
-      >
-        <img
-          src='/bav/girl.jpg'
-          alt='Select Female'
-          style={{ width: '6.25rem', height: '6.25rem' }}
-        />
-      </Button>
-    </Stack>
+        <Button
+          onClick={() => handleGenderSelect('Female')}
+          sx={{
+            padding: 0,
+            border: gender === 'Female' ? '0.25rem solid pink' : 'none',
+            borderRadius: '0.25rem',
+            '&:hover': { opacity: 0.8 },
+          }}
+        >
+          <img
+            src='/bav/girl.jpg'
+            alt='Select Female'
+            style={{ width: '6.25rem', height: '6.25rem' }}
+          />
+        </Button>
+      </Stack>
+    </Fade>
   );
 };
 export default GenderSelect;

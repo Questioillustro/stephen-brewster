@@ -30,7 +30,7 @@ const StoryPresenter = (props: StoryPresenterProps) => {
 
   const [versionIndex, setVersionIndex] = useState(0);
 
-  const [showStoryText, setShowStoryText] = useState(false);
+  const [showStory, setShowStory] = useState(true);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -81,23 +81,23 @@ const StoryPresenter = (props: StoryPresenterProps) => {
   };
 
   const navPreviousVersion = () => {
-    setShowStoryText(false);
+    setShowStory(false);
     setTimeout(decrementVersion, AnimationConstants.QUICK_STORY_NAV_SPEED);
   };
 
   const decrementVersion = () => {
     setVersionIndex((prev) => prev - 1);
-    setShowStoryText(true);
+    setShowStory(true);
   };
 
   const navNextVersion = () => {
-    setShowStoryText(false);
+    setShowStory(false);
     setTimeout(incrementVersion, AnimationConstants.QUICK_STORY_NAV_SPEED);
   };
 
   const incrementVersion = () => {
     setVersionIndex((next) => next + 1);
-    setShowStoryText(true);
+    setShowStory(true);
   };
 
   useEffect(() => {
@@ -112,7 +112,7 @@ const StoryPresenter = (props: StoryPresenterProps) => {
   }, [versionIndex]);
 
   return (
-    <Fade in={true} timeout={AnimationConstants.QUICK_STORY_NAV_SPEED}>
+    <Fade in={showStory} timeout={AnimationConstants.QUICK_STORY_NAV_SPEED}>
       <Paper
         elevation={2}
         sx={{ width: { md: '80%', lg: '60%' } }}
@@ -129,7 +129,7 @@ const StoryPresenter = (props: StoryPresenterProps) => {
             previousVersion={navPreviousVersion}
             nextVersion={navNextVersion}
             total={storyContext.allAdventures.length}
-            disabled={showStoryText}
+            disabled={showStory}
           />
         )}
 
