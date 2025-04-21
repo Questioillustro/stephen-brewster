@@ -13,7 +13,7 @@ const Landing = () => {
 
   return (
     <Stack sx={{ display: 'flex', width: '100%', flexDirection: 'column', alignItems: 'center' }}>
-      <AppHeader content={<ViewToggle />} about={<AboutBuildAVenture />} />
+      <AppHeader content={<ViewToggle />} />
 
       {state.currentView === 'building' && <BuildingView />}
 

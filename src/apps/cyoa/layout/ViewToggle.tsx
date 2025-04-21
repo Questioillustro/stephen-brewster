@@ -4,7 +4,7 @@ import { BavLibrary } from '@/apps/cyoa/layout/BavLibrary';
 
 export const ViewToggle = () => {
   return (
-    <Stack direction={'row'} sx={{ gap: 2 }}>
+    <Stack direction={'row'} sx={{ gap: 2, p: 1 }}>
       <BuildView />
       <BavLibrary />
     </Stack>
