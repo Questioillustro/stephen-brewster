@@ -13,6 +13,7 @@ import { AppsPage } from '@/layout/apps/AppsPage';
 import { WritingPage } from '@/apps/writing/WritingPage';
 import BuildAVentureApp from '@/apps/cyoa/BuildAVentureApp';
 import CodeAssistant from '@/apps/codeassistant/CodeAssistant';
+import WordleApp from '@/apps/wordle/WordleApp';
 
 function Layout() {
   const { theme } = useContext(ThemeContext);
@@ -31,6 +32,7 @@ function Layout() {
               <Route path='/apps' element={<AppsPage />} />
               <Route path='/apps/bav' element={<BuildAVentureApp />} />
               <Route path='/apps/codeassistant' element={<CodeAssistant />} />
+              <Route path='/apps/wordle' element={<WordleApp />} />
               <Route path='/resume' element={<Resume />} />
               <Route path='/writing' element={<WritingPage />} />
               <Route path='/pictures' element={<div>pictures</div>} />

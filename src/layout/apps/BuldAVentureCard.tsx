@@ -7,6 +7,6 @@ export const BuildAVentureCard = () => (
       'Build a customized short story with AI, including AI generated pictures to bring it to life!'
     }
     link={'bav'}
-    imageSrc={'https://azurefunctionsapp2022060.blob.core.windows.net/cyoa/buildadventure3.png'}
+    imageSrc={'https://azurefunctionsapp2022060.blob.core.windows.net/cyoa/bav.jpg'}
   />
 );

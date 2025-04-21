@@ -1,6 +1,7 @@
 ﻿import { Paper } from '@mui/material';
 import { BuildAVentureCard } from '@/layout/apps/BuldAVentureCard';
 import { CodeAssistantCard } from '@/layout/apps/CodeAssistantCard';
+import { WordleCard } from '@/layout/apps/WordleCard';
 
 export const AppsPage: React.FC = () => {
   return (
@@ -8,6 +9,8 @@ export const AppsPage: React.FC = () => {
       <BuildAVentureCard />
 
       <CodeAssistantCard />
+
+      <WordleCard />
     </Paper>
   );
 };

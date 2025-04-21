@@ -1,10 +1,12 @@
-﻿import { useState, useEffect } from 'react';
-import { Box, Typography, Snackbar } from '@mui/material';
+﻿import React, { useState, useEffect } from 'react';
+import { Box, Typography, Snackbar, Stack, Paper } from '@mui/material';
 import Board from './Board';
 import Keyboard from './Keyboard';
 import { WORDS } from './words';
 import { GameState, Guess } from '@/apps/wordle/Types';
 import { getDailyWord, getDateString } from '@/apps/wordle/DailyWord';
+import AppHeader from '@/layout/apps/AppHeader';
+import { AboutNotWordle } from '@/apps/wordle/AboutNotWordle';
 
 const WordleApp: React.FC = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -149,20 +151,28 @@ const WordleApp: React.FC = () => {
   }, [gameState]);
 
   return (
-    <Box display='flex' flexDirection='column' alignItems='center' p={2}>
-      <Board
-        guesses={gameState.guesses}
-        currentGuess={gameState.currentGuess}
-        guessIdx={gameState.guessIdx}
-      />
-      <Keyboard onKeyPress={handleKeyPress} letterStatuses={gameState.letterStatuses} />
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={3000}
-        onClose={() => setSnackbarOpen(false)}
-        message={snackbarMessage}
-      />
-    </Box>
+    <Stack sx={{ display: 'flex', alignItems: 'center', width: '100%', gap: 2 }}>
+      <AppHeader about={<AboutNotWordle />} />
+
+      <Paper elevation={2} sx={{ display: 'flex', width: '100%' }}>
+        <Stack sx={{ width: '100%', m: 4, alignItems: 'center' }}>
+          <Board
+            guesses={gameState.guesses}
+            currentGuess={gameState.currentGuess}
+            guessIdx={gameState.guessIdx}
+          />
+
+          <Keyboard onKeyPress={handleKeyPress} letterStatuses={gameState.letterStatuses} />
+
+          <Snackbar
+            open={snackbarOpen}
+            autoHideDuration={3000}
+            onClose={() => setSnackbarOpen(false)}
+            message={snackbarMessage}
+          />
+        </Stack>
+      </Paper>
+    </Stack>
   );
 };
 

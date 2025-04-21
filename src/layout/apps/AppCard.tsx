@@ -29,7 +29,6 @@ const AppCard: React.FC<AppCardProps> = ({ title, imageSrc, description, link })
           sx={{
             height: 250,
             objectFit: 'cover',
-            objectPosition: '0 100%',
             width: '100%',
           }}
           image={imageSrc || 'https://via.placeholder.com/150x300'}
