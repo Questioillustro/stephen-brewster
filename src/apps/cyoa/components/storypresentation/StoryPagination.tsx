@@ -28,7 +28,7 @@ const StoryPagination = (props: StoryPaginationProps) => {
       </Button>
 
       <Typography variant={'body2'} sx={{ pt: 1 }}>
-        Page: {currentPage} / {totalPages}
+        Page {currentPage}
       </Typography>
 
       <Button
