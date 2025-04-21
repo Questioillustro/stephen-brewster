@@ -141,5 +141,4 @@ export const EnvironmentList: IEnvironmentItem[] = [
   },
 ];
 
-// Example usage: Convert the entire environmentList
 export const envCarouselItems: CarouselItem[] = EnvironmentList.map(mapEnvironmentToCarouselItem);

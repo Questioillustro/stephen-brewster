@@ -1,5 +1,4 @@
-﻿import { Box } from '@mui/material';
-import ColorSwatchCarousel from '@/apps/cyoa/components/inputs/color/ColorSwatchCarousel';
+﻿import ColorSwatchCarousel from '@/apps/cyoa/components/inputs/color/ColorSwatchCarousel';
 
 export interface HairColorSelectProps {
   setHairColor: (hex: string) => void;
@@ -12,11 +11,7 @@ const MainCharacterHairColor = (props: HairColorSelectProps) => {
     setHairColor(`Main character's hair color is: ${color}.`);
   };
 
-  return (
-    <Box sx={{ p: 0 }}>
-      <ColorSwatchCarousel onColorSelect={colorChanged} title={'Hair Color'} />
-    </Box>
-  );
+  return <ColorSwatchCarousel onColorSelect={colorChanged} title={'Hair Color'} />;
 };
 
 export default MainCharacterHairColor;

@@ -2,18 +2,11 @@
 import { Box } from '@mui/material';
 import styled from '@emotion/styled';
 import CarouselSelector from '@/apps/cyoa/components/carousel/CarouselSelector';
-
-const artStyles = [
-  { id: '1', name: 'Anime' },
-  { id: '2', name: 'Watercolor' },
-  { id: '3', name: 'Studio Ghibli' },
-  { id: '4', name: 'Whimsical Fantasy' },
-  { id: '5', name: 'Cartoon' },
-];
+import { artCarouselItems } from '@/apps/cyoa/components/inputs/artstyle/ArtStyleList';
 
 const StyleSquare = styled(Box)<{ selected: boolean }>`
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -32,17 +25,24 @@ const StyleSquare = styled(Box)<{ selected: boolean }>`
   }
 `;
 
+const ArtStyleImage = styled('img')`
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+`;
+
 const ArtStyleSelector: React.FC<{ onChange: (style: string) => void }> = ({ onChange }) => {
   return (
     <CarouselSelector
-      items={artStyles}
+      items={artCarouselItems}
       title='Choose Your Art Style!'
-      itemWidth={96} // 80px width + 16px gap
+      itemWidth={145}
       onSelect={(item) => onChange(item.name)}
       useDividers
       renderItem={(item, selected, onClick) => (
         <StyleSquare selected={selected} onClick={onClick}>
-          {item.name}
+          <ArtStyleImage src={item.imageUrl} alt={item.name} />
         </StyleSquare>
       )}
     />

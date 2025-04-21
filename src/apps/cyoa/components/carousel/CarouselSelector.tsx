@@ -24,7 +24,6 @@ const Container = styled(Box)`
   display: flex;
   align-items: center;
   flex-direction: row;
-  height: 105px;
   width: 100%;
   max-width: 100%;
 `;
