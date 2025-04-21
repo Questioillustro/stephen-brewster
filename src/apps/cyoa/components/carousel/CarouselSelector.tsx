@@ -80,11 +80,6 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
         if (newItemsPerView !== itemsPerView) {
           setItemsPerView(newItemsPerView);
         }
-        // Recalculate scroll position to keep items centered
-        setScrollPosition((prev) => {
-          const centerOffset = (newContainerWidth - itemWidth * newItemsPerView) / 2;
-          return Math.min(Math.max(prev, -centerOffset), maxScroll);
-        });
       }
     }, 100),
     [itemsPerView, itemWidth],
@@ -112,31 +107,17 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
   const handleItemClick = (item: CarouselItem) => {
     setSelectedItemId(item.id);
     onSelect(item);
-    // Center the selected item
-    const itemIndex = items.findIndex((i) => i.id === item.id);
-    const centerOffset = (containerWidth - itemWidth) / 2;
-    const newScroll = itemIndex * itemWidth - centerOffset;
-    setScrollPosition(Math.max(0, Math.min(newScroll, maxScroll)));
   };
 
   const scrollLeft = () => {
-    const centerOffset = (containerWidth - itemWidth * itemsPerView) / 2;
-    const newPosition = Math.max(scrollPosition - itemWidth * itemsPerView, -centerOffset);
+    const newPosition = Math.max(scrollPosition - itemWidth * itemsPerView, 0);
     setScrollPosition(newPosition);
   };
 
   const scrollRight = () => {
-    const centerOffset = (containerWidth - itemWidth * itemsPerView) / 2;
-    const newPosition = Math.min(
-      scrollPosition + itemWidth * itemsPerView,
-      maxScroll + centerOffset,
-    );
+    const newPosition = Math.min(scrollPosition + itemWidth * itemsPerView, maxScroll);
     setScrollPosition(newPosition);
   };
-
-  // Calculate transform with centering
-  const centerOffset = (containerWidth - itemWidth * itemsPerView) / 2;
-  const adjustedScroll = scrollPosition + centerOffset;
 
   return (
     <Stack sx={{ width: '100%', mt: useDividers ? 2 : 0, pb: useDividers ? 2 : 0 }}>
@@ -152,7 +133,7 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
         <Button
           onClick={scrollLeft}
           variant='contained'
-          disabled={scrollPosition <= -centerOffset}
+          disabled={scrollPosition <= 0}
           sx={{ display: 'flex', height: '100%', m: 1 }}
         >
           <ChevronLeft />
@@ -161,7 +142,7 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
         <CarouselWrapper ref={carouselRef}>
           <CarouselTrack
             sx={{
-              transform: `translateX(-${adjustedScroll}px)`,
+              transform: `translateX(-${scrollPosition}px)`,
             }}
           >
             {items.map((item) => (
@@ -175,7 +156,7 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
         <Button
           onClick={scrollRight}
           variant='contained'
-          disabled={scrollPosition >= maxScroll + centerOffset}
+          disabled={scrollPosition >= maxScroll}
           sx={{ display: 'flex', height: '100%', m: 1 }}
         >
           <ChevronRight />

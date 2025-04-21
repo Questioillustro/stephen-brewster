@@ -6,16 +6,20 @@ export interface QuoteSelectProps {
 }
 const GenderSelect = (props: QuoteSelectProps) => {
   const { addGender } = props;
+
   const [gender, setGender] = useState<string>('Male');
+
   const handleGenderSelect = (selectedGender: 'Male' | 'Female') => {
     setGender(selectedGender);
   };
+
   useEffect(() => {
     if (gender) {
       const prompt = `Main character's gender is ${gender}.`;
       addGender(prompt);
     }
   }, [gender]);
+
   return (
     <Stack direction={'row'} sx={{ display: 'flex', gap: 2, justifyContent: 'center', mt: 2 }}>
       <Button
@@ -33,6 +37,7 @@ const GenderSelect = (props: QuoteSelectProps) => {
           style={{ width: '6.25rem', height: '6.25rem' }}
         />
       </Button>
+
       <Button
         onClick={() => handleGenderSelect('Female')}
         sx={{

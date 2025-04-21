@@ -35,7 +35,7 @@ const EnvironmentSelect: React.FC<{ setEnvironment: (environment: string) => voi
     <CarouselSelector
       items={envCarouselItems}
       title='Choose a Setting!'
-      itemWidth={124} // 105px width + 16px gap
+      itemWidth={126} // 105px width + 16px gap
       onSelect={(item) => setEnvironment(`The story setting is: ${item.prompt}.`)}
       useDividers
       renderItem={(item, selected, onClick) => (
