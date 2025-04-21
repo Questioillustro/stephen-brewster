@@ -7,6 +7,6 @@ export const CodeAssistantCard = () => (
       'Code writing buddy! Creates small components and builds a library of code examples.'
     }
     link={'codeassistant'}
-    imageSrc={'https://azurefunctionsapp2022060.blob.core.windows.net/cyoa/codeassistant.jpg'}
+    imageSrc={'/appcards/codeassistant.jpg'}
   />
 );

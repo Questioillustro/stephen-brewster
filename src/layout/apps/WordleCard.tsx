@@ -5,6 +5,6 @@ export const WordleCard = () => (
     title={''}
     description={`It's Wordle.`}
     link={'wordle'}
-    imageSrc={'https://azurefunctionsapp2022060.blob.core.windows.net/cyoa/wordle.jpg'}
+    imageSrc={'/appcards/wordle.jpg'}
   />
 );

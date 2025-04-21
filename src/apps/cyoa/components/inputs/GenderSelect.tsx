@@ -31,11 +31,7 @@ const GenderSelect = (props: QuoteSelectProps) => {
           '&:hover': { opacity: 0.8 },
         }}
       >
-        <img
-          src='https://azurefunctionsapp2022060.blob.core.windows.net/cyoa/boy.jpg'
-          alt='Select Male'
-          style={{ width: '6.25rem', height: '6.25rem' }}
-        />
+        <img src='/bav/boy.jpg' alt='Select Male' style={{ width: '6.25rem', height: '6.25rem' }} />
       </Button>
 
       <Button
@@ -48,7 +44,7 @@ const GenderSelect = (props: QuoteSelectProps) => {
         }}
       >
         <img
-          src='https://azurefunctionsapp2022060.blob.core.windows.net/cyoa/girl.jpg'
+          src='/bav/girl.jpg'
           alt='Select Female'
           style={{ width: '6.25rem', height: '6.25rem' }}
         />

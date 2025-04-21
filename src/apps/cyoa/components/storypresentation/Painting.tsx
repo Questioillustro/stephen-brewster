@@ -1,14 +1,14 @@
 ﻿import { CardMedia } from '@mui/material';
 import React from 'react';
 
-export const Building = () => (
+export const Painting = () => (
   <CardMedia
     component='img'
     sx={{
       width: '100%',
       objectFit: 'cover',
     }}
-    image={'/bav/building_a_venture_1.jpg'}
+    image={'/bav/painting.jpg'}
     title={'build-a-picture'}
     alt={'Building a picture...'}
   />

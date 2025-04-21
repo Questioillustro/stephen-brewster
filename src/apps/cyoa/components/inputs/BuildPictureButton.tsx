@@ -12,10 +12,7 @@ const BuildPictureButton = (props: BuildPictureButtonProps) => {
       style={{ width: '100%', height: '100%', cursor: 'pointer' }}
       onClick={() => generateImage()}
     >
-      <img
-        src={'https://azurefunctionsapp2022060.blob.core.windows.net/cyoa/build-a-picture.jpg'}
-        width={'100%'}
-      />
+      <img src={'/bav/build-a-picture.jpg'} width={'100%'} />
     </div>
   );
 };
