@@ -6,7 +6,6 @@ export const Building = () => (
     component='img'
     sx={{
       width: '100%',
-      minHeight: '387px',
       objectFit: 'cover',
     }}
     image={'https://azurefunctionsapp2022060.blob.core.windows.net/cyoa/building_a_venture_1.jpg'}
