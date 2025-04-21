@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import styled from '@emotion/styled';
 import { envCarouselItems } from './EnvironmentList';
 import CarouselSelector from '@/apps/cyoa/components/carousel/CarouselSelector';
@@ -32,18 +32,20 @@ const EnvironmentSelect: React.FC<{ setEnvironment: (environment: string) => voi
   setEnvironment,
 }) => {
   return (
-    <CarouselSelector
-      items={envCarouselItems}
-      title='Choose a Setting!'
-      itemWidth={126} // 105px width + 16px gap
-      onSelect={(item) => setEnvironment(`The story setting is: ${item.prompt}.`)}
-      useDividers
-      renderItem={(item, selected, onClick) => (
-        <EnvironmentSquare selected={selected} onClick={onClick}>
-          <EnvironmentImage src={item.imageUrl} alt={item.name} />
-        </EnvironmentSquare>
-      )}
-    />
+    <Stack sx={{ width: '100%' }}>
+      <CarouselSelector
+        items={envCarouselItems}
+        title='Choose a Setting!'
+        itemWidth={126} // 105px width + 16px gap
+        onSelect={(item) => setEnvironment(`The story setting is: ${item.prompt}.`)}
+        useDividers
+        renderItem={(item, selected, onClick) => (
+          <EnvironmentSquare selected={selected} onClick={onClick}>
+            <EnvironmentImage src={item.imageUrl} alt={item.name} />
+          </EnvironmentSquare>
+        )}
+      />
+    </Stack>
   );
 };
 

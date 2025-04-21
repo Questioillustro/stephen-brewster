@@ -6,6 +6,7 @@ import StyledDivider from '@/components/dividers/StyledDivider';
 import ArtStyleCarousel from '@/apps/cyoa/components/inputs/artstyle/ArtStyleCarousel';
 import EnvironmentCarousel from '@/apps/cyoa/components/inputs/environment/EnvironmentCarousel';
 import { BavLibrary } from '@/apps/cyoa/layout/BavLibrary';
+import Typography from '@mui/material/Typography';
 
 export interface IBuildOptionsProps {
   setPrompts: (prompts: string, characterPrompts: string, artStyle: string) => void;
@@ -102,8 +103,14 @@ const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) =
         >
           <StoryDetailsPanel setStoryDetailsPrompts={setStoryDetails} />
 
-          <Button onClick={() => buildAdventure()} variant={'contained'} sx={{ maxWidth: '300px' }}>
-            Build It!
+          <Button
+            onClick={() => buildAdventure()}
+            variant={'contained'}
+            sx={{ width: '50%', p: 3 }}
+          >
+            <Typography variant={'h6'} color={'black'}>
+              Build It!
+            </Typography>
           </Button>
 
           <StyledDivider />

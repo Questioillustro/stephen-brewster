@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import styled from '@emotion/styled';
 import CarouselSelector from '@/apps/cyoa/components/carousel/CarouselSelector';
 import { artCarouselItems } from '@/apps/cyoa/components/inputs/artstyle/ArtStyleList';
@@ -34,18 +34,20 @@ const ArtStyleImage = styled('img')`
 
 const ArtStyleSelector: React.FC<{ onChange: (style: string) => void }> = ({ onChange }) => {
   return (
-    <CarouselSelector
-      items={artCarouselItems}
-      title='Choose Your Art Style!'
-      itemWidth={145}
-      onSelect={(item) => onChange(item.name)}
-      useDividers
-      renderItem={(item, selected, onClick) => (
-        <StyleSquare selected={selected} onClick={onClick}>
-          <ArtStyleImage src={item.imageUrl} alt={item.name} />
-        </StyleSquare>
-      )}
-    />
+    <Stack sx={{ width: '100%' }}>
+      <CarouselSelector
+        items={artCarouselItems}
+        title='Choose Your Art Style!'
+        itemWidth={145}
+        onSelect={(item) => onChange(item.name)}
+        useDividers
+        renderItem={(item, selected, onClick) => (
+          <StyleSquare selected={selected} onClick={onClick}>
+            <ArtStyleImage src={item.imageUrl} alt={item.name} />
+          </StyleSquare>
+        )}
+      />
+    </Stack>
   );
 };
 

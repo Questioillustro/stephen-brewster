@@ -34,10 +34,12 @@ const CarouselWrapper = styled(Box)`
   max-width: 100%;
 `;
 
-const CarouselTrack = styled(Box)`
+const CarouselTrack = styled(Box)<{ isCentered: boolean }>`
   display: flex;
   transition: transform 0.3s ease-in-out;
   gap: 16px;
+  justify-content: ${({ isCentered }) => (isCentered ? 'center' : 'flex-start')};
+  width: ${({ isCentered }) => (isCentered ? 'auto' : '100%')};
 `;
 
 const debounce = (func: (...args: any[]) => void, wait: number) => {
@@ -63,12 +65,13 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
   const [scrollPosition, setScrollPosition] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(4);
   const [containerWidth, setContainerWidth] = useState(0);
+  const [isCentered, setIsCentered] = useState(false);
 
   const carouselRef = useRef<HTMLDivElement>(null);
   const totalItemsWidth = items.length * itemWidth;
   const maxScroll = Math.max(totalItemsWidth - containerWidth, 0);
 
-  // Update itemsPerView and containerWidth with debouncing
+  // Update itemsPerView, containerWidth, and centering logic with debouncing
   const updateDimensions = useCallback(
     debounce(() => {
       if (carouselRef.current) {
@@ -76,12 +79,13 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
         const calculatedItems = Math.floor(newContainerWidth / itemWidth);
         const newItemsPerView = Math.max(1, calculatedItems);
         setContainerWidth(newContainerWidth);
+        setIsCentered(newContainerWidth > totalItemsWidth);
         if (newItemsPerView !== itemsPerView) {
           setItemsPerView(newItemsPerView);
         }
       }
     }, 100),
-    [itemsPerView, itemWidth],
+    [itemsPerView, itemWidth, totalItemsWidth],
   );
 
   // Set up ResizeObserver
@@ -119,7 +123,7 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
   };
 
   return (
-    <Stack sx={{ width: '100%', mt: useDividers ? 2 : 0, pb: useDividers ? 2 : 0 }}>
+    <Stack sx={{ mt: useDividers ? 2 : 0, pb: useDividers ? 2 : 0 }}>
       {useDividers && <StyledDivider />}
       <Typography
         variant='h6'
@@ -132,27 +136,27 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
         <Button
           onClick={scrollLeft}
           variant='contained'
-          disabled={scrollPosition <= 0}
+          disabled={scrollPosition <= 0 || isCentered}
           sx={{
             display: 'flex',
             height: '100%',
             m: 1,
-            minWidth: { xs: '30px', sm: '40px' }, // Skinnier on xs screens
-            padding: { xs: '0 4px', sm: '0 8px' }, // Reduced padding on xs
+            minWidth: { xs: '30px', sm: '40px' },
+            padding: { xs: '0 4px', sm: '0 8px' },
           }}
         >
-          <ChevronLeft sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />{' '}
-          {/* Smaller icon on xs */}
+          <ChevronLeft sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
         </Button>
 
         <CarouselWrapper ref={carouselRef}>
           <CarouselTrack
+            isCentered={isCentered}
             sx={{
               transform: `translateX(-${scrollPosition}px)`,
             }}
           >
             {items.map((item) => (
-              <Box key={item.id}>
+              <Box key={item.id} sx={{ flexShrink: 0 }}>
                 {renderItem(item, selectedItemId === item.id, () => handleItemClick(item))}
               </Box>
             ))}
@@ -162,17 +166,16 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
         <Button
           onClick={scrollRight}
           variant='contained'
-          disabled={scrollPosition >= maxScroll}
+          disabled={scrollPosition >= maxScroll || isCentered}
           sx={{
             display: 'flex',
             height: '100%',
             m: 1,
-            minWidth: { xs: '30px', sm: '40px' }, // Skinnier on xs screens
-            padding: { xs: '0 4px', sm: '0 8px' }, // Reduced padding on xs
+            minWidth: { xs: '30px', sm: '40px' },
+            padding: { xs: '0 4px', sm: '0 8px' },
           }}
         >
-          <ChevronRight sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />{' '}
-          {/* Smaller icon on xs */}
+          <ChevronRight sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
         </Button>
       </Container>
 
