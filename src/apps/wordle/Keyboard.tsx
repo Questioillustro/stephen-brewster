@@ -9,9 +9,9 @@ interface KeyboardProps {
 const StyledButton = styled(Button)<{ status?: string }>(({ status }) => ({
   width: '100%',
   minWidth: '30px',
-  height: '30px',
-  fontSize: '16px',
-  padding: '3px',
+  height: '35px',
+  fontSize: '14px',
+  padding: '0px',
   backgroundColor:
     status === 'correct'
       ? '#4caf50'
@@ -35,7 +35,8 @@ const StyledButton = styled(Button)<{ status?: string }>(({ status }) => ({
 const keys = [
   ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
   ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-  ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'BACKSPACE'],
+  ['Z', 'X', 'C', 'V', 'B', 'N', 'M', 'BACKSPACE'],
+  ['ENTER'],
 ];
 
 const Keyboard: React.FC<KeyboardProps> = ({ onKeyPress, letterStatuses = {} }) => {
@@ -51,7 +52,7 @@ const Keyboard: React.FC<KeyboardProps> = ({ onKeyPress, letterStatuses = {} }) 
               status={letterStatuses[key.toLowerCase()]}
               variant='contained'
             >
-              {key === 'BACKSPACE' ? '⌫' : key === 'ENTER' ? '↵' : key}
+              {key === 'BACKSPACE' ? '⌫' : key}
             </StyledButton>
           ))}
         </Box>
