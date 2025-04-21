@@ -1,16 +1,14 @@
-﻿import { Fade, Paper, Stack, Typography } from '@mui/material';
+﻿import { Fade, Paper, Stack } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { AnimationConstants } from '../../constants/AnimationConstants';
 import { getImagesForPrompt } from '../../api/ImageService';
 import CurrentStepTile from './CurrentStepTile';
-import BackButton from '@/apps/cyoa/components/inputs/BackButton';
 import RevisitControls from '@/apps/cyoa/components/storypresentation/RevisitControls';
 import { useStoryContext } from '@/apps/cyoa/context/StoryContext';
 import { MainViewContext } from '@/apps/cyoa/context/MainViewContext';
-import { getExistingAdventuresForStory, IAdventureWrapper } from '@/apps/cyoa/api/AdventureService';
-import LoadingSkeleton from '@/components/loading/LoadingSkeleton';
 import { Building } from '@/apps/cyoa/components/storypresentation/Building';
 import { TitleTile } from '@/apps/cyoa/components/storypresentation/TitleTile';
+import { IAdventureWrapper } from '@/apps/cyoa/types/adventure';
 
 export interface StoryPresenterProps {
   view: StoryPresenterViews;
@@ -21,7 +19,7 @@ export type StoryPresenterViews = 'new' | 'existing';
 const StoryPresenter = (props: StoryPresenterProps) => {
   const { view } = props;
 
-  const { selectedAdventure, setAdventure } = useStoryContext();
+  const { selectedAdventure, setAdventure, allAdventures } = useStoryContext();
 
   const { state, dispatch } = useContext(MainViewContext);
 
@@ -34,8 +32,6 @@ const StoryPresenter = (props: StoryPresenterProps) => {
   const [showStoryText, setShowStoryText] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
-
-  const [adventures, setAdventures] = useState<IAdventureWrapper[]>([]);
 
   const generateImage = async () => {
     if (!selectedAdventure) return;
@@ -85,45 +81,24 @@ const StoryPresenter = (props: StoryPresenterProps) => {
   };
 
   useEffect(() => {
-    loadAdventures();
-  }, []);
-
-  useEffect(() => {
     setVersionIndex(0);
-  }, [adventures]);
+  }, [allAdventures]);
 
   useEffect(() => {
     if (!state.isRevisit) return;
 
-    setAdventure(adventures[versionIndex]);
+    setAdventure(allAdventures[versionIndex]);
   }, [versionIndex]);
-
-  const loadAdventures = () => {
-    if (!state.isRevisit) return;
-
-    setIsLoading(true);
-
-    getExistingAdventuresForStory().then((adventures) => {
-      setIsLoading(false);
-
-      if (adventures.length === 0) return;
-
-      setAdventures(adventures);
-
-      setAdventure(adventures[0]);
-    });
-  };
 
   return (
     <Fade in={true} timeout={AnimationConstants.QUICK_STORY_NAV_SPEED}>
       <Paper
         elevation={2}
-        sx={{ p: 2, width: { md: '80%' } }}
+        sx={{ width: { md: '80%' } }}
         style={{
           textAlign: 'left',
           display: 'flex',
           flexDirection: 'column',
-
           rowGap: '10px',
         }}
       >
@@ -132,14 +107,14 @@ const StoryPresenter = (props: StoryPresenterProps) => {
             currentVersionNumber={versionIndex}
             previousVersion={navPreviousVersion}
             nextVersion={navNextVersion}
-            total={adventures.length}
+            total={allAdventures.length}
             disabled={showStoryText}
           />
         )}
 
         {selectedAdventure && !isLoading && (
-          <Stack sx={{ display: 'flex', alignItems: 'end', width: '100%', p: 1, gap: 2 }}>
-            <Paper elevation={10} sx={{ width: '100%', p: { md: 4, lg: 4, sm: 2, xs: 2 } }}>
+          <Stack sx={{ display: 'flex', alignItems: 'end', width: '100%', gap: 2 }}>
+            <Paper elevation={10} sx={{ width: '100%', p: { md: 4, lg: 4, sm: 2, xs: 0 } }}>
               <TitleTile title={selectedAdventure.adventure.title} />
             </Paper>
 

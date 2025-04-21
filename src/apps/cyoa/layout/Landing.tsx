@@ -5,13 +5,14 @@ import BuildingView from '@/apps/cyoa/layout/BuildingView';
 import StoryPresenter from '@/apps/cyoa/components/storypresentation/StoryPresenter';
 import AppHeader from '@/layout/apps/AppHeader';
 import { AboutBuildAVenture } from '@/apps/cyoa/layout/AboutBuildAVenture';
+import { BavLibrary } from '@/apps/cyoa/layout/BavLibrary';
 
 const Landing = () => {
   const { state } = useContext(MainViewContext);
 
   return (
     <Stack sx={{ display: 'flex', width: '100%', flexDirection: 'column', alignItems: 'center' }}>
-      <AppHeader about={<AboutBuildAVenture />} />
+      <AppHeader content={<BavLibrary />} about={<AboutBuildAVenture />} />
 
       {state.currentView === 'building' && <BuildingView />}
 

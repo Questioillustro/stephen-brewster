@@ -1,9 +1,9 @@
 ﻿import { Fade, Paper, Stack, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { IAdventurePage } from '../../api/AdventureService';
 import { AnimationConstants } from '../../constants/AnimationConstants';
 import StoryPagination from './StoryPagination';
 import ImageTile from './ImageTile';
+import { IAdventurePage } from '@/apps/cyoa/types/adventure';
 
 export interface CurrentPageTileProps {
   page: IAdventurePage;
@@ -52,9 +52,8 @@ const CurrentStepTile = (props: CurrentPageTileProps) => {
           imageUrl={page.imageUrl ?? ''}
         />
 
-        <Paper elevation={0} sx={{ p: { md: 4 } }}>
+        <Paper elevation={1} sx={{ p: { md: 4 } }}>
           <Typography
-            variant='h6'
             color='secondary'
             sx={{
               p: 2,
@@ -65,7 +64,7 @@ const CurrentStepTile = (props: CurrentPageTileProps) => {
             }}
           />
 
-          <Paper elevation={7}>
+          <Paper elevation={10}>
             <StoryPagination
               currentPage={currentPage}
               totalPages={totalPages}

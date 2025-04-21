@@ -1,5 +1,6 @@
 ﻿import { Button, Paper, Stack, Typography } from '@mui/material';
 import React from 'react';
+import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 
 export interface StoryPaginationProps {
   currentPage: number;
@@ -24,7 +25,7 @@ const StoryPagination = (props: StoryPaginationProps) => {
         onClick={() => paginate('previous')}
         disabled={currentPage === 1}
       >
-        Previous Page
+        <ChevronLeft />
       </Button>
 
       <Typography variant={'body2'} sx={{ pt: 1 }}>
@@ -36,7 +37,7 @@ const StoryPagination = (props: StoryPaginationProps) => {
         onClick={() => paginate('next')}
         disabled={currentPage === totalPages}
       >
-        Next Page
+        <ChevronRight />
       </Button>
     </Stack>
   );

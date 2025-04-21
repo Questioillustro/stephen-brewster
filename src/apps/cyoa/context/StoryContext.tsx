@@ -1,5 +1,5 @@
 ﻿import { createContext, useContext, useState } from 'react';
-import { IAdventureWrapper } from '@/apps/cyoa/api/AdventureService';
+import { IAdventureWrapper } from '@/apps/cyoa/types/adventure';
 
 export type StoryType = 'adventure' | 'education';
 

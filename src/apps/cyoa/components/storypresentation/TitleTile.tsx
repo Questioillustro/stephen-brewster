@@ -6,7 +6,13 @@ export interface ITitleTileProps {
 }
 
 export const TitleTile = (props: ITitleTileProps) => (
-  <Typography variant={'h4'} color={'primary'}>
+  <Typography
+    color={'primary'}
+    sx={{
+      p: 2,
+      typography: { xs: 'body1', sm: 'h6', md: 'h4' },
+    }}
+  >
     {props.title}
   </Typography>
 );

@@ -12,7 +12,7 @@ interface AppCardProps {
 const AppCard: React.FC<AppCardProps> = ({ title, imageSrc, description, link }) => {
   return (
     <Paper
-      elevation={2}
+      elevation={1}
       sx={{
         display: 'flex',
         width: '100%',
@@ -27,10 +27,10 @@ const AppCard: React.FC<AppCardProps> = ({ title, imageSrc, description, link })
         <CardMedia
           component='img'
           sx={{
-            width: '100%', // Full width of the parent container
-            height: 'auto', // Auto height to maintain aspect ratio
-            maxHeight: '200px', // Optional: Limit max height
-            objectFit: 'cover', // Ensures image covers the area without stretching
+            width: '100%',
+            height: 'auto',
+            maxHeight: '200px',
+            objectFit: 'cover',
           }}
           image={imageSrc || 'https://via.placeholder.com/150x300'}
           title={title}

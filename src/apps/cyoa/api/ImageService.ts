@@ -1,5 +1,5 @@
 ﻿import apiClient from '@/api/ApiClient';
-import { IAdventureWrapper } from './AdventureService';
+import { IAdventureWrapper } from '@/apps/cyoa/types/adventure';
 
 export interface IGenerateImageRequest {
   model?: string;

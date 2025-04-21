@@ -5,7 +5,10 @@ import { WordleCard } from '@/layout/apps/WordleCard';
 
 export const AppsPage: React.FC = () => {
   return (
-    <Paper square sx={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 2 }}>
+    <Paper
+      elevation={0}
+      sx={{ pt: 2, width: '100%', display: 'flex', flexDirection: 'column', gap: 2 }}
+    >
       <BuildAVentureCard />
 
       <CodeAssistantCard />

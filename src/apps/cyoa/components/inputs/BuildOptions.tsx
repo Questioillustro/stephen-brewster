@@ -5,6 +5,7 @@ import StoryDetailsPanel from '@/apps/cyoa/components/inputs/StoryDetailsPanel';
 import StyledDivider from '@/components/dividers/StyledDivider';
 import ArtStyleCarousel from '@/apps/cyoa/components/inputs/artstyle/ArtStyleCarousel';
 import EnvironmentCarousel from '@/apps/cyoa/components/inputs/environment/EnvironmentCarousel';
+import { BavLibrary } from '@/apps/cyoa/layout/BavLibrary';
 
 export interface IBuildOptionsProps {
   setPrompts: (prompts: string, characterPrompts: string, artStyle: string) => void;
