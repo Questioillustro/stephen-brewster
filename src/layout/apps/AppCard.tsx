@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { CardContent, CardMedia, Typography, Button, Stack, Paper } from '@mui/material';
+import { CardContent, CardMedia, Typography, Stack, Paper } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
 interface AppCardProps {
@@ -17,19 +17,20 @@ const AppCard: React.FC<AppCardProps> = ({ title, imageSrc, description, link })
         display: 'flex',
         width: '100%',
         maxHeight: '300px',
-        '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }, // Optional: Add hover effect
+        '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' },
       }}
       component={RouterLink}
       to={`./${link}`}
-      style={{ textDecoration: 'none' }} // Remove underline from link
+      style={{ textDecoration: 'none' }}
     >
       <Stack sx={{ display: 'flex', width: '100%', alignItems: 'center' }}>
         <CardMedia
           component='img'
           sx={{
-            height: 250,
-            objectFit: 'cover',
-            width: '100%',
+            width: '100%', // Full width of the parent container
+            height: 'auto', // Auto height to maintain aspect ratio
+            maxHeight: '200px', // Optional: Limit max height
+            objectFit: 'cover', // Ensures image covers the area without stretching
           }}
           image={imageSrc || 'https://via.placeholder.com/150x300'}
           title={title}

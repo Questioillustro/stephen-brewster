@@ -7,8 +7,7 @@ export interface IEnvironmentItem {
   prompt: string;
 }
 
-// Method to convert an environment list item to a CarouselItem
-export const convertEnvironmentToCarouselItem = (
+export const mapEnvironmentToCarouselItem = (
   environment: (typeof EnvironmentList)[0],
 ): CarouselItem => {
   return {
@@ -19,7 +18,7 @@ export const convertEnvironmentToCarouselItem = (
   };
 };
 
-export const EnvironmentList = [
+export const EnvironmentList: IEnvironmentItem[] = [
   {
     _id: '1',
     name: 'Forest',
@@ -143,6 +142,4 @@ export const EnvironmentList = [
 ];
 
 // Example usage: Convert the entire environmentList
-export const envCarouselItems: CarouselItem[] = EnvironmentList.map(
-  convertEnvironmentToCarouselItem,
-);
+export const envCarouselItems: CarouselItem[] = EnvironmentList.map(mapEnvironmentToCarouselItem);

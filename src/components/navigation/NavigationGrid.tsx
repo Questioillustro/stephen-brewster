@@ -20,7 +20,7 @@ interface NavigationGridProps {
 }
 
 const navItems: NavItem[] = [
-  { title: 'Home', path: '/', icon: <HomeIcon />, description: 'Return to homepage' },
+  { title: 'About', path: '/', icon: <HomeIcon />, description: 'Return to homepage' },
   { title: 'Apps', path: '/apps', icon: <AppsIcon />, description: 'Explore my applications' },
   {
     title: 'Resume',

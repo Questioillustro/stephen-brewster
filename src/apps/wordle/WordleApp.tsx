@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { Box, Typography, Snackbar, Stack, Paper } from '@mui/material';
+import { Snackbar, Stack, Paper } from '@mui/material';
 import Board from './Board';
 import Keyboard from './Keyboard';
 import { WORDS } from './words';

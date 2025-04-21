@@ -1,26 +1,15 @@
 ﻿import React from 'react';
-import { Box, Stack } from '@mui/material';
+import { Box } from '@mui/material';
 import styled from '@emotion/styled';
-import { speciesList } from '@/apps/cyoa/components/inputs/species/speciesList';
+import {
+  mapSpeciesToCarouselItem,
+  speciesList,
+} from '@/apps/cyoa/components/inputs/species/speciesList';
 import CarouselSelector from '@/apps/cyoa/components/carousel/CarouselSelector';
 
 interface SpeciesSelectorProps {
   setSpecies: (species: string) => void;
 }
-
-interface CarouselItem {
-  id: string;
-  name: string;
-  [key: string]: any;
-}
-
-// Method to convert a species string to a CarouselItem
-const convertSpeciesToCarouselItem = (species: string, index: number): CarouselItem => {
-  return {
-    id: `${index}`, // Use index as a unique identifier
-    name: species,
-  };
-};
 
 const SpeciesSquare = styled(Box)<{ selected: boolean }>`
   width: 80px;
@@ -43,19 +32,27 @@ const SpeciesSquare = styled(Box)<{ selected: boolean }>`
   }
 `;
 
+const SpecieImage = styled('img')`
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+`;
+
 export const SpeciesCarousel: React.FC<SpeciesSelectorProps> = ({ setSpecies }) => {
-  const carouselItems = speciesList.map(convertSpeciesToCarouselItem);
+  const carouselItems = speciesList.map(mapSpeciesToCarouselItem);
 
   return (
     <CarouselSelector
       items={carouselItems}
       title='Species'
-      itemWidth={96} // 80px width + 16px gap
+      itemWidth={106} // 80px width + 16px gap
       defaultSelectedId='0' // Default to first item (Human)
       onSelect={(item) => setSpecies(`Main character species is: ${item.name}.`)}
       renderItem={(item, selected, onClick) => (
         <SpeciesSquare selected={selected} onClick={onClick}>
-          {item.name}
+          {item.imageUrl && <SpecieImage src={item.imageUrl} alt={item.name} />}
+          {!item.imageUrl && <div>{item.name}</div>}
         </SpeciesSquare>
       )}
     />
