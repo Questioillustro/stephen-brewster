@@ -151,10 +151,10 @@ const WordleApp: React.FC = () => {
   }, [gameState]);
 
   return (
-    <Stack sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+    <Stack sx={{ display: 'flex', alignItems: 'center', width: '100%', p: 2, pt: 0 }}>
       <AppHeader about={<AboutNotWordle />} />
 
-      <Paper elevation={2} sx={{ pt: 2, pb: 2, display: 'flex', width: '100%' }}>
+      <Paper elevation={2} sx={{ p: 2, display: 'flex', width: '100%' }}>
         <Stack sx={{ width: '100%', alignItems: 'center' }}>
           <Board
             guesses={gameState.guesses}

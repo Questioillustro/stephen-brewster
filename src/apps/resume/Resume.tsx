@@ -12,8 +12,8 @@ import { Paper, Stack } from '@mui/material';
 function Resume() {
   return (
     <SBThemeProvider theme={'resumeDark'}>
-      <Paper elevation={0} sx={{ mt: 2 }}>
-        <Stack sx={{ gap: 2 }}>
+      <Paper elevation={0} sx={{ p: 2, display: 'flex', width: '100%' }}>
+        <Stack sx={{ gap: 2, width: '100%' }}>
           <ResumeCard title={'Experience'} content={<Experience />} />
 
           <SkillsProvider>

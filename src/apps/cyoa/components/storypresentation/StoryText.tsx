@@ -12,6 +12,7 @@ export const StoryText = (props: IStoryTextProps) => {
       sx={{
         typography: { xs: 'body1', md: 'h6' },
         fontFamily: { md: '"Comic Neue", sans-serif' },
+        //backgroundImage: 'url(/bav/papertexture.jpg)',
       }}
       dangerouslySetInnerHTML={{
         __html: props.text,
