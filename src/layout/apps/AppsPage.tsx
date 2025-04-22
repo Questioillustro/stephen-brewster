@@ -9,7 +9,7 @@ export const AppsPage: React.FC = () => {
       elevation={0}
       sx={{
         pt: 2,
-        width: { xs: '100%', sm: '80%', md: '60%', lg: '40%' },
+        width: { xs: '100%', sm: '80%', md: '60%', lg: '50%' },
         display: 'flex',
         flexDirection: 'column',
         gap: 2,

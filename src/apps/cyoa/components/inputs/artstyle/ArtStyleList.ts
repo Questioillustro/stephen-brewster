@@ -1,4 +1,4 @@
-﻿import { CarouselItem } from '@/apps/cyoa/components/carousel/types';
+﻿import { CarouselItem } from '@/apps/cyoa/components/carousel/CarouselSelector.types';
 
 export interface IArtStyleItem {
   id: string;

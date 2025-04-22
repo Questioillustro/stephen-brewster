@@ -15,7 +15,6 @@ export const StyleSquare = styled(Box)<{ selected: boolean }>`
   color: ${({ selected }) => (selected ? '#fff' : '#fff')};
   font-size: 12px;
   text-align: center;
-  padding: 4px;
   transition: all 0.2s ease-in-out;
   &:hover {
     background-color: #aaaaaa;

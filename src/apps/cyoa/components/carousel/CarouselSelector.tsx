@@ -2,7 +2,7 @@
 import { Box, Fade, Stack, Typography } from '@mui/material';
 import { AnimationConstants } from '@/apps/cyoa/constants/AnimationConstants';
 import { CarouselButton } from '@/apps/cyoa/components/carousel/CarouselButton';
-import { CarouselItem } from '@/apps/cyoa/components/carousel/types';
+import { CarouselItem } from '@/apps/cyoa/components/carousel/CarouselSelector.types';
 import {
   CarouselContainer,
   CarouselTrack,
@@ -129,7 +129,7 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
       <Stack>
         <Typography
           variant='h6'
-          sx={{ pb: 2, justifyContent: 'center', width: '100%', display: 'flex' }}
+          sx={{ pb: 1, justifyContent: 'center', width: '100%', display: 'flex' }}
         >
           {title}
         </Typography>

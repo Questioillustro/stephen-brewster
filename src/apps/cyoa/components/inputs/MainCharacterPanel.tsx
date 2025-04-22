@@ -1,4 +1,4 @@
-﻿import { Box, Paper, Stack } from '@mui/material';
+﻿import { Stack } from '@mui/material';
 import MainCharacterName from '@/apps/cyoa/components/inputs/character/MainCharacterName';
 import Typography from '@mui/material/Typography';
 import GenderSelect from '@/apps/cyoa/components/inputs/character/GenderSelect';
@@ -37,7 +37,6 @@ const MainCharacterPanel = (props: MainCharacterPanelProps) => {
   return (
     <Stack
       sx={{
-        p: 2,
         alignItems: 'center',
         display: 'flex',
         flexDirection: 'column',
@@ -55,7 +54,6 @@ const MainCharacterPanel = (props: MainCharacterPanelProps) => {
           display: 'flex',
           direction: 'column',
           alignItems: 'center',
-          columnGap: '2rem',
         }}
       >
         <MainCharacterName setCharacterName={setCharacterName} />

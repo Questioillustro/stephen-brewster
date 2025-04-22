@@ -32,7 +32,6 @@ const StoryDetailsPanel = (props: StoryDetailsPanelProps) => {
   return (
     <Stack
       sx={{
-        p: 2,
         alignItems: 'center',
         display: 'flex',
         flexDirection: 'column',

@@ -1,15 +1,14 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-
 import React from 'react';
 import Layout from './layout/Layout';
-import { SBThemeProvider } from './contexts/ThemeContext';
-import Fading from './components/animation/fading/Fading';
+import '@fontsource/comic-neue';
+import '@fontsource/bangers';
+import '@fontsource/poppins';
+import { SBThemeProvider } from '@/theme/SBThemeContext';
 
 function App() {
   return (
-    <SBThemeProvider>
-      <Fading child={<Layout />} />
+    <SBThemeProvider theme={'dark'}>
+      <Layout />
     </SBThemeProvider>
   );
 }

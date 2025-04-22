@@ -4,6 +4,7 @@ import { AnimationConstants } from '../../constants/AnimationConstants';
 import StoryPagination from './StoryPagination';
 import ImageTile from './ImageTile';
 import { IAdventurePage } from '@/apps/cyoa/types/adventure';
+import { StoryText } from '@/apps/cyoa/components/storypresentation/StoryText';
 
 export interface CurrentPageTileProps {
   page: IAdventurePage;
@@ -52,24 +53,17 @@ const CurrentStepTile = (props: CurrentPageTileProps) => {
           imageUrl={page.imageUrl ?? ''}
         />
 
-        <Paper elevation={1} sx={{ p: { md: 4 } }}>
-          <Typography
-            color='secondary'
-            sx={{
-              p: 2,
-              typography: { xs: 'body1', sm: 'h6', md: 'h6' },
-            }}
-            dangerouslySetInnerHTML={{
-              __html: page.text,
-            }}
-          />
+        <Paper elevation={1} sx={{ p: { md: 2 } }}>
+          <Paper elevation={1} sx={{ p: { xs: 2, sm: 3 } }}>
+            <StoryText text={page.text} />
 
-          <Paper elevation={10}>
-            <StoryPagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              paginate={paginate}
-            />
+            <Paper elevation={10}>
+              <StoryPagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                paginate={paginate}
+              />
+            </Paper>
           </Paper>
         </Paper>
       </Stack>
