@@ -1,15 +1,13 @@
 ﻿import React, { useState, useRef, useEffect, useCallback } from 'react';
-import styled from '@emotion/styled';
-import { Box, Button, Fade, Stack, Typography } from '@mui/material';
-import { ChevronLeft, ChevronRight } from '@mui/icons-material';
-import StyledDivider from '@/components/dividers/StyledDivider';
+import { Box, Fade, Stack, Typography } from '@mui/material';
 import { AnimationConstants } from '@/apps/cyoa/constants/AnimationConstants';
-
-export interface CarouselItem {
-  id: string;
-  name: string;
-  [key: string]: any;
-}
+import { CarouselButton } from '@/apps/cyoa/components/carousel/CarouselButton';
+import { CarouselItem } from '@/apps/cyoa/components/carousel/types';
+import {
+  CarouselContainer,
+  CarouselTrack,
+  CarouselWrapper,
+} from '@/apps/cyoa/components/carousel/CarouselSelector.styles';
 
 interface CarouselSelectorProps {
   items: CarouselItem[];
@@ -18,30 +16,7 @@ interface CarouselSelectorProps {
   defaultSelectedId?: string;
   onSelect: (item: CarouselItem) => void;
   renderItem: (item: CarouselItem, selected: boolean, onClick: () => void) => JSX.Element;
-  useDividers?: boolean;
 }
-
-const Container = styled(Box)`
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  width: 100%;
-  max-width: 100%;
-`;
-
-const CarouselWrapper = styled(Box)`
-  overflow: hidden;
-  flex: 1;
-  max-width: 100%;
-`;
-
-const CarouselTrack = styled(Box)<{ isCentered: boolean }>`
-  display: flex;
-  transition: transform 0.3s ease-in-out;
-  gap: 16px;
-  justify-content: ${({ isCentered }) => (isCentered ? 'center' : 'flex-start')};
-  width: ${({ isCentered }) => (isCentered ? 'auto' : '100%')};
-`;
 
 const debounce = (func: (...args: any[]) => void, wait: number) => {
   let timeout: NodeJS.Timeout;
@@ -58,7 +33,6 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
   defaultSelectedId,
   onSelect,
   renderItem,
-  useDividers = false,
 }) => {
   const [selectedItemId, setSelectedItemId] = useState<string | null>(
     defaultSelectedId || items[0]?.id || null,
@@ -152,8 +126,7 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
 
   return (
     <Fade in={true} timeout={AnimationConstants.QUICK_STORY_NAV_SPEED}>
-      <Stack sx={{ mt: useDividers ? 2 : 0, pb: useDividers ? 2 : 0 }}>
-        {useDividers && <StyledDivider />}
+      <Stack>
         <Typography
           variant='h6'
           sx={{ pb: 2, justifyContent: 'center', width: '100%', display: 'flex' }}
@@ -161,21 +134,12 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
           {title}
         </Typography>
 
-        <Container>
-          <Button
+        <CarouselContainer>
+          <CarouselButton
+            direction={'left'}
             onClick={scrollLeft}
-            variant='contained'
             disabled={scrollPosition <= 0 || isCentered}
-            sx={{
-              display: { xs: 'none', sm: 'flex' }, // Hide buttons on mobile
-              height: '100%',
-              m: 1,
-              minWidth: { xs: '30px', sm: '40px' },
-              padding: { xs: '0 4px', sm: '0 8px' },
-            }}
-          >
-            <ChevronLeft sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
-          </Button>
+          />
 
           <CarouselWrapper
             ref={carouselRef}
@@ -197,23 +161,12 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
             </CarouselTrack>
           </CarouselWrapper>
 
-          <Button
+          <CarouselButton
+            direction={'right'}
             onClick={scrollRight}
-            variant='contained'
             disabled={scrollPosition >= maxScroll || isCentered}
-            sx={{
-              display: { xs: 'none', sm: 'flex' }, // Hide buttons on mobile
-              height: '100%',
-              m: 1,
-              minWidth: { xs: '30px', sm: '40px' },
-              padding: { xs: '0 4px', sm: '0 8px' },
-            }}
-          >
-            <ChevronRight sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
-          </Button>
-        </Container>
-
-        {useDividers && <StyledDivider />}
+          />
+        </CarouselContainer>
       </Stack>
     </Fade>
   );

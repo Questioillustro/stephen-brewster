@@ -1,7 +1,7 @@
 ﻿import { Box, Paper, Stack } from '@mui/material';
-import MainCharacterName from '@/apps/cyoa/components/inputs/MainCharacterName';
+import MainCharacterName from '@/apps/cyoa/components/inputs/character/MainCharacterName';
 import Typography from '@mui/material/Typography';
-import GenderSelect from '@/apps/cyoa/components/inputs/GenderSelect';
+import GenderSelect from '@/apps/cyoa/components/inputs/character/GenderSelect';
 import React, { useEffect, useState } from 'react';
 import { SpeciesCarousel } from '@/apps/cyoa/components/inputs/species/SpeciesCarousel';
 import StyledDivider from '@/components/dividers/StyledDivider';

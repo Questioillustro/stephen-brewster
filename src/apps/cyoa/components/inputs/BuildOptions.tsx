@@ -1,16 +1,24 @@
 ﻿import React, { useEffect, useState } from 'react';
-import { Button, Paper, Stack } from '@mui/material';
+import { Paper, Stack } from '@mui/material';
 import MainCharacterPanel from '@/apps/cyoa/components/inputs/MainCharacterPanel';
 import StoryDetailsPanel from '@/apps/cyoa/components/inputs/StoryDetailsPanel';
 import StyledDivider from '@/components/dividers/StyledDivider';
 import ArtStyleCarousel from '@/apps/cyoa/components/inputs/artstyle/ArtStyleCarousel';
 import EnvironmentCarousel from '@/apps/cyoa/components/inputs/environment/EnvironmentCarousel';
-import { BavLibrary } from '@/apps/cyoa/layout/BavLibrary';
-import Typography from '@mui/material/Typography';
+import styled from '@emotion/styled';
+import { BuildItButton } from '@/apps/cyoa/components/inputs/buttons/BuildItButton';
 
 export interface IBuildOptionsProps {
   setPrompts: (prompts: string, characterPrompts: string, artStyle: string) => void;
 }
+
+const BuildOptionPaper = styled(Paper)`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+`;
 
 const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) => {
   const { setPrompts } = props;
@@ -46,75 +54,45 @@ const BuildOptions: React.FC<IBuildOptionsProps> = (props: IBuildOptionsProps) =
 
   return (
     <Stack sx={{ display: 'flex', flexDirection: 'column', width: '100%', gap: 2 }}>
-      <Paper
-        elevation={2}
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 2,
-          alignItems: 'center',
-          width: '100%',
-        }}
-      >
+      <BuildOptionPaper elevation={2}>
+        <StyledDivider />
         <EnvironmentCarousel setEnvironment={setEnvironment} />
-      </Paper>
+        <StyledDivider />
+      </BuildOptionPaper>
 
-      <Paper
-        elevation={2}
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 2,
-          alignItems: 'center',
-          width: '100%',
-        }}
-      >
+      <BuildOptionPaper elevation={2}>
+        <StyledDivider />
         <ArtStyleCarousel onChange={setArtStyle} />
-      </Paper>
+        <StyledDivider />
+      </BuildOptionPaper>
 
       <Stack
         direction={{ xs: 'column', sm: 'column', md: 'row', lg: 'row' }}
         sx={{ display: 'flex', width: '100%' }}
       >
-        <Paper
+        <BuildOptionPaper
           elevation={2}
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 2,
-            alignItems: 'center',
             width: { sm: '100%', xs: '100%', md: '60%' },
           }}
         >
           <MainCharacterPanel setMainCharacterPrompts={setMainCharacter} />
-        </Paper>
+        </BuildOptionPaper>
 
-        <Paper
+        <BuildOptionPaper
           elevation={2}
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 2,
             mt: { xs: 2, sm: 2, md: 0 },
             ml: { xs: 0, sm: 0, md: 2 },
-            alignItems: 'center',
             width: { sm: '100%', xs: '100%', md: '40%' },
           }}
         >
           <StoryDetailsPanel setStoryDetailsPrompts={setStoryDetails} />
 
-          <Button
-            onClick={() => buildAdventure()}
-            variant={'contained'}
-            sx={{ width: '50%', p: 3 }}
-          >
-            <Typography variant={'h6'} color={'black'}>
-              Build It!
-            </Typography>
-          </Button>
+          <BuildItButton onClick={buildAdventure} />
 
           <StyledDivider />
-        </Paper>
+        </BuildOptionPaper>
       </Stack>
     </Stack>
   );

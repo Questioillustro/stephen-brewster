@@ -16,7 +16,6 @@ const ChildrensPlotSelect = (props: ChildrensPlotSelectProps) => {
 
   const PLOT_VERSION = '1';
 
-  // Initialize plot and inputValue with a random option (excluding 'RANDOM')
   const getRandomPlot = () => {
     const plotOptions = childrensPlots.filter((option) => option.value !== 'RANDOM');
     const randomIndex = Math.floor(Math.random() * plotOptions.length);

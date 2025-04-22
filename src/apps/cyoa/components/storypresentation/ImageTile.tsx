@@ -1,4 +1,4 @@
-﻿import BuildPictureButton from '../inputs/BuildPictureButton';
+﻿import BuildPictureButton from '../inputs/buttons/BuildPictureButton';
 import React, { useEffect } from 'react';
 import { Stack } from '@mui/material';
 import { StoryArtTile } from '@/apps/cyoa/components/storypresentation/StoryArtTile';

@@ -1,9 +1,9 @@
 ﻿import { Box, Paper, Stack } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react';
-import ThemeSelect from '@/apps/cyoa/components/inputs/ThemeSelect';
-import GenreSelect from '@/apps/cyoa/components/inputs/GenreSelect';
-import ChildrensPlotSelect from '@/apps/cyoa/components/inputs/plot/ChildrensPlotSelect';
+import ThemeSelect from '@/apps/cyoa/components/inputs/autocomplete/ThemeSelect';
+import GenreSelect from '@/apps/cyoa/components/inputs/autocomplete/GenreSelect';
+import ChildrensPlotSelect from '@/apps/cyoa/components/inputs/autocomplete/ChildrensPlotSelect';
 import StyledDivider from '@/components/dividers/StyledDivider';
 
 export interface StoryDetailsPanelProps {

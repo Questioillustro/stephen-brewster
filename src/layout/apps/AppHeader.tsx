@@ -1,5 +1,5 @@
 ﻿import { Paper, Stack } from '@mui/material';
-import BackButton from '@/apps/cyoa/components/inputs/BackButton';
+import BackButton from '@/apps/cyoa/components/inputs/buttons/BackButton';
 import { useNavigate } from 'react-router-dom';
 import { ReactNode } from 'react';
 
