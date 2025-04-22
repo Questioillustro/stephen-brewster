@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Select, MenuItem, FormControl, InputLabel, SelectChangeEvent } from '@mui/material';
+import { Button, ButtonGroup } from '@mui/material';
 import {
   LlmOptionType,
   useCodegenContext,
@@ -7,23 +7,25 @@ import {
 
 const LlmSelect: React.FC = () => {
   const [value, setValue] = React.useState<LlmOptionType>('grok');
-
   const codeGenContext = useCodegenContext();
 
-  const handleChange = (event: SelectChangeEvent<string>) => {
-    const option: LlmOptionType = event.target.value as LlmOptionType;
+  const handleClick = (option: LlmOptionType) => {
     setValue(option);
     codeGenContext.setLlmOption(option);
   };
 
   return (
-    <FormControl style={{ minWidth: 120 }}>
-      <InputLabel id='select-label'>LLM</InputLabel>
-      <Select labelId='select-label' value={value} label='Choose' onChange={handleChange}>
-        <MenuItem value='grok'>Grok</MenuItem>
-        <MenuItem value='chatgpt'>ChatGPT</MenuItem>
-      </Select>
-    </FormControl>
+    <ButtonGroup variant='contained' aria-label='LLM selection'>
+      <Button onClick={() => handleClick('grok')} color={value === 'grok' ? 'primary' : 'inherit'}>
+        Grok
+      </Button>
+      <Button
+        onClick={() => handleClick('chatgpt')}
+        color={value === 'chatgpt' ? 'primary' : 'inherit'}
+      >
+        ChatGPT
+      </Button>
+    </ButtonGroup>
   );
 };
 

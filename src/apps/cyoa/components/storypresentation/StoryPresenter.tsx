@@ -76,10 +76,6 @@ const StoryPresenter = (props: StoryPresenterProps) => {
     setCurrentPage((index) => index - 1);
   };
 
-  const goBack = () => {
-    dispatch('BUILD');
-  };
-
   const navPreviousVersion = () => {
     setShowStory(false);
     setTimeout(decrementVersion, AnimationConstants.QUICK_STORY_NAV_SPEED);
@@ -103,6 +99,14 @@ const StoryPresenter = (props: StoryPresenterProps) => {
   useEffect(() => {
     setVersionIndex(0);
   }, [storyContext.allAdventures]);
+
+  useEffect(() => {
+    // Preload images
+    storyContext.selectedAdventure?.adventure.pages.forEach((p) => {
+      const img = new Image();
+      img.src = p.imageUrl ?? '';
+    });
+  }, [storyContext.selectedAdventure]);
 
   useEffect(() => {
     if (!state.isRevisit) return;
