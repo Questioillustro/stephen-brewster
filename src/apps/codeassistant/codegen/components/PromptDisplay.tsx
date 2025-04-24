@@ -2,6 +2,7 @@
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
 import { useState } from 'react';
+import CollapsibleAccordion from '@/apps/codeassistant/codegen/components/CollapsibleAccordion';
 
 const PromptDisplay = () => {
   const { fullPrompt } = useCodegenContext();
@@ -19,23 +20,26 @@ const PromptDisplay = () => {
 
   const open = Boolean(anchorEl);
 
+  const textField = (
+    <TextField
+      multiline
+      rows={10}
+      value={fullPrompt}
+      label={'Full Prompt'}
+      sx={{ width: '100%', height: '100%' }}
+    />
+  );
+
+  const titleContent = (
+    <IconButton onClick={handleCopy} size='small' title='Copy to clipboard'>
+      <ContentCopyIcon fontSize='small' />
+    </IconButton>
+  );
+
   return (
     <Box sx={{ position: 'relative', width: '100%', height: '100%' }}>
-      <TextField
-        multiline
-        rows={10}
-        value={fullPrompt}
-        label={'Full Prompt'}
-        sx={{ width: '100%', height: '100%' }}
-      />
-      <IconButton
-        onClick={handleCopy}
-        size='small'
-        sx={{ position: 'absolute', top: 0, right: 0 }}
-        title='Copy to clipboard'
-      >
-        <ContentCopyIcon fontSize='small' />
-      </IconButton>
+      <CollapsibleAccordion title={'Full Prompt'} titleContent={titleContent} content={textField} />
+
       <Popover
         open={open}
         anchorEl={anchorEl}

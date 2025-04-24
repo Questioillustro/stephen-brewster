@@ -4,6 +4,7 @@ import {
   LlmOptionType,
   useCodegenContext,
 } from '@/apps/codeassistant/codegen/context/CodegenContext';
+import { llmOptions } from '@/apps/codeassistant/codegen/components/inputs/llmselect/LlmSelect.types';
 
 const LlmSelect: React.FC = () => {
   const [value, setValue] = React.useState<LlmOptionType>('grok');
@@ -16,15 +17,16 @@ const LlmSelect: React.FC = () => {
 
   return (
     <ButtonGroup variant='contained' aria-label='LLM selection'>
-      <Button onClick={() => handleClick('grok')} color={value === 'grok' ? 'primary' : 'inherit'}>
-        Grok
-      </Button>
-      <Button
-        onClick={() => handleClick('chatgpt')}
-        color={value === 'chatgpt' ? 'primary' : 'inherit'}
-      >
-        ChatGPT
-      </Button>
+      {llmOptions.map((option) => {
+        return (
+          <Button
+            onClick={() => handleClick(option.value)}
+            color={value === option.value ? 'primary' : 'inherit'}
+          >
+            {option.label}
+          </Button>
+        );
+      })}
     </ButtonGroup>
   );
 };
