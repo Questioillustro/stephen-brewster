@@ -2,7 +2,7 @@
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
 
 const PromptField = () => {
-  const { prompt, addPrompt } = useCodegenContext();
+  const { prompt, setPrompt } = useCodegenContext();
 
   return (
     <TextField
@@ -13,7 +13,7 @@ const PromptField = () => {
       multiline
       rows={3}
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-        addPrompt(event.target.value);
+        setPrompt(event.target.value);
       }}
       sx={{ width: '100%' }}
     />

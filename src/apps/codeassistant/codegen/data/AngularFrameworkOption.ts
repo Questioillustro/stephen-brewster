@@ -1,6 +1,6 @@
 ﻿import { IFrontEndFrameworkOption } from '@/apps/codeassistant/codegen/data/AllOptions';
 
-export const AngularOptions: IFrontEndFrameworkOption = {
+export const AngularFrameworkOption: IFrontEndFrameworkOption = {
   framework: 'Angular',
   tsOption: false,
   uiLibraries: [

@@ -1,7 +1,7 @@
-﻿import { ReactOptions } from '@/apps/codeassistant/codegen/data/ReactOptions';
-import { AngularOptions } from '@/apps/codeassistant/codegen/data/AngularOptions';
-import { VueOptions } from '@/apps/codeassistant/codegen/data/VueOptions';
-import { JavascriptOptions } from '@/apps/codeassistant/codegen/data/JavascriptOptions';
+﻿import { ReactFrameworkOption } from '@/apps/codeassistant/codegen/data/ReactFrameworkOption';
+import { AngularFrameworkOption } from '@/apps/codeassistant/codegen/data/AngularFrameworkOption';
+import { VueFrameworkOption } from '@/apps/codeassistant/codegen/data/VueFrameworkOption';
+import { JavascriptFrameworkOption } from '@/apps/codeassistant/codegen/data/JavascriptFrameworkOption';
 
 export interface IFrontEndFrameworkOption {
   framework: FrameworkType;
@@ -15,8 +15,8 @@ export type FrameworkType = 'React' | 'Angular' | 'Vue' | 'Javascript';
 export type SyntaxLanguages = 'jsx' | 'tsx' | 'js';
 
 export const FrontEndFrameworkOptions = [
-  ReactOptions,
-  AngularOptions,
-  VueOptions,
-  JavascriptOptions,
+  ReactFrameworkOption,
+  AngularFrameworkOption,
+  VueFrameworkOption,
+  JavascriptFrameworkOption,
 ];

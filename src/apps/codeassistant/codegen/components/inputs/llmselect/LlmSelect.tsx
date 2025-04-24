@@ -22,6 +22,7 @@ const LlmSelect: React.FC = () => {
           <Button
             onClick={() => handleClick(option.value)}
             color={value === option.value ? 'primary' : 'inherit'}
+            disabled={!option.available}
           >
             {option.label}
           </Button>

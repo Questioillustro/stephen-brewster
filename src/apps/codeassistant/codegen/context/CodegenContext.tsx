@@ -1,21 +1,26 @@
 ﻿import { createContext, useContext, useEffect, useState } from 'react';
 import { IFrontEndFrameworkOption } from '@/apps/codeassistant/codegen/data/AllOptions';
-import { ReactOptions } from '@/apps/codeassistant/codegen/data/ReactOptions';
 import { OpenPromptResponse, openPromptService } from '@/service/OpenPromptService';
+import {
+  DefaultSpecialRequestOptions,
+  ISpecialRequest,
+} from '@/apps/codeassistant/codegen/components/inputs/specialrequests/SpecialRequests.types';
 
 interface CodegenContextType {
-  framework: IFrontEndFrameworkOption;
-  addFramework: (framework: IFrontEndFrameworkOption) => void;
+  framework: IFrontEndFrameworkOption | undefined;
+  setFramework: (framework: IFrontEndFrameworkOption) => void;
   useTypescript: boolean;
   setUseTypescript: (isTypescript: boolean) => void;
-  inclComments: boolean;
-  setInclComments: (inclComments: boolean) => void;
-  separateStyles: boolean;
-  setSeparateStyles: (separateStyles: boolean) => void;
+  specialRequests: ISpecialRequest[];
+  setSpecialRequests: (requests: ISpecialRequest[]) => void;
+  addSpecialRequest: (request: ISpecialRequest) => void;
+  removeSpecialRequest: (requestId: string) => void;
+  codeExample: string | undefined;
+  setCodeExample: (example: string | undefined) => void;
   uiLibrary: string;
-  addUiLibrary: (library: string) => void;
+  setUiLibrary: (library: string) => void;
   prompt: string;
-  addPrompt: (prompt: string) => void;
+  setPrompt: (prompt: string) => void;
   sendRequest: () => void;
   codeDisplay: CodegenResponse | undefined;
   loading: boolean;
@@ -29,20 +34,22 @@ interface CodegenResponse {
   styles: string;
 }
 
-export type LlmOptionType = 'grok' | 'chatgpt';
+export type LlmOptionType = 'grok' | 'chatgpt' | 'claude';
 
 export const CodegenContext = createContext<CodegenContextType | undefined>(undefined);
 
 export function CodegenProvider({ children }) {
-  const [framework, setFramework] = useState<IFrontEndFrameworkOption>(ReactOptions);
-
-  const [useTypescript, setUseTypescript] = useState<boolean>(true);
+  const [framework, setFramework] = useState<IFrontEndFrameworkOption>();
 
   const [uiLibrary, setUiLibrary] = useState<string>('');
 
-  const [inclComments, setInclComments] = useState<boolean>(false);
+  const [useTypescript, setUseTypescript] = useState<boolean>(true);
 
-  const [separateStyles, setSeparateStyles] = useState<boolean>(false);
+  const [specialRequests, setSpecialRequests] = useState<ISpecialRequest[]>(
+    DefaultSpecialRequestOptions,
+  );
+
+  const [codeExample, setCodeExample] = useState<string | undefined>();
 
   const [prompt, setPrompt] = useState<string>('');
 
@@ -54,38 +61,9 @@ export function CodegenProvider({ children }) {
 
   const [llm, setLlm] = useState<LlmOptionType>('chatgpt');
 
-  const addFramework = (framework: IFrontEndFrameworkOption) => {
-    console.log('adding framework', framework);
-    setFramework(framework);
-  };
-
   const toggleTypescript = (isTypescript: boolean) => {
     console.log('toggling typescript', isTypescript);
     setUseTypescript(isTypescript);
-  };
-
-  const toggleComments = (isComments: boolean) => {
-    console.log('toggling comments', inclComments);
-    setInclComments(isComments);
-  };
-
-  const toggleSeparateStyles = (isSeparate: boolean) => {
-    console.log('toggling separate styles', isSeparate);
-    setSeparateStyles(isSeparate);
-  };
-
-  const addUiLibrary = (library: string) => {
-    console.log('adding ui library', library);
-    setUiLibrary(library);
-  };
-
-  const addPrompt = (prompt: string) => {
-    console.log('adding prompt', prompt);
-    setPrompt(prompt);
-  };
-
-  const setLlmOption = (llm: LlmOptionType) => {
-    setLlm(llm);
   };
 
   const sendRequest = () => {
@@ -97,50 +75,60 @@ export function CodegenProvider({ children }) {
     });
   };
 
+  const addSpecialRequest = (request: ISpecialRequest) => {
+    setSpecialRequests([request].concat(specialRequests));
+  };
+
+  const removeSpecialRequest = (requestId: string) => {
+    const newList = specialRequests.filter((sr) => sr.id !== requestId);
+    setSpecialRequests(newList);
+  };
+
   useEffect(() => {
     buildPrompt();
-  }, [framework, prompt, uiLibrary, useTypescript, inclComments, separateStyles]);
+  }, [framework, prompt, uiLibrary, useTypescript, specialRequests, codeExample]);
+
+  useEffect(() => {
+    console.log('codegen context updated', fullPrompt);
+  }, [fullPrompt]);
 
   const buildPrompt = () => {
-    const basePrompt = separateStyles
-      ? `Format the response json as: { code, styles }.`
-      : `Format the response json as: { code }.`;
-    const frameworkPrompt = `Use framework: ${framework.framework}.`;
+    const basePrompt = `Format the response json as: { code }.`;
+    const frameworkPrompt = framework ? `Use framework: ${framework.framework}.` : '';
     const libraryPrompt = uiLibrary ? `Use UI library: ${uiLibrary}.` : '';
     const typescriptPrompt = useTypescript ? `Use typescript.` : '';
-    const separateStylesPrompt = separateStyles
-      ? `Separate styles into their own file.`
-      : `Use inline styles.`;
-    const commentsPrompt = inclComments
-      ? `Include detailed comments.`
-      : `Do not include any comments.`;
     const userPrompt = prompt ? `${prompt}.` : '';
+    const codeExamplePrompt = codeExample ? codeExample : '';
+
+    const specialRequestsPrompt = specialRequests.map((sr) => sr.prompt).join(' ');
 
     const fullPrompt =
-      `${frameworkPrompt} ${typescriptPrompt} ${separateStylesPrompt} ${libraryPrompt} ${userPrompt} ${basePrompt} ${commentsPrompt}`.trim();
+      `${frameworkPrompt} ${typescriptPrompt} ${libraryPrompt} ${userPrompt} ${basePrompt} ${specialRequestsPrompt} \n\n${codeExamplePrompt}`.trim();
 
     setFullPrompt(fullPrompt);
   };
 
   const value = {
     framework: framework,
-    addFramework: addFramework,
+    setFramework: setFramework,
     useTypescript: useTypescript,
     setUseTypescript: toggleTypescript,
-    inclComments: inclComments,
-    setInclComments: toggleComments,
-    separateStyles: separateStyles,
-    setSeparateStyles: toggleSeparateStyles,
+    specialRequests: specialRequests,
+    setSpecialRequests: setSpecialRequests,
+    addSpecialRequest: addSpecialRequest,
+    removeSpecialRequest: removeSpecialRequest,
+    codeExample: codeExample,
+    setCodeExample: setCodeExample,
     uiLibrary: uiLibrary,
-    addUiLibrary: addUiLibrary,
+    setUiLibrary: setUiLibrary,
     prompt: prompt,
-    addPrompt: addPrompt,
+    setPrompt: setPrompt,
     sendRequest: sendRequest,
     codeDisplay: codeDisplay,
     loading: loading,
     fullPrompt: fullPrompt,
     llmOption: llm,
-    setLlmOption: setLlmOption,
+    setLlmOption: setLlm,
   };
 
   return <CodegenContext.Provider value={value}>{children}</CodegenContext.Provider>;

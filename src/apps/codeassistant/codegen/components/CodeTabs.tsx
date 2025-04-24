@@ -24,16 +24,7 @@ const CodeTabs: React.FC = () => {
         <Box style={{ padding: '20px' }}>
           <CodeBlock
             code={context.codeDisplay.code}
-            language={context.framework.syntaxHighlighter}
-          />
-        </Box>
-      )}
-
-      {value === 1 && context.codeDisplay?.styles && (
-        <Box style={{ padding: '20px' }}>
-          <CodeBlock
-            code={context.codeDisplay.styles}
-            language={context.framework.syntaxHighlighter}
+            language={context.framework?.syntaxHighlighter ?? 'js'}
           />
         </Box>
       )}

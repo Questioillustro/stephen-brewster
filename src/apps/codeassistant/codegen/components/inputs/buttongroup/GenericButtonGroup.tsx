@@ -1,8 +1,8 @@
 ﻿import React, { useEffect, useState } from 'react';
-import { ButtonGroup, Button, Stack, Paper } from '@mui/material';
+import { ButtonGroup, Button, Stack } from '@mui/material';
 import { css } from '@emotion/react';
 import { styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
+import { ComponentTitle } from '@/apps/codeassistant/codegen/components/ComponentTitle';
 
 const StyledButtonGroup = styled(ButtonGroup)(
   () => css`
@@ -25,42 +25,30 @@ const StyledButtonGroup = styled(ButtonGroup)(
   `,
 );
 
-interface GenericButtonGroupProps {
-  labels: string[];
+interface IGenericButtonGroupProps {
+  labels: string[] | undefined;
   label: string;
+  selected: string;
   onSelect: (selected: string) => void;
 }
 
-const GenericButtonGroup: React.FC<GenericButtonGroupProps> = ({
-  labels,
-  label = 'Options',
-  onSelect,
-}) => {
-  const [selected, setSelected] = useState<string>('');
-
-  useEffect(() => {
-    onSelect(labels[0]);
-    setSelected(labels[0]);
-  }, [labels]);
-
+const GenericButtonGroup: React.FC<IGenericButtonGroupProps> = (
+  props: IGenericButtonGroupProps,
+) => {
   const handleClick = (value: string) => {
-    setSelected(value);
-    if (onSelect) {
-      onSelect(value);
-    }
+    props.onSelect(value);
   };
 
   return (
     <Stack direction='column' sx={{ p: 2 }}>
-      <Typography variant='body1' sx={{ mb: 1 }}>
-        {label}
-      </Typography>
+      <ComponentTitle title={props.label} />
+
       <StyledButtonGroup aria-label='selection'>
-        {labels.map((value) => (
+        {(props.labels ?? []).map((value) => (
           <Button
             key={value}
             onClick={() => handleClick(value)}
-            className={selected === value ? 'Mui-selected' : ''}
+            className={props.selected === value ? 'Mui-selected' : ''}
             sx={{ fontSize: { xs: '8px', sm: '10px', md: '16px' } }}
           >
             {value}
