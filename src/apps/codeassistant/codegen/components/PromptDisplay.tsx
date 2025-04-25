@@ -1,61 +1,44 @@
-﻿import { TextField, IconButton, Box, Popover, Typography } from '@mui/material';
+﻿import { TextField, IconButton, Box, Modal, Typography, Stack } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
-import { useState } from 'react';
-import CollapsibleAccordion from '@/apps/codeassistant/codegen/components/CollapsibleAccordion';
+import { useCallback, useState } from 'react';
+import { TextFieldModal } from '@/apps/codeassistant/codegen/components/inputs/textfieldmodal/TextFieldModal';
 
 const PromptDisplay = () => {
   const { fullPrompt } = useCodegenContext();
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
 
-  const handleCopy = (event) => {
+  const handleClose = useCallback(() => setOpenModal(false), []);
+
+  const handleCopy = () => {
     navigator.clipboard.writeText(fullPrompt);
-    setAnchorEl(event.currentTarget);
-    setTimeout(() => setAnchorEl(null), 2000); // Close after 2 seconds
   };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-
-  const textField = (
-    <TextField
-      multiline
-      rows={10}
-      value={fullPrompt}
-      label={'Full Prompt'}
-      sx={{ width: '100%', height: '100%' }}
-    />
-  );
-
-  const titleContent = (
-    <IconButton onClick={handleCopy} size='small' title='Copy to clipboard'>
-      <ContentCopyIcon fontSize='small' />
-    </IconButton>
-  );
 
   return (
-    <Box sx={{ position: 'relative', width: '100%', height: '100%' }}>
-      <CollapsibleAccordion title={'Full Prompt'} titleContent={titleContent} content={textField} />
+    <Stack
+      sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        border: '1px solid',
+        borderColor: (theme) => theme.palette.primary.main,
+        borderRadius: '0.5rem',
+        p: 2,
+        gap: 2,
+      }}
+    >
+      <Typography variant='h6'>Full Prompt:</Typography>
 
-      <Popover
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-      >
-        <Typography sx={{ p: 1 }}>Copied!</Typography>
-      </Popover>
-    </Box>
+      <IconButton onClick={handleCopy} size='small' title='Copy to clipboard'>
+        <ContentCopyIcon fontSize='small' /> Copy
+      </IconButton>
+
+      <IconButton onClick={() => setOpenModal(true)} size='small' title='Open Prompt'>
+        <VisibilityIcon fontSize='small' /> View
+      </IconButton>
+
+      <TextFieldModal open={openModal} text={fullPrompt} onClose={handleClose} />
+    </Stack>
   );
 };
 

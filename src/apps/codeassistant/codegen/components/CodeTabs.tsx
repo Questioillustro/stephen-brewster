@@ -16,18 +16,16 @@ const CodeTabs: React.FC = () => {
     <Box>
       <Tabs value={value} onChange={handleChange}>
         <Tab label='Code' />
-
-        {context.codeDisplay?.styles && <Tab label='Styles' />}
       </Tabs>
 
-      {value === 0 && context.codeDisplay?.code && (
-        <Box style={{ padding: '20px' }}>
-          <CodeBlock
-            code={context.codeDisplay.code}
-            language={context.framework?.syntaxHighlighter ?? 'js'}
-          />
-        </Box>
-      )}
+      {/*{value === 0 && context.resultHistory[0]?.code && (*/}
+      {/*  <Box style={{ padding: '20px' }}>*/}
+      {/*    <CodeBlock*/}
+      {/*      code={context.resultHistory[0]?.code}*/}
+      {/*      language={context.framework?.syntaxHighlighter ?? 'js'}*/}
+      {/*    />*/}
+      {/*  </Box>*/}
+      {/*)}*/}
     </Box>
   );
 };

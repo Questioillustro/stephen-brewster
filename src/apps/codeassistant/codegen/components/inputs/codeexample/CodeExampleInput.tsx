@@ -1,68 +1,39 @@
-﻿import React, { useState } from 'react';
-import { Modal, TextField, Button, IconButton, Paper } from '@mui/material';
+﻿import React, { useState, useCallback } from 'react';
+import { Paper, IconButton, Stack } from '@mui/material';
 import { Add } from '@mui/icons-material';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
+import { TextFieldModal } from '@/apps/codeassistant/codegen/components/inputs/textfieldmodal/TextFieldModal';
+import { ComponentTitle } from '@/apps/codeassistant/codegen/components/ComponentTitle';
 
 const CodeExampleInput: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const { codeExample, setCodeExample } = useCodegenContext();
 
-  const context = useCodegenContext();
+  const handleOpen = useCallback(() => setOpen(true), []);
+  const handleClose = useCallback(() => setOpen(false), []);
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    context.setCodeExample(event.target.value);
-  };
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setCodeExample(event.target.value);
+    },
+    [setCodeExample],
+  );
 
   return (
-    <Paper elevation={2}>
-      <IconButton onClick={handleOpen} color='primary'>
-        <Add style={{ fontSize: '50px' }} />
-      </IconButton>
-      <Modal
+    <Paper elevation={2} sx={{ p: 2 }}>
+      <Stack direction={'row'} sx={{ justifyContent: 'center', alignItems: 'center' }}>
+        <ComponentTitle title={'Example Code'} />
+        <IconButton onClick={handleOpen} color='primary' aria-label='Add code example'>
+          <Add sx={{ fontSize: 50 }} />
+        </IconButton>
+      </Stack>
+
+      <TextFieldModal
         open={open}
+        text={codeExample ?? ''}
         onClose={handleClose}
-        componentsProps={{
-          backdrop: {
-            style: { backgroundColor: 'transparent' }, // Remove overlay opacity
-          },
-        }}
-        style={{ pointerEvents: 'none' }} // Allow clicks to pass through to background
-      >
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '90%',
-            maxWidth: '600px',
-            borderRadius: '8px',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)', // Softer shadow
-            padding: '20px',
-            backgroundColor: '#000', // Fully opaque modal
-            pointerEvents: 'auto', // Modal captures clicks
-          }}
-        >
-          <TextField
-            variant='outlined'
-            value={context.codeExample}
-            multiline
-            fullWidth
-            rows={8}
-            onChange={handleChange}
-            placeholder='Code example...'
-          />
-          <Button
-            onClick={handleClose}
-            variant='contained'
-            color='primary'
-            style={{ marginTop: '20px' }}
-          >
-            Close
-          </Button>
-        </div>
-      </Modal>
+        onChange={handleChange}
+      />
     </Paper>
   );
 };

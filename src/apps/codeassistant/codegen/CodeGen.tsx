@@ -1,8 +1,8 @@
 ﻿import { Paper, Stack } from '@mui/material';
 import FrontEndComponent from '@/apps/codeassistant/codegen/FrontEndComponent';
-import CodeTabs from '@/apps/codeassistant/codegen/components/CodeTabs';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
 import { PromptInputs } from '@/apps/codeassistant/codegen/PromptInputs';
+import DynamicTabs from '@/apps/codeassistant/codegen/components/DynamicTabs';
 
 export const CodeGen = () => {
   const context = useCodegenContext();
@@ -14,7 +14,9 @@ export const CodeGen = () => {
       <PromptInputs />
 
       <Paper elevation={2} sx={{ p: 0 }}>
-        {context.codeDisplay && !context.loading && <CodeTabs />}
+        {context.resultHistory.length > 0 && !context.loading && (
+          <DynamicTabs code={context.resultHistory[0].code} />
+        )}
       </Paper>
     </Stack>
   );

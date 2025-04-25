@@ -5,12 +5,15 @@ import {
   DefaultSpecialRequestOptions,
   ISpecialRequest,
 } from '@/apps/codeassistant/codegen/components/inputs/specialrequests/SpecialRequests.types';
+import {
+  CodeGenResponseStructure,
+  ICodeGenObject,
+  ICodeGenResponse,
+} from '@/apps/codeassistant/codegen/CodeGen.types';
 
 interface CodegenContextType {
   framework: IFrontEndFrameworkOption | undefined;
   setFramework: (framework: IFrontEndFrameworkOption) => void;
-  useTypescript: boolean;
-  setUseTypescript: (isTypescript: boolean) => void;
   specialRequests: ISpecialRequest[];
   setSpecialRequests: (requests: ISpecialRequest[]) => void;
   addSpecialRequest: (request: ISpecialRequest) => void;
@@ -22,16 +25,12 @@ interface CodegenContextType {
   prompt: string;
   setPrompt: (prompt: string) => void;
   sendRequest: () => void;
-  codeDisplay: CodegenResponse | undefined;
   loading: boolean;
   fullPrompt: string;
   llmOption: LlmOptionType;
   setLlmOption: (llm: LlmOptionType) => void;
-}
-
-interface CodegenResponse {
-  code: string;
-  styles: string;
+  resultHistory: ICodeGenResponse[];
+  addResult: (result: ICodeGenResponse) => void;
 }
 
 export type LlmOptionType = 'grok' | 'chatgpt' | 'claude';
@@ -43,8 +42,6 @@ export function CodegenProvider({ children }) {
 
   const [uiLibrary, setUiLibrary] = useState<string>('');
 
-  const [useTypescript, setUseTypescript] = useState<boolean>(true);
-
   const [specialRequests, setSpecialRequests] = useState<ISpecialRequest[]>(
     DefaultSpecialRequestOptions,
   );
@@ -53,24 +50,19 @@ export function CodegenProvider({ children }) {
 
   const [prompt, setPrompt] = useState<string>('');
 
-  const [codeDisplay, setCodeDisplay] = useState<CodegenResponse>();
-
   const [loading, setLoading] = useState<boolean>(false);
 
   const [fullPrompt, setFullPrompt] = useState<string>('');
 
   const [llm, setLlm] = useState<LlmOptionType>('chatgpt');
 
-  const toggleTypescript = (isTypescript: boolean) => {
-    console.log('toggling typescript', isTypescript);
-    setUseTypescript(isTypescript);
-  };
+  const [resultHistory, setResultHistory] = useState<ICodeGenResponse[]>([]);
 
   const sendRequest = () => {
     setLoading(true);
 
     openPromptService(fullPrompt, llm, 0.7).then((response: OpenPromptResponse) => {
-      setCodeDisplay(JSON.parse(response));
+      addResult(JSON.parse(response));
       setLoading(false);
     });
   };
@@ -84,26 +76,44 @@ export function CodegenProvider({ children }) {
     setSpecialRequests(newList);
   };
 
+  const addResult = (result: ICodeGenResponse) => {
+    const newHistory = [result].concat(resultHistory);
+    setResultHistory(newHistory);
+  };
+
   useEffect(() => {
     buildPrompt();
-  }, [framework, prompt, uiLibrary, useTypescript, specialRequests, codeExample]);
+  }, [framework, prompt, uiLibrary, specialRequests, codeExample]);
 
   useEffect(() => {
     console.log('codegen context updated', fullPrompt);
   }, [fullPrompt]);
 
   const buildPrompt = () => {
-    const basePrompt = `Format the response json as: { code }.`;
-    const frameworkPrompt = framework ? `Use framework: ${framework.framework}.` : '';
-    const libraryPrompt = uiLibrary ? `Use UI library: ${uiLibrary}.` : '';
-    const typescriptPrompt = useTypescript ? `Use typescript.` : '';
-    const userPrompt = prompt ? `${prompt}.` : '';
-    const codeExamplePrompt = codeExample ? codeExample : '';
+    const bePolite = `Please help me write some code!`;
+    const jsonFormat = `Format the response json as: ${CodeGenResponseStructure}.`;
 
-    const specialRequestsPrompt = specialRequests.map((sr) => sr.prompt).join(' ');
+    const frameworkPrompt = framework ? `Use framework: ${framework.framework}.` : undefined;
+    const libraryPrompt = uiLibrary ? `Use UI library: ${uiLibrary}.` : undefined;
+    const userPrompt = prompt ? `${prompt}.` : undefined;
+    const codeExamplePrompt = codeExample ? `\n${codeExample}` : undefined;
 
-    const fullPrompt =
-      `${frameworkPrompt} ${typescriptPrompt} ${libraryPrompt} ${userPrompt} ${basePrompt} ${specialRequestsPrompt} \n\n${codeExamplePrompt}`.trim();
+    const specialRequestsPrompt = specialRequests.map((sr) => sr.prompt).join('\n');
+
+    const promptArray = [
+      bePolite,
+      jsonFormat,
+      frameworkPrompt,
+      libraryPrompt,
+      userPrompt,
+      specialRequestsPrompt,
+      codeExamplePrompt,
+    ];
+
+    const fullPrompt = promptArray
+      .filter((p) => p)
+      .join('\n')
+      .trim();
 
     setFullPrompt(fullPrompt);
   };
@@ -111,8 +121,6 @@ export function CodegenProvider({ children }) {
   const value = {
     framework: framework,
     setFramework: setFramework,
-    useTypescript: useTypescript,
-    setUseTypescript: toggleTypescript,
     specialRequests: specialRequests,
     setSpecialRequests: setSpecialRequests,
     addSpecialRequest: addSpecialRequest,
@@ -124,11 +132,12 @@ export function CodegenProvider({ children }) {
     prompt: prompt,
     setPrompt: setPrompt,
     sendRequest: sendRequest,
-    codeDisplay: codeDisplay,
     loading: loading,
     fullPrompt: fullPrompt,
     llmOption: llm,
     setLlmOption: setLlm,
+    resultHistory: resultHistory,
+    addResult: addResult,
   };
 
   return <CodegenContext.Provider value={value}>{children}</CodegenContext.Provider>;
