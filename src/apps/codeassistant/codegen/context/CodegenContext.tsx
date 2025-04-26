@@ -8,6 +8,7 @@ import {
 import {
   CodeGenResponseStructure,
   ICodeGenResponse,
+  LlmOptionType,
 } from '@/apps/codeassistant/codegen/CodeGen.types';
 
 interface CodegenContextType {
@@ -33,8 +34,6 @@ interface CodegenContextType {
   resultViewIndex: number;
   setResultViewIndex: (index: number) => void;
 }
-
-export type LlmOptionType = 'grok' | 'chatgpt' | 'claude';
 
 export const CodegenContext = createContext<CodegenContextType | undefined>(undefined);
 

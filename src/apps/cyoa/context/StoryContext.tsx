@@ -1,6 +1,6 @@
 ﻿import { createContext, useContext, useState } from 'react';
 import { IAdventureWrapper } from '@/apps/cyoa/types/adventure';
-import { LlmOptionType } from '@/apps/codeassistant/codegen/context/CodegenContext';
+import { LlmOptionType } from '@/apps/codeassistant/codegen/CodeGen.types';
 
 export type StoryType = 'adventure' | 'education';
 

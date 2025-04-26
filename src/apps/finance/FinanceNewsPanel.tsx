@@ -1,11 +1,11 @@
 ﻿import { Paper } from '@mui/material';
 import FinanceDataGrid from '@/apps/finance/FinanceDataGrid';
 import MacroNews from '@/apps/finance/MacroNews';
-import InfoModal from '@/apps/modal/InfoModal';
 import React, { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { FinanceNewsDescription } from '@/apps/finance/about/FinanceNewsDescription';
+import InfoModal from '@/components/modal/InfoModal';
 
 export interface IFinanceNewsPanelProps {}
 

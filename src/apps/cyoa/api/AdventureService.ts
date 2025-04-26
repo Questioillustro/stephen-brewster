@@ -1,6 +1,6 @@
 ﻿import apiClient from '@/api/ApiClient';
 import { IAdventureWrapper } from '@/apps/cyoa/types/adventure';
-import { LlmOptionType } from '@/apps/codeassistant/codegen/context/CodegenContext';
+import { LlmOptionType } from '@/apps/codeassistant/codegen/CodeGen.types';
 
 export const BuildAVenture = async (
   prompts: string,

@@ -1,4 +1,4 @@
-﻿import { LlmOptionType } from '@/apps/codeassistant/codegen/context/CodegenContext';
+﻿import { LlmOptionType } from '@/apps/codeassistant/codegen/CodeGen.types';
 
 export interface ILlmOption {
   value: LlmOptionType;
