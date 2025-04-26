@@ -1,9 +1,9 @@
 ﻿import Typography from '@mui/material/Typography';
-import InfoModal from '@/apps/modal/InfoModal';
 import React, { useState } from 'react';
 import { IconButton, Paper } from '@mui/material';
 import HelpIcon from '@mui/icons-material/Help';
 import { CodeAssistantDescription } from '@/apps/codeassistant/CodeAssistantDescription';
+import InfoModal from '@/components/modal/InfoModal';
 
 export const AboutCodeAssistant = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

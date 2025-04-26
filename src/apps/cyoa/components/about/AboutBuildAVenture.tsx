@@ -1,9 +1,9 @@
 ﻿import Typography from '@mui/material/Typography';
-import InfoModal from '@/apps/modal/InfoModal';
-import { BuildAventureDescription } from '@/apps/modal/BuildAventureDescription';
+import { BuildAventureDescription } from './BuildAventureDescription';
 import React, { useState } from 'react';
 import { IconButton, Stack } from '@mui/material';
 import HelpIcon from '@mui/icons-material/Help';
+import InfoModal from '@/components/modal/InfoModal';
 
 export const AboutBuildAVenture = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

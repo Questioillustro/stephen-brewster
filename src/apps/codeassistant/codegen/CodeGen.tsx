@@ -13,7 +13,7 @@ export const CodeGen = () => {
 
       <PromptInputs />
 
-      <Paper elevation={2} sx={{ p: 0 }}>
+      <Paper elevation={2} sx={{ p: 0, width: '100%' }}>
         {context.resultHistory.length > 0 && <ResultHistoryDisplay />}
       </Paper>
     </Stack>

@@ -127,7 +127,7 @@ const DynamicTabs: React.FC<DynamicTabsProps> = ({
   }
 
   return (
-    <Paper elevation={2} sx={{ overflow: 'hidden', borderRadius: 1 }}>
+    <Paper elevation={2} sx={{ m: 2, width: '100%' }}>
       <AppBar
         position='static'
         color='default'

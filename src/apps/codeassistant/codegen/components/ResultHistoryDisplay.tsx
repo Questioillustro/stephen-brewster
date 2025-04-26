@@ -2,6 +2,7 @@
 import { Stack, Button, Pagination } from '@mui/material';
 import DynamicTabs from '@/apps/codeassistant/codegen/components/DynamicTabs';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
+import { SaveCodeGenButton } from '@/apps/codeassistant/codegen/service/SaveCodeGenButton';
 
 export const ResultHistoryDisplay: React.FC = () => {
   const context = useCodegenContext();
@@ -10,6 +11,7 @@ export const ResultHistoryDisplay: React.FC = () => {
 
   return (
     <Stack spacing={2} sx={{ alignItems: 'center', mt: 2, minHeight: '600px' }}>
+      <SaveCodeGenButton />
       <Stack direction='row' spacing={2} justifyContent='center'>
         <Button
           onClick={() => context.setResultViewIndex(Math.max(0, context.resultViewIndex - 1))}

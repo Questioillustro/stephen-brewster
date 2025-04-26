@@ -3,7 +3,7 @@ import { IAdventureWrapper } from '@/apps/cyoa/types/adventure';
 
 export interface IGenerateImageRequest {
   model?: string;
-  size?: string;
+  size?: imageSizeType;
   quality?: string;
   imageCount?: number;
   prompt: string;
@@ -31,11 +31,16 @@ export const getImagesForPrompt = async (
     throw new Error('Valid non-negative index number is required');
   }
 
+  const request: IGenerateImageRequest = {
+    prompt: prompt,
+    size: size,
+  };
+
   try {
-    const response = await apiClient.post<IAdventureWrapper>(`/generateimages/${id}/${index}`, {
-      prompt: prompt,
-      size: size,
-    });
+    const response = await apiClient.post<IAdventureWrapper>(
+      `/generateimages/${id}/${index}`,
+      request,
+    );
 
     if (!response.data) {
       throw new Error('No adventure data received from server');

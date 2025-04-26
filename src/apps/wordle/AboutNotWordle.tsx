@@ -1,9 +1,9 @@
 ﻿import Typography from '@mui/material/Typography';
-import InfoModal from '@/apps/modal/InfoModal';
 import React, { useState } from 'react';
 import { IconButton, Paper } from '@mui/material';
 import HelpIcon from '@mui/icons-material/Help';
 import { NotWordleDescription } from '@/apps/wordle/NotWordleDescription';
+import InfoModal from '@/components/modal/InfoModal';
 
 export const AboutNotWordle = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
