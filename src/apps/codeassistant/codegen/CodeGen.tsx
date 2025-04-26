@@ -2,7 +2,7 @@
 import FrontEndComponent from '@/apps/codeassistant/codegen/FrontEndComponent';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
 import { PromptInputs } from '@/apps/codeassistant/codegen/PromptInputs';
-import DynamicTabs from '@/apps/codeassistant/codegen/components/DynamicTabs';
+import { ResultHistoryDisplay } from '@/apps/codeassistant/codegen/components/ResultHistoryDisplay';
 
 export const CodeGen = () => {
   const context = useCodegenContext();
@@ -14,9 +14,7 @@ export const CodeGen = () => {
       <PromptInputs />
 
       <Paper elevation={2} sx={{ p: 0 }}>
-        {context.resultHistory.length > 0 && !context.loading && (
-          <DynamicTabs code={context.resultHistory[0].code} />
-        )}
+        {context.resultHistory.length > 0 && <ResultHistoryDisplay />}
       </Paper>
     </Stack>
   );

@@ -22,9 +22,6 @@ interface TabPanelProps {
   dir?: string;
 }
 
-/**
- * TabPanel component displays content for a selected tab
- */
 const TabPanel: React.FC<TabPanelProps> = ({ children, value, index, dir = 'ltr', ...other }) => {
   return (
     <div
@@ -40,9 +37,6 @@ const TabPanel: React.FC<TabPanelProps> = ({ children, value, index, dir = 'ltr'
   );
 };
 
-/**
- * Helper function for a11y props
- */
 function a11yProps(index: number) {
   return {
     id: `code-tab-${index}`,
@@ -50,9 +44,6 @@ function a11yProps(index: number) {
   };
 }
 
-/**
- * DynamicTabs displays code files in tabbed interface
- */
 interface DynamicTabsProps {
   code: ICodeGenObject[];
   defaultLanguage?: string;
@@ -69,12 +60,10 @@ const DynamicTabs: React.FC<DynamicTabsProps> = ({
   const theme = useTheme();
   const tabsRef = React.useRef<HTMLDivElement>(null);
 
-  // Handle tab change
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
-  // Determine the language based on file extension or fallback to default
   const getLanguage = (fileName: string): string => {
     const extension = fileName.split('.').pop()?.toLowerCase();
 
@@ -93,7 +82,6 @@ const DynamicTabs: React.FC<DynamicTabsProps> = ({
     return extension ? extensionMap[extension] || defaultLanguage : defaultLanguage;
   };
 
-  // Scroll tabs left/right
   const scrollTabs = (direction: 'left' | 'right') => {
     if (tabsRef.current) {
       const container = tabsRef.current;
@@ -108,10 +96,8 @@ const DynamicTabs: React.FC<DynamicTabsProps> = ({
     }
   };
 
-  // Check if we need to show scroll buttons
   const [showScrollButtons, setShowScrollButtons] = useState(false);
 
-  // Update scroll button visibility
   useEffect(() => {
     const checkScrollable = () => {
       if (tabsRef.current) {
@@ -122,7 +108,6 @@ const DynamicTabs: React.FC<DynamicTabsProps> = ({
 
     checkScrollable();
 
-    // Setup resize observer to check when tabs might need scroll buttons
     const resizeObserver = new ResizeObserver(checkScrollable);
     if (tabsRef.current) {
       resizeObserver.observe(tabsRef.current);
@@ -131,7 +116,6 @@ const DynamicTabs: React.FC<DynamicTabsProps> = ({
     return () => resizeObserver.disconnect();
   }, [code]);
 
-  // If no code, show a message
   if (!code || code.length === 0) {
     return (
       <Paper elevation={2} sx={{ p: 3 }}>
@@ -182,7 +166,7 @@ const DynamicTabs: React.FC<DynamicTabsProps> = ({
               flexGrow: 1,
               overflow: 'hidden',
               '&::-webkit-scrollbar': { display: 'none' },
-              scrollbarWidth: 'none', // Firefox
+              scrollbarWidth: 'none',
             }}
           >
             <Tabs

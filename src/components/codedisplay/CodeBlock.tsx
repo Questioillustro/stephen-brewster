@@ -1,10 +1,10 @@
 ﻿import React from 'react';
-import { styled } from '@mui/material/styles';
-import { Box, Typography, IconButton, Tooltip } from '@mui/material';
+import { Typography, IconButton, Tooltip } from '@mui/material';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { grey } from '@mui/material/colors';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { CodeContainer, CopyButtonContainer } from '@/components/codedisplay/CodeBlock.styles';
 
 interface CodeBlockProps {
   code: string;
@@ -13,28 +13,12 @@ interface CodeBlockProps {
   className?: string;
 }
 
-const CodeContainer = styled(Box)(({ theme }) => ({
-  backgroundColor: grey[900],
-  borderRadius: theme.shape.borderRadius,
-  padding: theme.spacing(2),
-  overflow: 'auto',
-  margin: theme.spacing(1, 0),
-  position: 'relative', // Added for button positioning
-}));
-
-const CopyButtonContainer = styled(Box)(({ theme }) => ({
-  position: 'absolute',
-  top: theme.spacing(1),
-  right: theme.spacing(1),
-}));
-
 const CodeBlock: React.FC<CodeBlockProps> = ({
   code,
   language = 'language-jsx',
   showLineNumbers = true,
   className,
 }) => {
-  // Normalize the code string
   const normalizedCode = code
     .replace(/\\r\\n/g, '\n')
     .replace(/\\n/g, '\n')
@@ -43,7 +27,6 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(normalizedCode);
-      // Optionally add a success feedback (e.g., toast notification)
     } catch (err) {
       console.error('Failed to copy:', err);
     }

@@ -7,7 +7,6 @@ import {
 } from '@/apps/codeassistant/codegen/components/inputs/specialrequests/SpecialRequests.types';
 import {
   CodeGenResponseStructure,
-  ICodeGenObject,
   ICodeGenResponse,
 } from '@/apps/codeassistant/codegen/CodeGen.types';
 
@@ -31,6 +30,8 @@ interface CodegenContextType {
   setLlmOption: (llm: LlmOptionType) => void;
   resultHistory: ICodeGenResponse[];
   addResult: (result: ICodeGenResponse) => void;
+  resultViewIndex: number;
+  setResultViewIndex: (index: number) => void;
 }
 
 export type LlmOptionType = 'grok' | 'chatgpt' | 'claude';
@@ -57,6 +58,8 @@ export function CodegenProvider({ children }) {
   const [llm, setLlm] = useState<LlmOptionType>('chatgpt');
 
   const [resultHistory, setResultHistory] = useState<ICodeGenResponse[]>([]);
+
+  const [resultViewIndex, setResultViewIndex] = useState<number>(0);
 
   const sendRequest = () => {
     setLoading(true);
@@ -138,6 +141,8 @@ export function CodegenProvider({ children }) {
     setLlmOption: setLlm,
     resultHistory: resultHistory,
     addResult: addResult,
+    resultViewIndex: resultViewIndex,
+    setResultViewIndex: setResultViewIndex,
   };
 
   return <CodegenContext.Provider value={value}>{children}</CodegenContext.Provider>;

@@ -55,7 +55,13 @@ export const SpecialRequestAutocomplete = () => {
           }
         }}
         renderInput={(params) => (
-          <TextField {...params} label='Add Option' variant='outlined' sx={{ width: '100%' }} />
+          <TextField
+            {...params}
+            label='Add Option'
+            placeholder={'Enter a new special request...'}
+            variant='outlined'
+            sx={{ width: '100%' }}
+          />
         )}
         sx={{ width: '100%' }}
       />
@@ -64,6 +70,7 @@ export const SpecialRequestAutocomplete = () => {
         <TextField
           label='Prompt'
           value={promptValue}
+          placeholder={'Enter the prompt that will fulfill the request...  '}
           onChange={(e) => setPromptValue(e.target.value)}
           variant='outlined'
           sx={{ width: '100%' }}

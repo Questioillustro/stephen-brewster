@@ -7,7 +7,8 @@ const PromptField = () => {
   return (
     <TextField
       id='outlined-basic'
-      label='Prompt'
+      label='Main Prompt'
+      placeholder={'Enter a detailed request... '}
       variant='outlined'
       value={prompt}
       multiline
