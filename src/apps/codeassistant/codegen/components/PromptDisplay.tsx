@@ -23,12 +23,10 @@ const PromptDisplay = () => {
         border: '1px solid',
         borderColor: (theme) => theme.palette.primary.main,
         borderRadius: '0.5rem',
-        p: 2,
+        p: 1,
         gap: 2,
       }}
     >
-      <Typography variant='h6'>Full Prompt:</Typography>
-
       <IconButton onClick={handleCopy} size='small' title='Copy to clipboard'>
         <ContentCopyIcon fontSize='small' /> Copy
       </IconButton>

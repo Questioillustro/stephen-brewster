@@ -6,7 +6,7 @@ import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenC
 const FrontEndComponent = () => {
   const context = useCodegenContext();
   return (
-    <Stack sx={{ flexDirection: { sm: 'column', lg: 'row' }, gap: 2 }}>
+    <Stack sx={{ flexDirection: { sm: 'column', lg: 'row' }, gap: 2, mb: 2 }}>
       <Paper elevation={2} sx={{ width: '100%' }}>
         <FrameworkButtonGroup />
       </Paper>

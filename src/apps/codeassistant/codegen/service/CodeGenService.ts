@@ -8,3 +8,13 @@ export const SaveCode = async (request: ICodeGen) => {
     console.log(`Failed to save codegen: ${JSON.stringify(error)}`);
   }
 };
+
+export const GetAll = async (): Promise<ICodeGen[]> => {
+  try {
+    const response = await apiClient.get<ICodeGen[]>(`/codegen`);
+    return response.data;
+  } catch (error) {
+    console.log('Failed to get code gen library');
+    throw error;
+  }
+};

@@ -1,15 +1,59 @@
 ﻿import { CodegenProvider } from '@/apps/codeassistant/codegen/context/CodegenContext';
 import AppHeader from '@/layout/apps/AppHeader';
-import { Stack } from '@mui/material';
+import { Box, Slide, Stack } from '@mui/material';
 import { AboutCodeAssistant } from '@/apps/codeassistant/AboutCodeAssistant';
-import { CodeGen } from '@/apps/codeassistant/codegen/CodeGen';
+import { LibraryList } from '@/apps/codeassistant/codelibrary/LibraryList';
+import { PanelControls } from '@/apps/codeassistant/PanelControls';
+import FrontEndComponent from '@/apps/codeassistant/codegen/FrontEndComponent';
+import { PromptInputs } from '@/apps/codeassistant/codegen/PromptInputs';
+import { ResultHistoryDisplay } from '@/apps/codeassistant/codegen/components/ResultHistoryDisplay';
+import { useState } from 'react';
 
 const CodeAssistant = () => {
+  const [fe, setFe] = useState<boolean>(true);
+  const [lib, setLib] = useState<boolean>(true);
+
   return (
     <CodegenProvider>
-      <Stack direction={'column'} sx={{ p: 2, pt: 0, display: 'flex', width: '100%' }}>
+      <Stack sx={{ pb: 4, width: '100%', p: 2, pt: 0 }}>
         <AppHeader about={<AboutCodeAssistant />} />
-        <CodeGen />
+
+        <PanelControls
+          fe={fe}
+          toggleFe={() => setFe(!fe)}
+          lib={lib}
+          toggleLib={() => setLib(!lib)}
+        />
+
+        <Box sx={{ display: 'flex', gap: 2, width: '100%', mt: 2 }}>
+          <Box
+            sx={{
+              flex: lib ? '0 0 67%' : '0 0 100%', // 67% when lib is visible, 100% when hidden
+              transition: 'flex 0.5s ease-in-out', // Smooth width transition
+              maxWidth: '100%',
+            }}
+          >
+            <Stack direction='column' sx={{ width: '100%' }}>
+              {fe && <FrontEndComponent />}
+
+              <PromptInputs />
+
+              <ResultHistoryDisplay />
+            </Stack>
+          </Box>
+
+          <Slide direction='left' timeout={500} in={lib}>
+            <Box
+              sx={{
+                flex: '0 0 33%',
+                maxWidth: '33%',
+                minWidth: '200px',
+              }}
+            >
+              <LibraryList />
+            </Box>
+          </Slide>
+        </Box>
       </Stack>
     </CodegenProvider>
   );

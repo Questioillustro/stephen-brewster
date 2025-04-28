@@ -1,12 +1,17 @@
-﻿import { createContext, useContext, useEffect, useState } from 'react';
-import { IFrontEndFrameworkOption } from '@/apps/codeassistant/codegen/data/AllOptions';
+﻿import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import {
+  FrontEndFrameworkOptions,
+  IFrontEndFrameworkOption,
+} from '@/apps/codeassistant/codegen/data/AllOptions';
 import { OpenPromptResponse, openPromptService } from '@/service/OpenPromptService';
 import {
   DefaultSpecialRequestOptions,
   ISpecialRequest,
+  SpecialRequestOptions,
 } from '@/apps/codeassistant/codegen/components/inputs/specialrequests/SpecialRequests.types';
 import {
   CodeGenResponseStructure,
+  ICodeGen,
   ICodeGenResponse,
   LlmOptionType,
 } from '@/apps/codeassistant/codegen/CodeGen.types';
@@ -15,14 +20,13 @@ interface CodegenContextType {
   framework: IFrontEndFrameworkOption | undefined;
   setFramework: (framework: IFrontEndFrameworkOption) => void;
   specialRequests: ISpecialRequest[];
-  setSpecialRequests: (requests: ISpecialRequest[]) => void;
   addSpecialRequest: (request: ISpecialRequest) => void;
   removeSpecialRequest: (requestId: string) => void;
-  codeExample: string | undefined;
+  codeExample?: string;
   setCodeExample: (example: string | undefined) => void;
-  uiLibrary: string;
+  uiLibrary?: string;
   setUiLibrary: (library: string) => void;
-  prompt: string;
+  prompt?: string;
   setPrompt: (prompt: string) => void;
   sendRequest: () => void;
   loading: boolean;
@@ -33,14 +37,19 @@ interface CodegenContextType {
   addResult: (result: ICodeGenResponse) => void;
   resultViewIndex: number;
   setResultViewIndex: (index: number) => void;
+  setCodeGenContext: (codeGen: ICodeGen) => void;
+}
+
+interface CodegenProviderProps {
+  children: React.ReactNode;
 }
 
 export const CodegenContext = createContext<CodegenContextType | undefined>(undefined);
 
-export function CodegenProvider({ children }) {
+export function CodegenProvider({ children }: CodegenProviderProps) {
   const [framework, setFramework] = useState<IFrontEndFrameworkOption>();
 
-  const [uiLibrary, setUiLibrary] = useState<string>('');
+  const [uiLibrary, setUiLibrary] = useState<string | undefined>();
 
   const [specialRequests, setSpecialRequests] = useState<ISpecialRequest[]>(
     DefaultSpecialRequestOptions,
@@ -60,13 +69,16 @@ export function CodegenProvider({ children }) {
 
   const [resultViewIndex, setResultViewIndex] = useState<number>(0);
 
-  const sendRequest = () => {
+  const sendRequest = async () => {
     setLoading(true);
-
-    openPromptService(fullPrompt, llm, 0.7).then((response: OpenPromptResponse) => {
+    try {
+      const response: OpenPromptResponse = await openPromptService(fullPrompt, llm, 0.7);
       addResult(JSON.parse(response));
+    } catch (error) {
+      console.error('Error sending request:', error);
+    } finally {
       setLoading(false);
-    });
+    }
   };
 
   const addSpecialRequest = (request: ISpecialRequest) => {
@@ -79,12 +91,35 @@ export function CodegenProvider({ children }) {
   };
 
   const addResult = (result: ICodeGenResponse) => {
-    const newHistory = [result].concat(resultHistory);
+    const newHistory = [result].concat(
+      resultHistory.filter((rh) => rh.code.join('') !== result.code.join('')),
+    );
     setResultHistory(newHistory);
   };
 
+  const setCodeGenContext = (codeGen: ICodeGen) => {
+    const frameworkOption = FrontEndFrameworkOptions.filter(
+      (c) => c.framework === codeGen.request.framework,
+    );
+
+    const specialRequests = SpecialRequestOptions.filter((sro) =>
+      codeGen.request.specialRequests?.includes(sro.prompt),
+    );
+    setFramework(frameworkOption[0] ?? undefined);
+    setUiLibrary(codeGen.request.uiLibrary);
+    setSpecialRequests(specialRequests);
+    setCodeExample(codeGen.request.codeExample);
+    setPrompt(codeGen.request.prompt ?? '');
+    addResult(codeGen.response);
+    setResultViewIndex(0);
+    setLlm(codeGen.request.llmOption);
+  };
+
   useEffect(() => {
-    buildPrompt();
+    const timeout = setTimeout(() => {
+      buildPrompt();
+    }, 300);
+    return () => clearTimeout(timeout);
   }, [framework, prompt, uiLibrary, specialRequests, codeExample]);
 
   useEffect(() => {
@@ -92,57 +127,57 @@ export function CodegenProvider({ children }) {
   }, [fullPrompt]);
 
   const buildPrompt = () => {
-    const bePolite = `Please help me write some code!`;
-    const jsonFormat = `Format the response json as: ${CodeGenResponseStructure}.`;
-
-    const frameworkPrompt = framework ? `Use framework: ${framework.framework}.` : undefined;
-    const libraryPrompt = uiLibrary ? `Use UI library: ${uiLibrary}.` : undefined;
-    const userPrompt = prompt ? `${prompt}.` : undefined;
-    const codeExamplePrompt = codeExample ? `\n${codeExample}` : undefined;
-
-    const specialRequestsPrompt = specialRequests.map((sr) => sr.prompt).join('\n');
-
-    const promptArray = [
-      bePolite,
-      jsonFormat,
-      frameworkPrompt,
-      libraryPrompt,
-      userPrompt,
-      specialRequestsPrompt,
-      codeExamplePrompt,
+    const parts = [
+      `Please help me write some code!`,
+      `Format the response json as: ${CodeGenResponseStructure}.`,
+      framework ? `Use framework: ${framework.framework}.` : '',
+      uiLibrary ? `Use UI library: ${uiLibrary}.` : '',
+      prompt ? `${prompt}.` : '',
+      specialRequests.map((sr) => sr.prompt).join('\n'),
+      codeExample ? `\n${codeExample}` : '',
     ];
 
-    const fullPrompt = promptArray
-      .filter((p) => p)
-      .join('\n')
-      .trim();
-
-    setFullPrompt(fullPrompt);
+    setFullPrompt(parts.filter(Boolean).join('\n').trim());
   };
 
-  const value = {
-    framework: framework,
-    setFramework: setFramework,
-    specialRequests: specialRequests,
-    setSpecialRequests: setSpecialRequests,
-    addSpecialRequest: addSpecialRequest,
-    removeSpecialRequest: removeSpecialRequest,
-    codeExample: codeExample,
-    setCodeExample: setCodeExample,
-    uiLibrary: uiLibrary,
-    setUiLibrary: setUiLibrary,
-    prompt: prompt,
-    setPrompt: setPrompt,
-    sendRequest: sendRequest,
-    loading: loading,
-    fullPrompt: fullPrompt,
-    llmOption: llm,
-    setLlmOption: setLlm,
-    resultHistory: resultHistory,
-    addResult: addResult,
-    resultViewIndex: resultViewIndex,
-    setResultViewIndex: setResultViewIndex,
-  };
+  const value = useMemo(
+    () => ({
+      framework,
+      setFramework,
+      specialRequests,
+      setSpecialRequests,
+      addSpecialRequest,
+      removeSpecialRequest,
+      codeExample,
+      setCodeExample,
+      uiLibrary,
+      setUiLibrary,
+      prompt,
+      setPrompt,
+      sendRequest,
+      loading,
+      fullPrompt,
+      llmOption: llm,
+      setLlmOption: setLlm,
+      resultHistory,
+      addResult,
+      resultViewIndex,
+      setResultViewIndex,
+      setCodeGenContext,
+    }),
+    [
+      framework,
+      specialRequests,
+      codeExample,
+      uiLibrary,
+      prompt,
+      loading,
+      fullPrompt,
+      llm,
+      resultHistory,
+      resultViewIndex,
+    ],
+  );
 
   return <CodegenContext.Provider value={value}>{children}</CodegenContext.Provider>;
 }

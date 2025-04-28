@@ -8,7 +8,10 @@ export const CodeGen = () => {
   const context = useCodegenContext();
 
   return (
-    <Stack direction={'column'} sx={{ gap: 2, fontSize: { xs: '8px', sm: '10px', md: '16px' } }}>
+    <Stack
+      direction={'column'}
+      sx={{ gap: 2, fontSize: { xs: '8px', sm: '10px', md: '16px' }, width: '100%' }}
+    >
       <FrontEndComponent />
 
       <PromptInputs />

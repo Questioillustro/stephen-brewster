@@ -1,5 +1,5 @@
 ﻿import React, { useState, useCallback } from 'react';
-import { Paper, IconButton, Stack } from '@mui/material';
+import { Paper, IconButton, Stack, Box } from '@mui/material';
 import { Add } from '@mui/icons-material';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
 import { TextFieldModal } from '@/apps/codeassistant/codegen/components/inputs/textfieldmodal/TextFieldModal';
@@ -20,9 +20,8 @@ const CodeExampleInput: React.FC = () => {
   );
 
   return (
-    <Paper elevation={2} sx={{ p: 2 }}>
+    <Box>
       <Stack direction={'row'} sx={{ justifyContent: 'center', alignItems: 'center' }}>
-        <ComponentTitle title={'Example Code'} />
         <IconButton onClick={handleOpen} color='primary' aria-label='Add code example'>
           <Add sx={{ fontSize: 50 }} />
         </IconButton>
@@ -34,7 +33,7 @@ const CodeExampleInput: React.FC = () => {
         onClose={handleClose}
         onChange={handleChange}
       />
-    </Paper>
+    </Box>
   );
 };
 

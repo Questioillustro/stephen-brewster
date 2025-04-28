@@ -10,7 +10,7 @@ export interface ICodeGenSaveRequest {
   specialRequests?: string[];
   codeExample?: string;
   uiLibrary?: string;
-  prompt: string;
+  prompt?: string;
   llmOption: LlmOptionType;
   code: ICodeGenResponse;
 }

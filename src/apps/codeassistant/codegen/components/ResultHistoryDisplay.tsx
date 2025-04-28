@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Stack, Button, Pagination } from '@mui/material';
+import { Stack, Button, Pagination, Paper } from '@mui/material';
 import DynamicTabs from '@/apps/codeassistant/codegen/components/DynamicTabs';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
 import { SaveCodeGenButton } from '@/apps/codeassistant/codegen/service/SaveCodeGenButton';
@@ -7,34 +7,38 @@ import { SaveCodeGenButton } from '@/apps/codeassistant/codegen/service/SaveCode
 export const ResultHistoryDisplay: React.FC = () => {
   const context = useCodegenContext();
 
-  const totalPages = Math.ceil(context.resultHistory.length / 1);
+  const totalPages = Math.ceil((context.resultHistory.length ?? 1) / 1);
+
+  if (context.resultHistory.length == 0) return <></>;
 
   return (
-    <Stack spacing={2} sx={{ alignItems: 'center', mt: 2, minHeight: '600px' }}>
-      <SaveCodeGenButton />
-      <Stack direction='row' spacing={2} justifyContent='center'>
-        <Button
-          onClick={() => context.setResultViewIndex(Math.max(0, context.resultViewIndex - 1))}
-          disabled={context.resultViewIndex === 0}
-        >
-          Previous
-        </Button>
-        <Pagination
-          count={totalPages}
-          page={context.resultViewIndex + 1}
-          onChange={(event, page) => context.setResultViewIndex(page - 1)}
-          variant='outlined'
-        />
-        <Button
-          onClick={() =>
-            context.setResultViewIndex(Math.min(totalPages - 1, context.resultViewIndex + 1))
-          }
-          disabled={context.resultViewIndex === totalPages - 1}
-        >
-          Next
-        </Button>
+    <Paper elevation={2}>
+      <Stack spacing={2} sx={{ alignItems: 'center', mt: 2, minHeight: '600px' }}>
+        <SaveCodeGenButton />
+        <Stack direction='row' spacing={2} justifyContent='center'>
+          <Button
+            onClick={() => context.setResultViewIndex(Math.max(0, context.resultViewIndex - 1))}
+            disabled={context.resultViewIndex === 0}
+          >
+            Previous
+          </Button>
+          <Pagination
+            count={totalPages}
+            page={context.resultViewIndex + 1}
+            onChange={(event, page) => context.setResultViewIndex(page - 1)}
+            variant='outlined'
+          />
+          <Button
+            onClick={() =>
+              context.setResultViewIndex(Math.min(totalPages - 1, context.resultViewIndex + 1))
+            }
+            disabled={context.resultViewIndex === totalPages - 1}
+          >
+            Next
+          </Button>
+        </Stack>
+        <DynamicTabs code={context.resultHistory[context.resultViewIndex].code} />
       </Stack>
-      <DynamicTabs code={context.resultHistory[context.resultViewIndex].code} />
-    </Stack>
+    </Paper>
   );
 };
