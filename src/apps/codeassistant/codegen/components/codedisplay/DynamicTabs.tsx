@@ -10,7 +10,7 @@ import {
   Tooltip,
   Paper,
 } from '@mui/material';
-import { ICodeGenObject } from '@/apps/codeassistant/codegen/CodeGen.types';
+import { ICodeObject } from '@/apps/codeassistant/codegen/CodeGen.types';
 import CodeBlock from '@/components/codedisplay/CodeBlock';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -45,7 +45,7 @@ function a11yProps(index: number) {
 }
 
 interface DynamicTabsProps {
-  code: ICodeGenObject[];
+  code: ICodeObject[];
   defaultLanguage?: string;
   maxHeight?: string | number;
 }
