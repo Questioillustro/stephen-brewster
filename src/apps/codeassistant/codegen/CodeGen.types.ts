@@ -1,28 +1,41 @@
 ﻿export interface ICodeGen {
   _id?: string;
-  request: ICodeGenSaveRequest;
+  request: ICodeGenRequest;
   response: ICodeGenResponse;
   notes?: string[];
 }
 
 export interface ICodeGenSaveRequest {
+  codeGen: ICodeGen;
+}
+
+export interface ICodeObject {
+  fileName: string;
+  content: string;
+}
+
+export interface ICodeGenRequest {
   framework?: string;
   specialRequests?: string[];
   codeExample?: string;
   uiLibrary?: string;
   prompt?: string;
   llmOption: LlmOptionType;
-  code: ICodeGenResponse;
-}
-
-export interface ICodeGenObject {
-  fileName: string;
-  content: string;
 }
 
 export interface ICodeGenResponse {
-  code: ICodeGenObject[];
+  code: ICodeObject[];
 }
+
+export interface IFrontEndFrameworkOption {
+  framework: FeFrameworkType;
+  uiLibraries: string[];
+  syntaxHighlighter?: SyntaxLanguages;
+}
+
+export type FeFrameworkType = 'React' | 'Angular' | 'Vue' | 'JavaScript';
+
+export type SyntaxLanguages = 'jsx' | 'tsx' | 'js';
 
 export const CodeGenResponseStructure = `{ code: [ { fileName, content } ] }`;
 

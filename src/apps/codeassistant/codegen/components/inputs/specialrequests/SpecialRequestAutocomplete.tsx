@@ -2,37 +2,30 @@
 import Autocomplete from '@mui/material/Autocomplete';
 import React, { useEffect, useState } from 'react';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
-import {
-  ISpecialRequest,
-  SpecialRequestOptions,
-} from '@/apps/codeassistant/codegen/components/inputs/specialrequests/SpecialRequests.types';
-import { v4 as uuidv4 } from 'uuid';
+import { SpecialRequestOptions } from '@/apps/codeassistant/codegen/components/inputs/specialrequests/SpecialRequests.types';
 
 export const SpecialRequestAutocomplete = () => {
   const [inputValue, setInputValue] = useState('');
-  const [options, setOptions] = useState<ISpecialRequest[]>(SpecialRequestOptions);
-  const [promptValue, setPromptValue] = useState('');
+  const [options, setOptions] = useState<string[]>(SpecialRequestOptions);
 
   const context = useCodegenContext();
 
   const handleAddOption = () => {
-    if (inputValue && !context.specialRequests.some((opt) => opt.label === inputValue)) {
-      const newOption: ISpecialRequest = {
-        id: uuidv4(),
-        label: inputValue,
-        prompt: promptValue || `Prompt for ${inputValue}`,
-      };
-      context.addSpecialRequest(newOption);
-      setOptions((prev) => [...prev, newOption]);
+    if (
+      inputValue &&
+      !(context.codeGen.request.specialRequests ?? []).some((opt) => opt === inputValue)
+    ) {
+      context.addSpecialRequest(inputValue);
+      setOptions((prev) => [...prev, inputValue]);
       setInputValue('');
-      setPromptValue('');
     }
   };
 
   const filterOptions = () => {
     const defaults = SpecialRequestOptions;
-    const selectedIds = context.specialRequests.map((sr) => sr.id);
-    setOptions(defaults.filter((o) => !selectedIds.includes(o.id)));
+    setOptions(
+      defaults.filter((o) => !(context.codeGen.request.specialRequests ?? []).includes(o)),
+    );
   };
 
   useEffect(() => {
@@ -44,12 +37,11 @@ export const SpecialRequestAutocomplete = () => {
       <Autocomplete
         freeSolo
         options={options}
-        getOptionLabel={(option) => (typeof option === 'string' ? option : option.label)}
         value={null}
         inputValue={inputValue}
         onInputChange={(_, newInputValue) => setInputValue(newInputValue)}
         onChange={(_, newValue) => {
-          if (typeof newValue !== 'string' && newValue) {
+          if (newValue) {
             context.addSpecialRequest(newValue);
             setInputValue('');
           }
@@ -66,18 +58,7 @@ export const SpecialRequestAutocomplete = () => {
         sx={{ width: '100%' }}
       />
 
-      {inputValue && !options.some((opt) => opt.label === inputValue) && (
-        <TextField
-          label='Prompt'
-          value={promptValue}
-          placeholder={'Enter the prompt that will fulfill the request...  '}
-          onChange={(e) => setPromptValue(e.target.value)}
-          variant='outlined'
-          sx={{ width: '100%' }}
-        />
-      )}
-
-      {inputValue && !options.some((opt) => opt.label === inputValue) && (
+      {inputValue && !options.some((opt) => opt === inputValue) && (
         <Button
           variant='contained'
           onClick={handleAddOption}

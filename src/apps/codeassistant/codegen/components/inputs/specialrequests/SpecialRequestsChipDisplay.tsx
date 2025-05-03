@@ -14,16 +14,16 @@ export const SpecialRequestsChipDisplay = () => {
         gap: 2,
       }}
     >
-      {context.specialRequests.map((option) => (
+      {(context.codeGen.request.specialRequests ?? []).map((option) => (
         <Chip
-          key={option.id}
-          label={option.label}
+          key={option}
+          label={option}
           deleteIcon={
             <IconButton size='small'>
               <CloseIcon fontSize='small' />
             </IconButton>
           }
-          onDelete={() => context.removeSpecialRequest(option.id)}
+          onDelete={() => context.removeSpecialRequest(option)}
         />
       ))}
     </Box>

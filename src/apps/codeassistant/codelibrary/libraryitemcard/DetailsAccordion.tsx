@@ -1,9 +1,9 @@
 ﻿import { Stack, Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { ICodeGenSaveRequest } from '@/apps/codeassistant/codegen/CodeGen.types';
+import { ICodeGenRequest } from '@/apps/codeassistant/codegen/CodeGen.types';
 
 export interface IDetailsAccordionProps {
-  request: ICodeGenSaveRequest;
+  request: ICodeGenRequest;
 }
 
 export const DetailsAccordion = (props: IDetailsAccordionProps) => {

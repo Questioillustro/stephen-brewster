@@ -2,7 +2,7 @@
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
 
 const PromptField = () => {
-  const { prompt, setPrompt } = useCodegenContext();
+  const context = useCodegenContext();
 
   return (
     <TextField
@@ -10,11 +10,11 @@ const PromptField = () => {
       label='Main Prompt'
       placeholder={'Enter a detailed request... '}
       variant='outlined'
-      value={prompt}
+      value={context.codeGen.request.prompt}
       multiline
       rows={3}
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-        setPrompt(event.target.value);
+        context.updatePrompt(event.target.value);
       }}
       sx={{ width: '100%' }}
     />

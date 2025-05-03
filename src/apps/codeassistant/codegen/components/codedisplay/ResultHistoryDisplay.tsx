@@ -1,6 +1,6 @@
 ﻿import React from 'react';
-import { Stack, Button, Pagination, Paper } from '@mui/material';
-import DynamicTabs from '@/apps/codeassistant/codegen/components/DynamicTabs';
+import { Stack, Button, Pagination, Paper, Box } from '@mui/material';
+import DynamicTabs from '@/apps/codeassistant/codegen/components/codedisplay/DynamicTabs';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
 import { SaveCodeGenButton } from '@/apps/codeassistant/codegen/service/SaveCodeGenButton';
 import { AddToCodeExampleButton } from '@/apps/codeassistant/codegen/components/inputs/codeexample/AddToCodeExampleButton';
@@ -15,9 +15,11 @@ export const ResultHistoryDisplay: React.FC = () => {
   return (
     <Paper elevation={2} sx={{ pt: 1 }}>
       <Stack spacing={2} sx={{ alignItems: 'center', mt: 2, minHeight: '600px' }}>
-        <SaveCodeGenButton />
+        <Stack sx={{ flexDirection: 'row', gap: 2 }}>
+          <SaveCodeGenButton />
 
-        <AddToCodeExampleButton />
+          <AddToCodeExampleButton />
+        </Stack>
 
         <Stack direction='row' spacing={2} justifyContent='center'>
           <Button

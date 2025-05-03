@@ -8,7 +8,7 @@ const LlmSelect: React.FC = () => {
   const context = useCodegenContext();
 
   const handleClick = (option: LlmOptionType) => {
-    context.setLlmOption(option);
+    context.updateCodeGen({ request: { ...context.codeGen.request, llmOption: option } });
   };
 
   return (
@@ -17,7 +17,7 @@ const LlmSelect: React.FC = () => {
         return (
           <Button
             onClick={() => handleClick(option.value)}
-            color={context.llmOption === option.value ? 'primary' : 'inherit'}
+            color={context.codeGen.request.llmOption === option.value ? 'primary' : 'inherit'}
             disabled={!option.available}
           >
             {option.label}

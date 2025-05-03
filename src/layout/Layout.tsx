@@ -1,6 +1,6 @@
-﻿import { Paper, Stack, ThemeProvider } from '@mui/material';
+﻿import { Paper, Stack } from '@mui/material';
 import Resume from '@/apps/resume/Resume';
-import React, { useContext } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import About from '@/apps/about/About';
 import NavigationGrid from '@/components/navigation/NavigationGrid';

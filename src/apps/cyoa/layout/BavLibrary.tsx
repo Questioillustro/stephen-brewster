@@ -1,6 +1,5 @@
-﻿import { useContext, useEffect, useState } from 'react';
+﻿import { useContext, useState } from 'react';
 import { IBavLibrary } from '@/apps/cyoa/types/library';
-import { Stack } from '@mui/material';
 import Button from '@mui/material/Button';
 import { MainViewContext } from '@/apps/cyoa/context/MainViewContext';
 import { useStoryContext } from '@/apps/cyoa/context/StoryContext';
@@ -40,29 +39,21 @@ export const BavLibrary = () => {
   };
 
   return (
-    <Stack
+    <Button
+      variant={'outlined'}
+      onClick={viewLibrary}
       sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        ...(state.currentView === 'reading' && {
+          backgroundColor: '#1976d2',
+          color: '#fff',
+          borderColor: '#115293',
+          '&:hover': {
+            backgroundColor: '#115293',
+          },
+        }),
       }}
     >
-      <Button
-        variant={'outlined'}
-        onClick={viewLibrary}
-        sx={{
-          ...(state.currentView === 'reading' && {
-            backgroundColor: '#1976d2',
-            color: '#fff',
-            borderColor: '#115293',
-            '&:hover': {
-              backgroundColor: '#115293',
-            },
-          }),
-        }}
-      >
-        Library
-      </Button>
-    </Stack>
+      Library
+    </Button>
   );
 };

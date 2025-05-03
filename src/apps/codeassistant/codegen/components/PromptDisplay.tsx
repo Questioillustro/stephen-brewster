@@ -1,4 +1,4 @@
-﻿import { TextField, IconButton, Box, Modal, Typography, Stack } from '@mui/material';
+﻿import { IconButton, Stack } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';

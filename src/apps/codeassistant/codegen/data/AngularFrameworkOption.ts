@@ -1,8 +1,7 @@
-﻿import { IFrontEndFrameworkOption } from '@/apps/codeassistant/codegen/data/AllOptions';
+﻿import { IFrontEndFrameworkOption } from '@/apps/codeassistant/codegen/CodeGen.types';
 
 export const AngularFrameworkOption: IFrontEndFrameworkOption = {
   framework: 'Angular',
-  tsOption: false,
   uiLibraries: [
     'Angular Material',
     'NG Bootstrap',

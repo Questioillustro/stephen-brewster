@@ -16,12 +16,17 @@ export const LibraryList = () => {
     });
   }, []);
 
+  const addToHistory = (codeGen: ICodeGen) => {
+    const codeGenClone: ICodeGen = JSON.parse(JSON.stringify(codeGen));
+    context.addResult({ ...codeGenClone });
+  };
+
   return (
     <Stack sx={{ gap: 2, width: '100%' }}>
       {all.map((a) => {
         return (
-          <Paper elevation={2} sx={{ p: 2, gap: 2 }} onClick={() => context.setCodeGenContext(a)}>
-            <LibraryItemCard item={a} />
+          <Paper elevation={2} sx={{ p: 2, gap: 2 }}>
+            <LibraryItemCard item={a} onSelect={addToHistory} />
           </Paper>
         );
       })}
