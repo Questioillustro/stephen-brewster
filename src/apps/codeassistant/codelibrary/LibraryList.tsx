@@ -21,7 +21,7 @@ export const LibraryList = (props: ILibraryListProps) => {
       {props.componentList.length > 0 &&
         props.componentList.map((a) => {
           return (
-            <Paper elevation={2} sx={{ p: 2, gap: 2 }}>
+            <Paper elevation={2} sx={{ p: 1, gap: 2 }}>
               <LibraryItemCard item={a} onSelect={addToHistory} />
             </Paper>
           );

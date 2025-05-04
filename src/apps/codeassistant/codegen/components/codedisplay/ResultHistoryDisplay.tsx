@@ -14,7 +14,7 @@ export const ResultHistoryDisplay: React.FC = () => {
 
   return (
     <Paper elevation={2} sx={{ pt: 1 }}>
-      <Stack spacing={2} sx={{ alignItems: 'center', mt: 2, minHeight: '600px' }}>
+      <Stack spacing={2} sx={{ alignItems: 'center', mt: 2 }}>
         <Stack sx={{ flexDirection: 'row', gap: 2 }}>
           <SaveCodeGenButton />
 

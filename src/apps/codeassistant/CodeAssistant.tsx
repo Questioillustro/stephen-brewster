@@ -34,6 +34,8 @@ const CodeAssistant = () => {
                 flex: lib ? '0 0 60%' : '0 0 100%',
                 transition: 'flex 0.5s ease-in-out',
                 maxWidth: '100%',
+                overflow: 'hidden',
+                whiteSpace: 'nowrap',
               }}
             >
               <Stack direction='column' sx={{ width: '100%', rowGap: '16px' }}>
@@ -48,7 +50,6 @@ const CodeAssistant = () => {
                 sx={{
                   flex: '0 0 40%',
                   maxWidth: '40%',
-                  minWidth: '200px',
                 }}
               >
                 <CodeLibrary />

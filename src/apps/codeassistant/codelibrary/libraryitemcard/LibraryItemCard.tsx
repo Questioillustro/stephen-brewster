@@ -34,7 +34,7 @@ export const LibraryItemCard = (props: ILibraryItemCardProps) => {
 
   return (
     <Paper
-      elevation={2}
+      elevation={0}
       sx={{
         border: selected ? `2px solid` : 'none',
         borderColor: selected ? (theme) => theme.palette.primary.main : '',
@@ -44,7 +44,7 @@ export const LibraryItemCard = (props: ILibraryItemCardProps) => {
               return rgb ? `rgba(${rgb}, 0.1)` : theme.palette.primary.main;
             }
           : '',
-        p: 2,
+        p: 1,
       }}
     >
       <Stack direction={'row'} sx={{ justifyContent: 'space-between' }}>

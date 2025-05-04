@@ -6,9 +6,10 @@ export const CodeContainer = styled(Box)(({ theme }) => ({
   backgroundColor: grey[900],
   borderRadius: theme.shape.borderRadius,
   padding: theme.spacing(2),
-  overflow: 'auto',
   margin: theme.spacing(1, 0),
   position: 'relative',
+  width: '100%',
+  boxSizing: 'border-box',
 }));
 
 export const CopyButtonContainer = styled(Box)(({ theme }) => ({
