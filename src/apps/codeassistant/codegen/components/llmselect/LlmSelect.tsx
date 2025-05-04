@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { Button, ButtonGroup } from '@mui/material';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
-import { llmOptions } from '@/apps/codeassistant/codegen/components/inputs/llmselect/LlmSelect.types';
+import { llmOptions } from '@/apps/codeassistant/codegen/components/llmselect/LlmSelect.types';
 import { LlmOptionType } from '@/apps/codeassistant/codegen/CodeGen.types';
 
 const LlmSelect: React.FC = () => {

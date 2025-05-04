@@ -1,9 +1,6 @@
 ﻿import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { OpenPromptResponse, openPromptService } from '@/service/OpenPromptService';
-import {
-  DefaultSpecialRequestOptions,
-  SpecialRequestOptions,
-} from '@/apps/codeassistant/codegen/components/specialrequests/SpecialRequests.types';
+import { DefaultSpecialRequestOptions } from '@/apps/codeassistant/codegen/components/specialrequests/SpecialRequests.types';
 import {
   CodeGenResponseStructure,
   ICodeGen,
@@ -23,7 +20,6 @@ interface CodegenContextType {
   resultViewIndex: number;
   setResultViewIndex: (index: number) => void;
   updateFeFramework: (framework: string) => void;
-  //updateUiLibrary: (library: string) => void;
   updateCodeExample: (example: string) => void;
   updatePrompt: (prompt: string) => void;
 }

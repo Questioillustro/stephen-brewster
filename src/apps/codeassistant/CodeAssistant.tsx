@@ -2,16 +2,17 @@
 import AppHeader from '@/layout/apps/AppHeader';
 import { Box, Slide, Stack } from '@mui/material';
 import { AboutCodeAssistant } from '@/apps/codeassistant/AboutCodeAssistant';
-import { LibraryList } from '@/apps/codeassistant/codelibrary/LibraryList';
 import { PanelControls } from '@/apps/codeassistant/PanelControls';
 import FrontEndComponent from '@/apps/codeassistant/codegen/FrontEndComponent';
 import { PromptInputs } from '@/apps/codeassistant/codegen/PromptInputs';
 import { ResultHistoryDisplay } from '@/apps/codeassistant/codegen/components/codedisplay/ResultHistoryDisplay';
 import { useState } from 'react';
 import { SBThemeProvider } from '@/theme/SBThemeContext';
+import { CodeLibrary } from '@/apps/codeassistant/codelibrary/CodeLibrary';
+import { CodeGenSettings } from '@/apps/codeassistant/codegen/CodeGenSettings';
 
 const CodeAssistant = () => {
-  const [fe, setFe] = useState<boolean>(true);
+  const [genSettings, setGenSettings] = useState<boolean>(true);
   const [lib, setLib] = useState<boolean>(true);
 
   return (
@@ -21,8 +22,8 @@ const CodeAssistant = () => {
           <AppHeader about={<AboutCodeAssistant />} />
 
           <PanelControls
-            fe={fe}
-            toggleFe={() => setFe(!fe)}
+            genSettings={genSettings}
+            toggleSettings={() => setGenSettings(!genSettings)}
             lib={lib}
             toggleLib={() => setLib(!lib)}
           />
@@ -30,15 +31,13 @@ const CodeAssistant = () => {
           <Box sx={{ display: 'flex', gap: 2, width: '100%', mt: 2 }}>
             <Box
               sx={{
-                flex: lib ? '0 0 67%' : '0 0 100%',
+                flex: lib ? '0 0 60%' : '0 0 100%',
                 transition: 'flex 0.5s ease-in-out',
                 maxWidth: '100%',
               }}
             >
               <Stack direction='column' sx={{ width: '100%', rowGap: '16px' }}>
-                {fe && <FrontEndComponent />}
-
-                <PromptInputs />
+                {genSettings && <CodeGenSettings />}
 
                 <ResultHistoryDisplay />
               </Stack>
@@ -47,12 +46,12 @@ const CodeAssistant = () => {
             <Slide direction='left' timeout={500} in={lib}>
               <Box
                 sx={{
-                  flex: '0 0 33%',
-                  maxWidth: '33%',
+                  flex: '0 0 40%',
+                  maxWidth: '40%',
                   minWidth: '200px',
                 }}
               >
-                <LibraryList />
+                <CodeLibrary />
               </Box>
             </Slide>
           </Box>

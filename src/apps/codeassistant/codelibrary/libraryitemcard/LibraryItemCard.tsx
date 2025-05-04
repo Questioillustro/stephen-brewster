@@ -48,7 +48,9 @@ export const LibraryItemCard = (props: ILibraryItemCardProps) => {
       }}
     >
       <Stack direction={'row'} sx={{ justifyContent: 'space-between' }}>
-        <UserPrompt prompt={props.item.request.prompt} />
+        <Box sx={{ p: 1 }}>
+          <UserPrompt prompt={props.item.request.prompt} />
+        </Box>
 
         <Button
           variant={'contained'}

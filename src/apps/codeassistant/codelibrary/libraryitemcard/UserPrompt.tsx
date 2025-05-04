@@ -5,5 +5,5 @@ export interface IUserPromptProps {
 }
 
 export const UserPrompt = (props: IUserPromptProps) => {
-  return <Typography variant={'h6'}>{props.prompt}</Typography>;
+  return <Typography variant={'body1'}>{props.prompt}</Typography>;
 };

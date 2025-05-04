@@ -2,8 +2,8 @@
 import Button from '@mui/material/Button';
 
 export interface IPanelControlsProps {
-  fe: boolean;
-  toggleFe: () => void;
+  genSettings: boolean;
+  toggleSettings: () => void;
   lib: boolean;
   toggleLib: () => void;
 }
@@ -11,13 +11,11 @@ export interface IPanelControlsProps {
 export const PanelControls = (props: IPanelControlsProps) => {
   return (
     <Stack direction={'row'} sx={{ justifyContent: 'center', gap: 2 }}>
-      <Button variant={props.fe ? 'contained' : 'outlined'} onClick={props.toggleFe}>
-        Front End
+      <Button variant={props.genSettings ? 'contained' : 'outlined'} onClick={props.toggleSettings}>
+        Settings
       </Button>
-      <Button variant={'outlined'}>Back End</Button>
-      <Button variant={'outlined'}>Database</Button>
       <Button variant={props.lib ? 'contained' : 'outlined'} onClick={props.toggleLib}>
-        Show Library
+        Library
       </Button>
     </Stack>
   );
