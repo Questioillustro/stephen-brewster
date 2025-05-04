@@ -3,7 +3,7 @@ import { OpenPromptResponse, openPromptService } from '@/service/OpenPromptServi
 import {
   DefaultSpecialRequestOptions,
   SpecialRequestOptions,
-} from '@/apps/codeassistant/codegen/components/inputs/specialrequests/SpecialRequests.types';
+} from '@/apps/codeassistant/codegen/components/specialrequests/SpecialRequests.types';
 import {
   CodeGenResponseStructure,
   ICodeGen,
