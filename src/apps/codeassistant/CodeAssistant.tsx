@@ -30,19 +30,17 @@ const CodeAssistant = () => {
           <Box sx={{ display: 'flex', gap: 2, width: '100%', mt: 2 }}>
             <Box
               sx={{
-                flex: lib ? '0 0 67%' : '0 0 100%', // 67% when lib is visible, 100% when hidden
-                transition: 'flex 0.5s ease-in-out', // Smooth width transition
+                flex: lib ? '0 0 67%' : '0 0 100%',
+                transition: 'flex 0.5s ease-in-out',
                 maxWidth: '100%',
               }}
             >
-              <Stack direction='column' sx={{ width: '100%' }}>
+              <Stack direction='column' sx={{ width: '100%', rowGap: '16px' }}>
                 {fe && <FrontEndComponent />}
 
                 <PromptInputs />
 
-                <Box sx={{ mt: 2 }}>
-                  <ResultHistoryDisplay />
-                </Box>
+                <ResultHistoryDisplay />
               </Stack>
             </Box>
 

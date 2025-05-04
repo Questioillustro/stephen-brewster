@@ -11,12 +11,10 @@ const CodeExampleInput: React.FC = () => {
 
   const handleOpen = useCallback(() => setOpen(true), []);
   const handleClose = useCallback(() => setOpen(false), []);
-  const handleClear = useCallback(() => context.updateCodeExample(''), []);
+  const handleClear = () => context.updateCodeExample('');
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     context.updateCodeExample(event.target.value);
-  };
-
   const isCodeExamplePopulated =
     context.codeGen.request.codeExample && context.codeGen.request.codeExample !== '';
 

@@ -25,12 +25,25 @@ export const LibraryItemCard = (props: ILibraryItemCardProps) => {
     }
   }, [context, props.item]);
 
+  const hexToRgb = (hex) => {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result
+      ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`
+      : null;
+  };
+
   return (
     <Paper
       elevation={2}
       sx={{
-        border: selected ? '2px solid #1976d2' : 'none',
-        backgroundColor: selected ? 'rgba(25, 118, 210, 0.08)' : 'transparent',
+        border: selected ? `2px solid` : 'none',
+        borderColor: selected ? (theme) => theme.palette.primary.main : '',
+        backgroundColor: selected
+          ? (theme) => {
+              const rgb = hexToRgb(theme.palette.primary.main);
+              return rgb ? `rgba(${rgb}, 0.1)` : theme.palette.primary.main;
+            }
+          : '',
         p: 2,
       }}
     >
@@ -51,7 +64,6 @@ export const LibraryItemCard = (props: ILibraryItemCardProps) => {
           framework={props.item.request.framework ?? undefined}
           uiLibrary={props.item.request.uiLibrary ?? undefined}
         />
-
         <PillDisplay label={props.item.request.llmOption} color={'secondary'} />
       </Stack>
 

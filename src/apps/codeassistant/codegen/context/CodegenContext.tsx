@@ -22,6 +22,8 @@ interface CodegenContextType {
   addResult: (result: ICodeGen) => void;
   resultViewIndex: number;
   setResultViewIndex: (index: number) => void;
+  updateFeFramework: (framework: string) => void;
+  //updateUiLibrary: (library: string) => void;
   updateCodeExample: (example: string) => void;
   updatePrompt: (prompt: string) => void;
 }
@@ -53,6 +55,10 @@ export function CodegenProvider({ children }: CodegenProviderProps) {
 
   const updateCodeGen = (updates: Partial<ICodeGen>) => {
     setCodeGen((prev) => ({ ...prev, ...updates, _id: undefined }));
+  };
+
+  const updateFeFramework = (framework: string) => {
+    updateCodeGen({ request: { ...codeGen.request, framework: framework, uiLibrary: undefined } });
   };
 
   const updateCodeExample = (example: string) => {
@@ -87,7 +93,7 @@ export function CodegenProvider({ children }: CodegenProviderProps) {
     );
 
     setResultHistory(newHistory);
-    setCodeGen(result);
+    setResultViewIndex(0);
   };
 
   const sendRequest = async () => {
@@ -120,8 +126,9 @@ export function CodegenProvider({ children }: CodegenProviderProps) {
   }, [codeGen]);
 
   useEffect(() => {
+    if (resultHistory[resultViewIndex]) setCodeGen(resultHistory[resultViewIndex]);
     console.log('result history updated', resultHistory);
-  }, [resultHistory]);
+  }, [resultHistory, resultViewIndex]);
 
   const buildPrompt = () => {
     const parts = [
@@ -152,6 +159,7 @@ export function CodegenProvider({ children }: CodegenProviderProps) {
       setResultViewIndex,
       updateCodeExample,
       updatePrompt,
+      updateFeFramework,
     }),
     [codeGen, loading, fullPrompt, resultHistory, resultViewIndex],
   );

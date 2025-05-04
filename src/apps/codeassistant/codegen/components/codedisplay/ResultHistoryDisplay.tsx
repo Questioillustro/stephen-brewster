@@ -28,12 +28,14 @@ export const ResultHistoryDisplay: React.FC = () => {
           >
             Previous
           </Button>
+
           <Pagination
             count={totalPages}
             page={context.resultViewIndex + 1}
             onChange={(event, page) => context.setResultViewIndex(page - 1)}
             variant='outlined'
           />
+
           <Button
             onClick={() =>
               context.setResultViewIndex(Math.min(totalPages - 1, context.resultViewIndex + 1))
