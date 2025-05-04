@@ -132,13 +132,12 @@ export function CodegenProvider({ children }: CodegenProviderProps) {
 
   const buildPrompt = () => {
     const parts = [
-      `Please help me write some code!`,
       `Format the response json as: ${CodeGenResponseStructure}.`,
       codeGen.request.framework ? `Use framework: ${codeGen.request.framework}.` : '',
       codeGen.request.uiLibrary ? `Use UI library: ${codeGen.request.uiLibrary}.` : '',
       codeGen.request.prompt ? `${codeGen.request.prompt}.` : '',
       codeGen.request.specialRequests?.join('\n') || '',
-      codeGen.request.codeExample ? `\n${codeGen.request.codeExample}` : '',
+      codeGen.request.codeExample ? `\nCode example: \n${codeGen.request.codeExample}` : '',
     ];
 
     setFullPrompt(parts.filter(Boolean).join('\n').trim());

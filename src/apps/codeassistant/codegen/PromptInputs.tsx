@@ -1,5 +1,5 @@
 ﻿import { Paper, Stack } from '@mui/material';
-import { SpecialRequests } from '@/apps/codeassistant/codegen/components/inputs/specialrequests/SpecialRequests';
+import { SpecialRequests } from '@/apps/codeassistant/codegen/components/specialrequests/SpecialRequests';
 import CodeExampleInput from '@/apps/codeassistant/codegen/components/inputs/codeexample/CodeExampleInput';
 import LlmSelect from '@/apps/codeassistant/codegen/components/inputs/llmselect/LlmSelect';
 import PromptField from '@/apps/codeassistant/codegen/components/PromptField';

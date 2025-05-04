@@ -1,7 +1,7 @@
 ﻿import { ComponentTitle } from '@/apps/codeassistant/codegen/components/ComponentTitle';
 import { Paper, Stack } from '@mui/material';
-import { SpecialRequestAutocomplete } from '@/apps/codeassistant/codegen/components/inputs/specialrequests/SpecialRequestAutocomplete';
-import { SpecialRequestsChipDisplay } from '@/apps/codeassistant/codegen/components/inputs/specialrequests/SpecialRequestsChipDisplay';
+import { SpecialRequestAutocomplete } from './SpecialRequestAutocomplete';
+import { SpecialRequestsChipDisplay } from './SpecialRequestsChipDisplay';
 import React from 'react';
 
 export const SpecialRequests = () => {

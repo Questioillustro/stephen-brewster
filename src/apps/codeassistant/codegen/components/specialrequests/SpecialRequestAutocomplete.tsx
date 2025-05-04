@@ -2,7 +2,7 @@
 import Autocomplete from '@mui/material/Autocomplete';
 import React, { useEffect, useState } from 'react';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
-import { SpecialRequestOptions } from '@/apps/codeassistant/codegen/components/inputs/specialrequests/SpecialRequests.types';
+import { SpecialRequestOptions } from './SpecialRequests.types';
 
 export const SpecialRequestAutocomplete = () => {
   const [inputValue, setInputValue] = useState('');
