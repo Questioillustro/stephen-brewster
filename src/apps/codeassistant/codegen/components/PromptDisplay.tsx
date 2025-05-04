@@ -3,7 +3,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
 import { useCallback, useState } from 'react';
-import { TextFieldModal } from '@/apps/codeassistant/codegen/components/inputs/textfieldmodal/TextFieldModal';
+import { TextFieldModal } from '@/apps/codeassistant/codegen/components/modals/TextFieldModal';
 
 const PromptDisplay = () => {
   const { fullPrompt } = useCodegenContext();
