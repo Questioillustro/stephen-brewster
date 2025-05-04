@@ -8,7 +8,6 @@ export const StyledModalContent = styled(Box)(({ theme }) => ({
   transform: 'translate(-50%, -50%)',
   width: '80%',
   maxWidth: '800px',
-  height: '80%',
   backgroundColor: theme.palette.background.paper,
   borderRadius: theme.shape.borderRadius,
   boxShadow: theme.shadows[5],

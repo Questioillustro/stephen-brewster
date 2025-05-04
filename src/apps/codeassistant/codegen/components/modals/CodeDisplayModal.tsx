@@ -1,44 +1,45 @@
-﻿import React, { useCallback, useRef } from 'react';
-import { Modal, TextField, Button, Box } from '@mui/material';
+﻿import React, { useCallback, useRef, useEffect } from 'react';
+import { Modal, Button } from '@mui/material';
 import { StyledModalContent, StyledTextareaWrapper } from './TextFieldModal.styles';
 import CodeBlock from '@/components/codedisplay/CodeBlock';
 
-interface CodeExampleModalProps {
+interface ICodeDisplayModalProps {
   open: boolean;
   text: string;
   onClose: () => void;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const CodeDisplayModal: React.FC<CodeExampleModalProps> = ({
-  open,
-  text,
-  onClose,
-  onChange,
-}) => {
+export const CodeDisplayModal: React.FC<ICodeDisplayModalProps> = (
+  props: ICodeDisplayModalProps,
+) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const handleBackdropClick = useCallback(
-    (event: React.MouseEvent) => {
-      if (onClose && modalRef.current && !modalRef.current.contains(event.target as Node)) {
-        onClose();
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        props.onClose();
       }
     },
-    [onClose],
+    [props],
   );
 
+  useEffect(() => {
+    if (props.open) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [props.open, handleClickOutside]);
+
   return (
-    <Modal
-      open={open}
-      onClose={handleBackdropClick}
-      closeAfterTransition
-      sx={{ pointerEvents: 'none' }}
-    >
+    <Modal open={props.open} closeAfterTransition>
       <StyledModalContent ref={modalRef} onClick={(e) => e.stopPropagation()}>
         <StyledTextareaWrapper>
-          <CodeBlock code={text} />
+          <CodeBlock code={props.text} />
         </StyledTextareaWrapper>
-        <Button onClick={onClose} variant='contained' color='primary' fullWidth>
+        <Button onClick={props.onClose} variant='contained' color='primary' fullWidth>
           Close
         </Button>
       </StyledModalContent>

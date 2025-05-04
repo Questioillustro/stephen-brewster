@@ -2,7 +2,7 @@
 import { IconButton, Stack, Box, useTheme, Tooltip } from '@mui/material';
 import { Subject, Clear, ContentPaste } from '@mui/icons-material';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
-import { TextFieldModal } from '@/apps/codeassistant/codegen/components/modals/TextFieldModal';
+import { CodeDisplayModal } from '@/apps/codeassistant/codegen/components/modals/CodeDisplayModal';
 
 const CodeExampleInput: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -72,7 +72,7 @@ const CodeExampleInput: React.FC = () => {
         </Tooltip>
       </Stack>
 
-      <TextFieldModal
+      <CodeDisplayModal
         open={open}
         text={context.codeGen.request.codeExample ?? ''}
         onClose={handleClose}

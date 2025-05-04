@@ -15,7 +15,7 @@ interface CodeBlockProps {
 
 const CodeBlock: React.FC<CodeBlockProps> = ({
   code,
-  language = 'language-jsx',
+  language = 'jsx',
   showLineNumbers = true,
   className,
 }) => {
