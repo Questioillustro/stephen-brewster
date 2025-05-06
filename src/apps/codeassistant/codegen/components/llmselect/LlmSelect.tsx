@@ -19,6 +19,7 @@ const LlmSelect: React.FC = () => {
             onClick={() => handleClick(option.value)}
             color={context.codeGen.request.llmOption === option.value ? 'primary' : 'inherit'}
             disabled={!option.available}
+            key={option.label}
           >
             {option.label}
           </Button>

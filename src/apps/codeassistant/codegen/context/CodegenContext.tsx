@@ -118,12 +118,12 @@ export function CodegenProvider({ children }: CodegenProviderProps) {
   }, [codeGen.request]);
 
   useEffect(() => {
-    console.log('codegen updated', codeGen);
+    //console.log('codegen updated', codeGen);
   }, [codeGen]);
 
   useEffect(() => {
     if (resultHistory[resultViewIndex]) setCodeGen(resultHistory[resultViewIndex]);
-    console.log('result history updated', resultHistory);
+    //console.log('result history updated', resultHistory);
   }, [resultHistory, resultViewIndex]);
 
   const buildPrompt = () => {

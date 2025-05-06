@@ -9,12 +9,13 @@ import { WritingPage } from '@/apps/writing/WritingPage';
 import BuildAVentureApp from '@/apps/cyoa/BuildAVentureApp';
 import CodeAssistant from '@/apps/codeassistant/CodeAssistant';
 import WordleApp from '@/apps/wordle/WordleApp';
+import NavBar from '@/components/navigation/NavBar';
 
 function Layout() {
   return (
     <Stack sx={{ display: 'flex', height: '100vh', width: '100%' }}>
       <Paper square>
-        <NavigationGrid compact />
+        <NavBar />
       </Paper>
 
       <Paper

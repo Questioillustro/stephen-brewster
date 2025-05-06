@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 
 export const FeFrameworkAutocomplete = () => {
   const context = useCodegenContext();
-  const [inputValue, setInputValue] = useState(context.codeGen.request.framework ?? '');
+  const [inputValue, setInputValue] = useState(context.codeGen.request.framework ?? null);
 
   useEffect(() => {
     setInputValue(context.codeGen.request.framework ?? '');
@@ -30,7 +30,7 @@ export const FeFrameworkAutocomplete = () => {
   return (
     <Autocomplete
       options={Object.values(FrontEndFrameworkOptionsLabels)}
-      value={context.codeGen.request.framework ?? ''}
+      value={context.codeGen.request.framework ?? null}
       onChange={handleFrameworkChange}
       onInputChange={handleInputChange}
       renderInput={(params) => <TextField {...params} label='FE Framework' variant='outlined' />}

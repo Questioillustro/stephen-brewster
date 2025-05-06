@@ -3,8 +3,6 @@ import AppHeader from '@/layout/apps/AppHeader';
 import { Box, Slide, Stack } from '@mui/material';
 import { AboutCodeAssistant } from '@/apps/codeassistant/AboutCodeAssistant';
 import { PanelControls } from '@/apps/codeassistant/PanelControls';
-import FrontEndComponent from '@/apps/codeassistant/codegen/FrontEndComponent';
-import { PromptInputs } from '@/apps/codeassistant/codegen/PromptInputs';
 import { ResultHistoryDisplay } from '@/apps/codeassistant/codegen/components/codedisplay/ResultHistoryDisplay';
 import { useState } from 'react';
 import { SBThemeProvider } from '@/theme/SBThemeContext';

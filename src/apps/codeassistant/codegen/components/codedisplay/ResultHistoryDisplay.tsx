@@ -4,6 +4,7 @@ import DynamicTabs from '@/apps/codeassistant/codegen/components/codedisplay/Dyn
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
 import { SaveCodeGenButton } from '@/apps/codeassistant/codegen/service/SaveCodeGenButton';
 import { AddToCodeExampleButton } from '@/apps/codeassistant/codegen/components/codeexample/AddToCodeExampleButton';
+import { CodeReviewOptionsModal } from '@/apps/codeassistant/codereview/CodeReviewOptionsModal';
 
 export const ResultHistoryDisplay: React.FC = () => {
   const context = useCodegenContext();
@@ -19,6 +20,8 @@ export const ResultHistoryDisplay: React.FC = () => {
           <SaveCodeGenButton />
 
           <AddToCodeExampleButton />
+
+          <CodeReviewOptionsModal />
         </Stack>
 
         <Stack direction='row' spacing={2} justifyContent='center'>
