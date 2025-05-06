@@ -3,11 +3,12 @@ import { UiLibraryAutoComplete } from '@/apps/codeassistant/codegen/components/f
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
 import { FeFrameworkAutocomplete } from '@/apps/codeassistant/codegen/components/feframework/FeFrameworkAutocomplete';
 import { ComponentTitle } from '@/apps/codeassistant/codegen/components/ComponentTitle';
+import { CAPaperPanel } from '@/apps/codeassistant/components/CAPaperPanel';
 
 const FrontEndComponent = () => {
   const context = useCodegenContext();
   return (
-    <Paper elevation={2} sx={{ p: 2, display: 'flex', flexDirection: 'column', rowGap: '8px' }}>
+    <CAPaperPanel>
       <ComponentTitle title={'FE Framework'} />
 
       <Stack direction={'row'} sx={{ gap: 2 }}>
@@ -15,7 +16,7 @@ const FrontEndComponent = () => {
 
         {context.codeGen.request.framework && <UiLibraryAutoComplete />}
       </Stack>
-    </Paper>
+    </CAPaperPanel>
   );
 };
 

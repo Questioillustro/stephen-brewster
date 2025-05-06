@@ -3,10 +3,11 @@ import { Paper, Stack } from '@mui/material';
 import { SpecialRequestAutocomplete } from './SpecialRequestAutocomplete';
 import { SpecialRequestsChipDisplay } from './SpecialRequestsChipDisplay';
 import React from 'react';
+import { CAPaperPanel } from '@/apps/codeassistant/components/CAPaperPanel';
 
 export const SpecialRequests = () => {
   return (
-    <Paper elevation={2} sx={{ p: 2, width: '100%' }}>
+    <CAPaperPanel sx={{ p: 2, width: '100%' }}>
       <Stack sx={{ gap: 1 }}>
         <ComponentTitle title={'Special Requests'} />
 
@@ -14,6 +15,6 @@ export const SpecialRequests = () => {
 
         <SpecialRequestsChipDisplay />
       </Stack>
-    </Paper>
+    </CAPaperPanel>
   );
 };

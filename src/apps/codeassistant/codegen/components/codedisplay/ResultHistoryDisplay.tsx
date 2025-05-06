@@ -5,6 +5,7 @@ import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenC
 import { SaveCodeGenButton } from '@/apps/codeassistant/codegen/service/SaveCodeGenButton';
 import { AddToCodeExampleButton } from '@/apps/codeassistant/codegen/components/codeexample/AddToCodeExampleButton';
 import { CodeReviewOptionsModal } from '@/apps/codeassistant/codereview/CodeReviewOptionsModal';
+import { CAPaperPanel } from '@/apps/codeassistant/components/CAPaperPanel';
 
 export const ResultHistoryDisplay: React.FC = () => {
   const context = useCodegenContext();
@@ -14,7 +15,7 @@ export const ResultHistoryDisplay: React.FC = () => {
   if (context.resultHistory.length == 0) return <></>;
 
   return (
-    <Paper elevation={2} sx={{ pt: 1 }}>
+    <CAPaperPanel>
       <Stack spacing={2} sx={{ alignItems: 'center', mt: 2 }}>
         <Stack sx={{ flexDirection: 'row', gap: 2 }}>
           <SaveCodeGenButton />
@@ -51,6 +52,6 @@ export const ResultHistoryDisplay: React.FC = () => {
 
         <DynamicTabs code={context.resultHistory[context.resultViewIndex].response.code} />
       </Stack>
-    </Paper>
+    </CAPaperPanel>
   );
 };

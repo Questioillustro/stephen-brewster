@@ -3,6 +3,7 @@ import { ICodeGen } from '@/apps/codeassistant/codegen/CodeGen.types';
 import { LibraryItemCard } from './libraryitemcard/LibraryItemCard';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
 import Typography from '@mui/material/Typography';
+import { CAPaperPanel } from '@/apps/codeassistant/components/CAPaperPanel';
 
 export interface ILibraryListProps {
   componentList: ICodeGen[];
@@ -21,9 +22,9 @@ export const LibraryList = (props: ILibraryListProps) => {
       {props.componentList.length > 0 &&
         props.componentList.map((a) => {
           return (
-            <Paper elevation={2} sx={{ p: 1, gap: 2 }} key={a._id}>
+            <CAPaperPanel sx={{ gap: 2 }} key={a._id}>
               <LibraryItemCard item={a} onSelect={addToHistory} />
-            </Paper>
+            </CAPaperPanel>
           );
         })}
 

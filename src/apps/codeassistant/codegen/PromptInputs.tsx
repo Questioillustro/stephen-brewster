@@ -1,10 +1,11 @@
-﻿import { Paper, Stack } from '@mui/material';
+﻿import { Stack } from '@mui/material';
 import { SpecialRequests } from '@/apps/codeassistant/codegen/components/specialrequests/SpecialRequests';
 import CodeExampleInput from '@/apps/codeassistant/codegen/components/codeexample/CodeExampleInput';
 import LlmSelect from '@/apps/codeassistant/codegen/components/llmselect/LlmSelect';
 import PromptField from '@/apps/codeassistant/codegen/components/PromptField';
 import SendPromptButton from '@/apps/codeassistant/codegen/components/SendPromptButton';
 import PromptDisplay from '@/apps/codeassistant/codegen/components/PromptDisplay';
+import { CAPaperPanel } from '@/apps/codeassistant/components/CAPaperPanel';
 
 export const PromptInputs = () => {
   return (
@@ -13,7 +14,7 @@ export const PromptInputs = () => {
         <SpecialRequests />
       </Stack>
 
-      <Paper elevation={2} sx={{ width: '100%' }}>
+      <CAPaperPanel>
         <Stack direction={'column'} sx={{ gap: 2, p: 2 }}>
           <Stack
             direction={'row'}
@@ -29,7 +30,7 @@ export const PromptInputs = () => {
             <SendPromptButton />
           </Stack>
         </Stack>
-      </Paper>
+      </CAPaperPanel>
     </Stack>
   );
 };

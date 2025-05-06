@@ -14,28 +14,8 @@ import { ICodeObject } from '@/apps/codeassistant/codegen/CodeGen.types';
 import CodeBlock from '@/components/codedisplay/CodeBlock';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-  dir?: string;
-}
-
-const TabPanel: React.FC<TabPanelProps> = ({ children, value, index, dir = 'ltr', ...other }) => {
-  return (
-    <div
-      role='tabpanel'
-      hidden={value !== index}
-      id={`code-tabpanel-${index}`}
-      aria-labelledby={`code-tab-${index}`}
-      {...other}
-      style={{ transition: 'opacity 0.3s ease' }}
-    >
-      {value === index && <Box p={3}>{children}</Box>}
-    </div>
-  );
-};
+import { TabPanel } from '@/apps/codeassistant/codegen/components/codedisplay/TabPanel';
+import { StyledDynamicTabs } from '@/apps/codeassistant/codegen/components/codedisplay/DynamicTabs.styles';
 
 function a11yProps(index: number) {
   return {
@@ -169,31 +149,13 @@ const DynamicTabs: React.FC<DynamicTabsProps> = ({
               scrollbarWidth: 'none',
             }}
           >
-            <Tabs
+            <StyledDynamicTabs
+              theme={theme}
               value={value}
               onChange={handleChange}
               variant='scrollable'
               scrollButtons={false}
               aria-label='code file tabs'
-              sx={{
-                '.MuiTab-root': {
-                  minWidth: 'auto',
-                  px: 2.5,
-                  py: 1.5,
-                  fontWeight: 'medium',
-                  textTransform: 'none',
-                  fontSize: '0.875rem',
-                  minHeight: 'unset',
-                  transition: 'all 0.2s ease',
-                  '&.Mui-selected': {
-                    color: theme.palette.primary.main,
-                    fontWeight: 'bold',
-                  },
-                },
-                '.MuiTabs-indicator': {
-                  height: 3,
-                },
-              }}
             >
               {code.map((file, index) => (
                 <Tab
@@ -202,7 +164,7 @@ const DynamicTabs: React.FC<DynamicTabsProps> = ({
                   {...a11yProps(index)}
                 />
               ))}
-            </Tabs>
+            </StyledDynamicTabs>
           </Box>
 
           {showScrollButtons && (
