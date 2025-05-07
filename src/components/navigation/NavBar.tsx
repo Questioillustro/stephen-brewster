@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { AppBar, Toolbar, Typography, Box, Link } from '@mui/material';
+import { AppBar, Toolbar, Typography, Box, Link, Avatar } from '@mui/material';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 
 const NavBar: React.FC = () => {
@@ -7,7 +7,13 @@ const NavBar: React.FC = () => {
 
   return (
     <AppBar position='static' color='default' elevation={1}>
-      <Toolbar sx={{ justifyContent: 'center' }}>
+      <Toolbar disableGutters>
+        <Avatar alt='Remy Sharp' src='/favicon.ico' sx={{ ml: 4 }} />
+
+        <Typography variant={'h5'} fontFamily={'bangers'} color={'primary'} sx={{ pl: 2, pr: 4 }}>
+          Stephen Brewster.com
+        </Typography>
+
         <Box sx={{ display: 'flex', gap: 4 }}>
           <Link
             component={RouterLink}

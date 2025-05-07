@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Stack, Button, Pagination, Paper, Box } from '@mui/material';
+import { Stack, Button, Pagination } from '@mui/material';
 import DynamicTabs from '@/apps/codeassistant/codegen/components/codedisplay/DynamicTabs';
 import { useCodegenContext } from '@/apps/codeassistant/codegen/context/CodegenContext';
 import { SaveCodeGenButton } from '@/apps/codeassistant/codegen/service/SaveCodeGenButton';
